@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {companyClient} from './shared/api/companies/clients';
+import {Company} from './shared/api/companies/models';
 
 function App() {
+  const initial: Company[] = [];
+  const [companies, setCompanies] = useState(initial);
+
+  useEffect(() => {
+    companyClient.get({search: 'pal'})
+        .then(s => setCompanies(s.results));
+  })
+
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        names <br/>
+        {companies.map(name => <p>{name.name}</p>)}
         <a
           className="App-link"
           href="https://reactjs.org"
