@@ -1,22 +1,22 @@
-import {Nav, Navbar} from 'react-bootstrap';
 import React from 'react';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 function AppNavbar() {
     return (
-        <Navbar className="company-shadow-1" expand="lg">
-            <Navbar.Brand className="nav-logo" href="#home">Kalendario</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-                <Nav>
-                    <LinkContainer to="/auth/login">
-                        <Nav.Link>Login</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/auth/register">
-                        <Nav.Link>Register</Nav.Link>
-                    </LinkContainer>
+        <Navbar  className="company-shadow-1" light expand="md">
+            <NavbarBrand tag={Link} to="/" className="nav-logo">Kalendario</NavbarBrand>
+            <NavbarToggler />
+            <Collapse className="justify-content-end" navbar>
+                <Nav navbar>
+                    <NavItem>
+                        <NavLink tag={Link} to="/auth/login">Login</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} to="/auth/register">Register</NavLink>
+                    </NavItem>
                 </Nav>
-            </Navbar.Collapse>
+            </Collapse>
         </Navbar>
     )
 }
