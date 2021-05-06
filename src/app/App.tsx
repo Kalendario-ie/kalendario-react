@@ -1,17 +1,13 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
-import AuthRoutes from './modules/auth/auth-routes';
+import AppRoutes from './AppRoutes';
+import AppIntl from './AppIntl';
+
 
 function App() {
     return (
-        <Switch>
-            <Route path="/auth">
-                <AuthRoutes/>
-            </Route>
-            <Route path="/">
-                Home
-            </Route>
-        </Switch>
+        <AppIntl language={'en'}>
+            <AppRoutes/>
+        </AppIntl>
     );
 }
 
