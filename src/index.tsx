@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
+import {Router} from 'react-router-dom';
+import history from './app/shared/util/history';
 import AppNavbar from './app/modules/core/navbar/AppNavbar';
 
 ReactDOM.render(
     <React.StrictMode>
-        <AppNavbar/>
-        <App/>
+        <Router history={history}>
+            <AppNavbar/>
+            <App/>
+        </Router>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,4 +1,6 @@
 import {Nav, Navbar} from 'react-bootstrap';
+import React from 'react';
+import {LinkContainer} from 'react-router-bootstrap';
 
 function AppNavbar() {
     return (
@@ -7,8 +9,12 @@ function AppNavbar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
                 <Nav>
-                    <Nav.Link href="#home">Login</Nav.Link>
-                    <Nav.Link href="#link">Register</Nav.Link>
+                    <LinkContainer to="/auth/login">
+                        <Nav.Link>Login</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/auth/register">
+                        <Nav.Link>Register</Nav.Link>
+                    </LinkContainer>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

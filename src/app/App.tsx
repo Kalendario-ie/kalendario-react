@@ -1,20 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {companyClient} from './shared/api/companies/clients';
-import {Company} from './shared/api/companies/models';
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
+import AuthRoutes from './modules/auth/auth-routes';
 
 function App() {
-  const initial: Company[] = [];
-  const [companies, setCompanies] = useState(initial);
-
-  useEffect(() => {
-    companyClient.get({search: 'pal'})
-        .then(s => setCompanies(s.results));
-  })
-
-  return (
-    <div className="App">
-    </div>
-  );
+    return (
+        <Switch>
+            <Route path="/auth">
+                <AuthRoutes/>
+            </Route>
+            <Route path="/">
+                Home
+            </Route>
+        </Switch>
+    );
 }
 
 export default App;
