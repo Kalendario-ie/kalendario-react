@@ -25,7 +25,7 @@ function flattenMessages(object: object, prefix: string = '') {
 
 interface AppItlProps {
     language: string;
-    children: React.ReactChild;
+    children: React.ReactChild[];
 }
 
 const AppIntl: React.FunctionComponent<AppItlProps> = ({language, children}) => {

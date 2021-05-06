@@ -1,11 +1,9 @@
 import {Moment} from 'moment';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import Axios from 'axios-observable';
 import {convertMoment} from '../common/helpers';
 import baseModelRequest from '../common/common-api';
 import {adaptList} from '../common/adapter';
 import {Company, CompanyDetails, Slot} from './models';
+import axios from 'axios';
 
 export interface SlotsParams {
     employee?: number;
@@ -18,18 +16,15 @@ const baseUrl = 'companies/';
 
 export const companyClient = {
     ...baseModelRequest(baseUrl, Company.fromJs),
-    fromName: (name: string): Observable<CompanyDetails> => {
-        return Axios.get<CompanyDetails>(baseUrl + name + '/')
-            .pipe(map(CompanyDetails.fromJs));
+    fromName: (name: string): Promise<CompanyDetails> => {
+        return axios.get<CompanyDetails>(baseUrl + name + '/')
+            .then(CompanyDetails.fromJs);
     },
 
-    slots: (slotsParams: SlotsParams): Observable<Slot[]> => {
+    slots: (slotsParams: SlotsParams): Promise<Slot[]> => {
         const params = convertMoment(slotsParams);
-        return Axios.get<Slot[]>(baseUrl + 'slots/', {params})
-            .pipe(
-                map(result => result.data),
-                map(adaptList(Slot.fromJs)
-                ));
+        return axios.get<Slot[]>(baseUrl + 'slots/', {params})
+            .then(result => adaptList(Slot.fromJs)(result.data));
     }
 };
 
