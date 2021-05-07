@@ -1,5 +1,5 @@
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 
 export interface ISocialAccount {
     id: number;
@@ -35,7 +35,3 @@ export interface ResetPassword {
     newPassword2: string;
 }
 
-export interface LoginModel {
-    email: string;
-    password: string;
-}

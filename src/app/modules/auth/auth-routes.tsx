@@ -1,12 +1,12 @@
 import {Route, Switch} from 'react-router-dom';
 import React from 'react';
-import Login from './login';
 import Register from './register';
+import LoginContainer from './login/login-container';
 
 
 const AuthRoutes = () => <Switch>
     <Route path="/auth/login">
-        <Login/>
+        <LoginContainer/>
     </Route>
     <Route path="/auth/register">
         <Register/>

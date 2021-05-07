@@ -2,7 +2,7 @@ import React from 'react';
 
 interface KalendarioCardProps {
     header?: React.ReactNode;
-    children?: React.ReactChild
+    children?: React.ReactChild | React.ReactChild[]
 }
 
 const KalendarioCard: React.FunctionComponent<KalendarioCardProps> = ({
