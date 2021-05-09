@@ -26,6 +26,8 @@ function getUser(): Promise<User> {
         });
 }
 
+
+
 function authApi() {
 
     return {
@@ -55,13 +57,7 @@ export default authApi;
 //
 
 //
-//     refreshAccessToken(): Observable<string> {
-//         const refresh = AuthService.getRefreshToken();
-//         return this.http.post<RefreshAccessTokenResponse>(this.baseUrl + 'token/refresh/', {refresh}).pipe(
-//             tap(({access}) => AuthService.setToken(access)),
-//             map(({access}) => access)
-//         );
-//     }
+
 //
 //     socialAccounts(): Observable<ISocialAccount[]> {
 //         return this.http.get<any[]>(this.baseUrl + 'accounts/').pipe(
