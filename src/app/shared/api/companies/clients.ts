@@ -1,9 +1,9 @@
 import {Moment} from 'moment';
 import {convertMoment} from '../common/helpers';
-import baseModelRequest from '../common/common-api';
 import {adaptList} from '../common/adapter';
 import {Company, CompanyDetails, Slot} from './models';
 import axios from 'axios';
+import baseModelRequest from '../common/clients/base-django-api';
 
 export interface SlotsParams {
     employee?: number;

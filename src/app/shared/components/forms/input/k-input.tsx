@@ -1,20 +1,34 @@
 import * as React from 'react';
-
+import {ErrorMessage, Field, useFormikContext} from 'formik';
+import {FormFeedback, FormGroup} from 'reactstrap';
 
 export interface KInputProps {
-    id?: string;
-    name?: string;
+    name: string;
     type?: string;
-    value?: string | ReadonlyArray<string> | number;
-    onChange: {
-        (e: React.ChangeEvent<any>): void;
-    };
+    placeholder?: string;
 }
 
-const KInput: React.FunctionComponent<KInputProps> = (props) => {
-
+const KInput: React.FunctionComponent<KInputProps> = (
+    {name,
+        placeholder,
+        type
+    }) => {
+    const formik = useFormikContext();
+    let className = "form-control";
+    const fieldMeta = formik.getFieldMeta(name);
+    if (fieldMeta.error && fieldMeta.touched) {
+        className += " is-invalid";
+    }
     return (
-        <input className="form-control" type={props.type} id={props.id} value={props.value} name={props.name} onChange={props.onChange}/>
+        <FormGroup>
+            <Field className={className}
+                   name={name}
+                   type={type}
+                   placeholder={placeholder || name}/>
+            <FormFeedback>
+                <ErrorMessage name={name}/>
+            </FormFeedback>
+        </FormGroup>
     )
 }
 

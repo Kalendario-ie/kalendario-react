@@ -1,24 +1,54 @@
 import React from 'react';
 import {FormikHelpers, FormikProps} from 'formik/dist/types';
-import {useFormik} from 'formik';
+import {Formik} from 'formik';
+import {ApiValidationError} from '../../api/common/api-errors';
+import {Form, FormGroup} from 'reactstrap';
 
 export interface KFormProps<Values> {
-    initialValues: Values,
+    initialValues: Values;
+    apiError: ApiValidationError | null;
+    formErrors?: string[] | null;
+    validationSchema?: any | (() => any);
     onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void;
     children: ((props: FormikProps<Values>) => React.ReactNode) | React.ReactNode;
+    errors?: string[];
 }
 
-export function KForm<Values>({onSubmit, children, initialValues}: KFormProps<Values>) {
-    const formik = useFormik({
-        initialValues: initialValues,
-        onSubmit: onSubmit
-    });
+export function KForm<Values>(
+    {
+        initialValues,
+        apiError,
+        formErrors,
+        onSubmit,
+        children,
+        validationSchema
+    }: KFormProps<Values>) {
+    let errors: string[] = [];
+    if (apiError && apiError.detail['nonFieldErrors']) {
+        errors = apiError.detail['nonFieldErrors'];
+    }
     return (
-        <form onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(e);}}>
-            {typeof children == 'function'
-                ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
-                : children}
-        </form>
+        <Formik initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}>
+            {(formik) => (
+                <Form className="is-invalid" onSubmit={(e) => {
+                    e.preventDefault();
+                    formik.handleSubmit(e);
+                }}>
+                    <FormGroup>
+                        <input hidden className="is-invalid"/>
+                        {errors.map((error, key) => <div key={key} className="invalid-feedback">{error}</div>)}
+                    </FormGroup>
+
+                    {typeof children == 'function'
+                        ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
+                        : children}
+                </Form>
+            )}
+
+        </Formik>
+
     )
 }
 

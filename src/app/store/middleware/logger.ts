@@ -1,5 +1,4 @@
-import {RootState} from '../root-state';
-import {AnyAction, Dispatch, Middleware, Store} from 'redux';
+import {Middleware} from 'redux';
 
 const logger: Middleware = (store) => (next) => (action) => {
     console.group(action.type)

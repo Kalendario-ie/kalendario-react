@@ -1,7 +1,8 @@
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {User} from '../users/models';
 
-export interface ISocialAccount {
+export interface SocialAccount {
     id: number;
     provider: SocialProvider;
     uid: string;
@@ -9,11 +10,9 @@ export interface ISocialAccount {
     dateJoined: Moment;
 }
 
-export function parseSocial(item: any): ISocialAccount {
+export function parseSocial(item: any): SocialAccount {
     return {
-        id: item.id,
-        provider: item.provider,
-        uid: item.uid,
+        ...item,
         lastLogin: moment.utc(item.lastLogin),
         dateJoined: moment.utc(item.dateJoined)
     };
@@ -22,16 +21,15 @@ export function parseSocial(item: any): ISocialAccount {
 type SocialProvider = 'facebook';
 
 
-export interface IChangePassword {
-    oldPassword: string;
-    newPassword1: string;
-    newPassword2: string;
+export interface LoginResponse {
+    accessToken: string;
+    refreshToken: string;
+    user: User;
 }
 
-export interface ResetPassword {
-    uid: string;
-    token: string;
-    newPassword1: string;
-    newPassword2: string;
+
+export interface RefreshAccessTokenResponse {
+    access: string;
+    accessTokenExpiration: string;
 }
 

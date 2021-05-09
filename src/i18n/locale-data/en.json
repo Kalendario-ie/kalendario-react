@@ -3,5 +3,10 @@
     "LOGIN-HEADER": "Log in to Kalendario",
     "LOGIN": "Login",
     "REGISTER": "Register"
+  },
+  "COMMON": {
+    "FORM": {
+      "SUBMIT": "Submit"
+    }
   }
 }

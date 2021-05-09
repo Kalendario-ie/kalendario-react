@@ -1,11 +1,7 @@
-import {ApiListResult} from './api-results';
-import {convertMoment} from './helpers';
-import baseApiAxios from './clients/base-api';
+import {ApiListResult} from '../api-results';
+import {convertMoment} from '../helpers';
+import baseApiAxios from './base-api';
 import {AxiosResponse} from 'axios';
-
-export interface Params {
-}
-
 
 function baseModelRequest<M, P>(baseUrl: string, adapter: (model: any) => M) {
     return {

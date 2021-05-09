@@ -1,16 +1,9 @@
-export class ApiBaseError {
+export interface ApiBaseError {
   status: number;
   detail: any;
-
-  constructor(data: any) {
-      this.status = data?.status;
-      this.detail = data?.detail;
-  }
 }
 
 
-export class ApiValidationError extends ApiBaseError {
-  static fromJS(data: any): ApiValidationError {
-    return  new ApiValidationError(data);
-  }
+export interface ApiValidationError extends ApiBaseError {
+    detail: {[key: string]: string[]};
 }
