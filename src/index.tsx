@@ -8,6 +8,7 @@ import history from './app/shared/util/history';
 import {Provider} from 'react-redux';
 import {configureStore, store} from './app/store';
 import {configureBaseApi} from './app/shared/api/common/clients/base-api';
+import AuthAutoLogin from './app/modules/auth/auth-auto-login';
 
 configureStore();
 configureBaseApi();
@@ -16,7 +17,9 @@ ReactDOM.render(
     <React.StrictMode>
         <Router history={history}>
             <Provider store={store}>
-                <App/>
+                <AuthAutoLogin>
+                    <App/>
+                </AuthAutoLogin>
             </Provider>
         </Router>
     </React.StrictMode>,

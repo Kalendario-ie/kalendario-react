@@ -11,7 +11,7 @@ import {removeToken, setRefreshToken, setToken} from '../common/session-storage'
 const authUrl = 'auth/';
 // const facebookUrl = 'auth/facebook/';
 
-function whoAmI(): Promise<User> {
+export function whoAmI(): Promise<User> {
     // this.facebookAuth.init();
     // if (isLoggedIn()) {
     return getUser();

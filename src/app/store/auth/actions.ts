@@ -12,3 +12,6 @@ export const loginRequestSuccess = (user: User) =>
 
 export const loginRequestFail = (error?: ApiBaseError) =>
     action(ACTION_TYPES.LOGIN_REQUEST_FAIL, error)
+
+export const setUser = (user: User) =>
+    action(ACTION_TYPES.SET_USER, user)
