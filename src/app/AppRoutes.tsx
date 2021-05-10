@@ -1,7 +1,7 @@
+import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import AuthContainer from './modules/auth/auth-container';
-import React from 'react';
-import HomeContainer from './modules/home/home-container';
+import HomeContainer from './modules/core/home/home-container';
 
 interface AppRouteProps {
 }

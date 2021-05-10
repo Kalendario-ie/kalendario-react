@@ -1,7 +1,7 @@
 import React from 'react';
-import KalendarioContainer from '../../shared/molecules/kalendario-container';
+import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import AsyncSelect from 'react-select/async';
-import {Company} from '../../api/companies';
+import {Company} from 'src/app/api/companies';
 
 
 interface HomeViewProps {
