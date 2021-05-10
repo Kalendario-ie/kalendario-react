@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import authApi from '../../shared/api/auth/clients';
-import {LoginRequest} from '../../shared/api/auth/requests';
+import authApi from '../../api/auth/clients';
+import {LoginRequest} from '../../api/auth/requests';
 import {ACTION_TYPES} from './types';
 import {loginRequestFail, loginRequestSuccess} from './actions';
 

@@ -1,7 +1,7 @@
 import {Reducer} from 'redux';
 import {ACTION_TYPES} from './types';
-import {User} from '../../shared/api/users/models';
-import {ApiValidationError} from '../../shared/api/common/api-errors';
+import {User} from '../../api/users/models';
+import {ApiValidationError} from '../../api/common/api-errors';
 
 export interface AuthState {
     apiError: ApiValidationError | null;

@@ -1,4 +1,4 @@
-import {whoAmI} from '../../shared/api/auth/clients';
+import {whoAmI} from '../../api/auth/clients';
 import {useDispatch} from 'react-redux';
 import {setUser} from '../../store/auth';
 import React, {useEffect} from 'react';

@@ -1,12 +1,12 @@
-import KalendarioCard from '../../../shared/molecules/kalendario-card';
+import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
+import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
+import KForm from 'src/app/shared/components/forms/k-form';
+import SubmitButton from 'src/app/shared/components/forms/buttons/submit-button';
+import KInput from 'src/app/shared/components/forms/input/k-input';
 import {FormattedMessage} from 'react-intl';
-import KForm from '../../../shared/components/forms/k-form';
 import React from 'react';
-import SubmitButton from '../../../shared/components/forms/buttons/submit-button';
-import {LoginRequest} from '../../../shared/api/auth/requests';
-import KInput from '../../../shared/components/forms/input/k-input';
-import KalendarioContainer from '../../../shared/molecules/kalendario-container';
-import {ApiValidationError} from '../../../shared/api/common/api-errors';
+import {LoginRequest} from 'src/app/api/auth/requests';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
 
 export interface LoginViewProps {
     data: LoginRequest;

@@ -1,8 +1,8 @@
-import {LoginRequest} from '../../shared/api/auth/requests';
+import {LoginRequest} from '../../api/auth/requests';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
-import {User} from '../../shared/api/users/models';
-import {ApiBaseError} from '../../shared/api/common/api-errors';
+import {User} from '../../api/users/models';
+import {ApiBaseError} from '../../api/common/api-errors';
 
 export const loginRequest = (request: LoginRequest) =>
     action(ACTION_TYPES.LOGIN_REQUEST, request);

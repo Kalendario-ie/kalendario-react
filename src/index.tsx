@@ -7,7 +7,7 @@ import {Router} from 'react-router-dom';
 import history from './app/shared/util/history';
 import {Provider} from 'react-redux';
 import {configureStore, store} from './app/store';
-import {configureBaseApi} from './app/shared/api/common/clients/base-api';
+import {configureBaseApi} from './app/api/common/clients/base-api';
 import AuthAutoLogin from './app/modules/auth/auth-auto-login';
 
 configureStore();

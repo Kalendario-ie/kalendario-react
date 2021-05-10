@@ -1,10 +1,8 @@
 import LoginView from './login-view';
-import {LoginRequest} from '../../../shared/api/auth/requests';
 import {useDispatch, useSelector} from 'react-redux'
-import {loginRequest, selectApiError} from '../../../store/auth';
-import {LoginRequestValidation} from '../../../shared/api/auth/validations';
-
-
+import {loginRequest, selectApiError} from 'src/app/store/auth';
+import {LoginRequest} from 'src/app/api/auth/requests';
+import {LoginRequestValidation} from 'src/app/api/auth/validations';
 
 
 const LoginContainer = () => {

@@ -1,7 +1,7 @@
 import HomeView from './home-view';
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import {Company, companyClient} from '../../shared/api/companies';
+import {Company, companyClient} from '../../api/companies';
 
 
 const HomeContainer: React.FunctionComponent = () => {
