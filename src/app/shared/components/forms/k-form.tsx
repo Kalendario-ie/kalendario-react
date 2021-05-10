@@ -7,7 +7,6 @@ import {Form, FormGroup} from 'reactstrap';
 export interface KFormProps<Values> {
     initialValues: Values;
     apiError: ApiValidationError | null;
-    formErrors?: string[] | null;
     validationSchema?: any | (() => any);
     onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void;
     children: ((props: FormikProps<Values>) => React.ReactNode) | React.ReactNode;
@@ -18,7 +17,6 @@ export function KForm<Values>(
     {
         initialValues,
         apiError,
-        formErrors,
         onSubmit,
         children,
         validationSchema

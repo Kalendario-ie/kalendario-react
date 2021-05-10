@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {ErrorMessage, Field, useFormikContext} from 'formik';
 import {FormFeedback, FormGroup} from 'reactstrap';
+import {ChangeEvent} from 'react';
 
 export interface KInputProps {
     name: string;
     type?: string;
     placeholder?: string;
+    onChange?: (e: ChangeEvent) => void;
 }
 
 const KInput: React.FunctionComponent<KInputProps> = (
@@ -24,6 +26,7 @@ const KInput: React.FunctionComponent<KInputProps> = (
             <Field className={className}
                    name={name}
                    type={type}
+                   onKeyUp={onchange}
                    placeholder={placeholder || name}/>
             <FormFeedback>
                 <ErrorMessage name={name}/>

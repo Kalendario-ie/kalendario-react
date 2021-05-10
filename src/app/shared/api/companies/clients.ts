@@ -16,9 +16,9 @@ const baseUrl = 'companies/';
 
 export const companyClient = {
     ...baseModelRequest(baseUrl, Company.fromJs),
-    fromName: (name: string): Promise<CompanyDetails> => {
-        return axios.get<CompanyDetails>(baseUrl + name + '/')
-            .then(CompanyDetails.fromJs);
+    fromName: (name: string): Promise<CompanyDetails[]> => {
+        return axios.get<CompanyDetails[]>(baseUrl + name + '/')
+            .then(result => adaptList(CompanyDetails.fromJs)(result.data));
     },
 
     slots: (slotsParams: SlotsParams): Promise<Slot[]> => {
