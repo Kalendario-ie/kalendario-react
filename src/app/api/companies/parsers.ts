@@ -1,4 +1,5 @@
-import {Service, ServiceCategory} from '../services/models';
+import {otherCategory} from 'src/app/api/services';
+import {serviceCategoryParser, serviceParser} from 'src/app/api/services/parsers';
 import {Employee} from '../employees/models';
 import {CompanyConfig} from '../admin-companies/models';
 import {Company, CompanyDetails} from './models';
@@ -11,11 +12,11 @@ export function companyDetailsParser(data: any): CompanyDetails {
         if (!service.category) {
             hasOtherCategory = true;
         }
-        return Service.fromJs(service);
+        return serviceParser(service);
     });
-    const serviceCategories = data.serviceCategories.map((cat: any) => ServiceCategory.fromJs(cat));
+    const serviceCategories = data.serviceCategories.map((cat: any) => serviceCategoryParser(cat));
     if (hasOtherCategory) {
-        serviceCategories.push(ServiceCategory.otherCategory());
+        serviceCategories.push(otherCategory);
     }
     return {
         ...data,

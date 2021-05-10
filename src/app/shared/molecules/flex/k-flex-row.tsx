@@ -9,7 +9,7 @@ const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         children
     }) => {
     return (
-        <div className="d-flex flex-row">{children}</div>
+        <div className="d-flex">{children}</div>
     )
 }
 

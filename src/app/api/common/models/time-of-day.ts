@@ -6,32 +6,24 @@ function stringfy(value: number): string {
     return value.toString();
 }
 
-export class TimeOfDay {
-    constructor(public hour: number, public minute: number) {
-    }
+export interface TimeOfDay {
+    hour: number;
+    minute: number;
+}
 
-    static fromString(time: string): TimeOfDay {
-        const timeOfDay = new TimeOfDay(0, 0);
+export const Zero = () =>  ({hour: 0, minute: 0});
+
+export const timeFromString = (time: string): TimeOfDay => {
+        const timeOfDay = Zero();
         timeOfDay.hour = +time.substr(0, 2);
         timeOfDay.minute = +time.substr(3, 2);
         return timeOfDay;
     }
 
-    static zero(): TimeOfDay {
-        return new TimeOfDay(0, 0);
-    }
+export const timeToString = (t: TimeOfDay) => stringfy(t.hour) + ':' + stringfy(t.minute);
 
-    toString(): string {
-        return stringfy(this.hour) + ':' + stringfy(this.minute);
-    }
+export const timeToISOString = (t: TimeOfDay) => stringfy(t.hour) + ':' + stringfy(t.minute) + ':00';
 
-
-    toISOString(): string {
-        return stringfy(this.hour) + ':' + stringfy(this.minute) + ':00';
-    }
-
-    hashCode(): number {
-        return this.hour + this.minute / 60;
-    }
-
-}
+    // hashCode(): number {
+    //     return this.hour + this.minute / 60;
+    // }

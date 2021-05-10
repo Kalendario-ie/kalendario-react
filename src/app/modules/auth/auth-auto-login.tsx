@@ -3,11 +3,11 @@ import {useDispatch} from 'react-redux';
 import {setUser} from '../../store/auth';
 import React, {useEffect} from 'react';
 
-interface AuthAutoLogin {
+interface AuthAutoLoginProps {
     children: React.ReactNode;
 }
 
-const AuthAutoLogin: React.FunctionComponent<AuthAutoLogin> = (
+const AuthAutoLogin: React.FunctionComponent<AuthAutoLoginProps> = (
     {children}
 ) => {
     const dispatch = useDispatch();

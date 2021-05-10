@@ -1,6 +1,6 @@
 import React from 'react';
 import AvatarImg from '../../../shared/molecules/avatar-img';
-import KFlexRow from '../../../shared/molecules/k-flex-row';
+import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 
 interface CompanyAvatarProps {
     logo: string;

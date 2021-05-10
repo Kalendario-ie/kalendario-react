@@ -1,17 +1,16 @@
 import React from 'react';
-import KFlexColumn, {FlexJustify} from './k-flex-column';
+import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
 
 export interface KalendarioContainerProps {
     children: React.ReactNode;
-    justify?: FlexJustify
 }
 
 const KalendarioContainer: React.FunctionComponent<KalendarioContainerProps> = (
-    {children,
-    justify= 'center'
+    {
+        children,
     }) => {
     return (
-        <div className={`container mt-5 d-flex justify-content-${justify}`}>
+        <div className="container mt-5">
             <KFlexColumn>
                 {children}
             </KFlexColumn>
