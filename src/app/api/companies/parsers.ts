@@ -3,6 +3,8 @@ import {Employee} from '../employees/models';
 import {CompanyConfig} from '../admin-companies/models';
 import {Company, CompanyDetails} from './models';
 
+const imageStorage = 'https://res.cloudinary.com/gchahm/';
+
 export function companyDetailsParser(data: any): CompanyDetails {
     let hasOtherCategory = false;
     const services = data.services.map((service: any) => {
@@ -17,7 +19,8 @@ export function companyDetailsParser(data: any): CompanyDetails {
     }
     return {
         ...data,
-        // this.avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
+        // avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
+        avatar: imageStorage + data.avatar,
         employees: data.employees.map((employee: any) => Employee.fromJs(employee)),
         services: services,
         serviceCategories: serviceCategories,
