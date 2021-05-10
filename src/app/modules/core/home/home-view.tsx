@@ -16,7 +16,7 @@ const HomeView: React.FunctionComponent<HomeViewProps> = (
     }) => {
 
     const groupStyles = {
-        width: '50%',
+        width: '400px',
     };
 
     return (

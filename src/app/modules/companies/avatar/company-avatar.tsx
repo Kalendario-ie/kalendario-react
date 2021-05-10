@@ -1,6 +1,6 @@
 import React from 'react';
 import AvatarImg from '../../../shared/molecules/avatar-img';
-import KFlexBox from '../../../shared/molecules/k-flex-box';
+import KFlexRow from '../../../shared/molecules/k-flex-row';
 
 interface CompanyAvatarProps {
     logo: string;
@@ -11,7 +11,7 @@ interface CompanyAvatarProps {
 const CompanyAvatar: React.FunctionComponent<CompanyAvatarProps> = (
     {logo, name, address}) => {
     return (
-        <KFlexBox>
+        <KFlexRow>
             <AvatarImg src={logo}/>
             <div className="ml-2">
                 <h1 className="pb-0 c-pointer">{name}</h1>
@@ -19,7 +19,7 @@ const CompanyAvatar: React.FunctionComponent<CompanyAvatarProps> = (
                     {address}
                 </div>
             </div>
-        </KFlexBox>
+        </KFlexRow>
     );
 }
 

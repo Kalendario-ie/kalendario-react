@@ -1,8 +1,9 @@
 import React from 'react';
+import KFlexColumn, {FlexJustify} from './k-flex-column';
 
 export interface KalendarioContainerProps {
     children: React.ReactNode;
-    justify?: 'center' | 'between'
+    justify?: FlexJustify
 }
 
 const KalendarioContainer: React.FunctionComponent<KalendarioContainerProps> = (
@@ -11,7 +12,9 @@ const KalendarioContainer: React.FunctionComponent<KalendarioContainerProps> = (
     }) => {
     return (
         <div className={`container mt-5 d-flex justify-content-${justify}`}>
-            {children}
+            <KFlexColumn>
+                {children}
+            </KFlexColumn>
         </div>
     )
 }

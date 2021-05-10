@@ -4,11 +4,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {companyDetailsRequest, selectCompany} from '../../store/companies';
 import CompanyAvatar from './avatar/company-avatar';
 import KalendarioContainer from '../../shared/molecules/kalendario-container';
+import CompanyServicesList from './company-services-list';
+import KFlexRow from '../../shared/molecules/k-flex-row';
+import CompaniesView from './companies-view';
 
 interface CompaniesContainerProps {
 }
 
-const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = () => {
+const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = (
+    {}) => {
     const {name} = useParams<{ name: string }>();
     const dispatch = useDispatch();
     const company = useSelector(selectCompany);
@@ -17,14 +21,11 @@ const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = () 
         dispatch(companyDetailsRequest(name))
     }, [dispatch, name])
     return (
-        <KalendarioContainer justify="between">
+        <>
             {company &&
-            <CompanyAvatar logo={company.avatar}
-                           name={company.name}
-                           address={company.address}/>
+            <CompaniesView company={company}/>
             }
-        </KalendarioContainer>
-
+        </>
     )
 }
 
