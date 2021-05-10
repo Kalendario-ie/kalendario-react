@@ -1,9 +1,10 @@
 import {Moment} from 'moment';
 import {convertMoment} from '../common/helpers';
 import {adaptList} from '../common/adapter';
-import {Company, CompanyDetails, Slot} from './models';
-import axios from 'axios';
+import {CompanyDetails, Slot} from './models';
 import baseModelRequest from '../common/clients/base-django-api';
+import {companyParser, companyDetailsParser} from './parsers';
+import baseApiAxios from 'src/app/api/common/clients/base-api';
 
 export interface SlotsParams {
     employee?: number;
@@ -15,15 +16,15 @@ export interface SlotsParams {
 const baseUrl = 'companies/';
 
 export const companyClient = {
-    ...baseModelRequest(baseUrl, Company.fromJs),
-    fromName: (name: string): Promise<CompanyDetails[]> => {
-        return axios.get<CompanyDetails[]>(baseUrl + name + '/')
-            .then(result => adaptList(CompanyDetails.fromJs)(result.data));
+    ...baseModelRequest(baseUrl, companyParser),
+    fromName: (name: string): Promise<CompanyDetails> => {
+        return baseApiAxios.get<CompanyDetails>(baseUrl + name + '/')
+            .then(result => companyDetailsParser(result.data));
     },
 
     slots: (slotsParams: SlotsParams): Promise<Slot[]> => {
         const params = convertMoment(slotsParams);
-        return axios.get<Slot[]>(baseUrl + 'slots/', {params})
+        return baseApiAxios.get<Slot[]>(baseUrl + 'slots/', {params})
             .then(result => adaptList(Slot.fromJs)(result.data));
     }
 };
