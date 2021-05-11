@@ -6,11 +6,13 @@ import KalendarioContainer from '../../shared/molecules/kalendario-container';
 
 interface CompaniesViewProps {
     company: CompanyDetails;
+    serviceClick: (id: number) => void;
 }
 
 const CompaniesView: React.FunctionComponent<CompaniesViewProps> = (
     {
-        company
+        company,
+        serviceClick
     }) => {
     return (
         <KalendarioContainer>
@@ -19,7 +21,7 @@ const CompaniesView: React.FunctionComponent<CompaniesViewProps> = (
                            address={company.address}/>
             <CompanyServicesList services={company.services}
                                  categories={company.serviceCategories}
-            serviceClick={(id) => {console.log(id)}}/>
+            serviceClick={serviceClick}/>
         </KalendarioContainer>
     )
 }

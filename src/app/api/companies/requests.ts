@@ -1,3 +1,4 @@
+import {Moment} from 'moment';
 import {IConfigWriteModel} from '../admin-companies/models';
 
 
@@ -15,4 +16,11 @@ export interface ICompanyWriteModel {
     whatsapp: string;
     facebook: string;
     config?: IConfigWriteModel;
+}
+
+export interface SlotRequestParams {
+    employee?: number;
+    service: number;
+    start: Moment;
+    end: Moment;
 }

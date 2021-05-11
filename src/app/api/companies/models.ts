@@ -2,7 +2,7 @@ import {IEmployee} from '../employees/models';
 import {Service, ServiceCategory} from '../services/models';
 import {CompanyConfig} from '../admin-companies/models';
 import {IReadModel} from '../common/models/IReadModel';
-import moment, {Moment} from 'moment';
+import {Moment} from 'moment';
 
 export interface Company extends IReadModel {
     id: number;
@@ -29,14 +29,8 @@ export interface CompanyDetails extends IReadModel {
     config: CompanyConfig;
 }
 
-export class Slot {
-    constructor(public start: Moment, public end: Moment) {
-    }
-
-    static fromJs(item: any): Slot {
-        return new Slot(
-            moment.utc(item.start),
-            moment.utc(item.end)
-        );
-    }
+export interface Slot {
+    start: Moment;
+    end: Moment;
+    title: string;
 }

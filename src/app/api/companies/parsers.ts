@@ -1,8 +1,9 @@
+import moment from 'moment';
 import {otherCategory} from 'src/app/api/services';
 import {serviceCategoryParser, serviceParser} from 'src/app/api/services/parsers';
 import {Employee} from '../employees/models';
 import {CompanyConfig} from '../admin-companies/models';
-import {Company, CompanyDetails} from './models';
+import {Company, CompanyDetails, Slot} from './models';
 
 const imageStorage = 'https://res.cloudinary.com/gchahm/';
 
@@ -34,5 +35,16 @@ export function companyParser(data: any): Company {
         ...data,
         // this.avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
         config: CompanyConfig.fromJs(data.config)
+    }
+}
+
+
+export function slotParser(data: any): Slot {
+    const start = moment.utc(data.start);
+    const end = moment.utc(data.end);
+    return {
+        start,
+        end,
+        title: start.format('HH:mm') + ' - ' + end.format('HH:mm'),
     }
 }

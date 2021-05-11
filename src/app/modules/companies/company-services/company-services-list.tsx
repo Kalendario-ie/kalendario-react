@@ -2,7 +2,7 @@ import React from 'react';
 import CompanyServicesItem from 'src/app/modules/companies/company-services/company-services-item';
 import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 import KFlexRowItem from 'src/app/shared/molecules/flex/k-flex-row-item';
-import KGrid from 'src/app/shared/molecules/k-grid';
+import KGrid from 'src/app/shared/molecules/grid/k-grid';
 import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
 
@@ -21,14 +21,14 @@ const CompanyServicesList: React.FunctionComponent<CompanyServicesListProps> = (
     return (
         <KalendarioCard>
             <KFlexRow>
-                {categories.length > 1 &&
+                {categories?.length > 1 &&
                 <KFlexRowItem>
                     {categories.map((c, k) => <div key={k}>{c.name}</div>)}
                 </KFlexRowItem>
                 }
                 <KFlexRowItem grow={4}>
                     <KGrid size={6}>
-                        {services.map((s, k) => <CompanyServicesItem key={k}
+                        {services?.map((s, k) => <CompanyServicesItem key={k}
                                                                      onClick={serviceClick}
                                                                      service={s}/>)}
                     </KGrid>
