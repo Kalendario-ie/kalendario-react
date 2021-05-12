@@ -13,6 +13,7 @@ interface KModalProps {
     header?: React.ReactNode;
     buttons?: KModalButtonProps[];
     backdrop?: boolean;
+    scrollable?: boolean;
     onCancel?: () => void
 }
 
@@ -22,11 +23,16 @@ const KModal: React.FunctionComponent<KModalProps> = (
         body,
         buttons,
         backdrop = false,
+        scrollable = true,
         isOpen,
         onCancel
     }) => {
     return (
-        <Modal isOpen={isOpen} toggle={onCancel} backdrop={backdrop}>
+        <Modal isOpen={isOpen}
+               toggle={onCancel}
+               backdrop={backdrop}
+               scrollable={scrollable}
+        >
             {header &&
             <ModalHeader toggle={onCancel}>
                 {header}

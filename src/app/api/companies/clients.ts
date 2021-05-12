@@ -1,4 +1,3 @@
-import {adaptList} from 'src/app/api/common/adapter';
 import {SlotRequestParams} from 'src/app/api/companies/requests';
 import {convertMoment} from '../common/helpers';
 import {CompanyDetails, Slot} from './models';
@@ -20,6 +19,6 @@ export const companyClient = {
     slots: (slotsParams: SlotRequestParams): Promise<Slot[]> => {
         const params = convertMoment(slotsParams);
         return baseApiAxios.get<Slot[]>(baseUrl + 'slots/', {params})
-            .then(result => adaptList(slotParser)(result.data));
+            .then(result => result.data.map((slot, id) => slotParser(id, slot)));
     }
 };

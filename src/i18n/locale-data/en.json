@@ -8,5 +8,8 @@
     "FORM": {
       "SUBMIT": "Submit"
     }
+  },
+  "COMPANY": {
+    "NO-SLOTS": "No time available for the date selected"
   }
 }

@@ -1,4 +1,3 @@
-import * as CSS from 'csstype';
 import React from 'react';
 import {Slot} from 'src/app/api/companies';
 

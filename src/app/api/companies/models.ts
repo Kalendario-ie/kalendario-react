@@ -30,6 +30,8 @@ export interface CompanyDetails extends IReadModel {
 }
 
 export interface Slot {
+    id: number;
+    date: string;
     start: Moment;
     end: Moment;
     title: string;

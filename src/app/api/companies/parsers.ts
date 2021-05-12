@@ -39,10 +39,12 @@ export function companyParser(data: any): Company {
 }
 
 
-export function slotParser(data: any): Slot {
+export function slotParser(id: number, data: any): Slot {
     const start = moment.utc(data.start);
     const end = moment.utc(data.end);
     return {
+        id,
+        date: start.clone().startOf('day').toISOString(),
         start,
         end,
         title: start.format('HH:mm') + ' - ' + end.format('HH:mm'),

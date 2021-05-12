@@ -9,20 +9,18 @@ export interface CompaniesState {
     apiError: ApiValidationError | null;
     company: CompanyDetails | null;
     selectedServiceId: number | null;
-    slots: Slot[];
+    slots: {[key: string]: Slot[]} | null;
     selectedSlotId: number | null;
-    datFrom: Moment;
-    dateTo: Moment;
+    selectedDate: Moment;
 }
 
 const initialState: CompaniesState = {
     apiError: null,
     company: null,
     selectedServiceId: null,
-    slots: [],
+    slots: null,
     selectedSlotId: null,
-    datFrom: moment.utc().add(1, 'day').startOf('day'),
-    dateTo: moment.utc().add(1, 'day').endOf('day')
+    selectedDate: moment.utc().startOf('day')
 }
 
 const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload}) => {
@@ -35,8 +33,12 @@ const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload})
             return {...state, selectedServiceId: payload}
         case ACTION_TYPES.SLOTS_REQUEST_SUCCESS:
             return {...state, slots: payload}
+        case ACTION_TYPES.SLOTS_REQUEST_FAIL:
+            return {...state, slots: null}
         case ACTION_TYPES.SET_SELECTED_SLOT_ID:
             return {...state, selectedSlotId: payload}
+        case ACTION_TYPES.SET_SELECTED_DATE:
+            return {...state, selectedDate: payload}
         default:
             return {...state}
     }

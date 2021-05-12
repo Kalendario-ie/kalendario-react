@@ -8,7 +8,7 @@ export const selectCompany: (rootState: RootState) => CompanyDetails | null =
     (rootState) => rootState.companies.company;
 
 
-export const selectSlots: (rootState: RootState) => Slot[] =
+export const selectSlots: (rootState: RootState) => { [key: string]: Slot[] } | null =
     (rootState) => rootState.companies.slots;
 
 
@@ -16,12 +16,8 @@ export const selectSelectedSlotId: (rootState: RootState) => number | null =
     (rootState) => rootState.companies.selectedSlotId;
 
 
-export const selectDateFrom: (rootState: RootState) => Moment =
-    (rootState) => rootState.companies.datFrom;
-
-
-export const selectDateTo: (rootState: RootState) => Moment =
-    (rootState) => rootState.companies.dateTo;
+export const selectSelectedDate: (rootState: RootState) => Moment =
+    (rootState) => rootState.companies.selectedDate;
 
 
 

@@ -4,10 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import SlotsForServiceModal from 'src/app/modules/companies/company-services/slots-for-service-modal';
 import {
     companyDetailsRequest,
-    selectCompany, selectDateFrom, selectDateTo,
+    selectCompany,
     selectService,
     setSelectedServiceId,
-    slotsRequest
 } from '../../store/companies';
 import CompaniesView from './companies-view';
 
@@ -33,7 +32,7 @@ const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = () 
             {company &&
             <CompaniesView company={company} serviceClick={serviceClick}/>
             }
-            <SlotsForServiceModal service={service}  onCancel={() => serviceClick(null)}/>
+            <SlotsForServiceModal service={service} onCancel={() => serviceClick(null)}/>
         </>
     )
 }
