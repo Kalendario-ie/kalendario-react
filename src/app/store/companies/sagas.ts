@@ -56,6 +56,10 @@ function* selectTodaySideEffect(action: { type: string, payload: number }) {
     yield put(setSelectedDate(moment.utc().startOf('day')));
 }
 
+function* bookSlotRequestSideEffect(action: { type: string, payload: number }) {
+    yield put(setSelectedDate(moment.utc().startOf('day')));
+}
+
 
 export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST, companyDetailsRequestSideEffect);

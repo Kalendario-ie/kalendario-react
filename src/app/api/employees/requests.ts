@@ -1,18 +1,12 @@
-import {Person} from 'src/app/api/common/models/person';
-
-
-export interface Employee extends Person {
+export interface SaveEmployeeRequest {
     id: number;
     private: boolean;
     firstName: string;
     lastName: string;
-    name: string;
     email: string;
     phone: string;
-    schedule: string;
+    schedule: number;
     instagram: string;
-    // photoUrl: string;
     bio: string;
     services: number[];
 }
-

@@ -7,7 +7,7 @@ import {Slot} from 'src/app/api/companies';
 import SlotButton from 'src/app/modules/companies/slots/slot-button';
 import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
 import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
-import {selectSelectedSlotId, selectSlots, setSelectedSlotId} from 'src/app/store/companies';
+import {bookSlotRequest, selectSelectedSlotId, selectSlots, setSelectedSlotId} from 'src/app/store/companies';
 
 interface SlotsContainerProps {
 }
@@ -19,11 +19,19 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
 
     const isEmpty = !slots || Object.keys(slots).length === 0;
 
+    const selectSlotOrAddToCart = (slotId: number) => {
+        if (slotId === selectedSlotId) {
+            dispatch(setSelectedSlotId(slotId))
+        } else {
+            dispatch(bookSlotRequest())
+        }
+    }
+
     const slotComponents = (slots: Slot[]) => slots.map((slot) =>
         <SlotButton slot={slot}
                     key={slot.id}
                     isSelected={slot.id === selectedSlotId}
-                    onClick={() => dispatch(setSelectedSlotId(slot.id))}/>
+                    onClick={() => selectSlotOrAddToCart(slot.id)}/>
     );
     return (
         <KFlexRow justify={isMobile ? 'center' : 'between'}>
