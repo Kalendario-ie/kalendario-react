@@ -2,7 +2,7 @@ import baseApiAxios from '../common/clients/base-api';
 import {LoginRequest} from './requests';
 import {User, userParser} from '../users/models';
 import {LoginResponse} from './models';
-import {removeToken, setRefreshToken, setToken} from '../common/session-storage';
+import {isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
 
 
 
@@ -11,11 +11,12 @@ import {removeToken, setRefreshToken, setToken} from '../common/session-storage'
 const authUrl = 'auth/';
 // const facebookUrl = 'auth/facebook/';
 
-export function whoAmI(): Promise<User> {
+export function whoAmI(): Promise<User | null> {
     // this.facebookAuth.init();
-    // if (isLoggedIn()) {
+    if (isLoggedIn()) {
     return getUser();
-    // }
+    }
+    return Promise.resolve(null);
 }
 
 function getUser(): Promise<User> {
@@ -34,7 +35,7 @@ function authApi() {
         verifyEmail(key: string) {
             return baseApiAxios.post(authUrl + 'registration/verify-email/', {key});
         },
-        login(request: LoginRequest): Promise<User> {
+        login(request: LoginRequest): Promise<User | null> {
             return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
                 .then(response => {
                     setToken(response.data.accessToken);
