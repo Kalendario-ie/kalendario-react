@@ -12,12 +12,18 @@ interface KFlexRowProps {
 const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
     {
         children,
-        justify = 'center',
-        align = 'stretch',
+        justify,
+        align,
         className= '',
         wrap = false,
     }) => {
-    className += ` d-flex flex-row ${wrap ? 'flex-wrap' : ''} align-items-${align} justify-content-${justify}`;
+    className += ` d-flex flex-row ${wrap ? 'flex-wrap' : ''}`;
+    if (justify) {
+        className += `  justify-content-${justify}`;
+    }
+    if (align)  {
+        className += `  align-items-${align}`;
+    }
     return (
         <div className={className}>{children}</div>
     )

@@ -1,4 +1,5 @@
 import React from 'react';
+import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import AsyncSelect from 'react-select/async';
 import {Company} from 'src/app/api/companies';
@@ -21,15 +22,17 @@ const HomeView: React.FunctionComponent<HomeViewProps> = (
 
     return (
         <KalendarioContainer>
-            <div style={groupStyles} className="company-shadow-1">
-                <AsyncSelect cacheOptions
-                             defaultOptions
-                             backspaceRemovesValue
-                             getOptionValue={(option) => option.name}
-                             getOptionLabel={(option) => option.name}
-                             onChange={(value, bc) => onChange(value)}
-                             loadOptions={values}/>
-            </div>
+            <KFlexRow justify="center">
+                <div style={groupStyles} className="company-shadow-1">
+                    <AsyncSelect cacheOptions
+                                 defaultOptions
+                                 backspaceRemovesValue
+                                 getOptionValue={(option) => option.name}
+                                 getOptionLabel={(option) => option.name}
+                                 onChange={(value, bc) => onChange(value)}
+                                 loadOptions={values}/>
+                </div>
+            </KFlexRow>
         </KalendarioContainer>
     )
 }

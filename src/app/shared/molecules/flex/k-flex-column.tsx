@@ -13,11 +13,17 @@ interface KFlexBoxProps {
 const KFlexColumn: React.FunctionComponent<KFlexBoxProps> = (
     {
         children,
-        justify = 'center',
-        align = 'stretch',
-        className= '',
+        justify,
+        align,
+        className = '',
     }) => {
-    className += ` d-flex flex-column align-items-${align} justify-content-${justify}`;
+    className += ` d-flex flex-column`;
+    if (align) {
+        className += ` align-items-${align}`;
+    }
+    if (justify) {
+        className += ` justify-content-${justify}`;
+    }
     return (
         <div className={className}>
             {children}

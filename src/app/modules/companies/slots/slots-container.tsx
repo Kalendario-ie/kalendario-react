@@ -17,6 +17,8 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
     const selectedSlotId = useSelector(selectSelectedSlotId);
     const dispatch = useDispatch();
 
+    const isEmpty = !slots || Object.keys(slots).length === 0;
+
     const slotComponents = (slots: Slot[]) => slots.map((slot) =>
         <SlotButton slot={slot}
                     key={slot.id}
@@ -31,7 +33,7 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
                     {slotComponents(slots[key])}
                 </KFlexColumn>
             )}
-            {!slots && <FormattedMessage id="COMPANY.NO-SLOTS"/>}
+            {isEmpty && <FormattedMessage id="COMPANY.NO-SLOTS"/>}
         </KFlexRow>
     )
 }

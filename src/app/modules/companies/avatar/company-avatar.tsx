@@ -11,7 +11,7 @@ interface CompanyAvatarProps {
 const CompanyAvatar: React.FunctionComponent<CompanyAvatarProps> = (
     {logo, name, address}) => {
     return (
-        <KFlexRow>
+        <KFlexRow align="center">
             <AvatarImg src={logo}/>
             <div className="ml-2">
                 <h1 className="pb-0 c-pointer">{name}</h1>
