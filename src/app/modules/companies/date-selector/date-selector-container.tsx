@@ -1,5 +1,6 @@
 import {Moment} from 'moment';
 import React from 'react';
+import {isMobile} from 'react-device-detect';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button} from 'reactstrap';
 import KDateInput from 'src/app/shared/components/forms/input/k-date-input';
@@ -23,7 +24,7 @@ const DateSelectorContainer: React.FunctionComponent<DateSelectorContainerProps>
     const previous = () => dispatch(setSelectedDateToPreviousDay());
     const today = () => dispatch(setSelectedDateToToday());
     return (
-        <KFlexRow>
+        <KFlexRow wrap={isMobile}>
             <Button color="accent" onClick={today}>Today</Button>
             <Button color="accent-dark" onClick={previous}>
                 <i className="fa fa-chevron-left"/>

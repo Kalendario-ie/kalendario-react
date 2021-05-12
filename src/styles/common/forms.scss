@@ -1,0 +1,20 @@
+.form-control.form-control-admin {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+//
+//.form-control.form-control-admin:focus {
+//  border: 1px solid $primary;
+//}
+.form-control:focus {
+  border-color: $primary;
+}
+
+.form-control.ng-invalid {
+  border-color: red;
+}
+
+.input-group-text.input-group-text-admin {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}

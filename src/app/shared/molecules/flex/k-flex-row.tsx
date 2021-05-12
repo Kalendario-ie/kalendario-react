@@ -6,6 +6,7 @@ interface KFlexRowProps {
     className?: string;
     justify?: FlexJustify;
     align?: FlexAlign;
+    wrap?: boolean;
 }
 
 const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
@@ -14,8 +15,9 @@ const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         justify = 'center',
         align = 'stretch',
         className= '',
+        wrap = false,
     }) => {
-    className += ` d-flex flex-row align-items-${align} justify-content-${justify}`;
+    className += ` d-flex flex-row ${wrap ? 'flex-wrap' : ''} align-items-${align} justify-content-${justify}`;
     return (
         <div className={className}>{children}</div>
     )

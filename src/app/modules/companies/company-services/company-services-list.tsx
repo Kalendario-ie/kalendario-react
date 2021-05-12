@@ -1,4 +1,5 @@
 import React from 'react';
+import {isMobile} from 'react-device-detect';
 import CompanyServicesItem from 'src/app/modules/companies/company-services/company-services-item';
 import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 import KFlexRowItem from 'src/app/shared/molecules/flex/k-flex-row-item';
@@ -27,7 +28,7 @@ const CompanyServicesList: React.FunctionComponent<CompanyServicesListProps> = (
                 </KFlexRowItem>
                 }
                 <KFlexRowItem grow={4}>
-                    <KGrid size={6}>
+                    <KGrid size={isMobile ? 12 : 6}>
                         {services?.map((s, k) => <CompanyServicesItem key={k}
                                                                      onClick={serviceClick}
                                                                      service={s}/>)}

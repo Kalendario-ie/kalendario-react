@@ -52,16 +52,3 @@ $list-group-bg: inherit;
 
 $breadcrumb-bg: white;
 
-@each $color, $value in $theme-colors {
-  .c-#{$color} {
-    color: $value;
-  }
-}
-
-
-@each $color, $value in $theme-colors {
-  .bg-#{$color} {
-    color: color-yiq($value);
-    background-color: $value;
-  }
-}

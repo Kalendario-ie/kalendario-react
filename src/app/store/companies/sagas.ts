@@ -10,6 +10,7 @@ import {
     slotsRequestSuccess
 } from './actions';
 import {companyClient, CompanyDetails, Slot, SlotRequestParams} from 'src/app/api/companies';
+import {isMobile} from 'react-device-detect';
 
 const apiClient = companyClient;
 
@@ -24,7 +25,8 @@ function* companyDetailsRequestSideEffect(action: { type: string, payload: strin
 
 function* triggerSlotRequest(action: { type: string, payload: number }) {
     const start: Moment = yield select(selectSelectedDate);
-    const end = start.clone().add(1, 'day').endOf('day');
+
+    const end = start.clone().add(isMobile ? 0 : 1, 'day').endOf('day');
     const service: number = yield select(selectSelectedServiceId);
     yield put(slotsRequest({start, end, service}));
 }
@@ -41,7 +43,7 @@ function* slotsRequestSideEffect(action: { type: string, payload: SlotRequestPar
 
 function* moveNextDateSideEffect(action: { type: string, payload: number }) {
     const selectedDate: Moment = yield select(selectSelectedDate);
-    yield put(setSelectedDate(selectedDate.add(1, 'day')))
+    yield put(setSelectedDate(selectedDate.clone().add(1, 'day')))
 }
 
 
