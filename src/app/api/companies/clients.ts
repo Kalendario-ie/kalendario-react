@@ -1,4 +1,5 @@
-import {SlotRequestParams} from 'src/app/api/companies/requests';
+import {CreateAppointmentRequest, SlotRequestParams} from 'src/app/api/companies/requests';
+import {RequestModel, requestParser} from 'src/app/api/requests';
 import {convertMoment} from '../common/helpers';
 import {CompanyDetails, Slot} from './models';
 import baseModelRequest from '../common/clients/base-django-api';
@@ -22,3 +23,47 @@ export const companyClient = {
             .then(result => result.data.map((slot, id) => slotParser(id, slot)));
     }
 };
+
+// const billingUrl = 'billing/';
+const requestsUrl = 'requests/';
+
+export const companyRequestClient = {
+    ...baseModelRequest(requestsUrl, requestParser),
+
+    createAppointment(data: CreateAppointmentRequest) {
+        convertMoment(data);
+        return baseApiAxios.post<RequestModel>(requestsUrl + 'add/', data)
+            .then(result => requestParser(result.data));
+    },
+
+    patch(id: number, customerNotes: string) {
+        return baseApiAxios.patch<RequestModel>(`${requestsUrl}${id}/`, {customerNotes})
+            .then(
+                result => requestParser(result.data)
+            );
+    },
+
+    complete(id: number) {
+        return baseApiAxios.patch<RequestModel>(requestsUrl + id + '/confirm/', {})
+            .then(
+                result => requestParser(result.data)
+            );
+    },
+
+    delete(id: number, appointment: string, owner: string) {
+        return baseApiAxios.delete<RequestModel>(requestsUrl + id + '/', {params: {appointment, owner}})
+            .then(
+                result => requestParser(result.data)
+            );
+    },
+
+    current(owner: number): Promise<RequestModel> {
+        return baseApiAxios.get<RequestModel>(requestsUrl + 'current/', {params: {owner}}).then(
+            result => requestParser(result.data)
+        );
+    },
+
+    // payment(requestId: number): Promise<StripePaymentDetails> {
+    //     return baseApiAxios.put<StripePaymentDetails>(this.billingUrl + `payment/${requestId}/`, {});
+    // }
+}

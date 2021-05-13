@@ -1,5 +1,5 @@
+import {timeFromString, Zero} from 'src/app/api/common/models';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
-import {timeFromString, Zero} from '../common/models/time-of-day';
 
 
 export function serviceParser(data: any): Service {

@@ -22,8 +22,8 @@ export function requestParser(data: any): RequestModel {
     return {
         ...data,
         owner: companyParser(data.owner),
-        user: userParser(data.user),
-        name: data.user.name,
+        user: data.user ? userParser(data.user) : null,
+        name: data.user?.name,
         items: Object.keys(items).map(k => items[k]),
         itemsCount
     }

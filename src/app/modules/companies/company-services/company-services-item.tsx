@@ -1,5 +1,5 @@
 import React from 'react';
-import {timeToString} from 'src/app/api/common/models/time-of-day';
+import {timeToString} from 'src/app/api/common/models';
 import {Service} from 'src/app/api/services';
 import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 import KFlexRowItem from 'src/app/shared/molecules/flex/k-flex-row-item';

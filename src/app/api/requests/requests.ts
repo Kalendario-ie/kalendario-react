@@ -1,7 +1,2 @@
-import {Moment} from 'moment';
+export {};
 
-export interface CreateAppointmentRequest {
-    start: Moment;
-    employee?: number;
-    service: number;
-}

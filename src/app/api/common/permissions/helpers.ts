@@ -7,7 +7,7 @@ import {
   PERMISSION_VIEW,
   PermissionModels
 } from './index';
-import {User} from '../../users/models';
+import {User} from 'src/app/api/users';
 
 
 export function userPermissions(user: User, model: PermissionModels): ModelPermissions {

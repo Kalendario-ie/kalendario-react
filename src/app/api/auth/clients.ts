@@ -24,9 +24,9 @@ function getUser(): Promise<User> {
         .then(({data}) => userParser(data))
         .catch(error => {
             removeToken();
+            return Promise.reject(error);
         });
 }
-
 
 
 function authApi() {

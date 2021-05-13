@@ -23,10 +23,10 @@ const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = () 
         dispatch(setSelectedServiceId(id));
     }
 
-
     useEffect(() => {
         dispatch(companyDetailsRequest(name))
     }, [dispatch, name])
+
     return (
         <>
             {company &&

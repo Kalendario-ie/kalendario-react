@@ -24,3 +24,9 @@ export interface SlotRequestParams {
     start: Moment;
     end: Moment;
 }
+
+export interface CreateAppointmentRequest {
+    start: Moment;
+    employee?: number;
+    service: number;
+}

@@ -1,4 +1,4 @@
-import {timeFromString, timeToString} from 'src/app/api/common/models/time-of-day';
+import {timeFromString, timeToString} from 'src/app/api/common/models';
 import {Shift, TimeFrame} from 'src/app/api/shifts/models';
 
 

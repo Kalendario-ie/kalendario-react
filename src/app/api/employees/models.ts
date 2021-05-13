@@ -1,4 +1,4 @@
-import {Person} from 'src/app/api/common/models/person';
+import {Person} from 'src/app/api/common/models';
 
 
 export interface Employee extends Person {

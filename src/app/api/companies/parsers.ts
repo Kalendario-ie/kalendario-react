@@ -1,7 +1,6 @@
 import moment from 'moment';
-import {otherCategory} from 'src/app/api/services';
-import {serviceCategoryParser, serviceParser} from 'src/app/api/services/parsers';
-import {Employee} from '../employees/models';
+import {otherCategory, serviceCategoryParser, serviceParser} from 'src/app/api/services';
+import {employeeParser} from '../employees';
 import {CompanyConfig} from '../admin-companies/models';
 import {Company, CompanyDetails, Slot} from './models';
 
@@ -23,7 +22,7 @@ export function companyDetailsParser(data: any): CompanyDetails {
         ...data,
         // avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
         avatar: imageStorage + data.avatar,
-        employees: data.employees.map((employee: any) => Employee.fromJs(employee)),
+        employees: data.employees.map((employee: any) => employeeParser(employee)),
         services: services,
         serviceCategories: serviceCategories,
         config: CompanyConfig.fromJs(data.config)

@@ -1,5 +1,4 @@
-import {IReadModel} from '../common/models/IReadModel';
-import {TimeOfDay} from '../common/models/time-of-day';
+import {IReadModel, TimeOfDay} from 'src/app/api/common/models';
 
 
 export interface Service extends IReadModel {

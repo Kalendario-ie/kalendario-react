@@ -1,4 +1,5 @@
 import {Moment} from 'moment';
+import {RequestModel} from 'src/app/api/requests';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
 import {ApiBaseError} from '../../api/common/api-errors';
@@ -45,8 +46,16 @@ export const setSelectedSlotId = (id: number) =>
     action(ACTION_TYPES.SET_SELECTED_SLOT_ID, id);
 
 
-export const bookSlotRequest = () =>
-    action(ACTION_TYPES.BOOK_SLOT_REQUEST);
+export const bookSlotRequest = (slot: Slot) =>
+    action(ACTION_TYPES.BOOK_SLOT_REQUEST, slot);
+
+
+export const bookSlotRequestSuccess = (request: RequestModel) =>
+    action(ACTION_TYPES.BOOK_SLOT_REQUEST_SUCCESS);
+
+
+export const bookSlotRequestFail = () =>
+    action(ACTION_TYPES.BOOK_SLOT_REQUEST_FAIL);
 
 
 export const setSelectedDate = (selectedDate: Moment) =>
@@ -63,3 +72,16 @@ export const setSelectedDateToPreviousDay = () =>
 
 export const setSelectedDateToToday = () =>
     action(ACTION_TYPES.SELECTED_DATE_TODAY);
+
+
+export const currentCartRequest = (companyId: number) =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST, companyId);
+
+
+export const currentCartRequestSuccess = (request: RequestModel) =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS, request);
+
+
+export const currentCartRequestFail = (apiError: ApiBaseError) =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST_FAIL, apiError);
+

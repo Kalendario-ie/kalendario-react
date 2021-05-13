@@ -1,5 +1,5 @@
-import {PermissionModels} from '../common/permissions';
-import {IReadModel} from '../common/models/IReadModel';
+import {IReadModel} from 'src/app/api/common/models';
+import {PermissionModels} from 'src/app/api/common/permissions';
 
 
 

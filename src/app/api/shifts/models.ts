@@ -1,4 +1,4 @@
-import {timeFromString, TimeOfDay, timeToString} from '../common/models/time-of-day';
+import {TimeOfDay} from 'src/app/api/common/models';
 
 export interface TimeFrame {
     start: TimeOfDay;

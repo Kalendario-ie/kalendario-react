@@ -1,7 +1,7 @@
-import {IEmployee} from '../employees/models';
+import {Employee} from '../employees/models';
 import {Service, ServiceCategory} from '../services/models';
 import {CompanyConfig} from '../admin-companies/models';
-import {IReadModel} from '../common/models/IReadModel';
+import {IReadModel} from '../common/models';
 import {Moment} from 'moment';
 
 export interface Company extends IReadModel {
@@ -23,7 +23,7 @@ export interface CompanyDetails extends IReadModel {
     address: string;
     avatar: string;
     about: string;
-    employees: IEmployee[];
+    employees: Employee[];
     services: Service[];
     serviceCategories: ServiceCategory[];
     config: CompanyConfig;
