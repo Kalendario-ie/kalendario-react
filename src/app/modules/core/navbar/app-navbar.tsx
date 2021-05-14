@@ -30,19 +30,19 @@ function AppNavbar() {
             <NavbarToggler onClick={toggle}/>
             <Collapse className="justify-content-end" isOpen={isOpen} navbar>
                 <Nav navbar>
+                    {company &&
+                    <NavItem>
+                        <NavLink tag={Link} to={`/c/${company.name}`}>
+                            <AvatarImg src={company.avatar} size={2} id="TooltipExample"/>
+                        </NavLink>
+                    </NavItem>
+                    }
                     {company && cart &&
-                    <>
-                        <NavItem>
-                            <NavLink tag={Link} to={`/c/${company.name}`}>
-                                <AvatarImg src={company.avatar} size={2} id="TooltipExample"/>
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} to={`/c/${company.name}/cart`}>
-                                <i className="fa fa-shopping-cart"/>
-                            </NavLink>
-                        </NavItem>
-                    </>
+                    <NavItem>
+                        <NavLink tag={Link} to={`/c/${company.name}/cart`}>
+                            <i className="fa fa-shopping-cart"/>
+                        </NavLink>
+                    </NavItem>
                     }
                     {!user &&
                     <>

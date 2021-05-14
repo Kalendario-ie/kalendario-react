@@ -1,6 +1,7 @@
 import moment, {Moment} from 'moment';
 import {call, put, takeEvery, select} from 'redux-saga/effects'
 import {RequestModel} from 'src/app/api/requests';
+import {selectLoggedIn} from 'src/app/store/auth';
 import {selectSelectedDate, selectSelectedServiceId} from 'src/app/store/companies/selectors';
 import {ACTION_TYPES} from './types';
 import {
@@ -10,7 +11,9 @@ import {
     companyDetailsRequestSuccess,
     currentCartRequest,
     currentCartRequestFail,
-    currentCartRequestSuccess, deleteAppointmentRequestFail, deleteAppointmentRequestSuccess,
+    currentCartRequestSuccess,
+    deleteAppointmentRequestFail,
+    deleteAppointmentRequestSuccess,
     setCurrentRequest,
     setSelectedDate,
     slotsRequest,
@@ -38,8 +41,11 @@ function* requestCompanyDetails(action: { type: string, payload: string }) {
 }
 
 
-function* triggerCartRequest(action: { type: string, payload: CompanyDetails }) {
-    yield put(currentCartRequest(action.payload.id))
+function* triggerCartRequestIfLoggedIn(action: { type: string, payload: CompanyDetails }) {
+    const isLoggedIn: boolean = yield select(selectLoggedIn);
+    if (isLoggedIn) {
+        yield put(currentCartRequest(action.payload.id))
+    }
 }
 
 
@@ -90,12 +96,9 @@ function* updateSelectedDate(action: { type: string, payload: number }) {
 }
 
 
-function* requestAddAppointment(action: { type: string, payload: Slot }) {
-    const service: number = yield select(selectSelectedServiceId);
-    const data: CreateAppointmentRequest = {start: action.payload.start, service};
-
+function* requestAddAppointment(action: { type: string, payload: CreateAppointmentRequest }) {
     try {
-        const request: RequestModel = yield call(companyRequestClient.createAppointment, data)
+        const request: RequestModel = yield call(companyRequestClient.createAppointment, action.payload)
         yield put(bookSlotRequestSuccess());
         yield put(setCurrentRequest(request));
     } catch (error) {
@@ -117,7 +120,7 @@ function* requestRemoveAppointment(action: { type: string, payload: number }) {
 
 export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST, requestCompanyDetails);
-    yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS, triggerCartRequest);
+    yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS, triggerCartRequestIfLoggedIn);
     yield takeEvery(ACTION_TYPES.CURRENT_CART_REQUEST, requestCartForCompany);
     yield takeEvery(ACTION_TYPES.SET_SELECTED_SERVICE_ID, triggerSlotRequest);
     yield takeEvery(ACTION_TYPES.SET_SELECTED_DATE, triggerSlotRequest);

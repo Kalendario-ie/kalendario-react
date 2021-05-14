@@ -27,7 +27,7 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
                             <KFlexColumn className="w-100">
                                 <h4 className="border-bottom border-dark">{requestItem.employee.name}</h4>
                                 {requestItem.appointments.map((appointment, key) => (
-                                        <KFlexRow key={key} justify={'between'}>
+                                        <KFlexRow className="m-2" key={key} justify={'between'}>
                                             <KFlexColumn>
                                                 <h6>{appointment.service.name}</h6>
                                                 {appointment.start.format('DD/MM/YYYY - HH:mm')}
@@ -35,12 +35,11 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
                                             </KFlexColumn>
                                             <KFlexColumn className="text-right">
                                                 <h6 className="c-primary">{appointment.service.price}</h6>
-                                                <Button size="sm"
-                                                        color="danger"
+                                                <button className="btn btn-sm btn-outline-danger"
                                                         onClick={() => deleteClick(appointment.id)}
                                                 >
                                                     <i className="fa fa-trash"/>
-                                                </Button>
+                                                </button>
                                             </KFlexColumn>
                                         </KFlexRow>
                                     )
@@ -49,6 +48,11 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
                         </KFlexRow>
                     )
                 )}
+                {request &&
+                    <div className="text-right font-weight-bold m-2 c-primary">
+                        Total: {request.total.toFixed(2)}
+                    </div>
+                }
                 {isEmpty && <FormattedMessage id="COMPANY.EMPTY-CART"/>}
             </KFlexColumn>
         </KalendarioCard>

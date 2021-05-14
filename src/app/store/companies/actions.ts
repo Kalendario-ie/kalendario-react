@@ -2,8 +2,8 @@ import {Moment} from 'moment';
 import {RequestModel} from 'src/app/api/requests';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
-import {ApiBaseError} from '../../api/common/api-errors';
-import {CompanyDetails, Slot, SlotRequestParams} from '../../api/companies';
+import {ApiBaseError} from 'src/app/api/common/api-errors';
+import {CompanyDetails, CreateAppointmentRequest, Slot, SlotRequestParams} from 'src/app/api/companies';
 
 export const companyDetailsRequest = (companyName: string) =>
     action(ACTION_TYPES.COMPANY_DETAILS_REQUEST, companyName);
@@ -46,8 +46,8 @@ export const setSelectedSlotId = (id: number) =>
     action(ACTION_TYPES.SET_SELECTED_SLOT_ID, id);
 
 
-export const bookSlotRequest = (slot: Slot) =>
-    action(ACTION_TYPES.BOOK_SLOT_REQUEST, slot);
+export const bookSlotRequest = (request: CreateAppointmentRequest) =>
+    action(ACTION_TYPES.BOOK_SLOT_REQUEST, request);
 
 
 export const bookSlotRequestSuccess = () =>

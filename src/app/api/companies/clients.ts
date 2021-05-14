@@ -17,10 +17,11 @@ export const companyClient = {
             .then(result => companyDetailsParser(result.data));
     },
 
-    slots: (slotsParams: SlotRequestParams): Promise<Slot[]> => {
+    slots: (slotsParams: SlotRequestParams): Promise<Slot[] | null> => {
         const params = convertMoment(slotsParams);
         return baseApiAxios.get<Slot[]>(baseUrl + 'slots/', {params})
-            .then(result => result.data.map((slot, id) => slotParser(id, slot)));
+            .then(result => result.data.map((slot, id) => slotParser(id, slot)))
+            .catch(error => null);
     }
 };
 

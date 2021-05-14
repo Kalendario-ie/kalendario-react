@@ -26,7 +26,7 @@ export interface SlotRequestParams {
 }
 
 export interface CreateAppointmentRequest {
-    start: Moment;
+    start: string;
     employee?: number;
     service: number;
 }

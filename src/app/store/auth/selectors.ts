@@ -1,6 +1,6 @@
-import {RootState} from '../root-state';
-import {ApiValidationError} from '../../api/common/api-errors';
-import {User} from '../../api/users/models';
+import {RootState} from 'src/app/store/root-state';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
+import {User} from 'src/app/api/users';
 
 
 export const selectLoggedIn: (rootState: RootState) => boolean =

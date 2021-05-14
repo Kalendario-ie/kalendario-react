@@ -49,7 +49,7 @@ const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload})
         case ACTION_TYPES.SET_SELECTED_DATE:
             return {...state, selectedDate: payload}
         case ACTION_TYPES.BOOK_SLOT_REQUEST:
-            return {...state, selectedSlotId: null}
+            return {...state, selectedSlotId: null, selectedServiceId: null}
         case ACTION_TYPES.SET_CURRENT_REQUEST:
             return {...state, currentRequest: payload}
         default:
