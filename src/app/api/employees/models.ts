@@ -11,7 +11,7 @@ export interface Employee extends Person {
     phone: string;
     schedule: string;
     instagram: string;
-    // photoUrl: string;
+    photoUrl: string;
     bio: string;
     services: number[];
 }

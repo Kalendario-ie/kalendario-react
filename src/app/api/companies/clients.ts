@@ -50,11 +50,9 @@ export const companyRequestClient = {
             );
     },
 
-    delete(id: number, appointment: string, owner: string) {
-        return baseApiAxios.delete<RequestModel>(requestsUrl + id + '/', {params: {appointment, owner}})
-            .then(
-                result => requestParser(result.data)
-            );
+    delete(appointmentId: number) {
+        return baseApiAxios.post<RequestModel>(requestsUrl + 'delete/', {appointment: appointmentId})
+            .then(result => requestParser(result.data));
     },
 
     current(owner: number): Promise<RequestModel> {
@@ -67,3 +65,4 @@ export const companyRequestClient = {
     //     return baseApiAxios.put<StripePaymentDetails>(this.billingUrl + `payment/${requestId}/`, {});
     // }
 }
+  

@@ -4,7 +4,7 @@ import {employeeParser} from '../employees';
 import {CompanyConfig} from '../admin-companies/models';
 import {Company, CompanyDetails, Slot} from './models';
 
-const imageStorage = 'https://res.cloudinary.com/gchahm/';
+const imageStorage = process.env.REACT_APP_IMAGE_API_URL;
 
 export function companyDetailsParser(data: any): CompanyDetails {
     let hasOtherCategory = false;

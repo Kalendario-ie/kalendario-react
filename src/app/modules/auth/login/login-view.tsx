@@ -3,7 +3,7 @@ import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import KForm from 'src/app/shared/components/forms/k-form';
 import SubmitButton from 'src/app/shared/components/forms/buttons/submit-button';
-import KInput from 'src/app/shared/components/forms/input/k-input';
+import KInput from 'src/app/shared/components/forms/input/k-formik-input';
 import {FormattedMessage} from 'react-intl';
 import React from 'react';
 import {LoginRequest} from 'src/app/api/auth/requests';

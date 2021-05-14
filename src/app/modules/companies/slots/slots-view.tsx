@@ -32,7 +32,7 @@ const SlotsView: React.FunctionComponent<SlotsViewProps> = (
     return (
         <KFlexRow justify={isMobile ? 'center' : 'between'}>
             {slots && Object.keys(slots).map(key =>
-                <KFlexColumn key={key} justify='around' className="text-center">
+                <KFlexColumn key={key} className="text-center">
                     <h5>{moment.utc(key).format('ddd DD/MM/YYYY')}</h5>
                     {slotComponents(slots[key])}
                 </KFlexColumn>

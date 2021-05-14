@@ -10,6 +10,7 @@
     }
   },
   "COMPANY": {
-    "NO-SLOTS": "No time available for the date selected"
+    "NO-SLOTS": "No time available for the date selected",
+    "EMPTY-CART": "Cart is empty"
   }
 }

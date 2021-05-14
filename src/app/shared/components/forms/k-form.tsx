@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormikHelpers, FormikProps} from 'formik/dist/types';
 import {Formik} from 'formik';
-import {ApiValidationError} from '../../../api/common/api-errors';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
 import {Form, FormGroup} from 'reactstrap';
 
 export interface KFormProps<Values> {

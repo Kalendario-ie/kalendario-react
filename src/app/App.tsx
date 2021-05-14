@@ -1,7 +1,7 @@
 import React from 'react';
 import AppRoutes from './AppRoutes';
 import AppIntl from './AppIntl';
-import AppNavbar from './modules/core/navbar/AppNavbar';
+import AppNavbar from './modules/core/navbar/app-navbar';
 
 
 function App() {

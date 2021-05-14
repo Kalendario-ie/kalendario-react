@@ -16,12 +16,12 @@ const CompaniesView: React.FunctionComponent<CompaniesViewProps> = (
     }) => {
     return (
         <KalendarioContainer>
-            <CompanyAvatar logo={company.avatar}
-                           name={company.name}
-                           address={company.address}/>
+            <CompanyAvatar company={company}
+            />
             <CompanyServicesList services={company.services}
                                  categories={company.serviceCategories}
-            serviceClick={serviceClick}/>
+                                 serviceClick={serviceClick}
+            />
         </KalendarioContainer>
     )
 }

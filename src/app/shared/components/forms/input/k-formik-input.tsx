@@ -10,7 +10,7 @@ export interface KInputProps {
     onChange?: (e: ChangeEvent) => void;
 }
 
-const KInput: React.FunctionComponent<KInputProps> = (
+const KFormikInput: React.FunctionComponent<KInputProps> = (
     {name,
         placeholder,
         type
@@ -35,4 +35,4 @@ const KInput: React.FunctionComponent<KInputProps> = (
     )
 }
 
-export default KInput;
+export default KFormikInput;

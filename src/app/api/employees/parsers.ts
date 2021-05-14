@@ -1,14 +1,15 @@
 import {personParser} from 'src/app/api/common/parsers';
 import {Employee} from 'src/app/api/employees/models';
 
+const imageStorage = process.env.REACT_APP_IMAGE_API_URL;
 
 export function employeeParser(data: any): Employee {
     return  {
         ...data,
         ...personParser(data),
         private: !!data.private,
-        // photoUrl: data.profileImg ? environment.imageStorage + data.profileImg
-        //     : environment.assetUrl + 'img/default-avatar.jpg',
+        photoUrl: data.profileImg ? imageStorage + data.profileImg
+            : 'img/default-avatar.jpg',
     }
 
 }

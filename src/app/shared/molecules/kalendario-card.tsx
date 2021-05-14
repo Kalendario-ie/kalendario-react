@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface KalendarioCardProps {
+export interface KalendarioCardProps {
     header?: React.ReactNode;
     children?: React.ReactChild | React.ReactChild[],
     maxWidth?: number | undefined;
@@ -26,7 +26,9 @@ const KalendarioCard: React.FunctionComponent<KalendarioCardProps> = (
     return (
         <div className={className} style={style}>
             <h5 className="card-title mb-3 text-center">{header}</h5>
-            {children}
+            <div className="card-body">
+                {children}
+            </div>
         </div>
     )
 }

@@ -50,7 +50,7 @@ export const bookSlotRequest = (slot: Slot) =>
     action(ACTION_TYPES.BOOK_SLOT_REQUEST, slot);
 
 
-export const bookSlotRequestSuccess = (request: RequestModel) =>
+export const bookSlotRequestSuccess = () =>
     action(ACTION_TYPES.BOOK_SLOT_REQUEST_SUCCESS);
 
 
@@ -78,10 +78,23 @@ export const currentCartRequest = (companyId: number) =>
     action(ACTION_TYPES.CURRENT_CART_REQUEST, companyId);
 
 
-export const currentCartRequestSuccess = (request: RequestModel) =>
-    action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS, request);
+export const currentCartRequestSuccess = () =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS);
 
 
 export const currentCartRequestFail = (apiError: ApiBaseError) =>
     action(ACTION_TYPES.CURRENT_CART_REQUEST_FAIL, apiError);
 
+
+export const deleteAppointmentRequest = (id: number) =>
+    action(ACTION_TYPES.DELETE_APPOINTMENT_REQUEST, id);
+
+export const deleteAppointmentRequestSuccess = () =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS);
+
+export const deleteAppointmentRequestFail = (error: ApiBaseError) =>
+    action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS, error);
+
+
+export const setCurrentRequest = (request: RequestModel) =>
+    action(ACTION_TYPES.SET_CURRENT_REQUEST, request);

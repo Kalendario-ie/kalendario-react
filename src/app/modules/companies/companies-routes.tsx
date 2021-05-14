@@ -1,12 +1,13 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, useRouteMatch} from 'react-router-dom';
 import CompaniesContainer from './companies-container';
 
 
 const CompaniesRoutes: React.FunctionComponent = () => {
+    let { path } = useRouteMatch();
     return (
         <Switch>
-            <Route path="/c/:name">
+            <Route path={`${path}/:name`}>
                 <CompaniesContainer/>
             </Route>
         </Switch>

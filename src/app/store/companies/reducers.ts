@@ -48,9 +48,9 @@ const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload})
             return {...state, selectedSlotId: payload}
         case ACTION_TYPES.SET_SELECTED_DATE:
             return {...state, selectedDate: payload}
-        case ACTION_TYPES.BOOK_SLOT_REQUEST_SUCCESS:
-            return {...state, currentRequest: payload}
-        case ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS:
+        case ACTION_TYPES.BOOK_SLOT_REQUEST:
+            return {...state, selectedSlotId: null}
+        case ACTION_TYPES.SET_CURRENT_REQUEST:
             return {...state, currentRequest: payload}
         default:
             return {...state}
