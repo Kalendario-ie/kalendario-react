@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {companiesUrls} from 'src/app/modules/companies/paths';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
 import {selectUser} from 'src/app/store/auth';
 import {selectCompany, selectCurrentRequest} from 'src/app/store/companies';
@@ -32,14 +33,14 @@ function AppNavbar() {
                 <Nav navbar>
                     {company &&
                     <NavItem>
-                        <NavLink tag={Link} to={`/c/${company.name}`}>
+                        <NavLink tag={Link} to={companiesUrls(company).index}>
                             <AvatarImg src={company.avatar} size={2} id="TooltipExample"/>
                         </NavLink>
                     </NavItem>
                     }
                     {company && cart &&
                     <NavItem>
-                        <NavLink tag={Link} to={`/c/${company.name}/cart`}>
+                        <NavLink tag={Link} to={companiesUrls(company).cart}>
                             <i className="fa fa-shopping-cart"/>
                         </NavLink>
                     </NavItem>

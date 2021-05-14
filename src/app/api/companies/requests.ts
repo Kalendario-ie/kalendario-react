@@ -30,3 +30,9 @@ export interface CreateAppointmentRequest {
     employee?: number;
     service: number;
 }
+
+
+export interface AddNotesRequest {
+    id: number;
+    notes: string;
+}

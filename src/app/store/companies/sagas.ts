@@ -5,6 +5,7 @@ import {selectLoggedIn} from 'src/app/store/auth';
 import {selectSelectedDate, selectSelectedServiceId} from 'src/app/store/companies/selectors';
 import {ACTION_TYPES} from './types';
 import {
+    addNotesRequestFail, addNotesRequestSuccess,
     bookSlotRequestFail,
     bookSlotRequestSuccess,
     companyDetailsRequestFail,
@@ -26,7 +27,7 @@ import {
     CompanyDetails,
     Slot,
     SlotRequestParams,
-    CreateAppointmentRequest
+    CreateAppointmentRequest, AddNotesRequest
 } from 'src/app/api/companies';
 import {isMobile} from 'react-device-detect';
 
@@ -118,6 +119,19 @@ function* requestRemoveAppointment(action: { type: string, payload: number }) {
 }
 
 
+
+function* requestAddNotes(action: { type: string, payload: AddNotesRequest }) {
+    try {
+        const request: RequestModel = yield call(companyRequestClient.patch, action.payload)
+        yield put(addNotesRequestSuccess());
+        yield put(setCurrentRequest(request));
+    } catch (error) {
+        yield put(addNotesRequestFail(error));
+    }
+}
+
+
+
 export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST, requestCompanyDetails);
     yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS, triggerCartRequestIfLoggedIn);
@@ -130,4 +144,5 @@ export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.SELECTED_DATE_TODAY, updateSelectedDate);
     yield takeEvery(ACTION_TYPES.BOOK_SLOT_REQUEST, requestAddAppointment);
     yield takeEvery(ACTION_TYPES.DELETE_APPOINTMENT_REQUEST, requestRemoveAppointment);
+    yield takeEvery(ACTION_TYPES.ADD_NOTES_REQUEST, requestAddNotes);
 }

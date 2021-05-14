@@ -1,4 +1,4 @@
-import {CreateAppointmentRequest, SlotRequestParams} from 'src/app/api/companies/requests';
+import {AddNotesRequest, CreateAppointmentRequest, SlotRequestParams} from 'src/app/api/companies/requests';
 import {RequestModel, requestParser} from 'src/app/api/requests';
 import {convertMoment} from '../common/helpers';
 import {CompanyDetails, Slot} from './models';
@@ -37,11 +37,9 @@ export const companyRequestClient = {
             .then(result => requestParser(result.data));
     },
 
-    patch(id: number, customerNotes: string) {
-        return baseApiAxios.patch<RequestModel>(`${requestsUrl}${id}/`, {customerNotes})
-            .then(
-                result => requestParser(result.data)
-            );
+    patch(request: AddNotesRequest) {
+        return baseApiAxios.patch<RequestModel>(`${requestsUrl}${request.id}/`, {customerNotes: request.notes})
+            .then(result => requestParser(result.data));
     },
 
     complete(id: number) {

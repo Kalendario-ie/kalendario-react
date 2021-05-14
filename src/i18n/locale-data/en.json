@@ -11,6 +11,11 @@
   },
   "COMPANY": {
     "NO-SLOTS": "No time available for the date selected",
-    "EMPTY-CART": "Cart is empty"
+    "EMPTY-CART": "Cart is empty",
+    "PROCEED-CHECKOUT": "Proceed to checkout",
+    "ADD-NOTES": "Add notes to the request",
+    "NOTES": "Notes",
+    "PAY-CARD": "Card",
+    "PAY-CASH": "Cash"
   }
 }

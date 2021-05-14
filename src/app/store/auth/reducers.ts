@@ -1,4 +1,5 @@
 import {Reducer} from 'redux';
+import {isLoggedIn} from 'src/app/api/common/session-storage';
 import {ACTION_TYPES} from './types';
 import {User} from 'src/app/api/users';
 import {ApiValidationError} from 'src/app/api/common/api-errors';
@@ -12,7 +13,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
     apiError: null,
-    loggedIn: false,
+    loggedIn: isLoggedIn(),
     loading: false,
     user: null
 }

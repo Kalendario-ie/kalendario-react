@@ -3,7 +3,13 @@ import {RequestModel} from 'src/app/api/requests';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
 import {ApiBaseError} from 'src/app/api/common/api-errors';
-import {CompanyDetails, CreateAppointmentRequest, Slot, SlotRequestParams} from 'src/app/api/companies';
+import {
+    AddNotesRequest,
+    CompanyDetails,
+    CreateAppointmentRequest,
+    Slot,
+    SlotRequestParams
+} from 'src/app/api/companies';
 
 export const companyDetailsRequest = (companyName: string) =>
     action(ACTION_TYPES.COMPANY_DETAILS_REQUEST, companyName);
@@ -98,3 +104,27 @@ export const deleteAppointmentRequestFail = (error: ApiBaseError) =>
 
 export const setCurrentRequest = (request: RequestModel) =>
     action(ACTION_TYPES.SET_CURRENT_REQUEST, request);
+
+
+export const addNotesRequest = (request: AddNotesRequest) =>
+    action(ACTION_TYPES.ADD_NOTES_REQUEST, request);
+
+
+export const addNotesRequestSuccess = () =>
+    action(ACTION_TYPES.ADD_NOTES_REQUEST_SUCCESS);
+
+
+export const addNotesRequestFail = (error: ApiBaseError) =>
+    action(ACTION_TYPES.ADD_NOTES_REQUEST_FAIL, error);
+
+
+export const confirmCartRequest = (id: number) =>
+    action(ACTION_TYPES.CONFIRM_CART_REQUEST, id);
+
+
+export const confirmCartRequestSuccess = () =>
+    action(ACTION_TYPES.CONFIRM_CART_REQUEST_SUCCESS);
+
+
+export const confirmCartRequestFail = (error: ApiBaseError) =>
+    action(ACTION_TYPES.CONFIRM_CART_REQUEST_FAIL, error);
