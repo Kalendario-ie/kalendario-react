@@ -1,33 +1,30 @@
-import React, {useEffect} from 'react';
-import {Route, Switch, useParams, useRouteMatch} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import CartContainer from 'src/app/modules/companies/cart/cart-container';
-import CompaniesMain from 'src/app/modules/companies/companies-main';
-import {
-    companyDetailsRequest,
-} from '../../store/companies';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import CompaniesView from 'src/app/modules/companies/companies-view';
+import SlotsForServiceModal from 'src/app/modules/companies/company-services/slots-for-service-modal';
+import { selectCompany, selectService, setSelectedServiceId} from 'src/app/store/companies';
 
-interface CompaniesContainerProps {
+interface CompaniesMainProps {
 }
 
-const CompaniesContainer: React.FunctionComponent<CompaniesContainerProps> = () => {
-    let { path, url } = useRouteMatch();
-    const {name} = useParams<{ name: string }>();
+const CompaniesContainer: React.FunctionComponent<CompaniesMainProps>  = () => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(companyDetailsRequest(name))
-    }, [dispatch, name])
+    const company = useSelector(selectCompany);
+    const service = useSelector(selectService);
+
+    const serviceClick = (id: number | null) => {
+        dispatch(setSelectedServiceId(id));
+    }
 
     return (
-        <Switch>
-            <Route path={`${path}/cart`}>
-                <CartContainer/>
-            </Route>
-            <Route path={`${path}/`}>
-                <CompaniesMain/>
-            </Route>
-        </Switch>
+        <>
+            {company &&
+            <CompaniesView company={company} serviceClick={serviceClick}/>
+            }
+            <SlotsForServiceModal service={service} onCancel={() => serviceClick(null)}/>
+        </>
     )
 }
+
 
 export default CompaniesContainer;

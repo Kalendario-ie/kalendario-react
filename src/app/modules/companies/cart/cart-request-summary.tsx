@@ -17,7 +17,7 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
         request,
         deleteClick
     }) => {
-    const isEmpty = !request || request && request.itemsCount === 0;
+    const isEmpty = !request || (request && request.itemsCount === 0);
     return (
         <KalendarioCard>
             <KFlexColumn>

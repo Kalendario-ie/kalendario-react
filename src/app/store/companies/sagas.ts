@@ -37,12 +37,13 @@ function* requestCompanyDetails(action: { type: string, payload: string }) {
     }
 }
 
-function* requestCartForCompany(action: { type: string, payload: CompanyDetails }) {
+
+function* triggerCartRequest(action: { type: string, payload: CompanyDetails }) {
     yield put(currentCartRequest(action.payload.id))
 }
 
 
-function* requestCurrentRequest(action: { type: string, payload: number }) {
+function* requestCartForCompany(action: { type: string, payload: number }) {
     try {
         const request: RequestModel = yield call(companyRequestClient.current, action.payload);
         yield put(currentCartRequestSuccess());
@@ -52,6 +53,7 @@ function* requestCurrentRequest(action: { type: string, payload: number }) {
         yield put(currentCartRequestFail(error));
     }
 }
+
 
 function* triggerSlotRequest(action: { type: string, payload: number }) {
     const start: Moment = yield select(selectSelectedDate);
@@ -115,14 +117,14 @@ function* requestRemoveAppointment(action: { type: string, payload: number }) {
 
 export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST, requestCompanyDetails);
-    yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS, requestCartForCompany);
-    yield takeEvery(ACTION_TYPES.CURRENT_CART_REQUEST, requestCurrentRequest);
+    yield takeEvery(ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS, triggerCartRequest);
+    yield takeEvery(ACTION_TYPES.CURRENT_CART_REQUEST, requestCartForCompany);
     yield takeEvery(ACTION_TYPES.SET_SELECTED_SERVICE_ID, triggerSlotRequest);
     yield takeEvery(ACTION_TYPES.SET_SELECTED_DATE, triggerSlotRequest);
     yield takeEvery(ACTION_TYPES.SLOTS_REQUEST, requestSlots);
-    yield takeEvery(ACTION_TYPES.BOOK_SLOT_REQUEST, requestAddAppointment);
     yield takeEvery(ACTION_TYPES.SELECTED_DATE_ADD_ONE, addOneDayToSelectedDate);
     yield takeEvery(ACTION_TYPES.SELECTED_DATE_SUBTRACT_ONE, subtractOneDayToSelectedDate);
     yield takeEvery(ACTION_TYPES.SELECTED_DATE_TODAY, updateSelectedDate);
+    yield takeEvery(ACTION_TYPES.BOOK_SLOT_REQUEST, requestAddAppointment);
     yield takeEvery(ACTION_TYPES.DELETE_APPOINTMENT_REQUEST, requestRemoveAppointment);
 }
