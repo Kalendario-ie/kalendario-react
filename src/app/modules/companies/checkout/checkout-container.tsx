@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import FlexSpacer from 'src/app/shared/molecules/flex/flex-spacer';
-import KGrid from 'src/app/shared/molecules/grid/k-grid';
 import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import {confirmCartRequest, selectCompany, selectCurrentRequest} from 'src/app/store/companies';

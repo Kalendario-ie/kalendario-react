@@ -9,7 +9,7 @@ import {
     bookSlotRequestFail,
     bookSlotRequestSuccess,
     companyDetailsRequestFail,
-    companyDetailsRequestSuccess,
+    companyDetailsRequestSuccess, confirmCartRequest, confirmCartRequestFail, confirmCartRequestSuccess,
     currentCartRequest,
     currentCartRequestFail,
     currentCartRequestSuccess,
@@ -119,7 +119,6 @@ function* requestRemoveAppointment(action: { type: string, payload: number }) {
 }
 
 
-
 function* requestAddNotes(action: { type: string, payload: AddNotesRequest }) {
     try {
         const request: RequestModel = yield call(companyRequestClient.patch, action.payload)
@@ -130,6 +129,16 @@ function* requestAddNotes(action: { type: string, payload: AddNotesRequest }) {
     }
 }
 
+
+function* requestCartConfirmation(action: { type: string, payload: number }) {
+    try {
+        const request: RequestModel = yield call(companyRequestClient.complete, action.payload)
+        yield put(confirmCartRequestSuccess());
+        yield put(setCurrentRequest(request));
+    } catch (error) {
+        yield put(confirmCartRequestFail(error));
+    }
+}
 
 
 export function* companiesSaga() {
@@ -145,4 +154,5 @@ export function* companiesSaga() {
     yield takeEvery(ACTION_TYPES.BOOK_SLOT_REQUEST, requestAddAppointment);
     yield takeEvery(ACTION_TYPES.DELETE_APPOINTMENT_REQUEST, requestRemoveAppointment);
     yield takeEvery(ACTION_TYPES.ADD_NOTES_REQUEST, requestAddNotes);
+    yield takeEvery(ACTION_TYPES.CONFIRM_CART_REQUEST, requestCartConfirmation);
 }

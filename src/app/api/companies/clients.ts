@@ -44,9 +44,7 @@ export const companyRequestClient = {
 
     complete(id: number) {
         return baseApiAxios.patch<RequestModel>(requestsUrl + id + '/confirm/', {})
-            .then(
-                result => requestParser(result.data)
-            );
+            .then(result => requestParser(result.data));
     },
 
     delete(appointmentId: number) {
