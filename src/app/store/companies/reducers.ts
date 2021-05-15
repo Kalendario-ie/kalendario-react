@@ -4,7 +4,6 @@ import {RequestModel} from 'src/app/api/requests';
 import {ApiValidationError} from '../../api/common/api-errors';
 import {CompanyDetails, Slot} from '../../api/companies';
 import {ACTION_TYPES} from './types';
-import {Moment} from 'moment';
 
 export interface SlotDict {
     [key: string]: Slot[];
@@ -16,7 +15,7 @@ export interface CompaniesState {
     selectedServiceId: number | null;
     slots: SlotDict;
     selectedSlotId: number | null;
-    selectedDate: Moment;
+    selectedDate: string;
     currentRequest: RequestModel | null;
 }
 
@@ -26,7 +25,7 @@ const initialState: CompaniesState = {
     selectedServiceId: null,
     slots: {},
     selectedSlotId: null,
-    selectedDate: moment.utc().startOf('day'),
+    selectedDate: moment.utc().startOf('day').toISOString(),
     currentRequest: null
 }
 

@@ -65,7 +65,7 @@ export const bookSlotRequestFail = () =>
 
 
 export const setSelectedDate = (selectedDate: Moment) =>
-    action(ACTION_TYPES.SET_SELECTED_DATE, selectedDate);
+    action(ACTION_TYPES.SET_SELECTED_DATE, selectedDate.toISOString());
 
 
 export const setSelectedDayToNextDay = () =>

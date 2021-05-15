@@ -1,4 +1,4 @@
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import {RequestModel} from 'src/app/api/requests';
 import {SlotDict} from 'src/app/store/companies/reducers';
 import {RootState} from '../root-state';
@@ -20,7 +20,7 @@ export const selectSelectedSlotId: (rootState: RootState) => number | null =
 
 
 export const selectSelectedDate: (rootState: RootState) => Moment =
-    (rootState) => rootState.companies.selectedDate;
+    (rootState) => moment.utc(rootState.companies.selectedDate);
 
 
 export const selectCurrentRequest: (rootState: RootState) => RequestModel | null =
