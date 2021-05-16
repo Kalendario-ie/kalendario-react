@@ -4,7 +4,6 @@ import {Appointment} from 'src/app/api/appointments';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import EventDetails from 'src/app/shared/components/appoitments/event-details';
 import KModal from 'src/app/shared/components/modal/k-modal';
-import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
 
 interface EventModalProps {
     appointment: Appointment | null;

@@ -18,6 +18,7 @@ const BookContainer: React.FunctionComponent = () => {
             dispatch(bookSlotRequest(request))
         }
     }, [company, dispatch, employee, service, start]);
+    console.log(company);
     return (
         <>
             {company &&

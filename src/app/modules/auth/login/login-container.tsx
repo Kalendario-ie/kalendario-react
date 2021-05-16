@@ -1,7 +1,6 @@
 import React from 'react';
 import FacebookLogin, {ReactFacebookFailureResponse, ReactFacebookLoginInfo} from 'react-facebook-login';
 import {FormattedMessage} from 'react-intl';
-import {authApi} from 'src/app/api/auth';
 import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
 import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
@@ -22,10 +21,9 @@ const LoginContainer = () => {
         dispatch(loginRequest(data));
     };
 
-    const queryParams = useQueryParams();
+    const {returnUrl, ...params} = useQueryParams();
     const history = useKHistory();
     if (isLoggedIn) {
-        const {returnUrl, ...params} = queryParams;
         const redirectUrl = returnUrl || '/';
         history.push(redirectUrl, params);
     }

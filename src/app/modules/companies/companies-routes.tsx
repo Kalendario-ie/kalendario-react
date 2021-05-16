@@ -5,6 +5,8 @@ import BookContainer from 'src/app/modules/companies/cart/book-container';
 import CartContainer from 'src/app/modules/companies/cart/cart-container';
 import CheckoutContainer from 'src/app/modules/companies/checkout/checkout-container';
 import CompaniesContainer from 'src/app/modules/companies/companies-container';
+import {companiesUrls} from 'src/app/modules/companies/paths';
+import {ProtectedRoute} from 'src/app/shared/util/router-extensions';
 import {companyDetailsRequest} from 'src/app/store/companies';
 
 const CompaniesInnerRoutes: React.FunctionComponent = () => {
@@ -14,21 +16,13 @@ const CompaniesInnerRoutes: React.FunctionComponent = () => {
     useEffect(() => {
         dispatch(companyDetailsRequest(name))
     }, [dispatch, name])
-
+    console.log(path)
     return (
         <Switch>
-            <Route path={`${path}/book`}>
-                <BookContainer/>
-            </Route>
-            <Route path={`${path}/cart`}>
-                <CartContainer/>
-            </Route>
-            <Route path={`${path}/checkout`}>
-                <CheckoutContainer/>
-            </Route>
-            <Route path={`${path}/`}>
-                <CompaniesContainer/>
-            </Route>
+            <ProtectedRoute path={`${path}/book`} component={BookContainer}/>
+            <Route path={`${path}/cart`} component={CartContainer}/>
+            <Route path={`${path}/checkout`} component={CheckoutContainer}/>
+            <Route path={`${path}/`} component={CompaniesContainer}/>
         </Switch>
     )
 }
