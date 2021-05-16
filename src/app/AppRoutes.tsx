@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import UsersRoutes from 'src/app/modules/users/users-routes';
 import AuthContainer from './modules/auth/auth-container';
@@ -12,7 +13,7 @@ interface AppRouteProps {
 const AppRoutes: React.FC<AppRouteProps> = () => {
     return (
         <Switch>
-            <Route path="/auth">
+            <Route path={AUTH_ROUTES.ROOT}>
                 <AuthContainer/>
             </Route>
             <Route path="/c">

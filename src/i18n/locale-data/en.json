@@ -2,7 +2,9 @@
   "AUTH": {
     "LOGIN-HEADER": "Log in to Kalendario",
     "LOGIN": "Login",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "LOGOUT": "Logout",
+    "LOGOUT-SUCCESS": "Successfully logged out"
   },
   "COMMON": {
     "FORM": {
@@ -24,5 +26,8 @@
       "A": "Accepted",
       "R": "Rejected"
     }
+  },
+  "USER": {
+    "BOOKINGS": "Bookings"
   }
 }

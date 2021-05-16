@@ -1,6 +1,6 @@
-import {whoAmI} from '../../api/auth/clients';
+import {authApi} from "src/app/api/auth/clients";
 import {useDispatch} from 'react-redux';
-import {setUser} from '../../store/auth';
+import {setUser} from 'src/app/store/auth';
 import React, {useEffect} from 'react';
 
 interface AuthAutoLoginProps {
@@ -12,7 +12,7 @@ const AuthAutoLogin: React.FunctionComponent<AuthAutoLoginProps> = (
 ) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        whoAmI().then(user => {
+        authApi.whoAmI().then(user => {
             dispatch(setUser(user));
         });
     }, [dispatch]);

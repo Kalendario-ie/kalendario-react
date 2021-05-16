@@ -1,6 +1,7 @@
-import * as moment from 'moment';
 import {Moment} from 'moment';
 import {User} from '../users/models';
+
+type SocialProvider = 'facebook';
 
 export interface SocialAccount {
     id: number;
@@ -10,23 +11,11 @@ export interface SocialAccount {
     dateJoined: Moment;
 }
 
-export function parseSocial(item: any): SocialAccount {
-    return {
-        ...item,
-        lastLogin: moment.utc(item.lastLogin),
-        dateJoined: moment.utc(item.dateJoined)
-    };
-}
-
-type SocialProvider = 'facebook';
-
-
 export interface LoginResponse {
     accessToken: string;
     refreshToken: string;
     user: User;
 }
-
 
 export interface RefreshAccessTokenResponse {
     access: string;

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {FormattedMessage} from 'react-intl';
 import {
     UncontrolledDropdown,
     DropdownToggle,
@@ -14,6 +15,7 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
@@ -49,28 +51,29 @@ function AppNavbar() {
                     {!user &&
                     <>
                         <NavItem>
-                            <NavLink tag={Link} to="/auth/login">Login</NavLink>
+                            <NavLink tag={Link} to={AUTH_ROUTES.LOGIN}><FormattedMessage id={'AUTH.LOGIN'}/></NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} to="/auth/register">Register</NavLink>
+                            <NavLink tag={Link} to={AUTH_ROUTES.REGISTER}><FormattedMessage id={'AUTH.REGISTER'}/></NavLink>
                         </NavItem>
                     </>
                     }
                     {user &&
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
-                            Options
+                            Menu
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem>
-                                <NavLink tag={Link} to={USER_ROUTES.BOOKING}>Bookings</NavLink>
-                            </DropdownItem>
-                            <DropdownItem>
-                                Option 2
+                                <NavLink tag={Link} to={USER_ROUTES.BOOKING}>
+                                    <FormattedMessage id={'USER.BOOKINGS'}/>
+                                </NavLink>
                             </DropdownItem>
                             <DropdownItem divider/>
                             <DropdownItem>
-                                Reset
+                                <NavLink tag={Link} to={AUTH_ROUTES.LOGOUT}>
+                                    <FormattedMessage id={'AUTH.LOGOUT'}/>
+                                </NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

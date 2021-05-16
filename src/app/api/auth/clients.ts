@@ -5,16 +5,14 @@ import {LoginResponse} from './models';
 import {isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
 
 
-
-
-
 const authUrl = 'auth/';
+
 // const facebookUrl = 'auth/facebook/';
 
-export function whoAmI(): Promise<User | null> {
+function whoAmI(): Promise<User | null> {
     // this.facebookAuth.init();
     if (isLoggedIn()) {
-    return getUser();
+        return getUser();
     }
     return Promise.resolve(null);
 }
@@ -29,32 +27,30 @@ function getUser(): Promise<User | null> {
 }
 
 
-function authApi() {
-
-    return {
-        verifyEmail(key: string) {
-            return baseApiAxios.post(authUrl + 'registration/verify-email/', {key});
-        },
-        login(request: LoginRequest): Promise<User | null> {
-            return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
-                .then(response => {
-                    setToken(response.data.accessToken);
-                    setRefreshToken(response.data.refreshToken);
-                    return whoAmI();
-                });
-        }
-    }
+export const authApi = {
+    verifyEmail(key: string) {
+        return baseApiAxios.post(authUrl + 'registration/verify-email/', {key});
+    },
+    login(request: LoginRequest): Promise<User | null> {
+        return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
+            .then(response => {
+                setToken(response.data.accessToken);
+                setRefreshToken(response.data.refreshToken);
+                return whoAmI();
+            });
+    },
+    logout() {
+        return baseApiAxios.post<{ detail: string }>(authUrl + 'logout/', {})
+            .then(() => {
+                removeToken();
+                // facebookAuth.logout()
+            });
+    },
+    whoAmI,
 }
 
-export default authApi;
-
 //
-//     logout() {
-//         return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
-//             tap(() => AuthService.removeToken()),
-//             tap(() => this.facebookAuth.logout()),
-//         );
-//     }
+
 //
 
 //
