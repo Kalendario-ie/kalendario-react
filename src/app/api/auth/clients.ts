@@ -1,3 +1,4 @@
+import {AxiosResponse} from 'axios';
 import baseApiAxios from '../common/clients/base-api';
 import {LoginRequest} from './requests';
 import {User, userParser} from '../users/models';
@@ -6,25 +7,7 @@ import {isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/sess
 
 
 const authUrl = 'auth/';
-
-// const facebookUrl = 'auth/facebook/';
-
-function whoAmI(): Promise<User | null> {
-    // this.facebookAuth.init();
-    if (isLoggedIn()) {
-        return getUser();
-    }
-    return Promise.resolve(null);
-}
-
-function getUser(): Promise<User | null> {
-    return baseApiAxios.get<User>(authUrl + 'user/')
-        .then(({data}) => userParser(data))
-        .catch(error => {
-            removeToken();
-            return Promise.resolve(null);
-        });
-}
+const facebookUrl = 'auth/facebook/';
 
 
 export const authApi = {
@@ -33,29 +16,38 @@ export const authApi = {
     },
     login(request: LoginRequest): Promise<User | null> {
         return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
-            .then(response => {
-                setToken(response.data.accessToken);
-                setRefreshToken(response.data.refreshToken);
-                return whoAmI();
-            });
+            .then(completeLogin);
     },
+
+    authenticateFacebook(accessToken: string): Promise<User | null> {
+        return baseApiAxios.post<LoginResponse>(facebookUrl, {accessToken})
+            .then(completeLogin);
+    },
+
     logout() {
         return baseApiAxios.post<{ detail: string }>(authUrl + 'logout/', {})
-            .then(() => {
-                removeToken();
-                // facebookAuth.logout()
-            });
+            .then(removeToken);
     },
-    whoAmI,
+
+    whoAmI(): Promise<User | null> {
+        if (isLoggedIn()) {
+            return baseApiAxios.get<User>(authUrl + 'user/')
+                .then(({data}) => userParser(data))
+                .catch(error => {
+                    removeToken();
+                    return Promise.resolve(null);
+                });
+        }
+        return Promise.resolve(null);
+    },
 }
 
-//
+const completeLogin = ({data}: AxiosResponse<LoginResponse>) => {
+    setToken(data.accessToken);
+    setRefreshToken(data.refreshToken);
+    return userParser(data.user);
+}
 
-//
-
-//
-
-//
 //     socialAccounts(): Observable<ISocialAccount[]> {
 //         return this.http.get<any[]>(this.baseUrl + 'accounts/').pipe(
 //             map(items => items.map(i => parseSocial(i)))
@@ -100,18 +92,3 @@ export const authApi = {
 //         catchError(err => of(User.AnonymousUser()))
 //     );
 // }
-
-//
-
-//
-// function authenticateFacebook(authToken: string): Observable<IUser> {
-//         return this.http.post<{ key: string }>(this.facebookUrl, {access_token: authToken}).pipe(
-//             tap(({key}) => AuthService.setToken(key)),
-//             switchMap(({key}) => this.whoAmI())
-//         );
-//     }
-// }
-//
-
-
-

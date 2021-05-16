@@ -1,4 +1,4 @@
-import {LoginRequest} from '../../api/auth/requests';
+import {LoginRequest} from 'src/app/api/auth';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
 import {User} from 'src/app/api/users';
@@ -15,3 +15,12 @@ export const loginRequestFail = (error?: ApiBaseError) =>
 
 export const setUser = (user: User | null) =>
     action(ACTION_TYPES.SET_USER, user)
+
+export const facebookLoginRequest = (accessToken: string) =>
+    action(ACTION_TYPES.FACEBOOK_LOGIN_REQUEST, accessToken);
+
+export const facebookLoginRequestSuccess = () =>
+    action(ACTION_TYPES.FACEBOOK_LOGIN_REQUEST_SUCCESS)
+
+export const facebookLoginRequestFail = (error?: ApiBaseError) =>
+    action(ACTION_TYPES.FACEBOOK_LOGIN_REQUEST_FAIL, error)
