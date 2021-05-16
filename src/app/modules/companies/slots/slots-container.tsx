@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useRouteMatch} from 'react-router-dom';
 import {CreateAppointmentRequest, Slot} from 'src/app/api/companies';
+import BookContainer from 'src/app/modules/companies/cart/book-container';
+import {companiesUrls} from 'src/app/modules/companies/paths';
 import SlotsView from 'src/app/modules/companies/slots/slots-view';
-import {useKHistory} from 'src/app/shared/util/router-extensions';
-import {selectLoggedIn} from 'src/app/store/auth';
+import { ProtectedRoute } from 'src/app/shared/util/router-extensions';
 import {
-    bookSlotRequest,
     selectCompany,
     selectSelectedSlotId,
     selectSlots,
@@ -22,14 +21,10 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
     const serviceId = useSelector(selectSelectedServiceId);
     const slots = useSelector(selectSlots);
     const selectedSlotId = useSelector(selectSelectedSlotId);
-    const isLoggedIn = useSelector(selectLoggedIn);
-
     const dispatch = useDispatch();
-
-    let {url} = useRouteMatch();
-    const history = useKHistory();
-
+    const [request, setRequest] = useState<CreateAppointmentRequest | null>(null);
     const isEmpty = !slots || Object.keys(slots).length === 0;
+
 
     const selectSlotOrAddToCart = (slot: Slot) => {
         if (!serviceId) {
@@ -39,21 +34,19 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
             dispatch(setSelectedSlotId(slot.id))
             return;
         }
-        const start = slot.start.toISOString();
-        const request: CreateAppointmentRequest = {start: start, service: +serviceId};
-        if (isLoggedIn) {
-            dispatch(bookSlotRequest(request));
-            history.push(`${url}/cart`);
-            return;
-        }
-        history.push('/auth/login', {returnUrl: `/c/${company?.name}/book`, ...request});
+        setRequest({start: slot.start.toISOString(), service: +serviceId});
     }
 
     return (
-        <SlotsView isEmpty={isEmpty}
-                   slots={slots}
-                   selectedSlotId={selectedSlotId}
-                   onClick={selectSlotOrAddToCart}/>
+        <>
+            <SlotsView isEmpty={isEmpty}
+                       slots={slots}
+                       selectedSlotId={selectedSlotId}
+                       onClick={selectSlotOrAddToCart}/>
+            {request && company &&
+            <ProtectedRoute path={companiesUrls(company).book} params={{...request}} component={BookContainer}/>
+            }
+        </>
     )
 }
 

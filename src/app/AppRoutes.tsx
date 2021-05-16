@@ -6,25 +6,16 @@ import UsersRoutes from 'src/app/modules/users/users-routes';
 import AuthContainer from './modules/auth/auth-container';
 import HomeContainer from './modules/core/home/home-container';
 import CompaniesRoutes from './modules/companies/companies-routes';
+import { ProtectedRoute } from './shared/util/router-extensions';
 
-interface AppRouteProps {
-}
 
-const AppRoutes: React.FC<AppRouteProps> = () => {
+const AppRoutes: React.FunctionComponent = () => {
     return (
         <Switch>
-            <Route path={AUTH_ROUTES.ROOT}>
-                <AuthContainer/>
-            </Route>
-            <Route path="/c">
-                <CompaniesRoutes/>
-            </Route>
-            <Route path={USER_ROUTES.ROOT}>
-                <UsersRoutes/>
-            </Route>
-            <Route path="/">
-                <HomeContainer/>
-            </Route>
+            <Route path={AUTH_ROUTES.ROOT} component={AuthContainer}/>
+            <Route path="/c" component={CompaniesRoutes}/>
+            <ProtectedRoute path={USER_ROUTES.ROOT} component={UsersRoutes}/>
+            <Route path="/" component={HomeContainer}/>
         </Switch>
     )
 }
