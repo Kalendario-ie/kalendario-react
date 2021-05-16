@@ -4,7 +4,6 @@ import {useHistory} from 'react-router-dom';
 import CartCompanySummary from 'src/app/modules/companies/cart/cart-company-summary';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {companiesUrls} from 'src/app/modules/companies/paths';
-import FlexSpacer from 'src/app/shared/molecules/flex/flex-spacer';
 import KGrid from 'src/app/shared/molecules/grid/k-grid';
 import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';

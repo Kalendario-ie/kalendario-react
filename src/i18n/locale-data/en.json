@@ -17,5 +17,12 @@
     "NOTES": "Notes",
     "PAY-CARD": "Card",
     "PAY-CASH": "Cash"
+  },
+  "APPOINTMENT": {
+    "STATUS": {
+      "P": "Pending",
+      "A": "Accepted",
+      "R": "Rejected"
+    }
   }
 }

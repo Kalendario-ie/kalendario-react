@@ -36,3 +36,8 @@ export interface AddNotesRequest {
     id: number;
     notes: string;
 }
+
+export interface RequestModelGetParams {
+    start: Moment,
+    end: Moment;
+}

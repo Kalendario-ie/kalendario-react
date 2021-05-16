@@ -15,6 +15,7 @@ import {
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {companiesUrls} from 'src/app/modules/companies/paths';
+import {USER_ROUTES} from 'src/app/modules/users/urls';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
 import {selectUser} from 'src/app/store/auth';
 import {selectCompany, selectCurrentRequest} from 'src/app/store/companies';
@@ -62,7 +63,7 @@ function AppNavbar() {
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem>
-                                Option 1
+                                <NavLink tag={Link} to={USER_ROUTES.BOOKING}>Bookings</NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 Option 2

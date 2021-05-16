@@ -17,12 +17,12 @@ const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         className= '',
         wrap = false,
     }) => {
-    className += ` d-flex flex-row ${wrap ? 'flex-wrap' : ''}`;
+    className += ` d-flex flex-row${wrap ? ' flex-wrap' : ''}`;
     if (justify) {
-        className += `  justify-content-${justify}`;
+        className += ` justify-content-${justify}`;
     }
     if (align)  {
-        className += `  align-items-${align}`;
+        className += ` align-items-${align}`;
     }
     return (
         <div className={className}>{children}</div>

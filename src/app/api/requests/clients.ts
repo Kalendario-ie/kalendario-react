@@ -5,7 +5,7 @@ import {requestParser} from 'src/app/api/requests/parsers';
 
 const baseUrl = 'admin/requests/';
 
-export const requestClient = {
+export const adminRequestClient = {
     ...baseModelRequest(baseUrl, requestParser),
 
       accept: (id: number): Promise<RequestModel> => {

@@ -24,3 +24,12 @@ export interface SaveAppointmentRequest {
   internalNotes: string;
   ignoreAvailability: boolean;
 }
+
+export interface AdminAppointmentQueryParams {
+  fromDate?: Moment;
+  toDate?: Moment;
+  customer?: number;
+  employee?: number;
+  employees?: number[];
+  services?: number[];
+}

@@ -19,12 +19,12 @@ export function whoAmI(): Promise<User | null> {
     return Promise.resolve(null);
 }
 
-function getUser(): Promise<User> {
+function getUser(): Promise<User | null> {
     return baseApiAxios.get<User>(authUrl + 'user/')
         .then(({data}) => userParser(data))
         .catch(error => {
             removeToken();
-            return Promise.reject(error);
+            return Promise.resolve(null);
         });
 }
 

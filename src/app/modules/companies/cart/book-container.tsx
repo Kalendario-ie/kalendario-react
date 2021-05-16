@@ -19,7 +19,7 @@ const BookContainer: React.FunctionComponent<BookContainerProps> = () => {
             dispatch(bookSlotRequest(request))
             history.push(`/c/${company?.name}/cart`);
         }
-    }, [company]);
+    }, [company, dispatch, employee, history, service, start]);
     return (
         <div>
         </div>

@@ -22,7 +22,7 @@ const KModal: React.FunctionComponent<KModalProps> = (
         header,
         body,
         buttons,
-        backdrop = false,
+        backdrop = true,
         scrollable = true,
         isOpen,
         onCancel

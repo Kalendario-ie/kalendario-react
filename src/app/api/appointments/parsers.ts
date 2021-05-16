@@ -1,5 +1,6 @@
 import moment from 'moment';
 import {Appointment, AppointmentHistory} from 'src/app/api/appointments/models';
+import {companyParser} from 'src/app/api/companies';
 import {customerParser} from 'src/app/api/customers';
 import {employeeParser} from 'src/app/api/employees';
 import {serviceParser} from 'src/app/api/services/parsers';
@@ -17,12 +18,8 @@ export function appointmentParser(data: any): Appointment {
         customer: data?.customer ? customerParser(data?.customer) : null,
         employee: employeeParser(data?.employee),
         service: serviceParser(data?.service),
+        owner: companyParser(data?.owner),
         status: data.status ? data.status : 'P',
-        start: moment.utc(data.start),
-        end: moment.utc(data.end),
-        deleted: data.deleted ? moment.utc(data.deleted) : null,
-
-
     }
 }
 

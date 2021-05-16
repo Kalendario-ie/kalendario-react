@@ -5,11 +5,14 @@ import {selectLoggedIn} from 'src/app/store/auth';
 import {selectSelectedDate, selectSelectedServiceId} from 'src/app/store/companies/selectors';
 import {ACTION_TYPES} from './types';
 import {
-    addNotesRequestFail, addNotesRequestSuccess,
+    addNotesRequestFail,
+    addNotesRequestSuccess,
     bookSlotRequestFail,
     bookSlotRequestSuccess,
     companyDetailsRequestFail,
-    companyDetailsRequestSuccess, confirmCartRequest, confirmCartRequestFail, confirmCartRequestSuccess,
+    companyDetailsRequestSuccess,
+    confirmCartRequestFail,
+    confirmCartRequestSuccess,
     currentCartRequest,
     currentCartRequestFail,
     currentCartRequestSuccess,

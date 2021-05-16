@@ -20,7 +20,6 @@ export function companyDetailsParser(data: any): CompanyDetails {
     }
     return {
         ...data,
-        // avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
         avatar: imageStorage + data.avatar,
         employees: data.employees.map((employee: any) => employeeParser(employee)),
         services: services,
@@ -32,7 +31,7 @@ export function companyDetailsParser(data: any): CompanyDetails {
 export function companyParser(data: any): Company {
     return {
         ...data,
-        // this.avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
+        avatar: imageStorage + data.avatar,
         config: CompanyConfig.fromJs(data.config)
     }
 }

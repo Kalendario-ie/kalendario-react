@@ -1,6 +1,7 @@
 import {Moment} from 'moment';
 import {HistoryType} from 'src/app/api/common/HistoryType';
 import {IReadModel} from 'src/app/api/common/models';
+import {Company} from 'src/app/api/companies';
 import {Customer} from 'src/app/api/customers';
 import {Employee} from 'src/app/api/employees/models';
 import {Service} from 'src/app/api/services';
@@ -12,13 +13,14 @@ export interface Appointment extends IReadModel {
   customer: Customer;
   employee: Employee;
   service: Service;
+  owner: Company;
   lockEmployee: boolean;
   status: string;
-  start: Moment;
-  end: Moment;
+  start: string;
+  end: string;
   customerNotes: string;
   internalNotes: string;
-  deleted: Moment | null;
+  deleted: string | null;
 }
 
 

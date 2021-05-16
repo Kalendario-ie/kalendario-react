@@ -8,7 +8,7 @@ export interface Company extends IReadModel {
     id: number;
     name: string;
     address: string;
-    // avatar: string;
+    avatar: string;
     about: string;
     instagram: string;
     phoneNumber: string;
@@ -17,12 +17,7 @@ export interface Company extends IReadModel {
     config: CompanyConfig;
 }
 
-export interface CompanyDetails extends IReadModel {
-    id: number;
-    name: string;
-    address: string;
-    avatar: string;
-    about: string;
+export interface CompanyDetails extends Company {
     employees: Employee[];
     services: Service[];
     serviceCategories: ServiceCategory[];

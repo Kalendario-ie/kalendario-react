@@ -14,7 +14,7 @@ const AuthAutoLogin: React.FunctionComponent<AuthAutoLoginProps> = (
     useEffect(() => {
         whoAmI().then(user => {
             dispatch(setUser(user));
-        })
+        });
     }, [dispatch]);
 
     return (

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {RequestModel} from 'src/app/api/requests';
@@ -30,7 +31,7 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
                                     <KFlexRow className="m-2" key={key} justify={'between'}>
                                         <KFlexColumn>
                                             <h6>{appointment.service.name}</h6>
-                                            {appointment.start.format('DD/MM/YYYY - HH:mm')}
+                                            {moment.utc(appointment.start).format('DD/MM/YYYY - HH:mm')}
                                             (duration: {appointment.service.duration.minute})
                                         </KFlexColumn>
                                         <KFlexColumn className="text-right">
