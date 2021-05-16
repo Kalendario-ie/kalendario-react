@@ -43,9 +43,13 @@ const KModal: React.FunctionComponent<KModalProps> = (
             </ModalBody>
             {buttons &&
             <ModalFooter>
-            {buttons.map(button => <Button color={button.color}
-                                               onClick={button.onClick}>{button.text}</Button>)}
-                </ModalFooter>
+                {buttons.map((button, key) =>
+                    <Button key={key}
+                            color={button.color}
+                            onClick={button.onClick}
+                    >
+                        {button.text}</Button>)}
+            </ModalFooter>
             }
         </Modal>
     )
