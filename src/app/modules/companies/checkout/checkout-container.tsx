@@ -1,6 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useDispatch, useSelector} from 'react-redux';
+import {RequestModel} from 'src/app/api/requests';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
@@ -19,9 +20,9 @@ const CheckoutContainer: React.FunctionComponent<CheckoutContainerProps> = () =>
     const dispatch = useDispatch();
     const history = useKHistory();
 
-    const cashClick = (requestId: number) => {
-        dispatch(confirmCartRequest(requestId));
-        history.push(USER_ROUTES.BOOKING);
+    const cashClick = (request: RequestModel) => {
+        dispatch(confirmCartRequest(request.id));
+        history.push(USER_ROUTES.BOOKING(request.scheduledDate));
     }
 
 
@@ -44,7 +45,7 @@ const CheckoutContainer: React.FunctionComponent<CheckoutContainerProps> = () =>
                     </button>
                     }
                     {company.config.canReceiveUnpaidRequest &&
-                    <button className="btn btn-accent" onClick={() => cashClick(request.id)}>
+                    <button className="btn btn-accent" onClick={() => cashClick(request)}>
                         <FormattedMessage id="COMPANY.PAY-CASH"/>
                     </button>
                     }

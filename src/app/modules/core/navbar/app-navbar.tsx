@@ -65,7 +65,7 @@ function AppNavbar() {
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem>
-                                <NavLink tag={Link} to={USER_ROUTES.BOOKING}>
+                                <NavLink tag={Link} to={USER_ROUTES.BOOKING()}>
                                     <FormattedMessage id={'USER.BOOKINGS'}/>
                                 </NavLink>
                             </DropdownItem>

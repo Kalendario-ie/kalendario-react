@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Slot} from 'src/app/api/companies';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import SlotsView from 'src/app/modules/companies/slots/slots-view';
-import {ProtectedRoute, useKHistory} from 'src/app/shared/util/router-extensions';
+import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     selectCompany,
     selectSelectedSlotId,

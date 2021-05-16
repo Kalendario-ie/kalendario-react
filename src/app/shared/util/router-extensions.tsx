@@ -5,7 +5,7 @@ import {isLoggedIn} from 'src/app/api/common/session-storage';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 
 
-export type QueryParams = Record<string, string | number>;
+export type QueryParams = Record<string, string | number | undefined>;
 
 export function useQueryParams(): { [key: string]: string } {
     const params = new URLSearchParams(useLocation().search);
@@ -55,7 +55,7 @@ function createQueryString(params?: QueryParams): string {
     if (!params) return '';
     const url = Object.keys(params)
         .reduce((prev, cur, i) => {
-            return `${prev}${i === 0 ? '?' : '&'}${cur}=${params[cur]}`
+            return params[cur] ? `${prev}${i === 0 ? '?' : '&'}${cur}=${params[cur]}` : prev;
         }, '');
     return encodeURI(url);
 }

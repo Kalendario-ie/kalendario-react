@@ -1,6 +1,7 @@
+import {pathWithParams} from 'src/app/shared/util/router-extensions';
 
 
-export enum USER_ROUTES {
-    ROOT = '/my',
-    BOOKING = '/my/bookings'
+export const USER_ROUTES = {
+    ROOT: '/my',
+    BOOKING: (date?: string) => pathWithParams('/my/bookings', {date})
 }

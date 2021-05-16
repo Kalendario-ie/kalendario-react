@@ -7,6 +7,8 @@ import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import moment from 'moment'
 import {Calendar, momentLocalizer, stringOrDate} from 'react-big-calendar'
+import {validOrToday} from 'src/app/shared/util/moment-helpers';
+import {useQueryParams} from 'src/app/shared/util/router-extensions';
 import {eventsRequest, selectEvents, selectSelectedEvent, setSelectedEvent} from 'src/app/store/users';
 
 
@@ -15,9 +17,12 @@ const BookingsContainer: React.FunctionComponent = () => {
         ?.map(a => ({...a, title: a.companyName}));
     const selectedEvent = useSelector(selectSelectedEvent);
     const dispatch = useDispatch();
+    const {date} = useQueryParams();
+
+    const initialDate = validOrToday(date);
 
     useEffect(() => {
-        dispatch(eventsRequest({start: moment.utc().startOf('month'), end: moment.utc().endOf('month')}))
+        dispatch(eventsRequest({start: initialDate.clone().startOf('month'), end: initialDate.clone().endOf('month')}))
     }, []);
 
 
@@ -35,6 +40,7 @@ const BookingsContainer: React.FunctionComponent = () => {
         <KalendarioContainer>
             <KalendarioCard>
                 <Calendar
+                    date={initialDate.toDate()}
                     localizer={momentLocalizer(moment)}
                     events={events || []}
                     startAccessor="start"
