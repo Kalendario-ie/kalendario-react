@@ -137,7 +137,7 @@ function* requestCartConfirmation(action: { type: string, payload: number }) {
     try {
         const request: RequestModel = yield call(companyRequestClient.complete, action.payload)
         yield put(confirmCartRequestSuccess());
-        yield put(setCurrentRequest(request));
+        yield put(setCurrentRequest(null));
     } catch (error) {
         yield put(confirmCartRequestFail(error));
     }

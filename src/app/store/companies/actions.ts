@@ -102,7 +102,7 @@ export const deleteAppointmentRequestFail = (error: ApiBaseError) =>
     action(ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS, error);
 
 
-export const setCurrentRequest = (request: RequestModel) =>
+export const setCurrentRequest = (request: RequestModel | null) =>
     action(ACTION_TYPES.SET_CURRENT_REQUEST, request);
 
 

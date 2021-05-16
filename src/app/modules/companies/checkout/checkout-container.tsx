@@ -3,9 +3,11 @@ import {FormattedMessage} from 'react-intl';
 import {useDispatch, useSelector} from 'react-redux';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
+import {USER_ROUTES} from 'src/app/modules/users/urls';
 import FlexSpacer from 'src/app/shared/molecules/flex/flex-spacer';
 import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
+import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {confirmCartRequest, selectCompany, selectCurrentRequest} from 'src/app/store/companies';
 
 interface CheckoutContainerProps {
@@ -15,10 +17,13 @@ const CheckoutContainer: React.FunctionComponent<CheckoutContainerProps> = () =>
     const company = useSelector(selectCompany);
     const request = useSelector(selectCurrentRequest);
     const dispatch = useDispatch();
+    const history = useKHistory();
 
     const cashClick = (requestId: number) => {
-        dispatch(confirmCartRequest(requestId))
+        dispatch(confirmCartRequest(requestId));
+        history.push(USER_ROUTES.BOOKING);
     }
+
 
     return (
         <KalendarioContainer>
