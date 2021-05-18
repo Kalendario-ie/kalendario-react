@@ -1,6 +1,8 @@
+import {Elements} from '@stripe/react-stripe-js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
+import {configureStripe} from 'src/app/external-apis/configure-stripe';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import {Router} from 'react-router-dom';
@@ -12,13 +14,16 @@ import AuthAutoLogin from './app/modules/auth/auth-auto-login';
 
 configureStore();
 configureBaseApi();
+const stripePromise = configureStripe();
 
 ReactDOM.render(
     <React.StrictMode>
         <Router history={history}>
             <Provider store={store}>
                 <AuthAutoLogin>
-                    <App/>
+                    <Elements stripe={stripePromise}>
+                        <App/>
+                    </Elements>
                 </AuthAutoLogin>
             </Provider>
         </Router>

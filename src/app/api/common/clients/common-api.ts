@@ -26,7 +26,7 @@ export const setupAuthHandlers = (apiAxios: AxiosInstance) => {
         if (status === 422) {
             return Promise.reject<ApiBaseError>({status, detail: data.detail});
         }
-        const applicationError = headers.get('Application-Error');
+        const applicationError = headers['applicationError'];
         if (applicationError) {
             return Promise.reject(applicationError);
         }

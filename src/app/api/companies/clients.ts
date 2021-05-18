@@ -62,9 +62,5 @@ export const companyRequestClient = {
             result => requestParser(result.data)
         );
     },
-
-    // payment(requestId: number): Promise<StripePaymentDetails> {
-    //     return baseApiAxios.put<StripePaymentDetails>(this.billingUrl + `payment/${requestId}/`, {});
-    // }
 }
   

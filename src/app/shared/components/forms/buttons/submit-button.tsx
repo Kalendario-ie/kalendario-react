@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from 'reactstrap';
 import {useFormikContext} from 'formik';
+import KButton from 'src/app/shared/components/primitives/k-button';
 
 export interface SubmitButtonProps {
     text?: React.ReactNode;
@@ -18,11 +18,11 @@ const SubmitButton: React.FunctionComponent<SubmitButtonProps> = (
         className += ' btn-block';
     }
     return (
-        <Button
+        <KButton
             disabled={!formik.isValid}
             className={className}
             type="submit">{text}
-        </Button>
+        </KButton>
     )
 }
 

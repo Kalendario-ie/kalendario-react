@@ -8,7 +8,8 @@
   },
   "COMMON": {
     "FORM": {
-      "SUBMIT": "Submit"
+      "SUBMIT": "Submit",
+      "PROCESSING": "Processing"
     }
   },
   "COMPANY": {
@@ -29,5 +30,9 @@
   },
   "USER": {
     "BOOKINGS": "Bookings"
+  },
+  "PAYMENTS": {
+    "PAY": "PAY",
+    "HEADER": "Payment with Stripe"
   }
 }
