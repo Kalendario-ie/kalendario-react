@@ -5,6 +5,8 @@ import {ApiValidationError} from '../../api/common/api-errors';
 import {CompanyDetails, Slot} from '../../api/companies';
 import {ACTION_TYPES} from './types';
 
+const ownerId = process.env.REACT_APP_OWNER_ID || null;
+
 export interface SlotDict {
     [key: string]: Slot[];
 }
@@ -12,6 +14,7 @@ export interface SlotDict {
 export interface CompaniesState {
     apiError: ApiValidationError | null;
     company: CompanyDetails | null;
+    ownerId: number | null,
     selectedServiceId: number | null;
     slots: SlotDict;
     selectedSlotId: number | null;
@@ -22,6 +25,7 @@ export interface CompaniesState {
 const initialState: CompaniesState = {
     apiError: null,
     company: null,
+    ownerId: ownerId ? +ownerId : null,
     selectedServiceId: null,
     slots: {},
     selectedSlotId: null,

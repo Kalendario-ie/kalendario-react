@@ -6,6 +6,10 @@ import {CompanyDetails} from '../../api/companies';
 import { createSelector } from '@reduxjs/toolkit';
 
 
+export const selectOwnerId: (rootState: RootState) => number | null =
+    (rootState) => rootState.companies.ownerId;
+
+
 export const selectCompany: (rootState: RootState) => CompanyDetails | null =
     (rootState) => rootState.companies.company;
 

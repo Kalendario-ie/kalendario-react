@@ -1,20 +1,25 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Route, Switch, useParams, useRouteMatch} from 'react-router-dom';
 import BookContainer from 'src/app/modules/companies/cart/book-container';
 import CartContainer from 'src/app/modules/companies/cart/cart-container';
 import CheckoutContainer from 'src/app/modules/companies/checkout/checkout-container';
 import CompaniesContainer from 'src/app/modules/companies/companies-container';
 import {ProtectedRoute} from 'src/app/shared/util/router-extensions';
-import {companyDetailsRequest} from 'src/app/store/companies';
+import {companyDetailsRequest, selectCompany} from 'src/app/store/companies';
 
 const CompaniesInnerRoutes: React.FunctionComponent = () => {
     let {path} = useRouteMatch();
     const {name} = useParams<{ name: string }>();
+    const company = useSelector(selectCompany);
     const dispatch = useDispatch();
+
     useEffect(() => {
-        dispatch(companyDetailsRequest(name))
-    }, [dispatch, name])
+        if (company?.name !== name) {
+            dispatch(companyDetailsRequest(name))
+        }
+    }, [dispatch, name, company])
+
     return (
         <Switch>
             <ProtectedRoute path={`${path}/book`} component={BookContainer}/>
