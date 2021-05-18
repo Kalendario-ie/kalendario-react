@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {getRefreshToken, getToken, setToken} from '../session-storage';
+import {authApi} from 'src/app/api/auth';
+import {getToken, removeToken} from '../session-storage';
 import {ApiBaseError} from '../api-errors';
-import {RefreshAccessTokenResponse} from '../../auth/models';
 
 
 export const setupAuthHandlers = (apiAxios: AxiosInstance) => {
@@ -13,14 +13,24 @@ export const setupAuthHandlers = (apiAxios: AxiosInstance) => {
         return config
     }
 
-    const onResponseError =  async (error: any) => {
+    const onResponseError = async (error: any) => {
         let {status, headers, config, data} = error.response;
-        // Refresh access token
-        if (status === 401 && !config._retry) {
-            config._retry = true;
-            const access_token = await refreshAccessToken(apiAxios);
-            config.headers.Authorization = `Bearer ${access_token}`;
-            return apiAxios(config);
+
+        if (status === 401) {
+            if (config.url === 'auth/token/refresh/') {
+                removeToken();
+                return Promise.reject(error);
+            }
+            if (!config._retry) {
+                config._retry = true;
+                return authApi.refreshAccessToken(apiAxios)
+                    .then(access_token => {
+                        if (access_token) {
+                            apiAxios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+                            return apiAxios(config);
+                        }
+                    });
+            }
         }
         // Create Api Validation Response
         if (status === 422) {
@@ -44,16 +54,8 @@ export const setupAuthHandlers = (apiAxios: AxiosInstance) => {
         return Promise.reject(modalStateErrors || data || 'Server Error');
     }
 
-    apiAxios.interceptors.request.use(onRequestSuccess);
+    apiAxios.interceptors.request.use(onRequestSuccess, error => Promise.reject(error));
     apiAxios.interceptors.response.use((response) => response, onResponseError);
 }
 
-export function refreshAccessToken(axios: AxiosInstance): Promise<string> {
-    const refresh = getRefreshToken();
-    return axios.post<RefreshAccessTokenResponse>('auth/token/refresh/', {refresh})
-        .then(({data}) => {
-                setToken(data.access);
-                return data.access;
-            }
-        );
-}
+

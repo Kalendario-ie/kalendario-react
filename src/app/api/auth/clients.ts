@@ -1,9 +1,9 @@
-import {AxiosResponse} from 'axios';
+import {AxiosInstance, AxiosResponse} from 'axios';
 import baseApiAxios from '../common/clients/base-api';
 import {LoginRequest} from './requests';
 import {User, userParser} from '../users/models';
-import {LoginResponse} from './models';
-import {isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
+import {LoginResponse, RefreshAccessTokenResponse} from './models';
+import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
 
 
 const authUrl = 'auth/';
@@ -40,6 +40,16 @@ export const authApi = {
         }
         return Promise.resolve(null);
     },
+
+    refreshAccessToken(axios: AxiosInstance): Promise<string | null> {
+        const refresh = getRefreshToken();
+        return axios.post<RefreshAccessTokenResponse>(authUrl + 'token/refresh/', {refresh})
+            .then(({data}) => {
+                    setToken(data.access);
+                    return data.access;
+                }
+            );
+    }
 }
 
 const completeLogin = ({data}: AxiosResponse<LoginResponse>) => {
