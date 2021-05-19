@@ -66,10 +66,12 @@ function* requestCartForCompany(action: { type: string, payload: number }) {
 
 
 function* triggerSlotRequest(action: { type: string, payload: number }) {
-    const start: Moment = yield select(selectSelectedDate);
-    const end = start.clone().add(isMobile ? 0 : 1, 'day').endOf('day');
     const service: number = yield select(selectSelectedServiceId);
-    yield put(slotsRequest({start, end, service}));
+    if (service) {
+        const start: Moment = yield select(selectSelectedDate);
+        const end = start.clone().add(isMobile ? 0 : 1, 'day').endOf('day');
+        yield put(slotsRequest({start, end, service}));
+    }
 }
 
 
