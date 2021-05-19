@@ -1,10 +1,8 @@
-import KForm from 'src/app/shared/components/forms/k-form';
-import SubmitButton from 'src/app/shared/components/forms/buttons/submit-button';
-import KInput from 'src/app/shared/components/forms/input/k-formik-input';
-import {FormattedMessage} from 'react-intl';
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 import {LoginRequest} from 'src/app/api/auth/requests';
 import {ApiValidationError} from 'src/app/api/common/api-errors';
+import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
 
 export interface LoginViewProps {
     data: LoginRequest;
@@ -21,18 +19,18 @@ const LoginView: React.FunctionComponent<LoginViewProps> = (
         validationSchema
     }) => {
     return (
-        <KForm initialValues={data}
+        <KFormikForm initialValues={data}
                apiError={apiError}
                onSubmit={onSubmit}
                validationSchema={validationSchema}>
             <>
-                <KInput name="email" type="email"/>
-                <KInput name="password" type="password"/>
-                <SubmitButton text={<FormattedMessage id={"AUTH.LOGIN"}/>}
+                <KFormikInput name="email" type="email"/>
+                <KFormikInput name="password" type="password"/>
+                <KFormikSubmit text={<FormattedMessage id={"AUTH.LOGIN"}/>}
                               isBlock={true}
-                ><FormattedMessage id="COMMON.FORM.SUBMIT"/></SubmitButton>
+                ><FormattedMessage id="COMMON.FORM.SUBMIT"/></KFormikSubmit>
             </>
-        </KForm>
+        </KFormikForm>
     )
 }
 

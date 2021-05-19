@@ -2,9 +2,7 @@ import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import React, {FormEvent, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {FormGroup} from 'reactstrap';
-import Currency from 'src/app/shared/components/primitives/currency';
-import KButton from 'src/app/shared/components/primitives/k-button';
-import KErrorMessage from 'src/app/shared/components/primitives/k-error-message';
+import {KButton, KCurrency, KErrorMessage} from 'src/app/shared/components/primitives';
 
 interface StripePaymentFormProps {
     stripeSecret: string;
@@ -85,7 +83,7 @@ const StripePaymentForm: React.FunctionComponent<StripePaymentFormProps> = (
             <KButton block={true} color={'primary'} disabled={!stripe && isProcessing}>
                 {isProcessing
                     ? <FormattedMessage id="COMMON.FORM.PROCESSING"/>
-                    : <><FormattedMessage id="PAYMENTS.PAY"/> <Currency value={price}/></>
+                    : <><FormattedMessage id="PAYMENTS.PAY"/> <KCurrency value={price}/></>
                 }
             </KButton>
         </form>

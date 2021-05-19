@@ -3,14 +3,14 @@ import React from 'react';
 import {isMobile} from 'react-device-detect';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button} from 'reactstrap';
-import KDateInput from 'src/app/shared/components/forms/input/k-date-input';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
+import KDateInput from 'src/app/shared/components/primitives/k-date-input';
+import { KFlexRow } from 'src/app/shared/molecules/flex';
 import {
-    setSelectedDayToNextDay,
-    setSelectedDateToPreviousDay,
     selectSelectedDate,
     setSelectedDate,
-    setSelectedDateToToday
+    setSelectedDateToPreviousDay,
+    setSelectedDateToToday,
+    setSelectedDayToNextDay
 } from 'src/app/store/companies';
 
 interface DateSelectorContainerProps {

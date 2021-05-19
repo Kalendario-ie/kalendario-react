@@ -4,14 +4,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {billingClient} from 'src/app/api/billing';
 import {RequestModel} from 'src/app/api/requests';
+import StripeContainer from 'src/app/modules/billing/stripe-container';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
-import StripeContainer from 'src/app/modules/billing/stripe-container';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
-import FlexSpacer from 'src/app/shared/molecules/flex/flex-spacer';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
-import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
+import {KFlexSpacer} from 'src/app/shared/molecules/flex';
+import KalendarioCard from 'src/app/shared/molecules/k-card';
+import KPageContainer from 'src/app/shared/molecules/k-page-container';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     confirmCartRequest,
@@ -45,7 +45,7 @@ const CheckoutContainer: React.FunctionComponent = () => {
     }
 
     return (
-        <KalendarioContainer>
+        <KPageContainer>
             {company && request &&
             <>
                 {cartIsLoadedAndEmpty &&
@@ -54,12 +54,12 @@ const CheckoutContainer: React.FunctionComponent = () => {
                 <KalendarioCard>
                     <>
                         <CompanyAvatar company={company}/>
-                        <FlexSpacer/>
+                        <KFlexSpacer/>
                         <CartRequestSummary request={request} showDelete={false}/>
-                        <FlexSpacer/>
+                        <KFlexSpacer/>
                         <h4><FormattedMessage id="COMPANY.NOTES"/></h4>
                         {request.customerNotes}
-                        <FlexSpacer/>
+                        <KFlexSpacer/>
                         <>
                             {company.config.canReceiveCardPayments &&
                             <button onClick={toggleStripePaymentOpen(request.id)}
@@ -86,7 +86,7 @@ const CheckoutContainer: React.FunctionComponent = () => {
             </>
 
             }
-        </KalendarioContainer>
+        </KPageContainer>
     )
 }
 

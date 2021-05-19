@@ -3,8 +3,7 @@ import {isMobile} from 'react-device-detect';
 import {FormattedMessage} from 'react-intl';
 import {Slot} from 'src/app/api/companies';
 import SlotButton from 'src/app/modules/companies/slots/slot-button';
-import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/molecules/flex';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {SlotDict} from 'src/app/store/companies';
 

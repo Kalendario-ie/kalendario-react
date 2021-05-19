@@ -1,16 +1,16 @@
-import * as React from 'react';
 import {ErrorMessage, Field, useFormikContext} from 'formik';
-import {FormFeedback, FormGroup} from 'reactstrap';
+import * as React from 'react';
 import {ChangeEvent} from 'react';
+import {FormFeedback, FormGroup} from 'reactstrap';
 
-export interface KInputProps {
+export interface KFormikInputProps {
     name: string;
     type?: string;
     placeholder?: string;
     onChange?: (e: ChangeEvent) => void;
 }
 
-const KFormikInput: React.FunctionComponent<KInputProps> = (
+export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     {name,
         placeholder,
         type
@@ -35,4 +35,3 @@ const KFormikInput: React.FunctionComponent<KInputProps> = (
     )
 }
 
-export default KFormikInput;

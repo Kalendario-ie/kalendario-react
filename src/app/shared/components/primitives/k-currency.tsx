@@ -4,7 +4,7 @@ interface CurrencyProps {
     value: number;
 }
 
-const Currency: React.FunctionComponent<CurrencyProps> = (
+export const KCurrency: React.FunctionComponent<CurrencyProps> = (
     {
         value
     }) => {
@@ -12,6 +12,3 @@ const Currency: React.FunctionComponent<CurrencyProps> = (
         <>{value.toFixed(2)} €</>
     )
 }
-
-
-export default Currency;

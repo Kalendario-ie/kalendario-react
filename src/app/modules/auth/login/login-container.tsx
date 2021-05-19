@@ -1,15 +1,15 @@
 import React from 'react';
 import FacebookLogin, {ReactFacebookFailureResponse, ReactFacebookLoginInfo} from 'react-facebook-login';
 import {FormattedMessage} from 'react-intl';
-import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
-import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
-import {useKHistory, useQueryParams} from 'src/app/shared/util/router-extensions';
-import LoginView from './login-view';
 import {useDispatch, useSelector} from 'react-redux'
-import {facebookLoginRequest, loginRequest, selectApiError, selectLoggedIn} from 'src/app/store/auth';
 import {LoginRequest} from 'src/app/api/auth/requests';
 import {LoginRequestValidation} from 'src/app/api/auth/validations';
+import {KFlexColumn} from 'src/app/shared/molecules/flex';
+import KCard from 'src/app/shared/molecules/k-card';
+import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import {useKHistory, useQueryParams} from 'src/app/shared/util/router-extensions';
+import {facebookLoginRequest, loginRequest, selectApiError, selectLoggedIn} from 'src/app/store/auth';
+import LoginView from './login-view';
 
 
 const LoginContainer = () => {
@@ -37,9 +37,9 @@ const LoginContainer = () => {
     }
 
     return (
-        <KalendarioContainer>
+        <KPageContainer>
             <KFlexColumn align="center">
-                <KalendarioCard maxWidth={400}
+                <KCard maxWidth={400}
                                 header={<FormattedMessage id="AUTH.LOGIN-HEADER"/>}
                 >
                     <>
@@ -58,9 +58,9 @@ const LoginContainer = () => {
                                    validationSchema={LoginRequestValidation}
                         />
                     </>
-                </KalendarioCard>
+                </KCard>
             </KFlexColumn>
-        </KalendarioContainer>
+        </KPageContainer>
     )
 }
 

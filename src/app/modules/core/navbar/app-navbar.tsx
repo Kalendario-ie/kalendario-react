@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
-    UncontrolledDropdown,
-    DropdownToggle,
+    Collapse,
     DropdownItem,
     DropdownMenu,
-    Collapse,
+    DropdownToggle,
     Nav,
     Navbar,
     NavbarBrand,
     NavbarToggler,
     NavItem,
     NavLink,
+    UncontrolledDropdown,
 } from 'reactstrap';
-import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';

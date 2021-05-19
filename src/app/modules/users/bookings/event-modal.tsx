@@ -2,7 +2,7 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Appointment} from 'src/app/api/appointments';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
-import EventDetails from 'src/app/shared/components/appoitments/event-details';
+import EventDetails from 'src/app/modules/users/bookings/event-details';
 import KModal from 'src/app/shared/components/modal/k-modal';
 
 interface EventModalProps {

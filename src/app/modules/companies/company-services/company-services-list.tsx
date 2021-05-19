@@ -1,11 +1,10 @@
 import React from 'react';
 import {isMobile} from 'react-device-detect';
-import CompanyServicesItem from 'src/app/modules/companies/company-services/company-services-item';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
-import KFlexRowItem from 'src/app/shared/molecules/flex/k-flex-row-item';
-import KGrid from 'src/app/shared/molecules/grid/k-grid';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
+import CompanyServicesItem from 'src/app/modules/companies/company-services/company-services-item';
+import {KFlexRow, KFlexRowItem} from 'src/app/shared/molecules/flex';
+import KGrid from 'src/app/shared/molecules/grid/k-grid';
+import KalendarioCard from 'src/app/shared/molecules/k-card';
 
 interface CompanyServicesListProps {
     services: Service[];
@@ -30,8 +29,8 @@ const CompanyServicesList: React.FunctionComponent<CompanyServicesListProps> = (
                 <KFlexRowItem grow={4}>
                     <KGrid size={isMobile ? 12 : 6}>
                         {services?.map((s, k) => <CompanyServicesItem key={k}
-                                                                     onClick={serviceClick}
-                                                                     service={s}/>)}
+                                                                      onClick={serviceClick}
+                                                                      service={s}/>)}
                     </KGrid>
                 </KFlexRowItem>
             </KFlexRow>

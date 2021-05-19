@@ -5,7 +5,7 @@ interface ErrorMessageProps {
     message: string | null | undefined;
 }
 
-const KErrorMessage: React.FunctionComponent<ErrorMessageProps> = (
+export const KErrorMessage: React.FunctionComponent<ErrorMessageProps> = (
     {
         message
     }) => {
@@ -15,6 +15,3 @@ const KErrorMessage: React.FunctionComponent<ErrorMessageProps> = (
         </FormGroup>
     )
 }
-
-
-export default KErrorMessage;

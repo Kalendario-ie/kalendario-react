@@ -1,11 +1,11 @@
 import React from 'react';
-import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
+import {KFlexColumn} from './flex';
 
 export interface KalendarioContainerProps {
     children: React.ReactNode;
 }
 
-const KalendarioContainer: React.FunctionComponent<KalendarioContainerProps> = (
+const KPageContainer: React.FunctionComponent<KalendarioContainerProps> = (
     {
         children,
     }) => {
@@ -18,4 +18,4 @@ const KalendarioContainer: React.FunctionComponent<KalendarioContainerProps> = (
     )
 }
 
-export default KalendarioContainer;
+export default KPageContainer;

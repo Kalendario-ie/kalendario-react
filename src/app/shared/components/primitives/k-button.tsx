@@ -16,11 +16,8 @@ interface KButtonProps
     close?: boolean;
 }
 
-const KButton: React.FunctionComponent<KButtonProps> = (props) => {
+export const KButton: React.FunctionComponent<KButtonProps> = (props) => {
     return (
         <Button {...props}/>
     )
 }
-
-
-export default KButton;

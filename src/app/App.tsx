@@ -1,6 +1,6 @@
 import React from 'react';
-import AppRoutes from './AppRoutes';
 import AppIntl from './AppIntl';
+import AppRoutes from './AppRoutes';
 import AppNavbar from './modules/core/navbar/app-navbar';
 
 

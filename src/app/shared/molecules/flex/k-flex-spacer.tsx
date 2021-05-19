@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface FlexSpacerProps {
+interface KFlexSpacerProps {
     size?: number;
 }
 
-const FlexSpacer: React.FunctionComponent<FlexSpacerProps> = (
+export const KFlexSpacer: React.FunctionComponent<KFlexSpacerProps> = (
     {
         children,
         size= 2
@@ -16,5 +16,3 @@ const FlexSpacer: React.FunctionComponent<FlexSpacerProps> = (
     )
 }
 
-
-export default FlexSpacer;

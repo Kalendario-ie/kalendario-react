@@ -7,9 +7,9 @@ import {momentToIso} from 'src/app/shared/util/moment-helpers';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     selectCompany,
+    selectSelectedServiceId,
     selectSelectedSlotId,
     selectSlots,
-    selectSelectedServiceId,
     setSelectedSlotId
 } from 'src/app/store/companies';
 

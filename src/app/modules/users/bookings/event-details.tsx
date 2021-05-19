@@ -1,8 +1,7 @@
 import React from 'react';
 import {Appointment} from 'src/app/api/appointments';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
-import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
+import { KFlexColumn, KFlexRow } from 'src/app/shared/molecules/flex';
 import KIcon from 'src/app/shared/molecules/KIcon';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 

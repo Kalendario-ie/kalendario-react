@@ -9,7 +9,7 @@ interface KFlexRowProps {
     wrap?: boolean;
 }
 
-const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
+export const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
     {
         children,
         justify,
@@ -28,6 +28,3 @@ const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         <div className={className}>{children}</div>
     )
 }
-
-
-export default KFlexRow;

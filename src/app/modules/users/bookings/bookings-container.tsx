@@ -1,12 +1,12 @@
+import moment from 'moment'
 import React, {useEffect} from 'react';
+import {Calendar, momentLocalizer, stringOrDate} from 'react-big-calendar'
 import {useDispatch, useSelector} from 'react-redux';
 import {Appointment} from 'src/app/api/appointments';
 import {RequestModelGetParams} from 'src/app/api/companies';
 import EventModal from 'src/app/modules/users/bookings/event-modal';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
-import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
-import moment from 'moment'
-import {Calendar, momentLocalizer, stringOrDate} from 'react-big-calendar'
+import KalendarioCard from 'src/app/shared/molecules/k-card';
+import KPageContainer from 'src/app/shared/molecules/k-page-container';
 import {stringToMoment, validOrToday} from 'src/app/shared/util/moment-helpers';
 import {useQueryParams} from 'src/app/shared/util/router-extensions';
 import {eventsRequest, selectEvents, selectSelectedEvent, setSelectedEvent} from 'src/app/store/users';
@@ -37,7 +37,7 @@ const BookingsContainer: React.FunctionComponent = () => {
     const closeModal = () => dispatch(setSelectedEvent(null));
 
     return (
-        <KalendarioContainer>
+        <KPageContainer>
             <KalendarioCard>
                 <Calendar
                     date={initialDate.toDate()}
@@ -52,7 +52,7 @@ const BookingsContainer: React.FunctionComponent = () => {
             </KalendarioCard>
             <EventModal appointment={selectedEvent}
                         closeClick={closeModal}/>
-        </KalendarioContainer>
+        </KPageContainer>
     )
 }
 

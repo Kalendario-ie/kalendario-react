@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {CompanyDetails} from 'src/app/api/companies';
-import { RequestModel } from 'src/app/api/requests';
+import {RequestModel} from 'src/app/api/requests';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
-import KInput from 'src/app/shared/components/forms/input/KInput';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
+import KInput from 'src/app/shared/components/primitives/k-Input';
+import KalendarioCard from 'src/app/shared/molecules/k-card';
 
 interface CartSummaryProps {
     company: CompanyDetails;

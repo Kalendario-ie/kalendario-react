@@ -1,9 +1,9 @@
-import {Route, Switch} from 'react-router-dom';
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
 import LogoutContainer from 'src/app/modules/auth/logout-container';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
-import Register from './register';
 import LoginContainer from './login/login-container';
+import Register from './register';
 
 
 const AuthRoutes = () => <Switch>

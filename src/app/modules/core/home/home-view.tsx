@@ -1,8 +1,8 @@
 import React from 'react';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
-import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import AsyncSelect from 'react-select/async';
 import {Company} from 'src/app/api/companies';
+import { KFlexRow } from 'src/app/shared/molecules/flex';
+import KPageContainer from 'src/app/shared/molecules/k-page-container';
 
 
 interface HomeViewProps {
@@ -21,7 +21,7 @@ const HomeView: React.FunctionComponent<HomeViewProps> = (
     };
 
     return (
-        <KalendarioContainer>
+        <KPageContainer>
             <KFlexRow justify="center">
                 <div style={groupStyles} className="company-shadow-1">
                     <AsyncSelect cacheOptions
@@ -33,7 +33,7 @@ const HomeView: React.FunctionComponent<HomeViewProps> = (
                                  loadOptions={values}/>
                 </div>
             </KFlexRow>
-        </KalendarioContainer>
+        </KPageContainer>
     )
 }
 

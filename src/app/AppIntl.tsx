@@ -1,5 +1,5 @@
-import {IntlProvider} from 'react-intl';
 import React, {useEffect, useState} from 'react';
+import {IntlProvider} from 'react-intl';
 
 function loadLocaleData(locale: string) {
     switch (locale) {

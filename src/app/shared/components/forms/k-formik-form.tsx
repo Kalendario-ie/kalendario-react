@@ -1,10 +1,10 @@
-import React from 'react';
-import {FormikHelpers, FormikProps} from 'formik/dist/types';
 import {Formik} from 'formik';
-import {ApiValidationError} from 'src/app/api/common/api-errors';
+import {FormikHelpers, FormikProps} from 'formik/dist/types';
+import React from 'react';
 import {Form, FormGroup} from 'reactstrap';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
 
-export interface KFormProps<Values> {
+export interface KFormikFormProps<Values> {
     initialValues: Values;
     apiError: ApiValidationError | null;
     validationSchema?: any | (() => any);
@@ -13,14 +13,14 @@ export interface KFormProps<Values> {
     errors?: string[];
 }
 
-export function KForm<Values>(
+export function KFormikForm<Values>(
     {
         initialValues,
         apiError,
         onSubmit,
         children,
         validationSchema
-    }: KFormProps<Values>) {
+    }: KFormikFormProps<Values>) {
     let errors: string[] = [];
     if (apiError && apiError.detail['nonFieldErrors']) {
         errors = apiError.detail['nonFieldErrors'];
@@ -50,4 +50,3 @@ export function KForm<Values>(
     )
 }
 
-export default KForm;

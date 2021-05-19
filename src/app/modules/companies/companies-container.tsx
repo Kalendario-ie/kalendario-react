@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import CompaniesView from 'src/app/modules/companies/companies-view';
 import SlotsForServiceModal from 'src/app/modules/companies/company-services/slots-for-service-modal';
-import { selectCompany, selectService, setSelectedServiceId} from 'src/app/store/companies';
+import {selectCompany, selectService, setSelectedServiceId} from 'src/app/store/companies';
 
 interface CompaniesMainProps {
 }

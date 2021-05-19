@@ -1,8 +1,7 @@
 import React from 'react';
 import {timeToString} from 'src/app/api/common/models';
 import {Service} from 'src/app/api/services';
-import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
-import KFlexRowItem from 'src/app/shared/molecules/flex/k-flex-row-item';
+import {KFlexRow, KFlexRowItem} from 'src/app/shared/molecules/flex';
 
 interface CompanyServicesItemProps {
     service: Service;

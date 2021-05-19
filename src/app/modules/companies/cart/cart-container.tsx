@@ -5,8 +5,8 @@ import CartCompanySummary from 'src/app/modules/companies/cart/cart-company-summ
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import KGrid from 'src/app/shared/molecules/grid/k-grid';
-import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
-import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
+import KalendarioCard from 'src/app/shared/molecules/k-card';
+import KPageContainer from 'src/app/shared/molecules/k-page-container';
 import {
     addNotesRequest,
     deleteAppointmentRequest,
@@ -32,7 +32,7 @@ const CartContainer: React.FunctionComponent<CartContainerProps> = () => {
     }
 
     return (
-        <KalendarioContainer>
+        <KPageContainer>
             {company && request &&
             <>
                 {cartIsLoadedAndEmpty &&
@@ -51,7 +51,7 @@ const CartContainer: React.FunctionComponent<CartContainerProps> = () => {
                 </KGrid>
             </>
             }
-        </KalendarioContainer>
+        </KPageContainer>
     )
 }
 

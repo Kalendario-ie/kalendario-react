@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import KModal from 'src/app/shared/components/modal/k-modal';
 import StripePaymentForm from 'src/app/modules/billing/stripe-payment-form';
+import KModal from 'src/app/shared/components/modal/k-modal';
 
 interface StripeContainerProps {
     price: number;

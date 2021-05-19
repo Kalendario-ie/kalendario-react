@@ -7,7 +7,7 @@ export interface KalendarioCardProps {
     hasShadow?: boolean;
 }
 
-const KalendarioCard: React.FunctionComponent<KalendarioCardProps> = (
+const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
@@ -33,4 +33,4 @@ const KalendarioCard: React.FunctionComponent<KalendarioCardProps> = (
     )
 }
 
-export default KalendarioCard;
+export default KCard;

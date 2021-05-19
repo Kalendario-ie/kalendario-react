@@ -11,7 +11,7 @@ interface FlexStyle {
     flex?: string;
 }
 
-const KFlexRowItem: React.FunctionComponent<KFlexRowItemProps> = (
+export const KFlexRowItem: React.FunctionComponent<KFlexRowItemProps> = (
     {
         children,
         grow,
@@ -30,6 +30,3 @@ const KFlexRowItem: React.FunctionComponent<KFlexRowItemProps> = (
         </div>
     )
 }
-
-
-export default KFlexRowItem;

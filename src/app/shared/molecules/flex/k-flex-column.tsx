@@ -10,7 +10,7 @@ interface KFlexBoxProps {
 }
 
 
-const KFlexColumn: React.FunctionComponent<KFlexBoxProps> = (
+export const KFlexColumn: React.FunctionComponent<KFlexBoxProps> = (
     {
         children,
         justify,
@@ -30,5 +30,3 @@ const KFlexColumn: React.FunctionComponent<KFlexBoxProps> = (
         </div>
     )
 }
-
-export default KFlexColumn;

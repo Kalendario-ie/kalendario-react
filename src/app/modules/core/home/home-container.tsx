@@ -1,9 +1,9 @@
-import {useSelector} from 'react-redux';
-import {selectCompany, selectOwnerId} from 'src/app/store/companies';
-import HomeView from './home-view';
 import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {useHistory} from "react-router-dom";
 import {Company, companyClient} from 'src/app/api/companies';
+import {selectCompany, selectOwnerId} from 'src/app/store/companies';
+import HomeView from './home-view';
 
 
 const HomeContainer: React.FunctionComponent = () => {

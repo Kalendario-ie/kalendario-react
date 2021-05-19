@@ -1,13 +1,13 @@
-import React from 'react';
 import {useFormikContext} from 'formik';
-import KButton from 'src/app/shared/components/primitives/k-button';
+import React from 'react';
+import {KButton} from '../primitives';
 
-export interface SubmitButtonProps {
+export interface KFormikSubmitProps {
     text?: React.ReactNode;
     isBlock?: boolean;
 }
 
-const SubmitButton: React.FunctionComponent<SubmitButtonProps> = (
+export const KFormikSubmit: React.FunctionComponent<KFormikSubmitProps> = (
     {
         text = 'Submit',
         isBlock = false
@@ -26,4 +26,3 @@ const SubmitButton: React.FunctionComponent<SubmitButtonProps> = (
     )
 }
 
-export default SubmitButton;

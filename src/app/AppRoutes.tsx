@@ -4,9 +4,9 @@ import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import UsersRoutes from 'src/app/modules/users/users-routes';
 import AuthContainer from './modules/auth/auth-container';
-import HomeContainer from './modules/core/home/home-container';
 import CompaniesRoutes from './modules/companies/companies-routes';
-import { ProtectedRoute } from './shared/util/router-extensions';
+import HomeContainer from './modules/core/home/home-container';
+import {ProtectedRoute} from './shared/util/router-extensions';
 
 
 const AppRoutes: React.FunctionComponent = () => {
