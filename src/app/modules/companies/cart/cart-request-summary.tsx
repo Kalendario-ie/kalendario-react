@@ -1,10 +1,10 @@
-import moment from 'moment';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {RequestModel} from 'src/app/api/requests';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
 import KFlexRow from 'src/app/shared/molecules/flex/k-flex-row';
 import KFlexColumn from 'src/app/shared/molecules/flex/k-flex-column';
+import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 
 interface CartRequestSummaryProps {
     request: RequestModel;
@@ -31,7 +31,7 @@ const CartRequestSummary: React.FunctionComponent<CartRequestSummaryProps> = (
                                     <KFlexRow className="m-2" key={key} justify={'between'}>
                                         <KFlexColumn>
                                             <h6>{appointment.service.name}</h6>
-                                            {moment.utc(appointment.start).format('DD/MM/YYYY - HH:mm')}
+                                            {stringToMoment(appointment.start).format('DD/MM/YYYY - HH:mm')}
                                             (duration: {appointment.service.duration.minute})
                                         </KFlexColumn>
                                         <KFlexColumn className="text-right">

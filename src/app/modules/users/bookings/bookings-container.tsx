@@ -7,7 +7,7 @@ import KalendarioCard from 'src/app/shared/molecules/kalendario-card';
 import KalendarioContainer from 'src/app/shared/molecules/kalendario-container';
 import moment from 'moment'
 import {Calendar, momentLocalizer, stringOrDate} from 'react-big-calendar'
-import {validOrToday} from 'src/app/shared/util/moment-helpers';
+import {stringToMoment, validOrToday} from 'src/app/shared/util/moment-helpers';
 import {useQueryParams} from 'src/app/shared/util/router-extensions';
 import {eventsRequest, selectEvents, selectSelectedEvent, setSelectedEvent} from 'src/app/store/users';
 
@@ -28,8 +28,8 @@ const BookingsContainer: React.FunctionComponent = () => {
 
     const updateEvents = (range: Date[] | { start: stringOrDate; end: stringOrDate }) => {
         const request: RequestModelGetParams = Array.isArray(range)
-            ? {start: moment.utc(range[0]), end: moment.utc(range[range.length - 1])}
-            : {start: moment.utc(range.start), end: moment.utc(range.end)}
+            ? {start: stringToMoment(range[0]), end: stringToMoment(range[range.length - 1])}
+            : {start: stringToMoment(range.start), end: stringToMoment(range.end)}
         dispatch(eventsRequest(request));
     }
 

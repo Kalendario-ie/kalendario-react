@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Slot} from 'src/app/api/companies';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import SlotsView from 'src/app/modules/companies/slots/slots-view';
+import {momentToIso} from 'src/app/shared/util/moment-helpers';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     selectCompany,
@@ -34,7 +35,7 @@ const SlotsContainer: React.FunctionComponent<SlotsContainerProps> = () => {
             return;
         }
         if (company) {
-            useHistory.push(companiesUrls(company).book({start: slot.start.toISOString(), service: +serviceId}))
+            useHistory.push(companiesUrls(company).book({start: momentToIso(slot.start), service: +serviceId}))
         }
     }
     return (

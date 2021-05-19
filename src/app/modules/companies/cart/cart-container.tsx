@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Redirect, useHistory} from 'react-router-dom';
 import CartCompanySummary from 'src/app/modules/companies/cart/cart-company-summary';

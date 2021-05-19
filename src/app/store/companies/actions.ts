@@ -1,5 +1,6 @@
 import {Moment} from 'moment';
 import {RequestModel} from 'src/app/api/requests';
+import {momentToIso} from 'src/app/shared/util/moment-helpers';
 import {ACTION_TYPES} from './types';
 import {action} from 'typesafe-actions';
 import {ApiBaseError} from 'src/app/api/common/api-errors';
@@ -65,7 +66,7 @@ export const bookSlotRequestFail = () =>
 
 
 export const setSelectedDate = (selectedDate: Moment) =>
-    action(ACTION_TYPES.SET_SELECTED_DATE, selectedDate.toISOString());
+    action(ACTION_TYPES.SET_SELECTED_DATE, momentToIso(selectedDate));
 
 
 export const setSelectedDayToNextDay = () =>
