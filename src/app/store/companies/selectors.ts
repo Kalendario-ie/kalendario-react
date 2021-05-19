@@ -36,6 +36,14 @@ export const selectSelectedServiceId: (rootState: RootState) => number | null =
     (rootState) => rootState.companies.selectedServiceId;
 
 
+export const selectCompanyRequestCompleted: (rootState: RootState) => boolean =
+    (rootState) => rootState.companies.companyRequestCompleted;
+
+
+export const selectCurrentRequestCompleted: (rootState: RootState) => boolean =
+    (rootState) => rootState.companies.currentRequestCompleted;
+
+
 const selectServices = createSelector(
     [selectCompany],
     (company) =>
@@ -49,3 +57,18 @@ export const selectService = createSelector(
         services && services.find(service => service.id === id)
 )
 
+export const selectIsStoreReady = createSelector(
+    [selectCompanyRequestCompleted, selectCurrentRequestCompleted],
+    (company, request) => company && request
+
+)
+
+export const selectCartIsEmpty = createSelector(
+    [selectCurrentRequest],
+    (request) => !!request && request.itemsCount === 0
+)
+
+export const selectCartIsLoadedAndEmpty = createSelector(
+    [selectCartIsEmpty, selectIsStoreReady],
+    (emptyCart, storeReady) => storeReady && emptyCart
+)

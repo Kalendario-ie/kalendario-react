@@ -20,7 +20,7 @@ import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import AvatarImg from 'src/app/shared/molecules/avatar-img';
 import {selectUser} from 'src/app/store/auth';
-import {selectCompany, selectCurrentRequest} from 'src/app/store/companies';
+import {selectCartIsEmpty, selectCompany, selectCurrentRequest} from 'src/app/store/companies';
 
 function AppNavbar() {
     const user = useSelector(selectUser);
@@ -28,6 +28,7 @@ function AppNavbar() {
     const toggle = () => setIsOpen(!isOpen);
     const company = useSelector(selectCompany);
     const cart = useSelector(selectCurrentRequest);
+    const cartIsEmpty = useSelector(selectCartIsEmpty);
     return (
         <Navbar className="company-shadow-1" light expand="md">
             <NavbarBrand tag={Link} to="/" className="nav-logo">Kalendario</NavbarBrand>
@@ -41,10 +42,11 @@ function AppNavbar() {
                         </NavLink>
                     </NavItem>
                     }
-                    {company && cart &&
+                    {cart &&
                     <NavItem>
-                        <NavLink tag={Link} to={companiesUrls(company).cart}>
+                        <NavLink tag={Link} to={companiesUrls(company!).cart} disabled={cartIsEmpty}>
                             <i className="fa fa-shopping-cart"/>
+                            <span className="badge">{cart.itemsCount}</span>
                         </NavLink>
                     </NavItem>
                     }
@@ -54,7 +56,8 @@ function AppNavbar() {
                             <NavLink tag={Link} to={AUTH_ROUTES.LOGIN}><FormattedMessage id={'AUTH.LOGIN'}/></NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} to={AUTH_ROUTES.REGISTER}><FormattedMessage id={'AUTH.REGISTER'}/></NavLink>
+                            <NavLink tag={Link} to={AUTH_ROUTES.REGISTER}><FormattedMessage
+                                id={'AUTH.REGISTER'}/></NavLink>
                         </NavItem>
                     </>
                     }

@@ -23,8 +23,8 @@ const CompaniesInnerRoutes: React.FunctionComponent = () => {
     return (
         <Switch>
             <ProtectedRoute path={`${path}/book`} component={BookContainer}/>
-            <Route path={`${path}/cart`} component={CartContainer}/>
-            <Route path={`${path}/checkout`} component={CheckoutContainer}/>
+            <ProtectedRoute path={`${path}/cart`} component={CartContainer}/>
+            <ProtectedRoute path={`${path}/checkout`} component={CheckoutContainer}/>
             <Route path={`${path}/`} component={CompaniesContainer}/>
         </Switch>
     )

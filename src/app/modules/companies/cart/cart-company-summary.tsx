@@ -19,7 +19,7 @@ const CartCompanySummary: React.FunctionComponent<CartSummaryProps> = (
         proceedToCheckoutClick
     }) => {
     const intl = useIntl();
-    const [notes, setNotes] = useState(request.customerNotes);
+    const [notes, setNotes] = useState(request.customerNotes || '');
 
     return (
         <KalendarioCard>
@@ -27,7 +27,6 @@ const CartCompanySummary: React.FunctionComponent<CartSummaryProps> = (
             <p>
                 {company.config.preBookWarn}
             </p>
-
             <KInput className="mb-2"
                     type="textarea"
                     value={notes}

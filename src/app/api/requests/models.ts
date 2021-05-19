@@ -18,7 +18,7 @@ export interface RequestModel extends IReadModel {
   itemsCount: number;
   total: number;
   complete: boolean;
-  customerNotes: string;
+  customerNotes: string | null | undefined;
   status: string;
   user: User;
 }

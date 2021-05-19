@@ -14,23 +14,27 @@ export interface SlotDict {
 export interface CompaniesState {
     apiError: ApiValidationError | null;
     company: CompanyDetails | null;
+    companyRequestCompleted: boolean;
     ownerId: number | null,
     selectedServiceId: number | null;
     slots: SlotDict;
     selectedSlotId: number | null;
     selectedDate: string;
     currentRequest: RequestModel | null;
+    currentRequestCompleted: boolean;
 }
 
 const initialState: CompaniesState = {
     apiError: null,
     company: null,
+    companyRequestCompleted: false,
     ownerId: ownerId ? +ownerId : null,
     selectedServiceId: null,
     slots: {},
     selectedSlotId: null,
     selectedDate: moment.utc().startOf('day').toISOString(),
-    currentRequest: null
+    currentRequest: null,
+    currentRequestCompleted: false
 }
 
 const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload}) => {
@@ -38,7 +42,13 @@ const reducer: Reducer<CompaniesState> = (state = initialState, {type, payload})
         case ACTION_TYPES.COMPANY_DETAILS_REQUEST:
             return {...state, apiError: null}
         case ACTION_TYPES.COMPANY_DETAILS_REQUEST_SUCCESS:
-            return {...state, company: payload}
+            return {...state, company: payload, companyRequestCompleted: true}
+        case ACTION_TYPES.COMPANY_DETAILS_REQUEST_FAIL:
+            return {...state, company: null, companyRequestCompleted: true}
+        case ACTION_TYPES.CURRENT_CART_REQUEST_SUCCESS:
+            return {...state, currentRequestCompleted: true}
+        case ACTION_TYPES.CURRENT_CART_REQUEST_FAIL:
+            return {...state, currentRequest: null, currentRequestCompleted: true}
         case ACTION_TYPES.SET_SELECTED_SERVICE_ID:
             return {...state, selectedServiceId: payload}
         case ACTION_TYPES.SLOTS_REQUEST:
