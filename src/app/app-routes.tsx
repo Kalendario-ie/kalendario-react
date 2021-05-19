@@ -1,5 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import AdminRoutes from 'src/app/modules/admin/admin-routes';
+import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import UsersRoutes from 'src/app/modules/users/users-routes';
@@ -15,6 +17,7 @@ const AppRoutes: React.FunctionComponent = () => {
             <Route path={AUTH_ROUTES.ROOT} component={AuthContainer}/>
             <Route path="/c" component={CompaniesRoutes}/>
             <ProtectedRoute path={USER_ROUTES.ROOT} component={UsersRoutes}/>
+            <ProtectedRoute path={ADMIN_ROUTES.ROOT} component={AdminRoutes}/>
             <Route path="/" component={HomeContainer}/>
         </Switch>
     )

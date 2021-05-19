@@ -12,6 +12,9 @@
       "PROCESSING": "Processing"
     }
   },
+  "NAVBAR": {
+    "ADMIN": "Admin Dashboard"
+  },
   "COMPANY": {
     "NO-SLOTS": "No time available for the date selected",
     "EMPTY-CART": "Cart is empty",
@@ -34,5 +37,15 @@
   "PAYMENTS": {
     "PAY": "PAY",
     "HEADER": "Payment with Stripe"
+  },
+  "ADMIN": {
+    "SIDEBAR": {
+      "HOME": "Home",
+      "SERVICES": "Services",
+      "SCHEDULES": "Schedules",
+      "EMPLOYEES": "Employees",
+      "CUSTOMERS": "Customers",
+      "APPOINTMENTS": "Appointments"
+    }
   }
 }

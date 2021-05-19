@@ -1,0 +1,52 @@
+.sidebar {
+  transition: all 0.2s;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.sidebar.open {
+  width: 16rem;
+}
+
+.sidebar.closed {
+  width: 5rem;
+}
+
+.sidebar-heading {
+  margin-bottom: 0;
+  padding: 1.5rem;
+  color: #adb5bd;
+  font-size: .7875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.dashboard-content {
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  padding-top: 3rem;
+  flex-wrap: wrap;
+  background: rgb(248, 249, 250);
+}
+
+.list-clear {
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar-link {
+  display: flex;
+  padding: 0.5rem 1.5rem;
+  transition: background 0.3s;
+  text-decoration: none;
+  align-items: center;
+}
+
+.active {
+  background: $primary;
+  color: white;
+}

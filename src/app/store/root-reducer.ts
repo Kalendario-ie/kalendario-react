@@ -1,3 +1,4 @@
+import {uiReducer} from 'src/app/store/ui';
 import {usersReducer} from 'src/app/store/users';
 import {RootState} from './root-state';
 import {AnyAction, combineReducers, Reducer} from 'redux';
@@ -6,6 +7,7 @@ import {companiesReducer} from './companies';
 
 
 const appReducer = combineReducers<RootState>({
+    ui: uiReducer,
     auth: authReducer,
     companies: companiesReducer,
     users: usersReducer,

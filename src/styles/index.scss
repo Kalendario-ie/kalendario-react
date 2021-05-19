@@ -4,7 +4,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import "reset";
-@import "~font-awesome/scss/font-awesome";
+//@import "~font-awesome/scss/font-awesome";
 @import "./common/kalendario-bs";
 @import '~react-big-calendar/lib/sass/styles';
 
@@ -22,7 +22,11 @@
   z-index: 99;
 }
 
-.company-shadow-1 {
+.k-shadow-0 {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.k-shadow-1 {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 

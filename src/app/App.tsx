@@ -1,13 +1,13 @@
 import React from 'react';
+import AppNavbarContainer from 'src/app/modules/core/navbar/app-navbar-container';
+import AppRoutes from './app-routes';
 import AppIntl from './AppIntl';
-import AppRoutes from './AppRoutes';
-import AppNavbar from './modules/core/navbar/app-navbar';
 
 
 function App() {
     return (
         <AppIntl language={'en'}>
-            <AppNavbar/>
+            <AppNavbarContainer/>
             <AppRoutes/>
         </AppIntl>
     );

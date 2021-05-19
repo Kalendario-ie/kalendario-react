@@ -31,7 +31,7 @@ const CartCompanySummary: React.FunctionComponent<CartSummaryProps> = (
                     type="textarea"
                     value={notes}
                     onChange={event => setNotes(event.target.value)}
-                    placeholder={intl.messages['COMPANY.ADD-NOTES'].toString()}/>
+                    placeholder={intl.formatMessage({id: 'COMPANY.ADD-NOTES'})}/>
 
             <button className="btn btn-primary btn-block" onClick={() => proceedToCheckoutClick(notes)}>
                 <FormattedMessage id="COMPANY.PROCEED-CHECKOUT"/>
