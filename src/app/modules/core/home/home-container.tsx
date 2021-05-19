@@ -12,7 +12,7 @@ const HomeContainer: React.FunctionComponent = () => {
     const company = useSelector(selectCompany);
 
     useEffect(() => {
-        if (company) {
+        if (company && ownerId) {
             history.push(`/c/${company.name}`);
         }
         if (ownerId && !company) {
