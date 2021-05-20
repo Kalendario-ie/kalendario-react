@@ -1,16 +1,8 @@
-export {}
-// import {Injectable} from '@angular/core';
-// import {HttpClient} from '@angular/common/http';
-// import {ServiceCategory, ServiceCategoryAdapter} from '@api/models';
-// import {ModelViewSetClient} from '@api/clients/ModelViewSetClient';
-// import {environment} from '../../../environments/environment';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ServiceCategoryAdminClient extends ModelViewSetClient<ServiceCategory, object> {
-//   constructor(http: HttpClient,
-//               adapter: ServiceCategoryAdapter) {
-//     super(http, adapter, environment.apiUrl + 'admin/serviceCategories/');
-//   }
-// }
+import baseModelRequest from 'src/app/api/common/clients/base-django-api';
+import {serviceParser} from 'src/app/api/services/parsers';
+
+const baseUrl = 'admin/services/';
+
+export const adminServiceClient = {
+    ...baseModelRequest(baseUrl, serviceParser),
+}

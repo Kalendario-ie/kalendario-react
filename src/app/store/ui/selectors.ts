@@ -1,4 +1,4 @@
-import {RootState} from 'src/app/store/root-state';
+import { RootState } from "../store"
 
 
 export const selectShowDashboardToggle: (rootState: RootState) => boolean =

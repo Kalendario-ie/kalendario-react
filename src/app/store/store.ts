@@ -1,29 +1,30 @@
-import {applyMiddleware, createStore, Store} from 'redux';
-import {rootReducer} from './root-reducer';
-import {RootState} from './root-state';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
+import {authReducer} from 'src/app/store/auth';
+import {companiesReducer} from 'src/app/store/companies';
+import {uiReducer} from 'src/app/store/ui';
+import {usersReducer} from 'src/app/store/users';
 import {rootSaga} from './root-saga';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import {serviceReducer} from './admin/services';
+import {configureStore} from '@reduxjs/toolkit'
 
-export let store: Store<RootState>;
+const sagaMiddleware = createSagaMiddleware()
 
-export function configureStore() {
-    store = buildStore();
-}
+export const store = configureStore({
+    reducer: {
+        auth: authReducer,
+        users: usersReducer,
+        ui: uiReducer,
+        companies: companiesReducer,
+        adminServices: serviceReducer,
+    },
+    middleware: [sagaMiddleware],
+})
 
-export function buildStore(initialState?: any): Store<RootState> {
+sagaMiddleware.run(rootSaga);
 
-    const sagaMiddleware = createSagaMiddleware()
-    const middlewareEnhancer = applyMiddleware(sagaMiddleware);
-    const composedEnhancers = composeWithDevTools(middlewareEnhancer)
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>() // Export a hook that can be reused to resolve types
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-
-    const store = createStore(
-        rootReducer,
-        composedEnhancers
-    );
-
-    sagaMiddleware.run(rootSaga)
-
-    return store;
-}

@@ -1,7 +1,6 @@
 import {
     AddNotesRequest,
     CreateAppointmentRequest,
-    RequestModelGetParams,
     SlotRequestParams
 } from 'src/app/api/companies/requests';
 import {RequestModel, requestParser} from 'src/app/api/requests';
@@ -34,7 +33,7 @@ export const companyClient = {
 const requestsUrl = 'requests/';
 
 export const companyRequestClient = {
-    ...baseModelRequest<RequestModel, RequestModelGetParams>(requestsUrl, requestParser),
+    ...baseModelRequest<RequestModel>(requestsUrl, requestParser),
 
     createAppointment(data: CreateAppointmentRequest) {
         convertMoment(data);

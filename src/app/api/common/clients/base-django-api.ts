@@ -3,11 +3,20 @@ import {convertMoment} from '../helpers';
 import baseApiAxios from './base-api';
 import {AxiosResponse} from 'axios';
 
-function baseModelRequest<M, P>(baseUrl: string, adapter: (model: any) => M) {
+export interface BaseModelRequest<TEntity> {
+    get: (filter: any) => Promise<ApiListResult<TEntity>>;
+    post: (model: any) => Promise<TEntity>;
+    detail: (id: number, params?: {}) => Promise<TEntity>;
+    patch: (id: number, model: any) => Promise<TEntity>;
+    put(id: number, model: any): Promise<TEntity>;
+    delete: (id: number) => Promise<AxiosResponse>;
+}
+
+function baseModelRequest<TEntity>(baseUrl: string, adapter: (model: any) => TEntity): BaseModelRequest<TEntity> {
     return {
-        get(filter: P): Promise<ApiListResult<M>> {
+        get(filter: any): Promise<ApiListResult<TEntity>> {
             const params = convertMoment(filter);
-            return baseApiAxios.get<ApiListResult<M>>(baseUrl, {params})
+            return baseApiAxios.get<ApiListResult<TEntity>>(baseUrl, {params})
                 .then(project => {
                         project.data.results = project.data.results.map(r => adapter(r));
                         return project.data;
@@ -15,23 +24,23 @@ function baseModelRequest<M, P>(baseUrl: string, adapter: (model: any) => M) {
                 )
         },
 
-        post(model: any): Promise<M> {
+        post(model: any): Promise<TEntity> {
             return baseApiAxios.post(baseUrl, model)
                 .then(result => adapter(result.data));
         },
 
-        detail(id: number, params = {}): Promise<M> {
-            return baseApiAxios.get<M>(baseUrl + id + '/', {params: {...params}})
+        detail(id: number, params = {}): Promise<TEntity> {
+            return baseApiAxios.get<TEntity>(baseUrl + id + '/', {params: {...params}})
                 .then(result => adapter(result.data));
         },
 
-        patch(id: number, model: any): Promise<M> {
-            return baseApiAxios.patch<M>(baseUrl + id + '/', model)
+        patch(id: number, model: any): Promise<TEntity> {
+            return baseApiAxios.patch<TEntity>(baseUrl + id + '/', model)
                 .then(result => adapter(result.data));
         },
 
-        put(id: number, model: any): Promise<M> {
-            return baseApiAxios.put<M>(baseUrl + id + '/', model)
+        put(id: number, model: any): Promise<TEntity> {
+            return baseApiAxios.put<TEntity>(baseUrl + id + '/', model)
                 .then(result => adapter(result.data));
         },
 

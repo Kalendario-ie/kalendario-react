@@ -1,18 +1,24 @@
-import {Appointment} from 'src/app/api/appointments';
-import {RootState} from 'src/app/store/root-state';
+import {createSelector} from '@reduxjs/toolkit';
+import {RootState} from 'src/app/store/store';
 
+const selectStore = (rootState: RootState) => rootState.users;
 
-export const selectEvents: (rootState: RootState) => Appointment[] | null =
-    (rootState) => rootState.users.events
+export const selectEvents = createSelector(
+    [selectStore],
+    (usersState) => usersState.events
+)
 
+export const selectStart = createSelector(
+    [selectStore],
+    (usersState) => usersState.start
+)
 
-export const selectStart: (rootState: RootState) => string | null =
-    (rootState) => rootState.users.start
+export const selectEnd = createSelector(
+    [selectStore],
+    (usersState) => usersState.end
+)
 
-
-export const selectEnd: (rootState: RootState) => string | null =
-    (rootState) => rootState.users.end
-
-
-export const selectSelectedEvent: (rootState: RootState) => Appointment | null =
-    (rootState) => rootState.users.selectedEvent
+export const selectSelectedEvent = createSelector(
+    [selectStore],
+    (usersState) => usersState.selectedEvent
+)

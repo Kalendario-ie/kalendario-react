@@ -1,7 +1,7 @@
 import moment, {Moment} from 'moment';
 import {RequestModel} from 'src/app/api/requests';
 import {SlotDict} from 'src/app/store/companies/reducers';
-import {RootState} from '../root-state';
+import {RootState} from 'src/app/store/store';
 import {CompanyDetails} from '../../api/companies';
 import { createSelector } from '@reduxjs/toolkit';
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useIntl} from 'react-intl';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import KDashboardContainer from 'src/app/shared/components/dashboard/k-dashboard-container';
