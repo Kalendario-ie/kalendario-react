@@ -3,7 +3,6 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
 import {IReadModel} from 'src/app/api/common/models';
-import {storeName} from 'src/app/store/admin/services';
 
 
 export function kCreateBaseStore<TEntity extends IReadModel>(
@@ -34,7 +33,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
 
     const actions = {
         reducerActions: {...slice.actions},
-        initializeStore: createAction<void>(`${storeName}/initializeStore`),
+        initializeStore: createAction<void>(`${sliceName}/initializeStore`),
     }
 
     function* requestAllServices(action: { type: string, payload: {} }) {

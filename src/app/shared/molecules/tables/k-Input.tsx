@@ -16,14 +16,17 @@ const KInput: React.FunctionComponent<KInputProps> = (
         type,
         placeholder,
         value,
-        onChange
+        onChange,
+        children
     }) => {
     return (
         <Input className={className}
                type={type}
                value={value}
                placeholder={placeholder}
-               onChange={onChange}/>
+               onChange={onChange}>
+            {children}
+        </Input>
     )
 }
 

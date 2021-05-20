@@ -1,4 +1,4 @@
 export * from './k-button';
 export * from './k-currency';
 export * from './k-error-message';
-export * from './k-Input';
+export * from 'src/app/shared/molecules/tables/k-Input';

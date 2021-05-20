@@ -1,7 +1,7 @@
 import {adminServiceClient, Service} from 'src/app/api/services';
 import {kCreateBaseStore} from 'src/app/store/admin/common/adapter';
 
-export const storeName = 'adminServices';
+const storeName = 'adminServices';
 
 const {
     actions,

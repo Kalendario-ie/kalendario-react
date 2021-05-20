@@ -1,5 +1,6 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
+import {employeeReducer} from 'src/app/store/admin/employees';
 import {authReducer} from 'src/app/store/auth';
 import {companiesReducer} from 'src/app/store/companies';
 import {uiReducer} from 'src/app/store/ui';
@@ -17,6 +18,7 @@ export const store = configureStore({
         ui: uiReducer,
         companies: companiesReducer,
         adminServices: serviceReducer,
+        adminEmployees: employeeReducer,
     },
     middleware: [sagaMiddleware],
 })

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Appointment} from 'src/app/api/appointments';
-import AvatarImg from 'src/app/shared/molecules/avatar-img';
+import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import { KFlexColumn, KFlexRow } from 'src/app/shared/molecules/flex';
 import KIcon from 'src/app/shared/molecules/KIcon';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';

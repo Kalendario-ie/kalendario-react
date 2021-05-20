@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {Service} from 'src/app/api/services';
 import {ServiceTableHeaders} from 'src/app/modules/admin/services/table/headers';
-import KTable from 'src/app/shared/components/primitives/k-table';
+import KTable from 'src/app/shared/molecules/tables/k-table';
 import KCard from 'src/app/shared/molecules/k-card';
 
 interface ServicesTableProps {

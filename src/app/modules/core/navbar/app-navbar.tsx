@@ -22,7 +22,7 @@ import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import {KButton} from 'src/app/shared/components/primitives';
-import AvatarImg from 'src/app/shared/molecules/avatar-img';
+import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KIcon from 'src/app/shared/molecules/KIcon';
 
 interface AppNavbarProps {
