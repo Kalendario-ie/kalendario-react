@@ -2,7 +2,6 @@ import React, {useMemo} from 'react';
 import {Service} from 'src/app/api/services';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import KTable from 'src/app/shared/molecules/tables/k-table';
-import KCard from 'src/app/shared/molecules/k-card';
 
 interface ServicesTableProps {
     services: Service[];
