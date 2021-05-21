@@ -1,4 +1,5 @@
 import {createAction, createEntityAdapter, createSelector, createSlice, EntityState} from '@reduxjs/toolkit';
+import {AxiosResponse} from 'axios';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
@@ -26,6 +27,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
+        deleteEntity: createAction<number>(`${sliceName}/deleteEntity`),
     }
 
     const slice = createSlice({
@@ -43,6 +45,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             upsertMany: adapter.upsertMany,
             // @ts-ignore
             upsertOne: adapter.upsertOne,
+            // @ts-ignore
+            removeOne: adapter.removeOne,
             setInitialized: (state, action) => {
                 state.isInitialized = true
             },
@@ -90,11 +94,20 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         }
     }
 
+    function* deleteEntity(action: { type: string, payload: number }) {
+        try {
+            const result: AxiosResponse = yield call(client.delete, action.payload);
+            yield put(actions.reducerActions.removeOne(action.payload));
+        } catch (error) {
+            yield put(actions.reducerActions.setApiError(error));
+        }
+    }
 
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, initializeStore);
         yield takeEvery(actions.fetchEntities.type, fetchEntities);
         yield takeEvery(actions.patchEntity.type, patchEntity);
+        yield takeEvery(actions.deleteEntity.type, deleteEntity);
     }
 
     return {

@@ -3,7 +3,7 @@ import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 
 export interface KModalButtonProps {
     text: string;
-    color: 'primary' | 'secondary';
+    color: 'primary' | 'secondary' | 'danger';
     onClick: () => void;
 }
 

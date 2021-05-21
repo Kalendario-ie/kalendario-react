@@ -11,7 +11,8 @@
       "SUBMIT": "Submit",
       "CANCEL": "Cancel",
       "PROCESSING": "Processing"
-    }
+    },
+    "SURE-DELETE": "Are you sure you want to delete?"
   },
   "NAVBAR": {
     "ADMIN": "Admin Dashboard"

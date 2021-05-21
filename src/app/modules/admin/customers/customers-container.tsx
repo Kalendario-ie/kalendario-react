@@ -19,6 +19,7 @@ const CustomersContainer: React.FunctionComponent = () => {
             <AdminListEditContainer entitiesSelector={customerSelectors}
                                     initializerAction={customerActions.initializeStore}
                                     patchAction={customerActions.patchEntity}
+                                    deleteAction={customerActions.deleteEntity}
                                     filter={filter}
                                     EditContainer={EditCustomer}
                                     ListContainer={CustomersTable}/>
