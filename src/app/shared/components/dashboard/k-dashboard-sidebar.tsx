@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom"
-import KIcon from 'src/app/shared/molecules/KIcon';
+import KIcon from 'src/app/shared/components/primitives/k-icon';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 
 export interface SideBarLinks {

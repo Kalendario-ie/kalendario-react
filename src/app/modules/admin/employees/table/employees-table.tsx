@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {Employee} from 'src/app/api/employees';
 import EmployeeRowExpanded from 'src/app/modules/admin/employees/table/employee-row-expanded';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import KIcon from 'src/app/shared/molecules/KIcon';
+import KIcon from 'src/app/shared/components/primitives/k-icon';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 

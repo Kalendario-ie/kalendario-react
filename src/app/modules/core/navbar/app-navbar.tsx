@@ -23,7 +23,7 @@ import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import {KButton} from 'src/app/shared/components/primitives';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import KIcon from 'src/app/shared/molecules/KIcon';
+import KIcon from 'src/app/shared/components/primitives/k-icon';
 
 interface AppNavbarProps {
     company: CompanyDetails | null;

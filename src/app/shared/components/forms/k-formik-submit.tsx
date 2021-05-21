@@ -19,6 +19,7 @@ export const KFormikSubmit: React.FunctionComponent<KFormikSubmitProps> = (
     }
     return (
         <KButton
+            color="primary"
             disabled={!formik.isValid}
             className={className}
             type="submit">{text}

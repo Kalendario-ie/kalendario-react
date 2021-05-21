@@ -9,6 +9,7 @@
   "COMMON": {
     "FORM": {
       "SUBMIT": "Submit",
+      "CANCEL": "Cancel",
       "PROCESSING": "Processing"
     }
   },

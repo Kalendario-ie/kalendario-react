@@ -3,6 +3,7 @@ import React from 'react';
 export interface KalendarioCardProps {
     header?: React.ReactNode;
     children?: React.ReactChild | React.ReactChild[],
+    className?: string;
     maxWidth?: number | undefined;
     mwUnit?: string | undefined;
     maxHeight?: number | undefined;
@@ -14,13 +15,14 @@ const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
+        className,
         maxWidth,
         mwUnit= 'px',
         maxHeight,
         mhUnit= 'px',
         hasShadow = true,
     }) => {
-    let className = "card-container"
+    className += " card-container"
     if (hasShadow) {
         className += ' company-shadow-1';
     }

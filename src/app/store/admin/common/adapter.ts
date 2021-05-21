@@ -9,6 +9,8 @@ interface AugmentedEntityState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
 }
 
+interface PatchActionPayload { id: number, entity: any }
+
 export function kCreateBaseStore<TEntity extends IReadModel>(
     sliceName: string,
     client: BaseModelRequest<TEntity>,
@@ -23,12 +25,14 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     const customActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
+        patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
     }
 
     const slice = createSlice({
         name: sliceName,
         initialState: adapter.getInitialState({
             isInitialized: false,
+            apiError: null
         }),
         reducers: {
             // @ts-ignore
@@ -41,6 +45,9 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             upsertOne: adapter.upsertOne,
             setInitialized: (state, action) => {
                 state.isInitialized = true
+            },
+            setApiError: (state, action) => {
+                state.apiError = action.payload
             },
         }
     });
@@ -71,12 +78,23 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
             yield put(actions.reducerActions.upsertMany(result.results));
         } catch (error) {
+            yield put(actions.reducerActions.setApiError(error));
         }
     }
+
+    function* patchEntity(action: { type: string, payload: PatchActionPayload }) {
+        try {
+            const entity: TEntity = yield call(client.patch, action.payload.id, action.payload.entity);
+            yield put(actions.reducerActions.upsertOne(entity));
+        } catch (error) {
+        }
+    }
+
 
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, initializeStore);
         yield takeEvery(actions.fetchEntities.type, fetchEntities);
+        yield takeEvery(actions.patchEntity.type, patchEntity);
     }
 
     return {
