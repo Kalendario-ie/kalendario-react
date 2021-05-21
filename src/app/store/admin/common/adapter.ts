@@ -22,6 +22,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
 
     const customActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
+        fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
     }
 
     const slice = createSlice({
@@ -40,7 +41,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             upsertOne: adapter.upsertOne,
             setInitialized: (state, action) => {
                 state.isInitialized = true
-            }
+            },
         }
     });
 
@@ -59,19 +60,23 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         selectIsInitialized: createSelector(selector, store => store.isInitialized)
     }
 
-    function* requestAllServices(action: { type: string, payload: {} }) {
+    function* initializeStore(action: { type: string, payload: {} }) {
         const isInitialized: boolean = yield select(selectors.selectIsInitialized);
         if (isInitialized) return;
+        yield put(actions.fetchEntities(action.payload))
+    }
+
+    function* fetchEntities(action: { type: string, payload: object }) {
         try {
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
             yield put(actions.reducerActions.upsertMany(result.results));
-            yield put(actions.reducerActions.setInitialized(null));
         } catch (error) {
         }
     }
 
     function* sagas() {
-        yield takeEvery(actions.initializeStore.type, requestAllServices);
+        yield takeEvery(actions.initializeStore.type, initializeStore);
+        yield takeEvery(actions.fetchEntities.type, fetchEntities);
     }
 
     return {

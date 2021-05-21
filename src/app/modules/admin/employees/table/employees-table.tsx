@@ -4,6 +4,7 @@ import EmployeeRowExpanded from 'src/app/modules/admin/employees/table/employee-
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KIcon from 'src/app/shared/molecules/KIcon';
 import KTable from 'src/app/shared/molecules/tables/k-table';
+import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 
 interface EmployeesTableProps {
     employees: Employee[];
@@ -32,14 +33,17 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
         {
             Header: 'Name',
             accessor: 'name',
+            Filter: KTextColumnFilter
         },
         {
             Header: 'Email',
             accessor: 'email',
+            Filter: KTextColumnFilter
         },
         {
             Header: 'Phone',
             accessor: 'phone',
+            Filter: KTextColumnFilter
         },
         {
             Header: 'Instagram',

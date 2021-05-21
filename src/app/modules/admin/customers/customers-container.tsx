@@ -12,9 +12,13 @@ const CustomersContainer: React.FunctionComponent = () => {
         dispatch(customerActions.initializeStore())
     }, []);
 
+    const filter = (value: string | undefined) => {
+        dispatch(customerActions.fetchEntities({search: value}));
+    }
+
     return (
         <AdminDashboard>
-            <CustomersTable customers={employees}/>
+            <CustomersTable customers={employees} filter={filter}/>
         </AdminDashboard>
     )
 }

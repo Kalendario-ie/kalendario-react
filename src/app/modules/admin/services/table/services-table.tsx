@@ -4,6 +4,7 @@ import {Service, ServiceCategory} from 'src/app/api/services';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
 import KTable from 'src/app/shared/molecules/tables/k-table';
+import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 
 interface ServicesTableProps {
     services: Service[];
@@ -28,6 +29,7 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
             {
                 Header: 'Name',
                 accessor: 'name',
+                Filter: KTextColumnFilter
             },
             {
                 Header: 'Duration',

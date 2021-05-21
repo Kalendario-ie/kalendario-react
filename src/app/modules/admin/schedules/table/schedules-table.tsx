@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import {Schedule} from 'src/app/api/schedule';
 import ShiftCell from 'src/app/modules/admin/schedules/table/shift-cell';
 import KTable from 'src/app/shared/molecules/tables/k-table';
+import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 
 interface SchedulesTableProps {
     schedules: Schedule[];
@@ -16,6 +17,7 @@ const SchedulesTable: React.FunctionComponent<SchedulesTableProps> = (
             {
                 Header: 'Name',
                 accessor: 'name',
+                Filter: KTextColumnFilter
             },
             ...['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(day => (
                 {

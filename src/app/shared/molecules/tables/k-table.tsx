@@ -53,6 +53,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
             // @ts-ignore
             defaultColumn,
             filterTypes,
+            autoResetFilters: false
         },
         useFilters,
         useExpanded,

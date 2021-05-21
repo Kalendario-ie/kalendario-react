@@ -12,7 +12,7 @@ const ShiftCell: React.FunctionComponent<ShiftCellProps> = (
     }) => {
     return (
         <KFlexColumn>
-            {shift.frames.map(f => <div>{f.name}</div>)}
+            {shift.frames.map((frame, key) => <div key={key}>{frame.name}</div>)}
         </KFlexColumn>
     )
 }
