@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 import {Service} from 'src/app/api/services';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
+import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 
 interface ServicesTableProps {
@@ -13,6 +14,11 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
     }) => {
     const columns = useMemo(
         () => [
+            {
+                Header: 'category',
+                accessor: 'category',
+                Filter: KSelectColumnFilter
+            },
             {
                 Header: 'Name',
                 accessor: 'name',

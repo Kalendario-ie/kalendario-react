@@ -8,13 +8,17 @@ interface KTableProps<D extends object = {}> {
     columns: Array<Column<D>>
     data: D[]
     renderRowSubComponent?: (row: Row<D>) => React.ReactNode
+    hover?: boolean;
+    stripped?: boolean;
 }
 
 const KTable: React.FunctionComponent<KTableProps> = (
     {
         columns,
         data,
-        renderRowSubComponent
+        renderRowSubComponent,
+        hover = false,
+        stripped = false
     }) => {
     const filterTypes = React.useMemo(
         () => ({
@@ -55,7 +59,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
 
 
     return (
-        <Table hover={true} {...getTableProps()}>
+        <Table hover={hover} striped={stripped} {...getTableProps()}>
             <thead>
             {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>

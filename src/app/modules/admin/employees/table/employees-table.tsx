@@ -51,7 +51,11 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
         (row: any) => <EmployeeRowExpanded employee={row.original}/>, [])
 
     return (
-        <KTable columns={columns} data={employees} renderRowSubComponent={renderRowSubComponent}/>
+        <KTable columns={columns}
+                data={employees}
+                renderRowSubComponent={renderRowSubComponent}
+                hover={true}
+        />
     )
 }
 
