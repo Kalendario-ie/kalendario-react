@@ -82,7 +82,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
             {rows.map((row, i) => {
                 prepareRow(row)
                 return (
-                    <React.Fragment {...row.getRowProps()} key={i}>
+                    <React.Fragment key={i}>
                         <tr {
                                 // @ts-ignore
                                 ...renderRowSubComponent ? row.getToggleRowExpandedProps() : null
@@ -92,7 +92,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
                         {renderRowSubComponent &&
                         // @ts-ignore
                         row.isExpanded ? (
-                            <tr>
+                            <tr {...row.getRowProps()}>
                                 <td colSpan={visibleColumns.length}>
                                     {renderRowSubComponent(row)}
                                 </td>

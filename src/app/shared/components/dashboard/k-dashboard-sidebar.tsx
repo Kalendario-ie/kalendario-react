@@ -23,13 +23,12 @@ const KDashboardSidebar: React.FunctionComponent<KDashboardSidebarProps> = (
         <div className={`sidebar ${isOpen ? 'open' : 'closed'} k-shadow-0 py-3`}>
             {Object.keys(links).map(key => {
                 return (
-                    <>
+                    <React.Fragment key={key}>
                         <h6 className="sidebar-heading">{key}</h6>
                         <ul className="list-clear">
                             {links[key].map(([name, url, icon]) => {
-
                                 return (
-                                    <li className="sidebar-list-item">
+                                    <li className="sidebar-list-item" key={name}>
                                         <Link to={url}
                                               className={`sidebar-link ${pathname === url ? ' active' : 'text-muted'}`}
                                         >
@@ -41,13 +40,13 @@ const KDashboardSidebar: React.FunctionComponent<KDashboardSidebarProps> = (
                                     </li>
                                 )
                             })}
-                                </ul>
-                                </>
-                                )
-                            })}
-                </div>
+                        </ul>
+                    </React.Fragment>
                 )
-            }
+            })}
+        </div>
+    )
+}
 
 
 export default KDashboardSidebar;

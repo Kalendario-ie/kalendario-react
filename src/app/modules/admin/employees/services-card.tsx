@@ -29,7 +29,7 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
             mhUnit={'vh'}
         >
             <KFlexColumn>
-                {services.map(s => <KFlexRow>{s.name}</KFlexRow>)}
+                {services.map(s => <KFlexRow key={s.id}>{s.name}</KFlexRow>)}
             </KFlexColumn>
         </KCard>
     )

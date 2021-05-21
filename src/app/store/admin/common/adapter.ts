@@ -1,14 +1,18 @@
 import {createAction, createEntityAdapter, createSelector, createSlice, EntityState} from '@reduxjs/toolkit';
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, select, takeEvery} from 'redux-saga/effects';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
 import {IReadModel} from 'src/app/api/common/models';
 
 
+interface AugmentedEntityState<TEntity> extends EntityState<TEntity> {
+    isInitialized: boolean;
+}
+
 export function kCreateBaseStore<TEntity extends IReadModel>(
     sliceName: string,
     client: BaseModelRequest<TEntity>,
-    selector: (state: any) => EntityState<TEntity>
+    selector: (state: any) => AugmentedEntityState<TEntity>
 ) {
 
     const adapter = createEntityAdapter<TEntity>({
@@ -16,9 +20,15 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         sortComparer: (a, b) => a.name.localeCompare(b.name),
     })
 
+    const customActions = {
+        initializeStore: createAction<void>(`${sliceName}/initializeStore`),
+    }
+
     const slice = createSlice({
         name: sliceName,
-        initialState: adapter.getInitialState(),
+        initialState: adapter.getInitialState({
+            isInitialized: false,
+        }),
         reducers: {
             // @ts-ignore
             addOne: adapter.addOne,
@@ -28,34 +38,40 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             upsertMany: adapter.upsertMany,
             // @ts-ignore
             upsertOne: adapter.upsertOne,
+            setInitialized: (state, action) => {
+                state.isInitialized = true
+            }
         }
     });
 
     const actions = {
         reducerActions: {...slice.actions},
-        initializeStore: createAction<void>(`${sliceName}/initializeStore`),
+        ...customActions
+    }
+
+    const adapterSelectors = adapter.getSelectors(selector);
+    const selectors = {
+        ...adapterSelectors,
+        selectByIds: (ids: number[]) => createSelector(
+            adapterSelectors.selectEntities,
+            (entities) => ids.map(id => entities[id]!).filter(service => !!service)
+        ),
+        selectIsInitialized: createSelector(selector, store => store.isInitialized)
     }
 
     function* requestAllServices(action: { type: string, payload: {} }) {
+        const isInitialized: boolean = yield select(selectors.selectIsInitialized);
+        if (isInitialized) return;
         try {
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
-            yield put({type: actions.reducerActions.upsertMany.type, payload: result.results});
+            yield put(actions.reducerActions.upsertMany(result.results));
+            yield put(actions.reducerActions.setInitialized(null));
         } catch (error) {
         }
     }
 
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, requestAllServices);
-    }
-
-    const adapterSelectors = adapter.getSelectors(selector);
-
-    const selectors = {
-        ...adapterSelectors,
-        selectByIds: (ids: number[]) => createSelector(
-            adapterSelectors.selectEntities,
-            (entities) => ids.map(id => entities[id]!).filter(service => !!service)
-        )
     }
 
     return {
