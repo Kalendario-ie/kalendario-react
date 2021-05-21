@@ -3,6 +3,7 @@ import {FormikHelpers, FormikProps} from 'formik/dist/types';
 import React from 'react';
 import {Form, FormGroup} from 'reactstrap';
 import {ApiValidationError} from 'src/app/api/common/api-errors';
+import KFormikErrorHandler from 'src/app/shared/components/forms/k-formik-error-handler';
 
 export interface KFormikFormProps<Values> {
     initialValues: Values;
@@ -34,10 +35,10 @@ export function KFormikForm<Values>(
                     e.preventDefault();
                     formik.handleSubmit(e);
                 }}>
-                    <FormGroup>
-                        <input hidden className="is-invalid"/>
-                        {errors.map((error, key) => <div key={key} className="invalid-feedback">{error}</div>)}
+                    <FormGroup className="text-danger">
+                        {errors.map((error, key) => <div key={key}>{error}</div>)}
                     </FormGroup>
+                    <KFormikErrorHandler apiError={apiError}/>
 
                     {typeof children == 'function'
                         ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
