@@ -2,6 +2,8 @@ import React from 'react';
 import {Column, Row, useExpanded, useFilters, useTable} from 'react-table';
 import {Table} from 'reactstrap';
 import {KDefaultColumnFilter} from 'src/app/shared/molecules/tables/k-default-column-filter';
+import KTableBody from 'src/app/shared/molecules/tables/k-table-body';
+import KTableHeader from 'src/app/shared/molecules/tables/k-table-header';
 
 
 interface KTableProps<D extends object = {}> {
@@ -44,7 +46,6 @@ const KTable: React.FunctionComponent<KTableProps> = (
         rows,
         prepareRow,
         visibleColumns,
-        state,
     } = useTable(
         {
             columns,
@@ -60,50 +61,14 @@ const KTable: React.FunctionComponent<KTableProps> = (
 
     return (
         <Table hover={hover} striped={stripped} {...getTableProps()}>
-            <thead>
-            {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                        <th {...column.getHeaderProps()}>
-                            {column.render('Header')}
-                            {/* Render the columns filter UI */}
-                            <div>
-                                {
-                                    // @ts-ignore
-                                    column.canFilter ? column.render('Filter') : null
-                                }
-                            </div>
-                        </th>
-                    ))}
-                </tr>
-            ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-                prepareRow(row)
-                return (
-                    <React.Fragment key={i}>
-                        <tr {
-                                // @ts-ignore
-                                ...renderRowSubComponent ? row.getToggleRowExpandedProps() : null
-                            }>
-                            {row.cells.map(cell => <td {...cell.getCellProps()}> {cell.render('Cell')}</td>)}
-                        </tr>
-                        {renderRowSubComponent &&
-                        // @ts-ignore
-                        row.isExpanded ? (
-                            <tr {...row.getRowProps()}>
-                                <td colSpan={visibleColumns.length}>
-                                    {renderRowSubComponent(row)}
-                                </td>
-                            </tr>
-                        ) : null
-                        }
-                    </React.Fragment>
-                )
-            })}
-
-            </tbody>
+            <KTableHeader headerGroups={headerGroups}
+            />
+            <KTableBody getTableBodyProps={getTableBodyProps}
+                        rows={rows}
+                        prepareRow={prepareRow}
+                        visibleColumns={visibleColumns}
+                        renderRowSubComponent={renderRowSubComponent}
+            />
         </Table>
     )
 }
