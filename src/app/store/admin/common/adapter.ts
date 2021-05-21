@@ -1,4 +1,4 @@
-import {createAction, createEntityAdapter, createSlice, EntityState} from '@reduxjs/toolkit';
+import {createAction, createEntityAdapter, createSelector, createSlice, EntityState} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
@@ -48,8 +48,14 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         yield takeEvery(actions.initializeStore.type, requestAllServices);
     }
 
+    const adapterSelectors = adapter.getSelectors(selector);
+
     const selectors = {
-        ...adapter.getSelectors(selector),
+        ...adapterSelectors,
+        selectByIds: (ids: number[]) => createSelector(
+            adapterSelectors.selectEntities,
+            (entities) => ids.map(id => entities[id]!).filter(service => !!service)
+        )
     }
 
     return {

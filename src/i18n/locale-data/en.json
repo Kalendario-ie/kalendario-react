@@ -39,7 +39,7 @@
     "HEADER": "Payment with Stripe"
   },
   "ADMIN": {
-    "SIDEBAR": {
+    "COMMON": {
       "HOME": "Home",
       "SERVICES": "Services",
       "SCHEDULES": "Schedules",

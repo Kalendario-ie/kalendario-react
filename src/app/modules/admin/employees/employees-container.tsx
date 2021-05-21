@@ -8,7 +8,9 @@ import {employeeSelectors, employeeActions} from 'src/app/store/admin/employees'
 const EmployeesContainer: React.FunctionComponent = () => {
     const dispatch = useAppDispatch()
     const employees = useAppSelector(employeeSelectors.selectAll)
-    useEffect(() => {dispatch(employeeActions.initializeStore())}, []);
+    useEffect(() => {
+        dispatch(employeeActions.initializeStore())
+    }, []);
 
     return (
         <AdminDashboard>

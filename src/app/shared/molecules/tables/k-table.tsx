@@ -1,5 +1,5 @@
 import React from 'react';
-import {Column, useFilters, useTable} from 'react-table';
+import {Column, Row, useExpanded, useFilters, useTable} from 'react-table';
 import {Table} from 'reactstrap';
 import {KDefaultColumnFilter} from 'src/app/shared/molecules/tables/k-default-column-filter';
 
@@ -7,12 +7,14 @@ import {KDefaultColumnFilter} from 'src/app/shared/molecules/tables/k-default-co
 interface KTableProps<D extends object = {}> {
     columns: Array<Column<D>>
     data: D[]
+    renderRowSubComponent?: (row: Row<D>) => React.ReactNode
 }
 
 const KTable: React.FunctionComponent<KTableProps> = (
     {
         columns,
-        data
+        data,
+        renderRowSubComponent
     }) => {
     const filterTypes = React.useMemo(
         () => ({
@@ -38,6 +40,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
         rows,
         prepareRow,
         visibleColumns,
+        state,
     } = useTable(
         {
             columns,
@@ -47,6 +50,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
             filterTypes,
         },
         useFilters,
+        useExpanded,
     )
 
 
@@ -83,11 +87,27 @@ const KTable: React.FunctionComponent<KTableProps> = (
             {rows.map((row, i) => {
                 prepareRow(row)
                 return (
-                    <tr {...row.getRowProps()}>
-                        {row.cells.map(cell => <td {...cell.getCellProps()}> {cell.render('Cell')}</td>)}
-                    </tr>
+                    <React.Fragment {...row.getRowProps()} key={i}>
+                        <tr {
+                                // @ts-ignore
+                                ...renderRowSubComponent ? row.getToggleRowExpandedProps() : null
+                            }>
+                            {row.cells.map(cell => <td {...cell.getCellProps()}> {cell.render('Cell')}</td>)}
+                        </tr>
+                        {renderRowSubComponent &&
+                        // @ts-ignore
+                        row.isExpanded ? (
+                            <tr>
+                                <td colSpan={visibleColumns.length}>
+                                    {renderRowSubComponent(row)}
+                                </td>
+                            </tr>
+                        ) : null
+                        }
+                    </React.Fragment>
                 )
             })}
+
             </tbody>
         </Table>
     )

@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {Service} from 'src/app/api/services';
-import {ServiceTableHeaders} from 'src/app/modules/admin/services/table/headers';
+import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KCard from 'src/app/shared/molecules/k-card';
 
@@ -14,15 +14,34 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
     }) => {
     const columns = useMemo(
         () => [
-            ServiceTableHeaders
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Duration',
+                accessor: 'duration',
+            },
+            {
+                Header: 'Color',
+                accessor: 'color',
+                Cell: (value: any) => <KColorBox backgroundColor={value.cell.value}/>
+
+            },
+            {
+                Header: 'Description',
+                accessor: 'description',
+            },
+            {
+                Header: 'Price',
+                accessor: 'price',
+            },
         ],
         []
     )
 
     return (
-        <KCard>
-            <KTable columns={columns} data={services}/>
-        </KCard>
+        <KTable columns={columns} data={services}/>
     )
 }
 

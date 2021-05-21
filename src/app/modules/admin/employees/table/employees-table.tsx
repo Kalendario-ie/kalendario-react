@@ -1,6 +1,9 @@
 import React, {useMemo} from 'react';
+import {Row} from 'react-table';
 import {Employee} from 'src/app/api/employees';
+import EmployeeRowExpanded from 'src/app/modules/admin/employees/table/employee-row-expanded';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
+import KIcon from 'src/app/shared/molecules/KIcon';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KCard from 'src/app/shared/molecules/k-card';
 
@@ -13,6 +16,16 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
         employees
     }) => {
     const columns = useMemo(() => [
+        {
+            // Make an expander cell
+            Header: () => null, // No header
+            id: 'expander', // It needs an ID
+            Cell: (value: any) => (
+                <span>
+                    {value.row.isExpanded ? <KIcon icon="caret-down"/> : <KIcon icon="caret-right"/>}
+                </span>
+            ),
+        },
         {
             Header: 'Photo',
             accessor: 'photoUrl',
@@ -34,12 +47,13 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
             Header: 'Instagram',
             accessor: 'instagram',
         }
-    ],[])
+    ], [])
+
+    const renderRowSubComponent = React.useCallback(
+        (row: any) => <EmployeeRowExpanded employee={row.original}/>, [])
 
     return (
-        <KCard>
-            <KTable columns={columns} data={employees}/>
-        </KCard>
+        <KTable columns={columns} data={employees} renderRowSubComponent={renderRowSubComponent}/>
     )
 }
 
