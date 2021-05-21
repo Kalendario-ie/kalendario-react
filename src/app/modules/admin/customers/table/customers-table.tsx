@@ -12,16 +12,16 @@ const CustomersTable: React.FunctionComponent<CustomersTableProps> = (
         customers
     }) => {
     const columns = useMemo(() => [
-        {
-            // Make an expander cell
-            Header: () => null, // No header
-            id: 'expander', // It needs an ID
-            Cell: (value: any) => (
-                <span>
-                    {value.row.isExpanded ? <KIcon icon="caret-down"/> : <KIcon icon="caret-right"/>}
-                </span>
-            ),
-        },
+        // {
+        //     // Make an expander cell
+        //     Header: () => null, // No header
+        //     id: 'expander', // It needs an ID
+        //     Cell: (value: any) => (
+        //         <span>
+        //             {value.row.isExpanded ? <KIcon icon="caret-down"/> : <KIcon icon="caret-right"/>}
+        //         </span>
+        //     ),
+        // },
 
         {
             Header: 'Name',

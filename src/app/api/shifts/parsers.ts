@@ -6,7 +6,7 @@ export function shiftParser(data: any): Shift {
     const frames: TimeFrame[] = data?.frames ? data.frames.map((f: any) => timeFrameParser(f.start, f.end)) : [];
     return {
         frames,
-        name: frames.length > 0 ? frames.map(f => f.name).reduce(((p, c) => p + c)) : ''
+        name: frames.length > 0 ? frames.map(f => f.name).reduce(((p, c) => `${p} ${c}`)) : ''
     }
 }
 
