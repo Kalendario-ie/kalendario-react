@@ -1,18 +1,11 @@
 import React, {useMemo} from 'react';
-import {Customer} from 'src/app/api/customers';
-import AdminTableButtons from 'src/app/shared/admin/admin-table-buttons';
+import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 
-interface CustomersTableProps {
-    customers: Customer[];
-    filter: (value: string | undefined) => void;
-    buttons: (customer: Customer) => React.ReactNode;
-}
-
-const CustomersTable: React.FunctionComponent<CustomersTableProps> = (
+const CustomersTable: React.FunctionComponent<AdminTableContainerProps> = (
     {
-        customers,
+        entities,
         filter,
         buttons
     }) => {
@@ -39,7 +32,7 @@ const CustomersTable: React.FunctionComponent<CustomersTableProps> = (
         ], [])
 
     return (
-        <KTable columns={columns} data={customers}/>
+        <KTable columns={columns} data={entities}/>
     )
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 
 export interface KalendarioCardProps {
     header?: React.ReactNode;
-    children?: React.ReactChild | React.ReactChild[],
     className?: string;
     maxWidth?: number | undefined;
     mwUnit?: string | undefined;

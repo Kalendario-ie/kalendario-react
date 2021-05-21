@@ -9,7 +9,7 @@ interface AugmentedEntityState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
 }
 
-interface PatchActionPayload { id: number, entity: any }
+export interface PatchActionPayload { id: number, entity: any }
 
 export function kCreateBaseStore<TEntity extends IReadModel>(
     sliceName: string,

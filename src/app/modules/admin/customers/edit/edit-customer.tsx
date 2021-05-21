@@ -1,22 +1,16 @@
 import React from 'react';
-import { Customer, SaveCustomerRequest } from 'src/app/api/customers';
+import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
 import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
 
-interface EditCustomerProps {
-    customer: Customer;
-    onSubmit: (values: SaveCustomerRequest) => void;
-    onCancel: () => void;
-}
-
-const EditCustomer: React.FunctionComponent<EditCustomerProps> = (
+const EditCustomer: React.FunctionComponent<AdminEditContainerProps> = (
     {
-        customer,
+        entity,
         onSubmit,
         onCancel
     }) => {
     return (
-        <KFormikForm initialValues={customer} apiError={null} onSubmit={onSubmit}>
+        <KFormikForm initialValues={entity} apiError={null} onSubmit={onSubmit}>
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>
