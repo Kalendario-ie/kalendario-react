@@ -77,15 +77,6 @@ const KTable: React.FunctionComponent<KTableProps> = (
                     ))}
                 </tr>
             ))}
-            <tr>
-                <th
-                    colSpan={visibleColumns.length}
-                    style={{
-                        textAlign: 'left',
-                    }}
-                >
-                </th>
-            </tr>
             </thead>
             <tbody {...getTableBodyProps()}>
             {rows.map((row, i) => {

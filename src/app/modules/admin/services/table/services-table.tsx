@@ -1,23 +1,29 @@
+import { Dictionary } from '@reduxjs/toolkit';
 import React, {useMemo} from 'react';
-import {Service} from 'src/app/api/services';
+import {Service, ServiceCategory} from 'src/app/api/services';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 
 interface ServicesTableProps {
     services: Service[];
+    serviceCategories: ServiceCategory[];
+    serviceCategoryDict: Dictionary<ServiceCategory>;
 }
 
 const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
     {
-        services
+        services,
+        serviceCategories,
+        serviceCategoryDict
     }) => {
     const columns = useMemo(
         () => [
             {
                 Header: 'category',
                 accessor: 'category',
-                Filter: KSelectColumnFilter
+                Filter: (props: any) => <KSelectColumnFilter {...props} options={serviceCategories}/>,
+                Cell: (value: any) => <>{serviceCategoryDict[value.cell.value]?.name}</>
             },
             {
                 Header: 'Name',
@@ -42,7 +48,7 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
                 accessor: 'price',
             },
         ],
-        []
+        [serviceCategories, serviceCategoryDict]
     )
 
     return (

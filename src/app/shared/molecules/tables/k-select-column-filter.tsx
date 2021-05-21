@@ -1,28 +1,41 @@
 import React from 'react';
 import KInput from 'src/app/shared/molecules/tables/k-Input';
 
+interface FilterOption {
+    id: number | string;
+    name: string | number;
+}
+
 interface KSelectColumnFilterProps {
     column: {
         filterValue: string;
         setFilter: (value: string | undefined) => void;
         preFilteredRows: any[];
         id: any;
-    }
+    },
+    options?: FilterOption[];
 }
 
-export const KSelectColumnFilter: React.FunctionComponent<KSelectColumnFilterProps> = ({
-                                column: {filterValue, setFilter, preFilteredRows, id},
-                            }) => {
-    // Calculate the options for filtering
-    // using the preFilteredRows
-    const options = React.useMemo(() => {
-        const options = new Set()
+export const KSelectColumnFilter: React.FunctionComponent<KSelectColumnFilterProps> = (
+    {
+        column: {
+            filterValue,
+            setFilter,
+            preFilteredRows,
+            id
+        },
+        options
+    }) => {
+
+    const rowOptions = React.useMemo(() => {
+        const options = new Set<number | string>()
         preFilteredRows.forEach(row => {
             options.add(row.values[id])
         })
-        // @ts-ignore
-        return [...options.values()]
+        return Array.from(options).map(opt => ({id: opt, name: opt}));
     }, [id, preFilteredRows])
+
+    const usedOptions = options || rowOptions;
 
     return (
         <KInput
@@ -31,9 +44,9 @@ export const KSelectColumnFilter: React.FunctionComponent<KSelectColumnFilterPro
             onChange={e => setFilter(e?.target.value || undefined)}
         >
             <option value="">All</option>
-            {options.map((option, i) => (
-                <option key={i} value={option}>
-                    {option}
+            {usedOptions.map((option, i) => (
+                <option key={i} value={option.id}>
+                    {option.name}
                 </option>
             ))}
         </KInput>
