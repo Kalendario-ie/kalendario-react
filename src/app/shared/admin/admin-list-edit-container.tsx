@@ -3,9 +3,9 @@ import {IReadModel} from 'src/app/api/common/models';
 import AdminTableButtons from 'src/app/shared/admin/admin-table-buttons';
 import {AdminEditContainerProps, AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import ConfirmationModal from 'src/app/shared/components/modal/confirmation-modal';
+import KModal from 'src/app/shared/components/modal/k-modal';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
 import {KFlexRow} from 'src/app/shared/molecules/flex';
-import KCard from 'src/app/shared/molecules/k-card';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 
@@ -85,22 +85,18 @@ function AdminListEditContainer<TEntity extends IReadModel>(
 
     return (
         <>
-            {selectedEntity
-                ? <KCard className="mt-2">
-                    <EditContainer entity={selectedEntity}
-                                   apiError={apiError}
-                                   onSubmit={onSubmit(selectedEntity.id)}
-                                   onCancel={() => selectEntity(null)}/>
-                </KCard>
-                : <ListContainer entities={entities}
-                                 filter={filter}
-                                 buttonsColumn={buttonsColumn}
-                />
-            }
+            <ListContainer entities={entities}
+                           filter={filter}
+                           buttonsColumn={buttonsColumn}/>
             <ConfirmationModal messageId="COMMON.SURE-DELETE"
                                isOpen={modalOpen}
                                onConfirm={proceedToDelete}
                                onCancel={cancelDelete}/>
+            <KModal body={<EditContainer entity={selectedEntity}
+                                         apiError={apiError}
+                                         onSubmit={onSubmit(selectedEntity?.id || 0)}
+                                         onCancel={() => selectEntity(null)}/>}
+                    isOpen={!!selectedEntity}/>
         </>
     )
 }
