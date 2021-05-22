@@ -3,7 +3,7 @@ import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
 import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
 
-const EditCustomer: React.FunctionComponent<AdminEditContainerProps> = (
+const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
     {
         entity,
         apiError,
@@ -23,4 +23,4 @@ const EditCustomer: React.FunctionComponent<AdminEditContainerProps> = (
 }
 
 
-export default EditCustomer;
+export default CustomerUpsertForm;

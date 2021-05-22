@@ -1,7 +1,7 @@
 import React from 'react';
 import {customerParser} from 'src/app/api/customers';
-import EditCustomer from 'src/app/modules/admin/customers/edit/edit-customer';
-import CustomersTable from 'src/app/modules/admin/customers/table/customers-table';
+import CustomerUpsertForm from 'src/app/modules/admin/customers/customer-upsert-form';
+import CustomersTable from 'src/app/modules/admin/customers/customers-table';
 import AdminDashboard from 'src/app/shared/admin/admin-dashboard';
 import AdminListEditContainer from 'src/app/shared/admin/admin-list-edit-container';
 import {useAppDispatch} from 'src/app/store';
@@ -21,7 +21,7 @@ const CustomersContainer: React.FunctionComponent = () => {
                                     baseActions={customerActions}
                                     entityParser={customerParser}
                                     filter={filter}
-                                    EditContainer={EditCustomer}
+                                    EditContainer={CustomerUpsertForm}
                                     ListContainer={CustomersTable}/>
         </AdminDashboard>
     )
