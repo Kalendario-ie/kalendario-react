@@ -4,16 +4,18 @@ import {KButton} from '../primitives';
 
 export interface KFormikSubmitProps {
     text?: React.ReactNode;
+    className?: string;
     isBlock?: boolean;
 }
 
 export const KFormikSubmit: React.FunctionComponent<KFormikSubmitProps> = (
     {
         text = 'Submit',
+        className = '',
         isBlock = false
     }) => {
     const formik = useFormikContext();
-    let className = "btn btn-primary";
+    className += " btn btn-primary";
     if (isBlock) {
         className += ' btn-block';
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
-import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
-import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
+import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
+import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import * as yup from 'yup';
 
 const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
@@ -27,8 +27,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
             <KFormikInput name="lastName"/>
             <KFormikInput name="email" type="email"/>
             <KFormikInput name="phone"/>
-            <KFormikSubmit/>
-            <KFormikCancel onClick={onCancel}/>
+            <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
 }
