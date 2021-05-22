@@ -1,4 +1,5 @@
 import React from 'react';
+import {customerParser} from 'src/app/api/customers';
 import EditCustomer from 'src/app/modules/admin/customers/edit/edit-customer';
 import CustomersTable from 'src/app/modules/admin/customers/table/customers-table';
 import AdminDashboard from 'src/app/shared/admin/admin-dashboard';
@@ -16,11 +17,9 @@ const CustomersContainer: React.FunctionComponent = () => {
 
     return (
         <AdminDashboard>
-            <AdminListEditContainer entitiesSelector={customerSelectors}
-                                    initializerAction={customerActions.initializeStore}
-                                    createAction={customerActions.createAction}
-                                    patchAction={customerActions.patchEntity}
-                                    deleteAction={customerActions.deleteEntity}
+            <AdminListEditContainer baseSelectors={customerSelectors}
+                                    baseActions={customerActions}
+                                    entityParser={customerParser}
                                     filter={filter}
                                     EditContainer={EditCustomer}
                                     ListContainer={CustomersTable}/>

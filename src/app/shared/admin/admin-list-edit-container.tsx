@@ -1,4 +1,3 @@
-import {ActionCreatorWithoutPayload, ActionCreatorWithPayload} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 import {IReadModel} from 'src/app/api/common/models';
 import AdminTableButtons from 'src/app/shared/admin/admin-table-buttons';
@@ -8,58 +7,45 @@ import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
 import {KFlexRow} from 'src/app/shared/molecules/flex';
 import KCard from 'src/app/shared/molecules/k-card';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
-import {BaseSelectors, CreateActionPayload, PatchActionPayload} from 'src/app/store/admin/common/adapter';
+import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 
-interface AdminListEditContainerProps {
-    entitiesSelector: BaseSelectors;
+interface AdminListEditContainerProps<TEntity> {
+    baseSelectors: BaseSelectors<TEntity>;
+    baseActions: BaseActions<TEntity>;
+    entityParser: () => TEntity;
     filter?: (value: string | undefined) => void;
-    initializerAction: any,
-    createAction: ActionCreatorWithPayload<CreateActionPayload, string>;
-    patchAction: ActionCreatorWithPayload<PatchActionPayload, string>;
-    deleteAction: ActionCreatorWithPayload<number, string>;
     EditContainer: React.FunctionComponent<AdminEditContainerProps>;
     ListContainer: React.FunctionComponent<AdminTableContainerProps>;
 }
 
-const AdminListEditContainer: React.FunctionComponent<AdminListEditContainerProps> = (
+function AdminListEditContainer<TEntity extends IReadModel>(
     {
-        entitiesSelector,
+        baseSelectors,
+        baseActions,
+        entityParser,
         filter,
-        initializerAction,
-        createAction,
-        patchAction,
-        deleteAction,
         EditContainer,
         ListContainer
-    }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [entity, setEntity] = useState<IReadModel | null>(null);
+    }: AdminListEditContainerProps<TEntity>) {
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteId, setDeleteId] = useState<number | null>(null);
 
     const dispatch = useAppDispatch();
-    const entities = useAppSelector(entitiesSelector.selectAll)
-    const storeEntity = useAppSelector(state => entitiesSelector.selectById(state, entity?.id || 0));
-    const apiError = useAppSelector(entitiesSelector.selectApiError);
+    const entities = useAppSelector(baseSelectors.selectAll)
+    const apiError = useAppSelector(baseSelectors.selectApiError);
+    const selectedEntity = useAppSelector(baseSelectors.selectSelectedEntity);
 
 
     useEffect(() => {
-        dispatch(initializerAction())
+        dispatch(baseActions.initializeStore())
     }, []);
 
-    useEffect(() => {
-        if (isSubmitting) {
-            setIsSubmitting(false);
-            setEntity(null);
-        }
-    }, [storeEntity]);
 
     const onSubmit = (id: number) => (entity: any) => {
-        setIsSubmitting(true)
         if (id === 0) {
-            dispatch(createAction({entity}));
+            dispatch(baseActions.createEntity({entity}));
         } else {
-            dispatch(patchAction({id, entity}));
+            dispatch(baseActions.patchEntity({id, entity}));
         }
     }
 
@@ -73,31 +59,38 @@ const AdminListEditContainer: React.FunctionComponent<AdminListEditContainerProp
     }
 
     const proceedToDelete = () => {
-        dispatch(deleteAction(deleteId!));
+        dispatch(baseActions.deleteEntity(deleteId!));
         openCloseModal(null);
     }
 
     const addClick = () => {
-        setEntity({id: 0, name: ''});
+        dispatch(baseActions.setSelectedEntity(entityParser()));
     }
 
-    const buttons = (entity: IReadModel) => <AdminTableButtons onEditClick={() => setEntity(entity)}
-                                                               onDeleteClick={() => openCloseModal(entity.id)}/>
+    const selectEntity = (entity: TEntity | null) => {
+        dispatch(baseActions.setSelectedEntity(entity));
+    }
+
+    const buttons = (entity: TEntity) => <AdminTableButtons onEditClick={() => selectEntity(entity)}
+                                                            onDeleteClick={() => openCloseModal(entity.id)}/>
 
     const buttonsColumn = {
-        Header: () => <KFlexRow justify={'end'}><KIconButton color="primary" icon="plus-square" onClick={addClick}/></KFlexRow>,
-            id: 'buttons',
-            Cell: (value: any) => buttons(value.row.original)
-        }
+        Header: () =>
+            <KFlexRow justify={'end'}>
+                <KIconButton color="primary" icon="plus-square" onClick={addClick}/>
+            </KFlexRow>,
+        id: 'buttons',
+        Cell: (value: any) => buttons(value.row.original)
+    }
 
     return (
         <>
-            {entity
+            {selectedEntity
                 ? <KCard className="mt-2">
-                    <EditContainer entity={entity}
+                    <EditContainer entity={selectedEntity}
                                    apiError={apiError}
-                                   onSubmit={onSubmit(entity.id)}
-                                   onCancel={() => setEntity(null)}/>
+                                   onSubmit={onSubmit(selectedEntity.id)}
+                                   onCancel={() => selectEntity(null)}/>
                 </KCard>
                 : <ListContainer entities={entities}
                                  filter={filter}

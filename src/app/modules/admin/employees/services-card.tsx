@@ -14,7 +14,7 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
         serviceIds
     }) => {
     const dispatch = useAppDispatch();
-    const services = useAppSelector(serviceSelectors.selectByIds(serviceIds))
+    const services = useAppSelector((state: any) => serviceSelectors.selectByIds(state, serviceIds))
 
     useEffect(() => {
         dispatch(serviceActions.initializeStore())
