@@ -1,5 +1,6 @@
 import React from 'react';
 import {ColumnInstance, Row, TablePropGetter, TableProps} from 'react-table';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/molecules/flex';
 
 interface KTableBodyProps {
     getTableBodyProps: (propGetter?: TablePropGetter<object>) => TableProps;
@@ -27,7 +28,11 @@ const KTableBody: React.FunctionComponent<KTableBodyProps> = (
                             // @ts-ignore
                             ...renderRowSubComponent ? row.getToggleRowExpandedProps() : null
                         }>
-                        {row.cells.map(cell => <td {...cell.getCellProps()}> {cell.render('Cell')}</td>)}
+                        {row.cells.map(cell =>
+                            <td style={{verticalAlign: 'middle'}} {...cell.getCellProps()}>
+                                {cell.render('Cell')}
+                            </td>
+                        )}
                     </tr>
                     {renderRowSubComponent &&
                     // @ts-ignore
