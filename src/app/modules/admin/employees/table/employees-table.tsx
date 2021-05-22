@@ -1,18 +1,18 @@
 import React, {useMemo} from 'react';
 import {Employee} from 'src/app/api/employees';
 import EmployeeRowExpanded from 'src/app/modules/admin/employees/table/employee-row-expanded';
+import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 
-interface EmployeesTableProps {
-    employees: Employee[];
-}
 
-const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
+const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
     {
-        employees
+        entities,
+        buttonsColumn,
+        filter,
     }) => {
     const columns = useMemo(() => [
         {
@@ -48,7 +48,8 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
         {
             Header: 'Instagram',
             accessor: 'instagram',
-        }
+        },
+        buttonsColumn
     ], [])
 
     const renderRowSubComponent = React.useCallback(
@@ -56,7 +57,7 @@ const EmployeesTable: React.FunctionComponent<EmployeesTableProps> = (
 
     return (
         <KTable columns={columns}
-                data={employees}
+                data={entities}
                 renderRowSubComponent={renderRowSubComponent}
                 hover={true}
         />
