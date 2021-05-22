@@ -1,21 +1,36 @@
-import {createAction, createEntityAdapter, createSelector, createSlice, EntityState} from '@reduxjs/toolkit';
+import {
+    createAction,
+    createEntityAdapter,
+    createSelector,
+    createSlice,
+    EntitySelectors,
+    EntityState
+} from '@reduxjs/toolkit';
 import {AxiosResponse} from 'axios';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
+import {ApiBaseError} from 'src/app/api/common/api-errors';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
 import {IReadModel} from 'src/app/api/common/models';
 
 
-interface AugmentedEntityState<TEntity> extends EntityState<TEntity> {
+interface BaseState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
+    apiError: ApiBaseError;
+}
+
+export interface BaseSelectors extends EntitySelectors<IReadModel, any> {
+    selectIsInitialized: (state: any) => boolean;
+    selectApiError: (state:any) => ApiBaseError;
 }
 
 export interface PatchActionPayload { id: number, entity: any }
+export interface CreateActionPayload { entity: any }
 
 export function kCreateBaseStore<TEntity extends IReadModel>(
     sliceName: string,
     client: BaseModelRequest<TEntity>,
-    selector: (state: any) => AugmentedEntityState<TEntity>
+    selector: (state: any) => BaseState<TEntity>
 ) {
 
     const adapter = createEntityAdapter<TEntity>({
@@ -26,6 +41,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     const customActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
+        createAction: createAction<CreateActionPayload>(`${sliceName}/createAction`),
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
         deleteEntity: createAction<number>(`${sliceName}/deleteEntity`),
     }
@@ -68,7 +84,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             adapterSelectors.selectEntities,
             (entities) => ids.map(id => entities[id]!).filter(service => !!service)
         ),
-        selectIsInitialized: createSelector(selector, store => store.isInitialized)
+        selectIsInitialized: createSelector(selector, store => store.isInitialized),
+        selectApiError: createSelector(selector, store => store.apiError)
     }
 
     function* initializeStore(action: { type: string, payload: {} }) {
@@ -86,11 +103,23 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         }
     }
 
+    function* createEntity(action: { type: string, payload: CreateActionPayload }) {
+        try {
+            const entity: TEntity = yield call(client.post, action.payload.entity);
+            yield put(actions.reducerActions.upsertOne(entity));
+            yield put(actions.reducerActions.setApiError(null));
+        } catch (error) {
+            yield put(actions.reducerActions.setApiError(error));
+        }
+    }
+
     function* patchEntity(action: { type: string, payload: PatchActionPayload }) {
         try {
             const entity: TEntity = yield call(client.patch, action.payload.id, action.payload.entity);
             yield put(actions.reducerActions.upsertOne(entity));
+            yield put(actions.reducerActions.setApiError(null));
         } catch (error) {
+            yield put(actions.reducerActions.setApiError(error));
         }
     }
 
@@ -98,6 +127,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         try {
             const result: AxiosResponse = yield call(client.delete, action.payload);
             yield put(actions.reducerActions.removeOne(action.payload));
+            yield put(actions.reducerActions.setApiError(null));
         } catch (error) {
             yield put(actions.reducerActions.setApiError(error));
         }
@@ -106,6 +136,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, initializeStore);
         yield takeEvery(actions.fetchEntities.type, fetchEntities);
+        yield takeEvery(actions.createAction.type, createEntity);
         yield takeEvery(actions.patchEntity.type, patchEntity);
         yield takeEvery(actions.deleteEntity.type, deleteEntity);
     }

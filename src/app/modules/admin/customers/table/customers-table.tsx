@@ -6,8 +6,8 @@ import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-fil
 const CustomersTable: React.FunctionComponent<AdminTableContainerProps> = (
     {
         entities,
+        buttonsColumn,
         filter,
-        buttons
     }) => {
     const columns =
         useMemo(() => [
@@ -24,11 +24,7 @@ const CustomersTable: React.FunctionComponent<AdminTableContainerProps> = (
                 Header: 'Phone',
                 accessor: 'phone',
             },
-            {
-                Header: () => null,
-                id: 'buttons',
-                Cell: (value: any) => buttons(value.row.original)
-            }
+            buttonsColumn
         ], [])
 
     return (

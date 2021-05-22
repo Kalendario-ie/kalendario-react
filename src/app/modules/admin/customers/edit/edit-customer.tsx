@@ -6,14 +6,15 @@ import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
 const EditCustomer: React.FunctionComponent<AdminEditContainerProps> = (
     {
         entity,
+        apiError,
         onSubmit,
         onCancel
     }) => {
     return (
-        <KFormikForm initialValues={entity} apiError={null} onSubmit={onSubmit}>
+        <KFormikForm initialValues={entity} apiError={apiError} onSubmit={onSubmit}>
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
-            <KFormikInput name="email"/>
+            <KFormikInput name="email" type="email"/>
             <KFormikInput name="phone"/>
             <KFormikSubmit/>
             <KFormikCancel onClick={onCancel}/>

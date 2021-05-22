@@ -1,15 +1,15 @@
-import React from 'react';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
 import { IReadModel } from "src/app/api/common/models";
-import {Customer} from 'src/app/api/customers';
 
 export interface AdminEditContainerProps {
     entity: IReadModel;
+    apiError: ApiValidationError;
     onSubmit: (values: any) => void;
     onCancel: () => void;
 }
 
 export interface AdminTableContainerProps {
     entities: IReadModel[];
-    buttons: (customer: Customer) => React.ReactNode;
     filter?: (value: string | undefined) => void;
+    buttonsColumn: any
 }

@@ -18,6 +18,7 @@ const CustomersContainer: React.FunctionComponent = () => {
         <AdminDashboard>
             <AdminListEditContainer entitiesSelector={customerSelectors}
                                     initializerAction={customerActions.initializeStore}
+                                    createAction={customerActions.createAction}
                                     patchAction={customerActions.patchEntity}
                                     deleteAction={customerActions.deleteEntity}
                                     filter={filter}
@@ -29,3 +30,5 @@ const CustomersContainer: React.FunctionComponent = () => {
 
 
 export default CustomersContainer;
+
+
