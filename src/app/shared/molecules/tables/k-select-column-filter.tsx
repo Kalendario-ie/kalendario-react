@@ -1,5 +1,5 @@
 import React from 'react';
-import KInput from 'src/app/shared/molecules/tables/k-Input';
+import KInput from 'src/app/shared/components/primitives/k-Input';
 
 interface FilterOption {
     id: number | string;

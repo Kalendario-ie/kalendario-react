@@ -6,6 +6,7 @@ import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import {useAppDispatch} from 'src/app/store';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
+import {serviceActions, serviceSelectors} from 'src/app/store/admin/services';
 import * as yup from 'yup';
 
 const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
@@ -15,11 +16,14 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
         onSubmit,
         onCancel
     }) => {
-    const schedule = useSelector(scheduleSelectors.selectAll)
+    const schedules = useSelector(scheduleSelectors.selectAll)
+    const services = useSelector(serviceSelectors.selectAll)
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(scheduleActions.initializeStore());
+        dispatch(serviceActions.initializeStore());
     }, []);
 
 
@@ -40,7 +44,8 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
             <KFormikInput name="email"/>
             <KFormikInput name="phone"/>
             <KFormikInput name="instagram"/>
-            <KFormikInput name="schedule" selectOptions={schedule}/>
+            <KFormikInput name="schedule" selectOptions={schedules}/>
+            <KFormikInput name="service" selectOptions={services} multiple={true}/>
             <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
