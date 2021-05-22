@@ -8,12 +8,17 @@ export interface KFormikInputProps {
     type?: string;
     placeholder?: string;
     onChange?: (e: ChangeEvent) => void;
+    selectOptions?: { id: number, name: string }[];
+    emptyOption?: boolean;
 }
 
 export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
-    {name,
+    {
+        name,
         placeholder,
-        type
+        type,
+        selectOptions,
+        emptyOption= true
     }) => {
     const formik = useFormikContext();
     let className = "form-control";
@@ -24,10 +29,18 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     return (
         <FormGroup>
             <Field className={className}
+                   as={selectOptions ? 'select' : 'input'}
                    name={name}
                    type={type}
                    onKeyUp={onchange}
-                   placeholder={placeholder || name}/>
+                   placeholder={placeholder || name}>
+                {selectOptions &&
+                    <>
+                        {emptyOption && <option value={undefined}></option>}
+                        {selectOptions.map(option => <option value={option.id}>{option.name}</option>)}
+                    </>
+                }
+            </Field>
             <FormFeedback>
                 <ErrorMessage name={name}/>
             </FormFeedback>

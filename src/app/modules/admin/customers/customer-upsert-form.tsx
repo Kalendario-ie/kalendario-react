@@ -13,7 +13,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
     }) => {
     const validation = yup.object().shape({
         firstName: yup.string().required(),
-        lastName: yup.number().required(),
+        lastName: yup.string().required(),
         email: yup.string().required().email(),
     });
 
