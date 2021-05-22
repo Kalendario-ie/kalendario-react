@@ -18,7 +18,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
         placeholder,
         type,
         selectOptions,
-        emptyOption= true
+        emptyOption = true
     }) => {
     const formik = useFormikContext();
     let className = "form-control";
@@ -35,10 +35,11 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
                    onKeyUp={onchange}
                    placeholder={placeholder || name}>
                 {selectOptions &&
-                    <>
-                        {emptyOption && <option value={undefined}></option>}
-                        {selectOptions.map(option => <option value={option.id}>{option.name}</option>)}
-                    </>
+                <>
+                    {emptyOption && <option value={undefined}></option>}
+                    {selectOptions.map((option) =>
+                        <option key={option.id} value={option.id}>{option.name}</option>)}
+                </>
                 }
             </Field>
             <FormFeedback>
