@@ -8,18 +8,20 @@ export interface KalendarioCardProps {
     maxHeight?: number | undefined;
     mhUnit?: string | undefined;
     hasShadow?: boolean;
+    bodiless?: boolean;
 }
 
 const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
-        className= '',
+        className = '',
         maxWidth,
-        mwUnit= 'px',
+        mwUnit = 'px',
         maxHeight,
-        mhUnit= 'px',
+        mhUnit = 'px',
         hasShadow = true,
+        bodiless = false,
     }) => {
     className += " card"
     if (hasShadow) {
@@ -40,9 +42,9 @@ const KCard: React.FunctionComponent<KalendarioCardProps> = (
     return (
         <div className={className} style={style}>
             <h5 className="card-title mb-3 text-center">{header}</h5>
-            <div className="card-body" style={bodyStyle}>
-                {children}
-            </div>
+            <div className={bodiless ? '' : 'card-body'} style={bodyStyle}>
+            {children}
+        </div>
         </div>
     )
 }

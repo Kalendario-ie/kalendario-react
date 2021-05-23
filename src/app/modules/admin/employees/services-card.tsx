@@ -27,6 +27,7 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
             maxWidth={500}
             maxHeight={30}
             mhUnit={'vh'}
+            hasShadow={false}
         >
             <KFlexColumn>
                 {services.map(s => <KFlexRow key={s.id}>{s.name}</KFlexRow>)}
