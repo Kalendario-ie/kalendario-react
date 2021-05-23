@@ -1,5 +1,6 @@
 import { Dictionary } from '@reduxjs/toolkit';
 import React, {useMemo} from 'react';
+import {timeToString} from 'src/app/api/common/models';
 import {Service, ServiceCategory} from 'src/app/api/services';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
@@ -34,6 +35,7 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
             {
                 Header: 'Duration',
                 accessor: 'duration',
+                Cell: (value: any) => timeToString(value.cell.value)
             },
             {
                 Header: 'Color',

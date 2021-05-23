@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import ServicesTable from 'src/app/modules/admin/services/table/services-table';
+import ServicesTable from 'src/app/modules/admin/services/services-table';
 import AdminDashboard from 'src/app/shared/admin/admin-dashboard';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {serviceCategoriesActions, serviceCategoriesSelectors} from 'src/app/store/admin/serviceCategories';
