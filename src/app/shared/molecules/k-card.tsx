@@ -14,14 +14,14 @@ const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
-        className,
+        className= '',
         maxWidth,
         mwUnit= 'px',
         maxHeight,
         mhUnit= 'px',
         hasShadow = true,
     }) => {
-    className += " card-container"
+    className += " card"
     if (hasShadow) {
         className += ' company-shadow-1';
     }
