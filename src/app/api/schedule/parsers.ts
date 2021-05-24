@@ -1,6 +1,8 @@
 import {Moment} from 'moment';
+import {timeToISOString} from 'src/app/api/common/models';
 import {Schedule} from 'src/app/api/schedule/models';
-import {shiftParser} from 'src/app/api/shifts';
+import {UpsertScheduleRequest, UpsertScheduleRequestShift} from 'src/app/api/schedule/requests';
+import {Shift, shiftParser} from 'src/app/api/shifts';
 
 export function scheduleParser(data: any): Schedule {
     return {
@@ -33,5 +35,34 @@ export function getShift(schedule: Schedule, date: Moment) {
             return schedule.sat;
         case 7:
             return schedule.sun;
+    }
+}
+
+function shiftToUpsertShift(shift?: Shift): UpsertScheduleRequestShift | null {
+    return shift ? {
+        frames: shift.frames.map(frame => ({start: timeToISOString(frame.start), end: timeToISOString(frame.end)}))
+    } : null;
+}
+
+export function upsertScheduleRequestParser(schedule: Schedule | null): UpsertScheduleRequest {
+    return schedule ? {
+        name: schedule.name,
+        mon: shiftToUpsertShift(schedule.mon),
+        tue: shiftToUpsertShift(schedule.tue),
+        wed: shiftToUpsertShift(schedule.wed),
+        thu: shiftToUpsertShift(schedule.thu),
+        fri: shiftToUpsertShift(schedule.fri),
+        sat: shiftToUpsertShift(schedule.sat),
+        sun: shiftToUpsertShift(schedule.sun)
+
+    } : {
+        name: '',
+        mon: null,
+        tue: null,
+        wed: null,
+        thu: null,
+        fri: null,
+        sat: null,
+        sun: null
     }
 }

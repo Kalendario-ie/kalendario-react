@@ -1,12 +1,10 @@
-import React from 'react';
+import React, {HTMLProps} from 'react';
 import {FlexAlign, FlexJustify} from 'src/app/shared/molecules/flex/types';
 
-interface KFlexRowProps {
-    children: React.ReactNode;
-    className?: string;
+interface KFlexRowProps extends HTMLProps<any> {
     justify?: FlexJustify;
     align?: FlexAlign;
-    wrap?: boolean;
+    flexWrap?: boolean;
 }
 
 export const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
@@ -15,9 +13,10 @@ export const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         justify,
         align,
         className= '',
-        wrap = false,
+        flexWrap = false,
+        ...rest
     }) => {
-    className += ` d-flex flex-row${wrap ? ' flex-wrap' : ''}`;
+    className += ` d-flex flex-row${flexWrap ? ' flex-wrap' : ''}`;
     if (justify) {
         className += ` justify-content-${justify}`;
     }
@@ -25,6 +24,6 @@ export const KFlexRow: React.FunctionComponent<KFlexRowProps> = (
         className += ` align-items-${align}`;
     }
     return (
-        <div className={className}>{children}</div>
+        <div className={className} {...rest}>{children}</div>
     )
 }

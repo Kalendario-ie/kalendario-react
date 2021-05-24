@@ -24,7 +24,7 @@ const DateSelectorContainer: React.FunctionComponent<DateSelectorContainerProps>
     const previous = () => dispatch(setSelectedDateToPreviousDay());
     const today = () => dispatch(setSelectedDateToToday());
     return (
-        <KFlexRow wrap={isMobile}>
+        <KFlexRow flexWrap={isMobile}>
             <Button color="accent" onClick={today}>Today</Button>
             <Button color="accent-dark" onClick={previous}>
                 <i className="fa fa-chevron-left"/>

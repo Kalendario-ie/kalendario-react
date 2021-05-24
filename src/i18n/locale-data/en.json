@@ -48,6 +48,9 @@
       "EMPLOYEES": "Employees",
       "CUSTOMERS": "Customers",
       "APPOINTMENTS": "Appointments"
+    },
+    "SCHEDULE": {
+      "EDIT-FRAME-MODAL": "Edit frame times"
     }
   }
 }

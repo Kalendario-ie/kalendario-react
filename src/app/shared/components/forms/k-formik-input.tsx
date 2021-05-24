@@ -1,6 +1,6 @@
 import {ErrorMessage, Field, FieldInputProps, useFormikContext} from 'formik';
 import * as React from 'react';
-import {FormFeedback, FormGroup} from 'reactstrap';
+import {FormFeedback, FormGroup, Label} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
 import {MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
 import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
@@ -58,6 +58,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
 
     return (
         <FormGroup>
+            <Label>{placeholder || name}</Label>
             <Field className={className}
                    as={inputType}
                    name={name}

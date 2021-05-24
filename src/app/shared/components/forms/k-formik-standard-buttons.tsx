@@ -1,7 +1,7 @@
 import React from 'react';
 import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
-import {KFormikForm} from 'src/app/shared/components/forms/k-formik-form';
 import {KFormikSubmit} from 'src/app/shared/components/forms/k-formik-submit';
+import {KFlexRow} from 'src/app/shared/molecules/flex';
 
 interface KFormikStandardButtonsProps {
     onCancel: () => void;
@@ -12,10 +12,10 @@ const KFormikStandardButtons: React.FunctionComponent<KFormikStandardButtonsProp
         onCancel
     }) => {
     return (
-        <>
-            <KFormikSubmit className="mr-2"/>
-            <KFormikCancel onClick={onCancel}/>
-        </>
+        <KFlexRow>
+            <KFormikSubmit className="mr-2 btn-block"/>
+            <KFormikCancel className="btn-block m-0" onClick={onCancel}/>
+        </KFlexRow>
     )
 }
 
