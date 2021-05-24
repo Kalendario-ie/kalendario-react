@@ -1,24 +1,28 @@
-import { Dictionary } from '@reduxjs/toolkit';
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {timeToString} from 'src/app/api/common/models';
-import {Service, ServiceCategory} from 'src/app/api/services';
+import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
+import {useAppDispatch, useAppSelector} from 'src/app/store';
+import {serviceCategoriesActions, serviceCategoriesSelectors} from 'src/app/store/admin/serviceCategories';
 
-interface ServicesTableProps {
-    services: Service[];
-    serviceCategories: ServiceCategory[];
-    serviceCategoryDict: Dictionary<ServiceCategory>;
-}
 
-const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
+const ServicesTable: React.FunctionComponent<AdminTableContainerProps> = (
     {
-        services,
-        serviceCategories,
-        serviceCategoryDict
+        entities,
+        buttonsColumn,
+        filter,
     }) => {
+    const serviceCategories = useAppSelector(serviceCategoriesSelectors.selectAll)
+    const serviceCategoryDict = useAppSelector(serviceCategoriesSelectors.selectEntities)
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(serviceCategoriesActions.initializeStore());
+    }, []);
+
     const columns = useMemo(
         () => [
             {
@@ -51,12 +55,13 @@ const ServicesTable: React.FunctionComponent<ServicesTableProps> = (
                 Header: 'Price',
                 accessor: 'price',
             },
+            buttonsColumn
         ],
         [serviceCategories, serviceCategoryDict]
     )
 
     return (
-        <KTable columns={columns} data={services}/>
+        <KTable columns={columns} data={entities}/>
     )
 }
 

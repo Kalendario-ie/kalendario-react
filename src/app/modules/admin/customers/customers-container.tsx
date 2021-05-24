@@ -1,5 +1,4 @@
 import React from 'react';
-import {customerParser} from 'src/app/api/customers';
 import CustomerUpsertForm from 'src/app/modules/admin/customers/customer-upsert-form';
 import CustomersTable from 'src/app/modules/admin/customers/customers-table';
 import AdminDashboard from 'src/app/shared/admin/admin-dashboard';
@@ -19,7 +18,6 @@ const CustomersContainer: React.FunctionComponent = () => {
         <AdminDashboard>
             <AdminListEditContainer baseSelectors={customerSelectors}
                                     baseActions={customerActions}
-                                    entityParser={customerParser}
                                     filter={filter}
                                     EditContainer={CustomerUpsertForm}
                                     ListContainer={CustomersTable}/>

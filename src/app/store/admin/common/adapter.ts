@@ -19,14 +19,14 @@ import {IReadModel} from 'src/app/api/common/models';
 interface BaseState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
     apiError: ApiBaseError;
-    selectedEntity: TEntity;
+    editMode: boolean;
 }
 
 export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
     selectByIds: OutputParametricSelector<any, number[], NonNullable<TEntity>[], (res1: Dictionary<TEntity>, res2: number[]) => NonNullable<TEntity>[]>
     selectIsInitialized: (state: any) => boolean;
     selectApiError: (state: any) => ApiBaseError;
-    selectSelectedEntity: (state: any) => TEntity;
+    selectEditMode: (state: any) => boolean;
 }
 
 export interface PatchActionPayload {
@@ -38,13 +38,13 @@ export interface CreateActionPayload {
     entity: any
 }
 
-export interface BaseActions<TEntity> {
+export interface BaseActions {
     initializeStore: ActionCreatorWithoutPayload;
     fetchEntities: ActionCreatorWithPayload<object>;
     createEntity: ActionCreatorWithPayload<CreateActionPayload>;
     patchEntity: ActionCreatorWithPayload<PatchActionPayload>;
     deleteEntity: ActionCreatorWithPayload<number>;
-    setSelectedEntity: ActionCreatorWithPayload<TEntity | null>;
+    setEditMode: ActionCreatorWithPayload<boolean>;
 }
 
 export function kCreateBaseStore<TEntity extends IReadModel>(
@@ -58,13 +58,13 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         sortComparer: (a, b) => a.name.localeCompare(b.name),
     })
 
-    const actions: BaseActions<TEntity> = {
+    const actions: BaseActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
         createEntity: createAction<CreateActionPayload>(`${sliceName}/createEntity`),
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
         deleteEntity: createAction<number>(`${sliceName}/deleteEntity`),
-        setSelectedEntity: createAction<any>(`${sliceName}/setSelectedEntity`),
+        setEditMode: createAction<any>(`${sliceName}/setEditMode`),
     }
 
     const slice = createSlice({
@@ -72,7 +72,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         initialState: adapter.getInitialState({
             isInitialized: false,
             apiError: null,
-            selectedEntity: null
+            editMode: false
         }),
         reducers: {
             // @ts-ignore
@@ -87,8 +87,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             setApiError: (state, action) => {
                 state.apiError = action.payload
             },
-            setSelectedEntity: (state, action) => {
-                state.selectedEntity = action.payload;
+            setEditMode: (state, action) => {
+                state.editMode = action.payload;
             }
         }
     });
@@ -103,7 +103,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         ),
         selectIsInitialized: createSelector(selector, store => store.isInitialized),
         selectApiError: createSelector(selector, store => store.apiError),
-        selectSelectedEntity: createSelector(selector, store => store.selectedEntity),
+        selectEditMode: createSelector(selector, store => store.editMode),
     }
 
     function* initializeStore(action: { type: string, payload: {} }) {
@@ -126,7 +126,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             const entity: TEntity = yield call(client.post, action.payload.entity);
             yield put(slice.actions.upsertOne(entity));
             yield put(slice.actions.setApiError(null));
-            yield put(slice.actions.setSelectedEntity(null));
+            yield put(slice.actions.setEditMode(false));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }
@@ -137,7 +137,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             const entity: TEntity = yield call(client.patch, action.payload.id, action.payload.entity);
             yield put(slice.actions.upsertOne(entity));
             yield put(slice.actions.setApiError(null));
-            yield put(slice.actions.setSelectedEntity(null));
+            yield put(slice.actions.setEditMode(false));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }

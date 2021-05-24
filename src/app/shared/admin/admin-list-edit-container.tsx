@@ -11,8 +11,7 @@ import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 
 interface AdminListEditContainerProps<TEntity> {
     baseSelectors: BaseSelectors<TEntity>;
-    baseActions: BaseActions<TEntity>;
-    entityParser: () => TEntity;
+    baseActions: BaseActions;
     filter?: (value: string | undefined) => void;
     EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>;
     ListContainer: React.FunctionComponent<AdminTableContainerProps>;
@@ -22,62 +21,64 @@ function AdminListEditContainer<TEntity extends IReadModel>(
     {
         baseSelectors,
         baseActions,
-        entityParser,
         filter,
         EditContainer,
         ListContainer
     }: AdminListEditContainerProps<TEntity>) {
-    const [modalOpen, setModalOpen] = useState(false);
     const [deleteId, setDeleteId] = useState<number | null>(null);
+    const [selectedEntity, setSelectedEntity] = useState<TEntity | null>(null);
 
     const dispatch = useAppDispatch();
     const entities = useAppSelector(baseSelectors.selectAll)
     const apiError = useAppSelector(baseSelectors.selectApiError);
-    const selectedEntity = useAppSelector(baseSelectors.selectSelectedEntity);
-
+    const editMode = useAppSelector(baseSelectors.selectEditMode);
 
     useEffect(() => {
         dispatch(baseActions.initializeStore())
     }, []);
 
-
-    const onSubmit = (id: number) => (entity: any) => {
-        if (id === 0) {
-            dispatch(baseActions.createEntity({entity}));
-        } else {
-            dispatch(baseActions.patchEntity({id, entity}));
-        }
-    }
-
-    const openCloseModal = (id: number | null) => {
-        setModalOpen(!!id);
+    const handleDeleteClick = (id: number | null) => () => {
         setDeleteId(id);
     }
 
-    const cancelDelete = () => {
-        openCloseModal(null);
-    }
-
-    const proceedToDelete = () => {
+    const handleDeleteConfirm = () => {
         dispatch(baseActions.deleteEntity(deleteId!));
-        openCloseModal(null);
+        setDeleteId(null);
     }
 
-    const addClick = () => {
-        dispatch(baseActions.setSelectedEntity(entityParser()));
+    const handleDeleteCancel = () => {
+        setDeleteId(null);
     }
 
-    const selectEntity = (entity: TEntity | null) => {
-        dispatch(baseActions.setSelectedEntity(entity));
+    const handleCreateClick = () => {
+        dispatch(baseActions.setEditMode(true));
     }
 
-    const buttons = (entity: TEntity) => <AdminTableButtons onEditClick={() => selectEntity(entity)}
-                                                            onDeleteClick={() => openCloseModal(entity.id)}/>
+    const handleEditClick = (entity: TEntity) => () => {
+        setSelectedEntity(entity);
+        dispatch(baseActions.setEditMode(true));
+    }
+
+    const handleEditCancel = () => {
+        setSelectedEntity(null);
+        dispatch(baseActions.setEditMode(false));
+    }
+
+    const handleSubmit = (entity: any) => {
+        if (!selectedEntity) {
+            dispatch(baseActions.createEntity({entity}));
+        } else {
+            dispatch(baseActions.patchEntity({id: selectedEntity.id, entity}));
+        }
+    }
+
+    const buttons = (entity: TEntity) => <AdminTableButtons onEditClick={handleEditClick(entity)}
+                                                            onDeleteClick={handleDeleteClick(entity.id)}/>
 
     const buttonsColumn = {
         Header: () =>
             <KFlexRow justify={'end'}>
-                <KIconButton color="primary" icon="plus-square" onClick={addClick}/>
+                <KIconButton color="primary" icon="plus-square" onClick={handleCreateClick}/>
             </KFlexRow>,
         id: 'buttons',
         Cell: (value: any) => buttons(value.row.original)
@@ -89,14 +90,14 @@ function AdminListEditContainer<TEntity extends IReadModel>(
                            filter={filter}
                            buttonsColumn={buttonsColumn}/>
             <ConfirmationModal messageId="COMMON.SURE-DELETE"
-                               isOpen={modalOpen}
-                               onConfirm={proceedToDelete}
-                               onCancel={cancelDelete}/>
+                               isOpen={!!deleteId}
+                               onConfirm={handleDeleteConfirm}
+                               onCancel={handleDeleteCancel}/>
             <KModal body={<EditContainer entity={selectedEntity}
                                          apiError={apiError}
-                                         onSubmit={onSubmit(selectedEntity?.id || 0)}
-                                         onCancel={() => selectEntity(null)}/>}
-                    isOpen={!!selectedEntity}/>
+                                         onSubmit={handleSubmit}
+                                         onCancel={handleEditCancel}/>}
+                    isOpen={editMode}/>
         </>
     )
 }
