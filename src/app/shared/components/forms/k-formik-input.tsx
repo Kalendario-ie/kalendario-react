@@ -1,7 +1,10 @@
 import {ErrorMessage, Field, useFormikContext} from 'formik';
+import {FieldProps} from 'formik/dist/Field';
 import * as React from 'react';
 import {FormFeedback, FormGroup} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
+import {KBaseInputProps} from 'src/app/shared/components/primitives/inputs/interfaces';
+import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
 import KDurationInput from 'src/app/shared/components/primitives/inputs/k-duration-input';
 
 export interface KFormikInputProps extends KFormikInputBaseProps {
@@ -9,6 +12,17 @@ export interface KFormikInputProps extends KFormikInputBaseProps {
     multiple?: boolean;
     emptyOption?: boolean;
     as?: string;
+}
+
+function inputAs(value: string): string | React.FunctionComponent<any> {
+    switch (value) {
+        case 'duration':
+            return KDurationInput
+        case 'color':
+            return KColorInput
+        default:
+            return value;
+    }
 }
 
 export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
@@ -27,12 +41,10 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     className += (fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : '';
     className += multiple ? ' form-select form-control' : '';
 
-    const component = selectOptions ? 'select' : as === 'duration' ? KDurationInput : as
-
     return (
         <FormGroup>
             <Field className={className}
-                   as={component}
+                   as={selectOptions ? 'select' : inputAs(as)}
                    name={name}
                    type={type}
                    multiple={multiple}
@@ -40,7 +52,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
                    placeholder={placeholder || name}>
                 {selectOptions &&
                 <>
-                    {emptyOption && !multiple && <option value={0}></option>}
+                    {emptyOption && !multiple && <option value={0}/>}
                     {selectOptions.map((option) =>
                         <option key={option.id} value={option.id}>{option.name}</option>)
                     }
