@@ -21,7 +21,19 @@ const selectServicesWithCategories = createSelector(
     )
 )
 
-export const serviceSelectors = {...selectors, selectServicesWithCategories};
+const selectServicesWithCategoriesByIds = createSelector(
+    selectors.selectAll,
+    serviceCategorySelectors.selectByIds,
+    (services, categories) => categories.map(cat =>
+        ({...cat, children: services.filter(s => s.category === cat.id)})
+    )
+)
+
+export const serviceSelectors = {
+    ...selectors,
+    selectServicesWithCategories,
+    selectServicesWithCategoriesByIds
+};
 
 export {reducer as serviceReducer}
 export {actions as serviceActions}

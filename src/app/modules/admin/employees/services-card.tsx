@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/molecules/flex';
 import KCard from 'src/app/shared/molecules/k-card';
+import KTreeView from 'src/app/shared/molecules/k-tree-view';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
+import {serviceCategoryActions} from 'src/app/store/admin/serviceCategories';
 import {serviceActions, serviceSelectors} from 'src/app/store/admin/services';
 
 interface ServicesCardProps {
@@ -14,10 +15,12 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
         serviceIds
     }) => {
     const dispatch = useAppDispatch();
-    const services = useAppSelector((state: any) => serviceSelectors.selectByIds(state, serviceIds))
+    const categories = useAppSelector((state: any) =>
+        serviceSelectors.selectServicesWithCategoriesByIds(state, serviceIds))
 
     useEffect(() => {
         dispatch(serviceActions.initializeStore())
+        dispatch(serviceCategoryActions.initializeStore())
     }, []);
 
 
@@ -29,9 +32,10 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
             mhUnit={'vh'}
             hasShadow={false}
         >
-            <KFlexColumn>
-                {services.map(s => <KFlexRow key={s.id}>{s.name}</KFlexRow>)}
-            </KFlexColumn>
+            <KTreeView
+                items={categories}
+                renderComponent={(props => <>{props.name}</>)}
+            />
         </KCard>
     )
 }
