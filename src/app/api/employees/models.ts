@@ -9,7 +9,7 @@ export interface Employee extends Person {
     name: string;
     email: string;
     phone: string;
-    schedule: string;
+    schedule: number;
     instagram: string;
     photoUrl: string;
     bio: string;

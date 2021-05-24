@@ -23,7 +23,7 @@ const ServiceUpsertForm: React.FunctionComponent<AdminEditContainerProps<Service
                      onSubmit={onSubmit}
                      validationSchema={UpsertServiceRequestValidation}
         >
-            <KFormikInput name="category" selectOptions={serviceCategories}/>
+            <KFormikInput name="category" options={serviceCategories}/>
             <KFormikInput name="name"/>
             <KFormikInput name="duration" as="duration"/>
             <KFormikInput name="color" as="color"/>

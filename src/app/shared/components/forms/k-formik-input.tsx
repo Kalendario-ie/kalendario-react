@@ -1,27 +1,38 @@
-import {ErrorMessage, Field, useFormikContext} from 'formik';
-import {FieldProps} from 'formik/dist/Field';
+import {ErrorMessage, Field, FieldInputProps, FormikContextType, useFormikContext} from 'formik';
 import * as React from 'react';
 import {FormFeedback, FormGroup} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
-import {KBaseInputProps} from 'src/app/shared/components/primitives/inputs/interfaces';
 import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
 import KDurationInput from 'src/app/shared/components/primitives/inputs/k-duration-input';
+import KMultiSelectInput from 'src/app/shared/components/primitives/inputs/k-multi-select-input';
 
 export interface KFormikInputProps extends KFormikInputBaseProps {
-    selectOptions?: { id: number, name: string }[];
+    options?: { id: number, name: string }[];
     multiple?: boolean;
     emptyOption?: boolean;
     as?: string;
 }
 
-function inputAs(value: string): string | React.FunctionComponent<any> {
-    switch (value) {
+function inputAs(as: string,
+                 options: { id: number; name: string }[] | undefined
+): string | React.FunctionComponent<any> | React.ForwardRefExoticComponent<any> {
+    switch (as) {
         case 'duration':
             return KDurationInput
         case 'color':
             return KColorInput
+        case 'multi-select':
+            return (fieldProps: FieldInputProps<any>) =>
+                <KMultiSelectInput
+                    name={fieldProps.name}
+                    value={fieldProps.value}
+                    onChange={fieldProps.onChange}
+                    onBlur={fieldProps.onBlur}
+                    options={options || []}
+                />
+
         default:
-            return value;
+            return as;
     }
 }
 
@@ -30,11 +41,12 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
         name,
         placeholder,
         type,
-        selectOptions,
+        options,
         multiple = false,
         emptyOption = true,
         as = 'input'
-    }) => {
+    }
+) => {
     const formik = useFormikContext();
     let className = "form-control";
     const fieldMeta = formik.getFieldMeta(name);
@@ -44,16 +56,16 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     return (
         <FormGroup>
             <Field className={className}
-                   as={selectOptions ? 'select' : inputAs(as)}
+                   as={inputAs(as, options)}
                    name={name}
                    type={type}
                    multiple={multiple}
                    onKeyUp={onchange}
                    placeholder={placeholder || name}>
-                {selectOptions &&
+                {options &&
                 <>
                     {emptyOption && !multiple && <option value={0}/>}
-                    {selectOptions.map((option) =>
+                    {options.map((option) =>
                         <option key={option.id} value={option.id}>{option.name}</option>)
                     }
                 </>

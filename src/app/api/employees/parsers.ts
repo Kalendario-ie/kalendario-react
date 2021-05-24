@@ -1,5 +1,6 @@
 import {personParser} from 'src/app/api/common/parsers';
 import {Employee} from 'src/app/api/employees/models';
+import {UpsertEmployeeRequest} from 'src/app/api/employees/requests';
 
 const imageStorage = process.env.REACT_APP_IMAGE_API_URL;
 
@@ -19,4 +20,28 @@ export function employeeParser(data?: any): Employee {
         services: [],
     }
 
+}
+
+export function upsertEmployeeRequestParser(employee: Employee | null | undefined): UpsertEmployeeRequest {
+    return employee ? {
+        bio: employee.bio,
+        email: employee.email,
+        firstName: employee.firstName,
+        instagram: employee.instagram,
+        lastName: employee.lastName,
+        phone: employee.phone,
+        private: employee.private,
+        schedule: employee.schedule,
+        services: employee.services
+    } : {
+        bio: '',
+        email: '',
+        firstName: '',
+        instagram: '',
+        lastName: '',
+        phone: '',
+        private: false,
+        schedule: 0,
+        services: []
+    }
 }

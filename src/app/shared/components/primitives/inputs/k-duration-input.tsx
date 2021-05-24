@@ -28,11 +28,9 @@ const KDurationInput: React.FunctionComponent<KFormikDurationInputProps> =
         }
 
         const handleChange = (e: ChangeEvent<HTMLInputElement>, newValue: TimeOfDay) => {
+            const type = 'string';
             setTimeOfDay(newValue);
-            e.target = {...e.target};
-            e.target.type = 'string';
-            e.target.value = timeToISOString(newValue);
-            onChange && onChange(e);
+            onChange && onChange({...e, target: {...e.target, type, value: timeToISOString(newValue)}});
         }
 
         const style = {
