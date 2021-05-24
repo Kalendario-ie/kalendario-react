@@ -39,7 +39,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
                    placeholder={placeholder || name}>
                 {selectOptions &&
                 <>
-                    {emptyOption && !multiple && <option value={undefined}></option>}
+                    {emptyOption && !multiple && <option value={0}></option>}
                     {selectOptions.map((option) =>
                         <option key={option.id} value={option.id}>{option.name}</option>)
                     }

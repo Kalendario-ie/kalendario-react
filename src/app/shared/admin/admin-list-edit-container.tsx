@@ -14,7 +14,7 @@ interface AdminListEditContainerProps<TEntity> {
     baseActions: BaseActions<TEntity>;
     entityParser: () => TEntity;
     filter?: (value: string | undefined) => void;
-    EditContainer: React.FunctionComponent<AdminEditContainerProps>;
+    EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>;
     ListContainer: React.FunctionComponent<AdminTableContainerProps>;
 }
 

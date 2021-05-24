@@ -1,17 +1,19 @@
-import {Field} from 'formik';
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
+import {Employee} from 'src/app/api/employees';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikMultiSelect from 'src/app/shared/components/forms/k-formik-multi-select';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
-import {KFormikState} from 'src/app/shared/components/forms/KFormikState';
+import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
+import {KFlexColumn} from 'src/app/shared/molecules/flex';
 import {useAppDispatch} from 'src/app/store';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
 import {serviceActions, serviceSelectors} from 'src/app/store/admin/services';
+import {number} from 'yup';
 import * as yup from 'yup';
 
-const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
+const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employee>> = (
     {
         entity,
         apiError,
@@ -33,6 +35,8 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
         firstName: yup.string().required('First Name is required'),
         lastName: yup.string().required('Last Name is required'),
         email: yup.string().required().email(),
+        phone: yup.string().required(),
+        services: yup.array(number()).required().min(1)
     });
 
     return (
@@ -41,6 +45,11 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps> = (
                      onSubmit={onSubmit}
                      validationSchema={validation}
         >
+            {entity?.photoUrl &&
+            <KFlexColumn className="mb-2" justify={'center'} align={'center'}>
+                <AvatarImg size={3} src={entity.photoUrl}/>
+            </KFlexColumn>
+            }
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>

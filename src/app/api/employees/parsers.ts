@@ -11,6 +11,12 @@ export function employeeParser(data?: any): Employee {
         photoUrl: data.profileImg ? imageStorage + data.profileImg
             : 'img/default-avatar.jpg',
     } : {
+        ...personParser(),
+        private: false,
+        photoUrl: null,
+        instagram: '',
+        schedule: 0,
+        services: [],
     }
 
 }

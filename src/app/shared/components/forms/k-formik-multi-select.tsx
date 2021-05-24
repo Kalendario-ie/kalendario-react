@@ -1,6 +1,6 @@
-import {useFormikContext} from 'formik';
+import {ErrorMessage, useFormikContext} from 'formik';
 import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from 'react';
-import {FormGroup, Input, Label} from 'reactstrap';
+import {FormFeedback, FormGroup, Input, Label} from 'reactstrap';
 import KCheckbox from 'src/app/shared/components/primitives/k-checkbox';
 import KCard from 'src/app/shared/molecules/k-card';
 
@@ -41,6 +41,9 @@ const KFormikMultiSelect: React.FunctionComponent<KFormikMultiSelectProps> = (
                header={name}
                bodiless={true}
         >
+            <FormFeedback>
+                <ErrorMessage name={name}/>
+            </FormFeedback>
             {shouldRender &&
             <ul className="ul-none">
                 {options.map(option =>
