@@ -6,7 +6,7 @@ import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import {KFormikState} from 'src/app/shared/components/forms/KFormikState';
 import {useAppSelector} from 'src/app/store';
-import {serviceCategoriesSelectors} from 'src/app/store/admin/serviceCategories';
+import {serviceCategorySelectors} from 'src/app/store/admin/serviceCategories';
 
 const ServiceUpsertForm: React.FunctionComponent<AdminEditContainerProps<Service>> = (
     {
@@ -15,7 +15,7 @@ const ServiceUpsertForm: React.FunctionComponent<AdminEditContainerProps<Service
         onSubmit,
         onCancel
     }) => {
-    const serviceCategories = useAppSelector(serviceCategoriesSelectors.selectAll)
+    const serviceCategories = useAppSelector(serviceCategorySelectors.selectAll)
 
     return (
         <KFormikForm initialValues={createUpsertServiceRequest(entity)}

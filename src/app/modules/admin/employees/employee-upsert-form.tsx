@@ -4,11 +4,11 @@ import {Employee, upsertEmployeeRequestParser, UpsertEmployeeRequestValidation} 
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
-import {KFormikState} from 'src/app/shared/components/forms/KFormikState';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import {KFlexColumn} from 'src/app/shared/molecules/flex';
 import {useAppDispatch} from 'src/app/store';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
+import {serviceCategoryActions} from 'src/app/store/admin/serviceCategories';
 import {serviceActions, serviceSelectors} from 'src/app/store/admin/services';
 
 const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employee>> = (
@@ -19,13 +19,14 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
         onCancel
     }) => {
     const schedules = useSelector(scheduleSelectors.selectAll)
-    const services = useSelector(serviceSelectors.selectAll)
+    const services = useSelector(serviceSelectors.selectServicesWithCategories)
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(scheduleActions.initializeStore());
         dispatch(serviceActions.initializeStore());
+        dispatch(serviceCategoryActions.initializeStore());
     }, []);
 
     return (
@@ -39,7 +40,6 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
                 <AvatarImg size={3} src={entity.photoUrl}/>
             </KFlexColumn>
             }
-            <KFormikState/>
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>

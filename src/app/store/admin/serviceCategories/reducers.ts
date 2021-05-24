@@ -11,9 +11,9 @@ const {
     selectors
 } = kCreateBaseStore<ServiceCategory>(storeName, adminServiceCategoryClient, (state) => state.adminServiceCategories);
 
-export {reducer as serviceCategoriesReducer}
-export {actions as serviceCategoriesActions}
-export {adapter as serviceCategoriesAdapter}
-export {selectors as serviceCategoriesSelectors}
+export {reducer as serviceCategoryReducer}
+export {actions as serviceCategoryActions}
+export {adapter as serviceCategoryAdapter}
+export {selectors as serviceCategorySelectors}
 export {sagas as adminServiceCategorySaga}
 

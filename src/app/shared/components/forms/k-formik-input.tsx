@@ -1,13 +1,14 @@
-import {ErrorMessage, Field, FieldInputProps, FormikContextType, useFormikContext} from 'formik';
+import {ErrorMessage, Field, FieldInputProps, useFormikContext} from 'formik';
 import * as React from 'react';
 import {FormFeedback, FormGroup} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
+import {MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
 import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
 import KDurationInput from 'src/app/shared/components/primitives/inputs/k-duration-input';
 import KMultiSelectInput from 'src/app/shared/components/primitives/inputs/k-multi-select-input';
 
 export interface KFormikInputProps extends KFormikInputBaseProps {
-    options?: { id: number, name: string }[];
+    options?: MultiSelectOption[];
     multiple?: boolean;
     emptyOption?: boolean;
     as?: string;
@@ -53,10 +54,12 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     className += (fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : '';
     className += multiple ? ' form-select form-control' : '';
 
+    const inputType = React.useMemo(() => inputAs(as, options), [options]);
+
     return (
         <FormGroup>
             <Field className={className}
-                   as={inputAs(as, options)}
+                   as={inputType}
                    name={name}
                    type={type}
                    multiple={multiple}

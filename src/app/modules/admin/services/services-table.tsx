@@ -6,7 +6,7 @@ import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-colu
 import KTable from 'src/app/shared/molecules/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
-import {serviceCategoriesActions, serviceCategoriesSelectors} from 'src/app/store/admin/serviceCategories';
+import {serviceCategoryActions, serviceCategorySelectors} from 'src/app/store/admin/serviceCategories';
 
 
 const ServicesTable: React.FunctionComponent<AdminTableContainerProps> = (
@@ -15,12 +15,12 @@ const ServicesTable: React.FunctionComponent<AdminTableContainerProps> = (
         buttonsColumn,
         filter,
     }) => {
-    const serviceCategories = useAppSelector(serviceCategoriesSelectors.selectAll)
-    const serviceCategoryDict = useAppSelector(serviceCategoriesSelectors.selectEntities)
+    const serviceCategories = useAppSelector(serviceCategorySelectors.selectAll)
+    const serviceCategoryDict = useAppSelector(serviceCategorySelectors.selectEntities)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(serviceCategoriesActions.initializeStore());
+        dispatch(serviceCategoryActions.initializeStore());
     }, []);
 
     const columns = useMemo(
