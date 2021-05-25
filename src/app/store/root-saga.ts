@@ -4,6 +4,7 @@ import {adminEmployeeSaga} from 'src/app/store/admin/employees';
 import {adminScheduleSaga} from 'src/app/store/admin/schedules';
 import {adminServiceCategorySaga} from 'src/app/store/admin/serviceCategories';
 import {adminServiceSaga} from 'src/app/store/admin/services';
+import {adminUserSaga} from 'src/app/store/admin/users';
 import {userSaga} from 'src/app/store/users';
 import {authSaga} from './auth';
 import {companiesSaga} from './companies';
@@ -19,5 +20,6 @@ export function* rootSaga() {
         fork(adminEmployeeSaga),
         fork(adminCustomerSaga),
         fork(adminScheduleSaga),
+        fork(adminUserSaga),
     ])
 }

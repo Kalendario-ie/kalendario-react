@@ -1,7 +1,8 @@
 import {AxiosInstance, AxiosResponse} from 'axios';
+import {userParser} from 'src/app/api/users';
 import baseApiAxios from '../common/clients/base-api';
 import {LoginRequest} from './requests';
-import {User, userParser} from '../users/models';
+import {User} from '../users/models';
 import {LoginResponse, RefreshAccessTokenResponse} from './models';
 import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
 

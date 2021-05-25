@@ -1,22 +1,16 @@
-export {}
-// import baseModelRequest from '../common/common-api';
-// import {IUser, User} from './models';
-// import axios from 'axios';
-//
-// const baseUrl = 's';
-//
-// const userAdminClient = {...baseModelRequest(baseUrl, User.fromJs),
-//     changePassword: (id: number, model: UserPasswordWriteModel): Observable<IUser> => {
-//         return axios
-//             .patch(baseUrl + id + '/changePassword/', model)
-//             .pipe(map(User.fromJs));
-//     }
-// };
-//
-// export interface UserPasswordWriteModel {
-//     userPassword: string;
-//     password1: string;
-//     password2: string;
-// }
-//
-// export default userAdminClient;
+import baseModelRequest from 'src/app/api/common/clients/base-django-api';
+import {User} from 'src/app/api/users/models';
+import {userParser} from 'src/app/api/users/parsers';
+import {ChangeUserPasswordRequest} from 'src/app/api/users/requests';
+import baseApiAxios from 'src/app/api/common/clients/base-api';
+
+const baseUrl = 'core/users/';
+
+export const adminUserClient = {
+    ...baseModelRequest(baseUrl, userParser),
+    changePassword(id: number, model: ChangeUserPasswordRequest): Promise<User> {
+        return baseApiAxios
+            .patch<User>(baseUrl + id + '/changePassword/', model)
+            .then(data => userParser(data.data));
+    }
+}

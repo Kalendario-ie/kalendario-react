@@ -1,7 +1,7 @@
 import {appointmentParser} from 'src/app/api/appointments';
 import {companyParser} from 'src/app/api/companies';
-import {RequestItem, RequestModel} from 'src/app/api/requests/models';
-import {userParser} from 'src/app/api/users/models';
+import {RequestItem, RequestModel} from 'src/app/api/requests';
+import {userParser} from 'src/app/api/users';
 
 
 export function requestParser(data: any): RequestModel {

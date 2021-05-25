@@ -23,12 +23,3 @@ export interface ResetPasswordRequest {
     newPassword1: string;
     newPassword2: string;
 }
-
-export interface UpsertUserRequest {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    employeeId: number;
-    groups: number[];
-}

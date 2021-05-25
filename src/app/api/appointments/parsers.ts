@@ -3,8 +3,8 @@ import {Appointment, AppointmentHistory} from 'src/app/api/appointments/models';
 import {companyParser} from 'src/app/api/companies';
 import {customerParser} from 'src/app/api/customers';
 import {employeeParser} from 'src/app/api/employees';
-import {serviceParser} from 'src/app/api/services/parsers';
-import { userParser} from 'src/app/api/users/models';
+import {serviceParser} from 'src/app/api/services';
+import {userParser} from 'src/app/api/users';
 
 export function appointmentParser(data: any): Appointment {
     const name = data.customer ?

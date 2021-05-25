@@ -1,20 +1,11 @@
-import {getApp, PermissionModels} from '../common/permissions';
 import {IReadModel} from 'src/app/api/common/models';
-import {Employee, employeeParser} from '../employees';
-import {Company, companyParser} from '../companies';
+import {getApp, PermissionModels} from '../common/permissions';
+import {Company} from '../companies';
+import {Employee} from '../employees';
 
 
 export function checkForPermission(user: User, permission: string, model: PermissionModels) {
     return user.permissions.includes(`${getApp(model)}.${permission}_${model}`);
-}
-
-export function userParser(data: any): User {
-    return {
-        ...data,
-        employee: data.employee ? employeeParser(data.employee) : null,
-        company: data.owner ? companyParser(data.owner) : null,
-        verified: !!data.verified
-    }
 }
 
 export interface User extends IReadModel {

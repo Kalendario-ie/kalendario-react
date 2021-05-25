@@ -7,5 +7,6 @@ export const ADMIN_ROUTES = {
     SCHEDULES: '/admin/schedules',
     EMPLOYEES: '/admin/employees',
     CUSTOMERS: '/admin/customers',
+    USERS: '/admin/users',
     APPOINTMENTS: '/admin/appointments'
 }

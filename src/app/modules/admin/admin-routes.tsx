@@ -5,6 +5,7 @@ import EmployeesContainer from 'src/app/modules/admin/employees/employees-contai
 import SchedulesContainer from 'src/app/modules/admin/schedules/schedules-container';
 import ServicesContainer from 'src/app/modules/admin/services/services-container';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
+import UsersContainer from 'src/app/modules/admin/users/users-container';
 
 const AdminRoutes: React.FunctionComponent = () => {
     return (
@@ -13,6 +14,7 @@ const AdminRoutes: React.FunctionComponent = () => {
             <Route path={ADMIN_ROUTES.EMPLOYEES} component={EmployeesContainer}/>
             <Route path={ADMIN_ROUTES.CUSTOMERS} component={CustomersContainer}/>
             <Route path={ADMIN_ROUTES.SCHEDULES} component={SchedulesContainer}/>
+            <Route path={ADMIN_ROUTES.USERS} component={UsersContainer}/>
             <Route path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
         </Switch>
     )

@@ -47,6 +47,7 @@
       "SCHEDULES": "Schedules",
       "EMPLOYEES": "Employees",
       "CUSTOMERS": "Customers",
+      "USERS": "Users",
       "APPOINTMENTS": "Appointments"
     },
     "SCHEDULE": {

@@ -4,6 +4,7 @@ import {customerReducer} from 'src/app/store/admin/customers';
 import {employeeReducer} from 'src/app/store/admin/employees';
 import {scheduleReducer} from 'src/app/store/admin/schedules';
 import {serviceCategoryReducer} from 'src/app/store/admin/serviceCategories';
+import {userReducer} from 'src/app/store/admin/users';
 import {authReducer} from 'src/app/store/auth';
 import {companiesReducer} from 'src/app/store/companies';
 import {uiReducer} from 'src/app/store/ui';
@@ -25,6 +26,7 @@ export const store = configureStore({
         adminEmployees: employeeReducer,
         adminCustomers: customerReducer,
         adminSchedules: scheduleReducer,
+        adminUsers: userReducer,
     },
     middleware: [sagaMiddleware],
 })

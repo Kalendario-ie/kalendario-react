@@ -14,7 +14,7 @@ const KFormikErrorHandler: React.FunctionComponent<KFormikErrorHandlerProps> = (
     useEffect(() => {
         if (apiError?.detail) {
             Object.keys(apiError.detail).forEach(key => {
-                if (key !== 'nonFieldErrors') {
+                if (key !== 'nonFieldErrors' && Array.isArray(apiError.detail[key])) {
                     const error = apiError.detail[key].reduce(((previousValue, currentValue) => previousValue + currentValue), '');
                     formik.setFieldError(key,  error);
                 }
