@@ -1,4 +1,4 @@
-import moment from 'moment/moment';
+import moment from 'moment';
 import {Reducer} from 'redux';
 import {RequestModel} from 'src/app/api/requests';
 import {ApiValidationError} from '../../api/common/api-errors';

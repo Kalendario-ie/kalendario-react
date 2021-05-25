@@ -1,6 +1,8 @@
 import { all, fork } from 'redux-saga/effects'
 import {adminCustomerSaga} from 'src/app/store/admin/customers';
 import {adminEmployeeSaga} from 'src/app/store/admin/employees';
+import {adminPermissionGroupSaga} from 'src/app/store/admin/permissionGroups';
+import {adminPermissionsSagas} from 'src/app/store/admin/permissions';
 import {adminScheduleSaga} from 'src/app/store/admin/schedules';
 import {adminServiceCategorySaga} from 'src/app/store/admin/serviceCategories';
 import {adminServiceSaga} from 'src/app/store/admin/services';
@@ -21,5 +23,7 @@ export function* rootSaga() {
         fork(adminCustomerSaga),
         fork(adminScheduleSaga),
         fork(adminUserSaga),
+        fork(adminPermissionGroupSaga),
+        fork(adminPermissionsSagas),
     ])
 }

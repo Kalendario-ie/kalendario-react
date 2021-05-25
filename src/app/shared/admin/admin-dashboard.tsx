@@ -21,6 +21,7 @@ const AdminDashboard: React.FunctionComponent<AdminDashboardProps> = (
             [intl.formatMessage({id: 'ADMIN.COMMON.EMPLOYEES'}), ADMIN_ROUTES.EMPLOYEES, 'people-carry'],
             [intl.formatMessage({id: 'ADMIN.COMMON.CUSTOMERS'}), ADMIN_ROUTES.CUSTOMERS, 'address-card'],
             [intl.formatMessage({id: 'ADMIN.COMMON.USERS'}), ADMIN_ROUTES.USERS, 'users'],
+            [intl.formatMessage({id: 'ADMIN.COMMON.PERMISSION-GROUPS'}), ADMIN_ROUTES.PERMISSION_GROUPS, 'users-slash'],
             // [intl.formatMessage({id: 'ADMIN.COMMON.APPOINTMENTS'}), ADMIN_ROUTES.APPOINTMENTS, 'address-book'],
         ]
     });

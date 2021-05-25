@@ -2,6 +2,8 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import {customerReducer} from 'src/app/store/admin/customers';
 import {employeeReducer} from 'src/app/store/admin/employees';
+import {permissionGroupReducer} from 'src/app/store/admin/permissionGroups';
+import {permissionReducer} from 'src/app/store/admin/permissions';
 import {scheduleReducer} from 'src/app/store/admin/schedules';
 import {serviceCategoryReducer} from 'src/app/store/admin/serviceCategories';
 import {userReducer} from 'src/app/store/admin/users';
@@ -27,6 +29,8 @@ export const store = configureStore({
         adminCustomers: customerReducer,
         adminSchedules: scheduleReducer,
         adminUsers: userReducer,
+        adminPermissionGroups: permissionGroupReducer,
+        adminPermissions: permissionReducer
     },
     middleware: [sagaMiddleware],
 })

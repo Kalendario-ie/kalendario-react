@@ -23,6 +23,6 @@ export function userPermissions(user: User, model: PermissionModels): ModelPermi
 //   const model = Appointment.modelType;
 //   return {
 //     ...userPermissions(user, model),
-//     overlap: user.permissions.includes(`${getApp(model)}.overlap_${model}`),
+//     overlap: user.permissionGroups.includes(`${getApp(model)}.overlap_${model}`),
 //   };
 // }

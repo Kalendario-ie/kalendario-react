@@ -48,6 +48,7 @@
       "EMPLOYEES": "Employees",
       "CUSTOMERS": "Customers",
       "USERS": "Users",
+      "PERMISSION-GROUPS": "Permission Groups",
       "APPOINTMENTS": "Appointments"
     },
     "SCHEDULE": {
