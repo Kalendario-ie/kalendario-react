@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import KModal from 'src/app/shared/components/modal/k-modal';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
@@ -39,4 +39,15 @@ export function useEditModal<TEntity>(
                           isOpen={editMode}/>
 
     return [openModal, modal]
+}
+
+
+export function useSelectAll<TEntity>(baseSelectors: BaseSelectors<TEntity>, baseActions: BaseActions) {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(baseActions.initializeStore());
+    }, []);
+
+    return useAppSelector(baseSelectors.selectAll);
 }

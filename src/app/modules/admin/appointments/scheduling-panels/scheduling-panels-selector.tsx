@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import SchedulingPanelForm from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panel-form';
-import {useEditModal} from 'src/app/shared/admin/hooks';
+import {useEditModal, useSelectAll} from 'src/app/shared/admin/hooks';
 import {KFlexRow} from 'src/app/shared/components/flex';
 import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
 import KTextButton from 'src/app/shared/components/primitives/buttons/k-text-button';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import {useAppDispatch, useAppSelector} from 'src/app/store';
+import {useAppDispatch} from 'src/app/store';
+import {adminDashboardActions} from 'src/app/store/admin/dashboard';
 import {schedulingPanelActions, schedulingPanelSelectors} from 'src/app/store/admin/panels';
 
 const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const dispatch = useAppDispatch();
-    const schedulingPanels = useAppSelector(schedulingPanelSelectors.selectAll);
+    const schedulingPanels = useSelectAll(schedulingPanelSelectors, schedulingPanelActions);
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const [setDeleteId, confirmDeleteModal] = UseConfirmationModalWithDispatch(schedulingPanelActions.deleteEntity);
     const [openModal, formModal] = useEditModal(schedulingPanelSelectors, schedulingPanelActions, SchedulingPanelForm);
@@ -18,18 +19,19 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const selectedPanel = () => schedulingPanels[selectedIndex];
 
     useEffect(() => {
-        dispatch(schedulingPanelActions.initializeStore());
-    }, [])
-
+        if (schedulingPanels && selectedPanel()) {
+            dispatch(adminDashboardActions.setSelectedPanelId(selectedPanel().id));
+        }
+    }, [schedulingPanels])
 
     const handlePanelClick = (id: number) => () => {
+        dispatch(adminDashboardActions.setSelectedPanelId(id));
         setSelectedIndex(id);
     }
 
     const handleDeleteClick = () => {
         setDeleteId(selectedPanel().id);
     }
-
 
     return (
         <KFlexRow align={'center'}>
