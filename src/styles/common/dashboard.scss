@@ -26,11 +26,11 @@
 .dashboard-content {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 56px);
-  max-height: calc(100vh - 56px);
+  min-height: $view-height;
+  max-height: $view-height;
   overflow: scroll;
   flex-wrap: wrap;
-  background: rgb(248, 249, 250);
+  background: $white-gray;
 }
 
 .list-clear {

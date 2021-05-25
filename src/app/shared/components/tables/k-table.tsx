@@ -4,7 +4,7 @@ import {Table} from 'reactstrap';
 import {KDefaultColumnFilter} from 'src/app/shared/components/tables/k-default-column-filter';
 import KTableBody from 'src/app/shared/components/tables/k-table-body';
 import KTableHeader from 'src/app/shared/components/tables/k-table-header';
-
+import style from './k-table.module.scss';
 
 interface KTableProps<D extends object = {}> {
     columns: Array<Column<D>>
@@ -61,7 +61,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
 
 
     return (
-        <Table hover={hover} striped={stripped} {...getTableProps()}>
+        <Table className={style.fixedHeaders} hover={hover} striped={stripped} {...getTableProps()}>
             <KTableHeader headerGroups={headerGroups}
             />
             <KTableBody getTableBodyProps={getTableBodyProps}

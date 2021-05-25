@@ -28,8 +28,10 @@ $primary: #0DB4B9;
 $accent-light: #F2A1A1;
 $accent: #E76D89;
 $primary-gradient: linear-gradient(205.76deg, #0DB4B9 0%, #f9f871 191.92%);
+$white-gray: rgb(248, 249, 250);
 $light-gray: #D0D0D0;
 $medium-gray: #A1A1A1;
+$view-height: calc(100vh - 56px);
 
 $theme-colors: (
   "accent": $accent,
