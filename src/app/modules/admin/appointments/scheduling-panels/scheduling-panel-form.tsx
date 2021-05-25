@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {SchedulingPanel} from 'src/app/api/scheduling-panels/models';
 import {upsertSchedulingPanelRequestParser} from 'src/app/api/scheduling-panels/parsers';
+import {useSelectAll} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
-import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {employeeActions, employeeSelectors} from 'src/app/store/admin/employees';
 
 const SchedulingPanelForm: React.FunctionComponent<AdminEditContainerProps<SchedulingPanel>> = (
@@ -14,12 +14,7 @@ const SchedulingPanelForm: React.FunctionComponent<AdminEditContainerProps<Sched
         onSubmit,
         onCancel
     }) => {
-    const employees = useAppSelector(employeeSelectors.selectAll);
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(employeeActions.initializeStore());
-    }, []);
+    const employees = useSelectAll(employeeSelectors, employeeActions);
 
     return (
         <KFormikForm initialValues={upsertSchedulingPanelRequestParser(entity)}

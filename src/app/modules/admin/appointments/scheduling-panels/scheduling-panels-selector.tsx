@@ -25,8 +25,8 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     }, [schedulingPanels])
 
     const handlePanelClick = (id: number) => () => {
-        dispatch(adminDashboardActions.setSelectedPanelId(id));
         setSelectedIndex(id);
+        dispatch(adminDashboardActions.setSelectedPanelId(selectedPanel().id));
     }
 
     const handleDeleteClick = () => {
@@ -34,7 +34,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     }
 
     return (
-        <KFlexRow align={'center'}>
+        <KFlexRow className="m-2" align={'center'}>
             {confirmDeleteModal}
             {formModal}
             {schedulingPanels.map((panel, i) =>

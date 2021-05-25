@@ -44,10 +44,19 @@ export function useEditModal<TEntity>(
 
 export function useSelectAll<TEntity>(baseSelectors: BaseSelectors<TEntity>, baseActions: BaseActions) {
     const dispatch = useAppDispatch();
-
     useEffect(() => {
         dispatch(baseActions.initializeStore());
     }, []);
-
     return useAppSelector(baseSelectors.selectAll);
+}
+
+/**
+ * a shortcut effect to dispatch the initialize store action
+ * @param baseActions The base action for the store that needs to be initialized
+ */
+export function useInitializeEffect(baseActions: BaseActions) {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(baseActions.initializeStore());
+    }, []);
 }

@@ -47,6 +47,9 @@
 }
 
 .active {
-  background: $primary;
-  color: white;
+  color: $primary;
+}
+.active:hover {
+  color: $primary;
+
 }
