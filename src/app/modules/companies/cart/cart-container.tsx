@@ -4,9 +4,9 @@ import {Redirect, useHistory} from 'react-router-dom';
 import CartCompanySummary from 'src/app/modules/companies/cart/cart-company-summary';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {companiesUrls} from 'src/app/modules/companies/paths';
-import KGrid from 'src/app/shared/molecules/grid/k-grid';
-import KalendarioCard from 'src/app/shared/molecules/k-card';
-import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import KGrid from 'src/app/shared/components/grid/k-grid';
+import KalendarioCard from 'src/app/shared/components/k-card';
+import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
 import {
     addNotesRequest,
     deleteAppointmentRequest,

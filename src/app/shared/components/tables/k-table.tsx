@@ -1,9 +1,9 @@
 import React from 'react';
 import {Column, Row, useExpanded, useFilters, useTable} from 'react-table';
 import {Table} from 'reactstrap';
-import {KDefaultColumnFilter} from 'src/app/shared/molecules/tables/k-default-column-filter';
-import KTableBody from 'src/app/shared/molecules/tables/k-table-body';
-import KTableHeader from 'src/app/shared/molecules/tables/k-table-header';
+import {KDefaultColumnFilter} from 'src/app/shared/components/tables/k-default-column-filter';
+import KTableBody from 'src/app/shared/components/tables/k-table-body';
+import KTableHeader from 'src/app/shared/components/tables/k-table-header';
 
 
 interface KTableProps<D extends object = {}> {

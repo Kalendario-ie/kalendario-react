@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {timeFromString, TimeOfDay, timeToISOString} from 'src/app/api/common/models';
 import {KBaseInputProps} from 'src/app/shared/components/primitives/inputs/interfaces';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface KFormikDurationInputProps extends KBaseInputProps {
     value: string;

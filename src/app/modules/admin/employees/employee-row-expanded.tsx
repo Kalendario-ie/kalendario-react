@@ -1,7 +1,7 @@
 import React from 'react';
 import {Employee} from 'src/app/api/employees';
 import ServicesCard from 'src/app/modules/admin/employees/services-card';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface EmployeeRowExpandedProps {
     employee: Employee;

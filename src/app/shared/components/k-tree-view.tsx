@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 export interface TreeViewItem {
     id: number;

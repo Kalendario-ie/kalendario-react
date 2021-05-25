@@ -4,7 +4,7 @@ import {CompanyDetails} from 'src/app/api/companies';
 import {RequestModel} from 'src/app/api/requests';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import KInput from 'src/app/shared/components/primitives/k-Input';
-import KalendarioCard from 'src/app/shared/molecules/k-card';
+import KalendarioCard from 'src/app/shared/components/k-card';
 
 interface CartSummaryProps {
     company: CompanyDetails;

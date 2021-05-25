@@ -5,7 +5,7 @@ import ScheduleFormikInput from 'src/app/modules/admin/schedules/schedule-shift-
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 
 const ScheduleUpsertForm: React.FunctionComponent<AdminEditContainerProps<Schedule>> = (

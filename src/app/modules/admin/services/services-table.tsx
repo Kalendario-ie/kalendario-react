@@ -2,9 +2,9 @@ import React, {useEffect, useMemo} from 'react';
 import {timeToString} from 'src/app/api/common/models';
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
-import {KSelectColumnFilter} from 'src/app/shared/molecules/tables/k-select-column-filter';
-import KTable from 'src/app/shared/molecules/tables/k-table';
-import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
+import {KSelectColumnFilter} from 'src/app/shared/components/tables/k-select-column-filter';
+import KTable from 'src/app/shared/components/tables/k-table';
+import KTextColumnFilter from 'src/app/shared/components/tables/k-text-column-filter';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {serviceCategoryActions, serviceCategorySelectors} from 'src/app/store/admin/serviceCategories';
 

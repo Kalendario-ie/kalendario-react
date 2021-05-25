@@ -3,8 +3,8 @@ import React, {ChangeEvent, useState} from 'react';
 import {FormGroup} from 'reactstrap';
 import {KBaseInputProps, MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
 import KCheckbox from 'src/app/shared/components/primitives/inputs/k-checkbox';
-import KCard from 'src/app/shared/molecules/k-card';
-import KTreeView from 'src/app/shared/molecules/k-tree-view';
+import KCard from 'src/app/shared/components/k-card';
+import KTreeView from 'src/app/shared/components/k-tree-view';
 import KIconButton from '../k-icon-button';
 
 // @ts-ignore

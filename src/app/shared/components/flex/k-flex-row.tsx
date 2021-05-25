@@ -1,5 +1,5 @@
 import React, {HTMLProps} from 'react';
-import {FlexAlign, FlexJustify} from 'src/app/shared/molecules/flex/types';
+import {FlexAlign, FlexJustify} from 'src/app/shared/components/flex/types';
 
 interface KFlexRowProps extends HTMLProps<any> {
     justify?: FlexJustify;

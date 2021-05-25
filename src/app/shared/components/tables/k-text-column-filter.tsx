@@ -1,5 +1,5 @@
 import React from 'react';
-import KInput from 'src/app/shared/components/primitives/k-Input';
+import KInput from '../primitives/k-Input';
 
 interface KTextColumnFilterProps {
     column: {

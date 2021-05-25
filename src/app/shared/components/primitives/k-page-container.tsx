@@ -1,5 +1,5 @@
 import React from 'react';
-import {KFlexColumn} from './flex';
+import {KFlexColumn} from 'src/app/shared/components/flex';
 
 export interface KalendarioContainerProps {
     children: React.ReactNode;

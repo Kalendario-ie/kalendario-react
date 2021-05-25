@@ -4,9 +4,9 @@ import {FormattedMessage} from 'react-intl';
 import {useDispatch, useSelector} from 'react-redux'
 import {LoginRequest} from 'src/app/api/auth/requests';
 import {LoginRequestValidation} from 'src/app/api/auth/validations';
-import {KFlexColumn} from 'src/app/shared/molecules/flex';
-import KCard from 'src/app/shared/molecules/k-card';
-import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import {KFlexColumn} from 'src/app/shared/components/flex';
+import KCard from 'src/app/shared/components/k-card';
+import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
 import {useKHistory, useQueryParams} from 'src/app/shared/util/router-extensions';
 import {facebookLoginRequest, loginRequest, selectApiError, selectLoggedIn} from 'src/app/store/auth';
 import LoginView from './login-view';

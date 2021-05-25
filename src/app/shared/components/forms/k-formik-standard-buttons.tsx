@@ -1,7 +1,7 @@
 import React from 'react';
 import KFormikCancel from 'src/app/shared/components/forms/k-formik-cancel';
 import {KFormikSubmit} from 'src/app/shared/components/forms/k-formik-submit';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface KFormikStandardButtonsProps {
     onCancel: () => void;

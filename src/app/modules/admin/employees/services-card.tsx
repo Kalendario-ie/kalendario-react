@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
-import KCard from 'src/app/shared/molecules/k-card';
-import KTreeView from 'src/app/shared/molecules/k-tree-view';
+import KCard from 'src/app/shared/components/k-card';
+import KTreeView from 'src/app/shared/components/k-tree-view';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {serviceCategoryActions} from 'src/app/store/admin/serviceCategories';
 import {serviceActions, serviceSelectors} from 'src/app/store/admin/services';

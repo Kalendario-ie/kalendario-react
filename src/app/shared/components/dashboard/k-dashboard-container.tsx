@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import KDashboardContent from 'src/app/shared/components/dashboard/k-dashboard-content';
 import KDashboardSidebar, {SideBarLinks} from 'src/app/shared/components/dashboard/k-dashboard-sidebar';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 import {selectSidenavOpen, setShowDashboardToggle} from 'src/app/store/ui';
 
 interface DashboardContainerProps {

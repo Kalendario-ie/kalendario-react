@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useDispatch} from 'react-redux';
 import {authApi} from 'src/app/api/auth/clients';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
-import KCard from 'src/app/shared/molecules/k-card';
-import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import {KFlexRow} from 'src/app/shared/components/flex';
+import KCard from 'src/app/shared/components/k-card';
+import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
 import {setUser} from 'src/app/store/auth';
 
 

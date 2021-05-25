@@ -5,7 +5,7 @@ import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import {KFlexColumn} from 'src/app/shared/molecules/flex';
+import {KFlexColumn} from 'src/app/shared/components/flex';
 import {useAppDispatch} from 'src/app/store';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
 import {serviceCategoryActions} from 'src/app/store/admin/serviceCategories';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TreeViewItem} from 'src/app/shared/molecules/k-tree-view';
+import {TreeViewItem} from 'src/app/shared/components/k-tree-view';
 
 export interface KBaseInputProps extends React.InputHTMLAttributes<any> {
 

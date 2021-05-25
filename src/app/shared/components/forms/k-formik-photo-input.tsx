@@ -2,7 +2,7 @@ import {useFormikContext} from 'formik';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {FormGroup, Input} from 'reactstrap';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface KFormikPhotoInputProps {
     name: string;

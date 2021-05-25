@@ -1,6 +1,6 @@
 import React from 'react';
 import {Company} from 'src/app/api/companies';
-import { KFlexRow } from 'src/app/shared/molecules/flex';
+import { KFlexRow } from 'src/app/shared/components/flex';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 
 interface CompanyAvatarProps {

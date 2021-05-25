@@ -3,8 +3,8 @@ import React from 'react';
 import {isMobile} from 'react-device-detect';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button} from 'reactstrap';
+import { KFlexRow } from 'src/app/shared/components/flex';
 import KDateInput from 'src/app/shared/components/primitives/k-date-input';
-import { KFlexRow } from 'src/app/shared/molecules/flex';
 import {
     selectSelectedDate,
     setSelectedDate,

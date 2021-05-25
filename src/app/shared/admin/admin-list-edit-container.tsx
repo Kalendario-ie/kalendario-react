@@ -5,9 +5,9 @@ import {AdminEditContainerProps, AdminTableContainerProps} from 'src/app/shared/
 import ConfirmationModal from 'src/app/shared/components/modal/confirmation-modal';
 import KModal from 'src/app/shared/components/modal/k-modal';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
+import { KFlexRow } from '../components/flex';
 
 interface AdminListEditContainerProps<TEntity> {
     baseSelectors: BaseSelectors<TEntity>;

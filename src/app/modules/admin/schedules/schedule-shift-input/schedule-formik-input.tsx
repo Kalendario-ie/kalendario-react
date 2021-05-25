@@ -5,7 +5,7 @@ import {UpsertScheduleRequestFrame} from 'src/app/api/schedule/requests';
 import HourCell from 'src/app/modules/admin/schedules/schedule-shift-input/hour-cell';
 import ScheduleFormikInputModal from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-formik-input-modal';
 import ScheduleFrame from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-frame';
-import {KFlexColumn} from 'src/app/shared/molecules/flex';
+import {KFlexColumn} from 'src/app/shared/components/flex';
 import styles from './schedule-formik-input.module.scss';
 
 interface ScheduleFormikInputProps {

@@ -9,9 +9,9 @@ import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
-import {KFlexSpacer} from 'src/app/shared/molecules/flex';
-import KalendarioCard from 'src/app/shared/molecules/k-card';
-import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import {KFlexSpacer} from 'src/app/shared/components/flex';
+import KalendarioCard from 'src/app/shared/components/k-card';
+import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     confirmCartRequest,

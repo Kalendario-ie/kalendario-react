@@ -1,6 +1,6 @@
 import React from 'react';
 import {Shift} from 'src/app/api/shifts';
-import { KFlexColumn } from 'src/app/shared/molecules/flex';
+import {KFlexColumn} from 'src/app/shared/components/flex';
 
 interface ShiftCellProps {
     shift: Shift;

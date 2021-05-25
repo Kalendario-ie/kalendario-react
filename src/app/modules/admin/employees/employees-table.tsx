@@ -4,8 +4,8 @@ import EmployeeRowExpanded from 'src/app/modules/admin/employees/employee-row-ex
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
-import KTable from 'src/app/shared/molecules/tables/k-table';
-import KTextColumnFilter from 'src/app/shared/molecules/tables/k-text-column-filter';
+import KTable from 'src/app/shared/components/tables/k-table';
+import KTextColumnFilter from 'src/app/shared/components/tables/k-text-column-filter';
 
 
 const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (

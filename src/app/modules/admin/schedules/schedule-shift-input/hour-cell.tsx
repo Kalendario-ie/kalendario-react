@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {timeToString} from 'src/app/api/common/models';
 import styles from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-formik-input.module.scss';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import {KFlexRow} from 'src/app/shared/molecules/flex';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface HourCellProps {
     className: string;

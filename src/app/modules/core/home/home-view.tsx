@@ -1,8 +1,8 @@
 import React from 'react';
 import AsyncSelect from 'react-select/async';
 import {Company} from 'src/app/api/companies';
-import { KFlexRow } from 'src/app/shared/molecules/flex';
-import KPageContainer from 'src/app/shared/molecules/k-page-container';
+import { KFlexRow } from 'src/app/shared/components/flex';
+import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
 
 
 interface HomeViewProps {
