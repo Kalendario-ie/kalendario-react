@@ -13,3 +13,9 @@ p {
 .fix-size {
   font-size: 16px;
 }
+
+@each $color, $value in $theme-colors {
+  .underline-#{$color} {
+    text-decoration: underline $value;
+  }
+}

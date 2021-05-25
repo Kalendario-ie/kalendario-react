@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import {appointmentReducer} from 'src/app/store/admin/appointments';
 import {customerReducer} from 'src/app/store/admin/customers';
 import {employeeReducer} from 'src/app/store/admin/employees';
+import {schedulingPanelReducer} from 'src/app/store/admin/panels';
 import {permissionGroupReducer} from 'src/app/store/admin/permissionGroups';
 import {permissionReducer} from 'src/app/store/admin/permissions';
 import {scheduleReducer} from 'src/app/store/admin/schedules';
@@ -25,6 +26,7 @@ export const store = configureStore({
         ui: uiReducer,
         companies: companiesReducer,
         adminAppointments: appointmentReducer,
+        adminSchedulingPanels: schedulingPanelReducer,
         adminServices: serviceReducer,
         adminServiceCategories: serviceCategoryReducer,
         adminEmployees: employeeReducer,

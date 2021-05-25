@@ -10,9 +10,7 @@ const KDashboardContent: React.FunctionComponent<KDashboardContentProps> = (
     }) => {
     return (
         <div className="dashboard-content">
-            <div className="container-fluid">
-                {children}
-            </div>
+            {children}
         </div>
     )
 }
