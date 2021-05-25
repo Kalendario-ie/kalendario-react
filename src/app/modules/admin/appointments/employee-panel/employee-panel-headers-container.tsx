@@ -1,6 +1,6 @@
 import React from 'react';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
-import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
+import EmployeePanelHeader from 'src/app/modules/admin/appointments/employee-panel/employee-panel-header';
+import {KFlexRow} from 'src/app/shared/components/flex';
 import KFiller from 'src/app/shared/components/primitives/k-filler';
 import {useAppSelector} from 'src/app/store';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
@@ -15,11 +15,7 @@ const EmployeePanelHeadersContainer: React.FunctionComponent = () => {
     return (
         <KFlexRow>
             <KFiller className={`sticky-top-left bg-white-gray ${styles.panelItem}`} width={5}/>
-            {employees.map(employee =>
-                <KFlexColumn className={`${styles.panelItem} py-3`} align={'center'} justify={'center'}>
-                    <AvatarImg size={4} key={employee.id} src={employee.photoUrl}/>
-                </KFlexColumn>
-            )}
+            {employees.map(employee => <EmployeePanelHeader key={employee.id} employee={employee}/>)}
         </KFlexRow>
     )
 }

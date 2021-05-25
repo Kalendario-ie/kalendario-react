@@ -6,7 +6,7 @@ import {useAppSelector} from 'src/app/store';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 import {employeeSelectors} from 'src/app/store/admin/employees';
 
-const EmployeePanelsContainer: React.FunctionComponent = () => {
+const EmployeePanelsBodyContainer: React.FunctionComponent = () => {
     const selectedPanel = useAppSelector(adminDashboardSelectors.selectSelectedPanel)
     const employees = useAppSelector(state => employeeSelectors.selectByIds(state, selectedPanel?.employees || []));
 
@@ -24,4 +24,4 @@ const EmployeePanelsContainer: React.FunctionComponent = () => {
     )
 }
 
-export default EmployeePanelsContainer;
+export default EmployeePanelsBodyContainer;

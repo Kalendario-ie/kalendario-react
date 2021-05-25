@@ -1,6 +1,8 @@
 import React from 'react';
-import EmployeePanelHeadersContainer from 'src/app/modules/admin/appointments/employee-panel/employee-panel-headers-container';
-import EmployeePanelsContainer from 'src/app/modules/admin/appointments/employee-panel/employee-panels-container';
+import EmployeePanelHeadersContainer
+    from 'src/app/modules/admin/appointments/employee-panel/employee-panel-headers-container';
+import EmployeePanelsBodyContainer
+    from 'src/app/modules/admin/appointments/employee-panel/employee-panels-body-container';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/scheduling-date-selector';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
 import {useInitializeEffect} from 'src/app/shared/admin/hooks';
@@ -19,7 +21,7 @@ const AppointmentsContainer: React.FunctionComponent = () => {
                 <SchedulingDateSelector/>
                 <EmployeePanelHeadersContainer/>
             </KFlexColumn>
-            <EmployeePanelsContainer/>
+            <EmployeePanelsBodyContainer/>
         </KFlexColumn>
     )
 }
