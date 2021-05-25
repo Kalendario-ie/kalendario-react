@@ -1,6 +1,5 @@
 import React from 'react';
 import {ColumnInstance, Row, TablePropGetter, TableProps} from 'react-table';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/molecules/flex';
 
 interface KTableBodyProps {
     getTableBodyProps: (propGetter?: TablePropGetter<object>) => TableProps;

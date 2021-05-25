@@ -82,7 +82,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             // @ts-ignore
             removeOne: adapter.removeOne,
             setInitialized: (state, action) => {
-                state.isInitialized = true
+                state.isInitialized = action.payload
             },
             setApiError: (state, action) => {
                 state.apiError = action.payload
@@ -116,8 +116,10 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         try {
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
             yield put(slice.actions.upsertMany(result.results));
+            yield put(slice.actions.setInitialized(true));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
+            yield put(slice.actions.setInitialized(false));
         }
     }
 
