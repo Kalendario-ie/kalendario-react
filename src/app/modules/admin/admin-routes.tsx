@@ -7,18 +7,21 @@ import SchedulesContainer from 'src/app/modules/admin/schedules/schedules-contai
 import ServicesContainer from 'src/app/modules/admin/services/services-container';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import UsersContainer from 'src/app/modules/admin/users/users-container';
+import AdminDashboard from 'src/app/shared/admin/admin-dashboard';
 
 const AdminRoutes: React.FunctionComponent = () => {
     return (
-        <Switch>
-            <Route path={ADMIN_ROUTES.SERVICES} component={ServicesContainer}/>
-            <Route path={ADMIN_ROUTES.EMPLOYEES} component={EmployeesContainer}/>
-            <Route path={ADMIN_ROUTES.CUSTOMERS} component={CustomersContainer}/>
-            <Route path={ADMIN_ROUTES.SCHEDULES} component={SchedulesContainer}/>
-            <Route path={ADMIN_ROUTES.USERS} component={UsersContainer}/>
-            <Route path={ADMIN_ROUTES.PERMISSION_GROUPS} component={PermissionGroupsContainer}/>
-            <Route path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
-        </Switch>
+        <AdminDashboard>
+            <Switch>
+                <Route path={ADMIN_ROUTES.SERVICES} component={ServicesContainer}/>
+                <Route path={ADMIN_ROUTES.EMPLOYEES} component={EmployeesContainer}/>
+                <Route path={ADMIN_ROUTES.CUSTOMERS} component={CustomersContainer}/>
+                <Route path={ADMIN_ROUTES.SCHEDULES} component={SchedulesContainer}/>
+                <Route path={ADMIN_ROUTES.USERS} component={UsersContainer}/>
+                <Route path={ADMIN_ROUTES.PERMISSION_GROUPS} component={PermissionGroupsContainer}/>
+                <Route path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
+            </Switch>
+        </AdminDashboard>
     )
 }
 

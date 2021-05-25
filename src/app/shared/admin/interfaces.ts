@@ -3,7 +3,7 @@ import { IReadModel } from "src/app/api/common/models";
 
 export interface AdminEditContainerProps<TEntity> {
     entity: TEntity | null;
-    apiError: ApiValidationError;
+    apiError: ApiValidationError | null;
     onSubmit: (values: any) => void;
     onCancel: () => void;
 }
