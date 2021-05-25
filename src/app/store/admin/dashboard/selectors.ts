@@ -22,7 +22,20 @@ const selectSelectedPanel = createSelector(
     (state, id) => id ? schedulingPanelSelectors.selectById(state, id) : null
 )
 
+const selectPanelHours = createSelector(
+    baseSelector,
+    store => store.panelHours
+)
+
+const selectSlotSize = createSelector(
+    baseSelector,
+    store => store.slotSize
+)
+
+
 export const selectors = {
     selectCurrentDate,
-    selectSelectedPanel
+    selectSelectedPanel,
+    selectPanelHours,
+    selectSlotSize
 }

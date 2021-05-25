@@ -111,7 +111,7 @@ ul.ul-none {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 200;
 }
 
@@ -126,4 +126,17 @@ ul.ul-none {
   text-align: center;
   width: 10rem;
   cursor: pointer;
+}
+
+
+.m-1r {
+  margin: 1rem;
+}
+
+.sticky-top-left {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }

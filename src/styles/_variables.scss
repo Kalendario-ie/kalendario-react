@@ -1,16 +1,16 @@
 $grid-breakpoints: (
-  xs: 0, // handset portrait (small, medium, large) | handset landscape (small)
-  sm: 600px, // handset landscape (medium, large) | tablet portrait(small, large)
-  md: 960px, //  tablet landscape (small, large)
-  lg: 1280px, // laptops and desktops
-  xl: 1600px // large desktops
+        xs: 0, // handset portrait (small, medium, large) | handset landscape (small)
+        sm: 600px, // handset landscape (medium, large) | tablet portrait(small, large)
+        md: 960px, //  tablet landscape (small, large)
+        lg: 1280px, // laptops and desktops
+        xl: 1600px // large desktops
 );
 
 $container-max-widths: (
-  sm: 600px,
-  md: 960px,
-  lg: 1280px,
-  xl: 1600px
+        sm: 600px,
+        md: 960px,
+        lg: 1280px,
+        xl: 1600px
 );
 
 $link-color: #3f51b5;
@@ -34,11 +34,12 @@ $medium-gray: #A1A1A1;
 $view-height: calc(100vh - 56px);
 
 $theme-colors: (
-  "accent": $accent,
-  "accent-light": $accent-light,
-  "ksuccess": $ksuccess,
-  "light-gray": $light-gray,
-  "medium-gray": $medium-gray
+        "accent": $accent,
+        "accent-light": $accent-light,
+        "ksuccess": $ksuccess,
+        "light-gray": $light-gray,
+        "medium-gray": $medium-gray,
+        "white-gray": $white-gray
 );
 
 $btn-disabled-opacity: 0.2;
@@ -46,7 +47,7 @@ $btn-border-radius: 10px;
 $btn-padding-y: 0.5rem;
 $btn-padding-x: 1rem;
 
-$zindex-sticky: 50;
+$zindex-sticky: 2;
 
 $list-group-action-hover-color: $accent-light;
 $list-group-hover-bg: inherit;

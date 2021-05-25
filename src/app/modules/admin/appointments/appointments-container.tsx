@@ -1,32 +1,25 @@
 import React from 'react';
-import EmployeePanel from 'src/app/modules/admin/appointments/employee-panel/employee-panel';
-import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
+import EmployeePanelHeadersContainer from 'src/app/modules/admin/appointments/employee-panel/employee-panel-headers-container';
+import EmployeePanelsContainer from 'src/app/modules/admin/appointments/employee-panel/employee-panels-container';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/scheduling-date-selector';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
-import {useAppSelector} from 'src/app/store';
-import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
+import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
+import {useInitializeEffect} from 'src/app/shared/admin/hooks';
+import {KFlexColumn} from 'src/app/shared/components/flex';
+import {employeeActions} from 'src/app/store/admin/employees';
 
-interface AppointmentsContainerProps {
-    children: React.ReactNode;
-}
 
-const AppointmentsContainer: React.FunctionComponent<AppointmentsContainerProps> = (
-    {
-        children
-    }) => {
-    const selectedPanel = useAppSelector(adminDashboardSelectors.selectSelectedPanel)
+const AppointmentsContainer: React.FunctionComponent = () => {
+    useInitializeEffect(employeeActions);
+
 
     return (
         <KFlexColumn>
-            <SchedulingPanelsSelector/>
-            <SchedulingDateSelector/>
-            {selectedPanel &&
-            <KFlexRow>
-                {selectedPanel.employees.map(id =>
-                    <EmployeePanel key={id} employeeId={id}/> )
-                }
-            </KFlexRow>
-            }
+            <KFlexColumn className="sticky-top bg-white-gray">
+                <SchedulingPanelsSelector/>
+                <SchedulingDateSelector/>
+                <EmployeePanelHeadersContainer/>
+            </KFlexColumn>
+            <EmployeePanelsContainer/>
         </KFlexColumn>
     )
 }
