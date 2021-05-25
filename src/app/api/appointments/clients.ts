@@ -8,7 +8,7 @@ import {appointmentHistoryParser, appointmentParser } from './parsers';
 const adminUrl = 'admin/appointments/'
 const userUrl = 'appointments/'
 
-export const appointmentAdminClient = {
+export const adminAppointmentClient = {
   ...baseModelRequest(adminUrl, appointmentParser),
   history (id: number): Promise<ApiListResult<AppointmentHistory>> {
     return baseApiAxios.get<ApiListResult<AppointmentHistory>>(adminUrl + `${id}/history/`)

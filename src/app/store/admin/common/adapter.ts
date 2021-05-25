@@ -18,14 +18,14 @@ import {IReadModel} from 'src/app/api/common/models';
 
 interface BaseState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
-    apiError: ApiBaseError;
+    apiError: ApiBaseError | null;
     editMode: boolean;
 }
 
 export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
     selectByIds: OutputParametricSelector<any, number[], NonNullable<TEntity>[], (res1: Dictionary<TEntity>, res2: number[]) => NonNullable<TEntity>[]>
     selectIsInitialized: (state: any) => boolean;
-    selectApiError: (state: any) => ApiBaseError;
+    selectApiError: (state: any) => ApiBaseError | null;
     selectEditMode: (state: any) => boolean;
 }
 
@@ -73,7 +73,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             isInitialized: false,
             apiError: null,
             editMode: false
-        }),
+        }) as BaseState<TEntity>,
         reducers: {
             // @ts-ignore
             upsertMany: adapter.upsertMany,
