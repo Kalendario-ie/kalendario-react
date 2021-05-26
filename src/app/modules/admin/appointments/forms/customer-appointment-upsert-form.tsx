@@ -7,13 +7,18 @@ import {Appointment, CustomerAppointment} from 'src/app/api/appointments';
 import {timeToString} from 'src/app/api/common/models';
 import {Company, companyClient} from 'src/app/api/companies';
 import {adminCustomerClient, Customer} from 'src/app/api/customers';
+import {useEditModal} from 'src/app/shared/admin/hooks';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KFormikInput} from 'src/app/shared/components/forms';
 import KDateInput from 'src/app/shared/components/primitives/k-date-input';
+import KIcon from 'src/app/shared/components/primitives/k-icon';
+import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
+import {customerActions, customerSelectors } from 'src/app/store/admin/customers';
 import {employeeSelectors} from 'src/app/store/admin/employees';
 import {serviceSelectors} from 'src/app/store/admin/services';
+import CustomerUpsertForm from '../../customers/customer-upsert-form';
 
 function addHours(date: Moment, time: string): string {
     const momentTime = moment.utc(time, 'HH:mm')
@@ -80,6 +85,7 @@ interface FormikCustomerInput {
 
 const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({initialCustomer}) => {
     const [customer, setCustomer] = useState<Customer | null>(initialCustomer);
+    const [openModal, modal] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm)
     const formik = useFormikContext();
     const {setValue} = formik.getFieldHelpers('customer');
 
@@ -90,18 +96,41 @@ const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({init
         setValue(selectedCustomer?.id || null);
     }
 
+
+
     return (
         <FormGroup>
-            <AsyncSelect cacheOptions
-                         defaultOptions
-                         backspaceRemovesValue
-                         defaultInputValue={initialCustomer?.name}
-                         getOptionValue={(option) => option.id.toString()}
-                         getOptionLabel={(option) => option.name}
-                         onChange={navigateToPage}
-                         loadOptions={promiseOptions}/>
+            {modal}
+            <KFlexRow align={'center'}>
+                <AsyncSelect className={"flex-fill"}
+                    cacheOptions
+                             defaultOptions
+                             backspaceRemovesValue
+                             defaultInputValue={initialCustomer?.name}
+                             getOptionValue={(option) => option.id.toString()}
+                             getOptionLabel={(option) => option.name}
+                             onChange={navigateToPage}
+                             loadOptions={promiseOptions}/>
+                <KIconButton color="primary" icon={'plus'} onClick={openModal(null)}/>
+            </KFlexRow>
+
             {customer &&
-            customer.name
+            <KFlexColumn>
+                <KFlexRow justify={'between'} align={'center'}>
+                    <div>
+                        <KIcon color="primary" icon={'user'}/>
+                        {customer.name}
+                    </div>
+                    <div>
+                        <KIcon color="primary" icon={'phone'}/>
+                        {customer.phone}
+                    </div>
+                </KFlexRow>
+                <KFlexRow align={'center'}>
+                    <KIcon color="primary" icon={'at'}/>
+                    {customer.email}
+                </KFlexRow>
+            </KFlexColumn>
             }
         </FormGroup>
     )

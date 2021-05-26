@@ -29,7 +29,6 @@ export function useEditModal<TEntity extends IReadModel>(
     }
 
     const openModal = (entity: TEntity | null) => () => {
-        console.log(entity);
         setSelectedEntity(entity);
         dispatch(baseActions.setEditMode(true));
     }
