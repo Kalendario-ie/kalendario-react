@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import { IReadModel } from 'src/app/api/common/models';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import KModal from 'src/app/shared/components/modal/k-modal';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 
-export function useEditModal<TEntity>(
+export function useEditModal<TEntity extends IReadModel>(
     baseSelectors: BaseSelectors<TEntity>,
     baseActions: BaseActions,
     EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>
@@ -23,11 +24,12 @@ export function useEditModal<TEntity>(
         if (!selectedEntity) {
             dispatch(baseActions.createEntity({entity}));
         } else {
-            dispatch(baseActions.patchEntity({id: entity.id, entity}));
+            dispatch(baseActions.patchEntity({id: selectedEntity.id, entity}));
         }
     }
 
     const openModal = (entity: TEntity | null) => () => {
+        console.log(entity);
         setSelectedEntity(entity);
         dispatch(baseActions.setEditMode(true));
     }

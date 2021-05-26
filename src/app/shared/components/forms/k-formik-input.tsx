@@ -1,6 +1,6 @@
 import {ErrorMessage, Field, FieldInputProps, useFormikContext} from 'formik';
 import * as React from 'react';
-import {DropdownItem, FormFeedback, FormGroup, Label} from 'reactstrap';
+import {FormFeedback, FormGroup, Label} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
 import {MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
 import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
@@ -32,7 +32,6 @@ function inputAs(as: string,
                     onBlur={fieldProps.onBlur}
                     options={options || []}
                 />
-
         default:
             return as;
     }

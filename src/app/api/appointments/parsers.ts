@@ -3,9 +3,10 @@ import {
     AppointmentHistory,
     CustomerAppointment,
     CustomerRequestAppointment,
-    EmployeeEvent
+    EmployeeEvent,
+    EventType
 } from 'src/app/api/appointments/models';
-import {UpsertAppointmentRequest} from 'src/app/api/appointments/requests';
+import {UpsertCustomerAppointmentRequest, UpsertEmployeeEventRequest} from 'src/app/api/appointments/requests';
 import {customerParser} from 'src/app/api/customers';
 import {employeeParser} from 'src/app/api/employees';
 import {serviceParser} from 'src/app/api/services';
@@ -23,6 +24,7 @@ export function customerRequestAppointmentParser(data: any): CustomerRequestAppo
     return {
         ...customerAppointmentParser(data),
         name,
+        type: EventType.CustomerRequestAppointment,
         customerNotes: data.customerNotes,
         companyName: data.owner?.name ? data.owner.name : '',
         request: data.request,
@@ -33,6 +35,7 @@ export function customerRequestAppointmentParser(data: any): CustomerRequestAppo
 function customerAppointmentParser(data: any): CustomerAppointment {
     return {
         ...employeeEventParser(data),
+        type: EventType.CustomerAppointment,
         customer: customerParser(data.customer),
         service: serviceParser(data.service),
     }
@@ -41,6 +44,7 @@ function customerAppointmentParser(data: any): CustomerAppointment {
 function employeeEventParser(data: any): EmployeeEvent {
     return {
         ...data,
+        type: EventType.EmployeeEvent,
         name: '',
         employee: employeeParser(data.employee),
     }
@@ -56,24 +60,43 @@ export function appointmentHistoryParser(data: any): AppointmentHistory {
 
 }
 
-export function upsertAppointmentRequestParser(appointment: Appointment | null): UpsertAppointmentRequest {
-    return appointment ? {
+export function upsertCustomerAppointmentRequestParser(appointment: Appointment | null): UpsertCustomerAppointmentRequest {
+    if (!appointment || appointment.type === EventType.EmployeeEvent) {
+        return {
+            start: '',
+            end: '',
+            customer: 0,
+            employee: 0,
+            service: 0,
+            ignoreAvailability: false,
+            internalNotes: '',
+        }
+    }
+
+    const customerAppointment = appointment as CustomerAppointment;
+    return {
         start: appointment.start,
         end: appointment.end,
-        customer: 'customer' in appointment ? appointment.customer?.id : '',
         employee: appointment.employee.id,
         internalNotes: appointment.internalNotes,
         ignoreAvailability: false,
-        service: 'service' in appointment ? appointment.service?.id : '',
-        status: 'status' in appointment ? appointment.status : ''
+        customer: customerAppointment.customer.id,
+        service: customerAppointment.service.id,
+    }
+}
+
+export function upsertEmployeeEventRequestParser(appointment: Appointment | null): UpsertEmployeeEventRequest {
+    return appointment ? {
+        start: appointment.start,
+        end: appointment.end,
+        employee: appointment.employee.id,
+        internalNotes: appointment.internalNotes,
+        ignoreAvailability: false,
     } : {
         start: '',
         end: '',
-        customer: '',
-        employee: '',
+        employee: 0,
         ignoreAvailability: false,
         internalNotes: '',
-        service: '',
-        status: ''
     }
 }

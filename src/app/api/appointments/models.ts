@@ -7,6 +7,12 @@ import {Employee} from 'src/app/api/employees/models';
 import {Service} from 'src/app/api/services';
 import {User} from 'src/app/api/users/models';
 
+export enum EventType {
+    EmployeeEvent,
+    CustomerAppointment,
+    CustomerRequestAppointment,
+    CustomerEvent,
+}
 
 export type Appointment = CustomerRequestAppointment | EmployeeEvent | CustomerEvent;
 
@@ -28,6 +34,7 @@ export interface CustomerAppointment extends EmployeeEvent {
 }
 
 export interface EmployeeEvent extends IReadModel {
+    type: EventType;
     start: string;
     end: string;
     employee: Employee;

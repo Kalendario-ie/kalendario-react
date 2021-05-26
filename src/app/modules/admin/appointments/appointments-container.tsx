@@ -1,6 +1,6 @@
 import React from 'react';
-import AppointmentUpsertForm from 'src/app/modules/admin/appointments/appointment-upsert-form';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/date-selector/scheduling-date-selector';
+import AppointmentUpsertForm from 'src/app/modules/admin/appointments/forms/appointment-upsert-form';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
 import {useEditModal, useInitializeEffect} from 'src/app/shared/admin/hooks';
 import {KFlexColumn} from 'src/app/shared/components/flex';

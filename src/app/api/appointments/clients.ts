@@ -1,5 +1,5 @@
 import {Appointment, AppointmentHistory} from 'src/app/api/appointments/models';
-import {UpsertAppointmentRequest} from 'src/app/api/appointments/requests';
+import {UpsertCustomerAppointmentRequest} from 'src/app/api/appointments/requests';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import baseApiAxios from 'src/app/api/common/clients/base-api';
 import baseModelRequest from 'src/app/api/common/clients/base-django-api';
@@ -23,7 +23,7 @@ export const adminAppointmentClient = {
         .then(result => customerRequestAppointmentParser(result.data));
   },
 
-  updateLock(id: number, model: UpsertAppointmentRequest): Promise<Appointment> {
+  updateLock(id: number, model: UpsertCustomerAppointmentRequest): Promise<Appointment> {
     return baseApiAxios.patch<Appointment>(adminUrl + `${id}/plock/`, model)
         .then(result => customerRequestAppointmentParser(result.data));
   }
