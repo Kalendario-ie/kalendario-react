@@ -1,12 +1,27 @@
 import React from 'react';
-import EmployeePanelHeader from 'src/app/modules/admin/appointments/employee-panel/employee-panel-header';
-import styles from 'src/app/modules/admin/appointments/employee-panel/employee-panel.module.scss';
+import {Employee} from 'src/app/api/employees';
 import {useSelectPanelEmployees} from 'src/app/modules/admin/appointments/employee-panel/hooks';
-import {KFlexRow} from 'src/app/shared/components/flex';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
+import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KFiller from 'src/app/shared/components/primitives/k-filler';
+import styles from './employee-panel.module.scss';
 
+interface EmployeePanelHeaderProps {
+    employee: Employee;
+}
 
-const EmployeePanelHeadersContainer: React.FunctionComponent = () => {
+const EmployeePanelHeader: React.FunctionComponent<EmployeePanelHeaderProps> = (
+    {
+        employee
+    }) => {
+    return (
+        <KFlexColumn className={`${styles.panelItem} py-3`} align={'center'} justify={'center'}>
+            <AvatarImg size={4} key={employee.id} src={employee.photoUrl}/>
+        </KFlexColumn>
+    )
+}
+
+export const EmployeePanelHeadersContainer: React.FunctionComponent = () => {
     const employees = useSelectPanelEmployees();
 
     return (
@@ -18,4 +33,3 @@ const EmployeePanelHeadersContainer: React.FunctionComponent = () => {
 }
 
 
-export default EmployeePanelHeadersContainer;

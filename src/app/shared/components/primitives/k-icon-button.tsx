@@ -14,6 +14,7 @@ const KIconButton: React.FunctionComponent<KIconButtonProps> = (
         color
     }) => {
     return (
+
         <div onClick={onClick} className={`c-${color} c-pointer mx-1`}>
             <KIcon icon={icon}/>
         </div>

@@ -13,5 +13,5 @@ export const initialState: AdminDashboardState = {
     currentDate: moment.utc().startOf('day').toISOString(),
     selectedPanelId: null,
     panelHours: Array.from(Array(24).keys()),
-    slotSize: 3
+    slotSize: 6
 }
