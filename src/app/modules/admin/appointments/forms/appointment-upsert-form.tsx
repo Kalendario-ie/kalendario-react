@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Appointment,
+    Appointment, CustomerAppointment,
     EventType,
     upsertCustomerAppointmentRequestParser,
     UpsertCustomerAppointmentRequestValidation,
@@ -38,7 +38,7 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
             >
                 <KFormikState/>
                 {isAppointment &&
-                <CustomerAppointmentUpsertForm/>
+                <CustomerAppointmentUpsertForm appointment={entity as CustomerAppointment}/>
                 }
                 {!isAppointment &&
                 <>
