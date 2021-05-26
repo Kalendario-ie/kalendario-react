@@ -3,6 +3,7 @@ import EmployeePanelHeadersContainer
     from 'src/app/modules/admin/appointments/employee-panel/employee-panel-headers-container';
 import EmployeePanelsBodyContainer
     from 'src/app/modules/admin/appointments/employee-panel/employee-panels-body-container';
+import {useReloadAppointmentsEffect} from 'src/app/modules/admin/appointments/employee-panel/hooks';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/scheduling-date-selector';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
 import {useInitializeEffect} from 'src/app/shared/admin/hooks';
@@ -12,7 +13,7 @@ import {employeeActions} from 'src/app/store/admin/employees';
 
 const AppointmentsContainer: React.FunctionComponent = () => {
     useInitializeEffect(employeeActions);
-
+    useReloadAppointmentsEffect();
 
     return (
         <KFlexColumn>

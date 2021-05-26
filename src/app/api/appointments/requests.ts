@@ -2,8 +2,8 @@ import {Moment} from 'moment';
 
 export interface AppointmentQueryParams {
   status?: string;
-  from_date?: Moment;
-  to_date?: Moment;
+  from_date?: string;
+  to_date?: string;
   customer?: number;
   employee?: number;
   employees?: number[];

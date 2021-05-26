@@ -6,6 +6,20 @@ import {employeeParser} from 'src/app/api/employees';
 import {serviceParser} from 'src/app/api/services';
 import {userParser} from 'src/app/api/users';
 
+export function adminAppointmentParser(data: any): Appointment {
+    const name = data.customer ?
+        data.status !== 'P' ? data.customer.firstName + ' - ' + data.service.name : 'pending request'
+        : 'lock time: ' + data.internalNotes;
+    return {
+        ...data,
+        name,
+        employee: employeeParser(data?.employee),
+        service: data?.service ? serviceParser(data?.service) : undefined,
+        customer: data?.customer ? customerParser(data?.customer) : undefined,
+        status: data.status ? data.status : 'P',
+    }
+}
+
 export function appointmentParser(data: any): Appointment {
     const name = data.customer ?
         data.status !== 'P' ? data.customer.firstName + ' - ' + data.service.name : 'pending request'

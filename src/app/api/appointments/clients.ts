@@ -3,13 +3,13 @@ import {SaveAppointmentRequest} from 'src/app/api/appointments/requests';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import baseApiAxios from 'src/app/api/common/clients/base-api';
 import baseModelRequest from 'src/app/api/common/clients/base-django-api';
-import {appointmentHistoryParser, appointmentParser } from './parsers';
+import {adminAppointmentParser, appointmentHistoryParser, appointmentParser} from './parsers';
 
 const adminUrl = 'admin/appointments/'
 const userUrl = 'appointments/'
 
 export const adminAppointmentClient = {
-  ...baseModelRequest(adminUrl, appointmentParser),
+  ...baseModelRequest(adminUrl, adminAppointmentParser),
   history (id: number): Promise<ApiListResult<AppointmentHistory>> {
     return baseApiAxios.get<ApiListResult<AppointmentHistory>>(adminUrl + `${id}/history/`)
       .then(project => {

@@ -41,6 +41,7 @@ export interface CreateActionPayload {
 export interface BaseActions {
     initializeStore: ActionCreatorWithoutPayload;
     fetchEntities: ActionCreatorWithPayload<object>;
+    fetchEntitiesWithSetAll: ActionCreatorWithPayload<object>;
     createEntity: ActionCreatorWithPayload<CreateActionPayload>;
     patchEntity: ActionCreatorWithPayload<PatchActionPayload>;
     deleteEntity: ActionCreatorWithPayload<number>;
@@ -61,6 +62,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     const actions: BaseActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
+        fetchEntitiesWithSetAll: createAction<object>(`${sliceName}/fetchEntitiesWithSetAll`),
         createEntity: createAction<CreateActionPayload>(`${sliceName}/createEntity`),
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
         deleteEntity: createAction<number>(`${sliceName}/deleteEntity`),
@@ -77,6 +79,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         reducers: {
             // @ts-ignore
             upsertMany: adapter.upsertMany,
+            // @ts-ignore
+            setAll: adapter.setAll,
             // @ts-ignore
             upsertOne: adapter.upsertOne,
             // @ts-ignore
@@ -123,6 +127,15 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         }
     }
 
+    function* fetchEntitiesWithSetAll(action: { type: string, payload: object }) {
+        try {
+            const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
+            yield put(slice.actions.setAll(result.results));
+        } catch (error) {
+            yield put(slice.actions.setApiError(error));
+        }
+    }
+
     function* createEntity(action: { type: string, payload: CreateActionPayload }) {
         try {
             const entity: TEntity = yield call(client.post, action.payload.entity);
@@ -158,6 +171,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, initializeStore);
         yield takeEvery(actions.fetchEntities.type, fetchEntities);
+        yield takeEvery(actions.fetchEntitiesWithSetAll.type, fetchEntitiesWithSetAll);
         yield takeEvery(actions.createEntity.type, createEntity);
         yield takeEvery(actions.patchEntity.type, patchEntity);
         yield takeEvery(actions.deleteEntity.type, deleteEntity);
