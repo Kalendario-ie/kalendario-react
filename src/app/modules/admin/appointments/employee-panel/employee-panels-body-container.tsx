@@ -1,4 +1,5 @@
 import React from 'react';
+import {Appointment} from 'src/app/api/appointments';
 import {timeToString} from 'src/app/api/common/models';
 import {Employee} from 'src/app/api/employees';
 import {useSelectPanelEmployees} from 'src/app/modules/admin/appointments/employee-panel/hooks';
@@ -63,7 +64,12 @@ const EmployeePanelBody: React.FunctionComponent<EmployeePanelProps> = (
     )
 }
 
-export const EmployeePanelsBodyContainer: React.FunctionComponent = () => {
+export interface EmployeePanelsBodyContainerProps {
+    onSelect: (entity: Appointment | null) => () => void
+}
+
+
+export const EmployeePanelsBodyContainer: React.FunctionComponent<EmployeePanelsBodyContainerProps> = ({onSelect}) => {
     const employees = useSelectPanelEmployees();
     return (
         <KFlexRow>
@@ -71,7 +77,7 @@ export const EmployeePanelsBodyContainer: React.FunctionComponent = () => {
                 <PanelHours/>
                 {employees.map(employee =>
                     <React.Fragment key={employee.id}>
-                        <EventsContainer employee={employee}/>
+                        <EventsContainer onSelect={onSelect} employee={employee}/>
                         <EmployeePanelBody employee={employee}/>
                     </React.Fragment>
                 )}

@@ -12,15 +12,13 @@ export interface AppointmentQueryParams {
   delete_only?: boolean;
 }
 
-export interface SaveAppointmentRequest {
-  id: number;
-  start: Moment;
-  end: Moment;
-  customer: number | null;
-  employee: number;
-  service: number;
+export interface UpsertAppointmentRequest {
+  start: string;
+  end: string;
+  customer: number | '';
+  employee: number | '';
+  service: number | '';
   status: string;
-  customerNotes: string;
   internalNotes: string;
   ignoreAvailability: boolean;
 }

@@ -16,21 +16,21 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const [setDeleteId, confirmDeleteModal] = UseConfirmationModalWithDispatch(schedulingPanelActions.deleteEntity);
     const [openModal, formModal] = useEditModal(schedulingPanelSelectors, schedulingPanelActions, SchedulingPanelForm);
 
-    const selectedPanel = () => schedulingPanels[selectedIndex];
+    const selectPanel = (index: number) => schedulingPanels[index];
 
     useEffect(() => {
-        if (schedulingPanels && selectedPanel()) {
-            dispatch(adminDashboardActions.setSelectedPanelId(selectedPanel().id));
+        if (schedulingPanels && selectPanel(selectedIndex)) {
+            dispatch(adminDashboardActions.setSelectedPanelId(selectPanel(selectedIndex).id));
         }
     }, [schedulingPanels])
 
-    const handlePanelClick = (id: number) => () => {
-        setSelectedIndex(id);
-        dispatch(adminDashboardActions.setSelectedPanelId(selectedPanel().id));
+    const handlePanelClick = (index: number) => () => {
+        setSelectedIndex(index);
+        dispatch(adminDashboardActions.setSelectedPanelId(selectPanel(index).id));
     }
 
     const handleDeleteClick = () => {
-        setDeleteId(selectedPanel().id);
+        setDeleteId(selectPanel(selectedIndex).id);
     }
 
     return (
@@ -44,7 +44,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
                 >{panel.name}</KTextButton>)
             }
             <KIconButton color="primary" icon="plus" onClick={openModal(null)}/>
-            <KIconButton color="accent" icon="edit" onClick={openModal(selectedPanel())}/>
+            <KIconButton color="accent" icon="edit" onClick={openModal(selectPanel(selectedIndex))}/>
             <KIconButton color="danger" icon="trash" onClick={handleDeleteClick}/>
         </KFlexRow>
     )

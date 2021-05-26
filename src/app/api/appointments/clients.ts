@@ -1,15 +1,15 @@
 import {Appointment, AppointmentHistory} from 'src/app/api/appointments/models';
-import {SaveAppointmentRequest} from 'src/app/api/appointments/requests';
+import {UpsertAppointmentRequest} from 'src/app/api/appointments/requests';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import baseApiAxios from 'src/app/api/common/clients/base-api';
 import baseModelRequest from 'src/app/api/common/clients/base-django-api';
-import {adminAppointmentParser, appointmentHistoryParser, appointmentParser} from './parsers';
+import {appointmentHistoryParser, appointmentParser, customerRequestAppointmentParser} from './parsers';
 
 const adminUrl = 'admin/appointments/'
 const userUrl = 'appointments/'
 
 export const adminAppointmentClient = {
-  ...baseModelRequest(adminUrl, adminAppointmentParser),
+  ...baseModelRequest(adminUrl, appointmentParser),
   history (id: number): Promise<ApiListResult<AppointmentHistory>> {
     return baseApiAxios.get<ApiListResult<AppointmentHistory>>(adminUrl + `${id}/history/`)
       .then(project => {
@@ -20,15 +20,15 @@ export const adminAppointmentClient = {
 
   createLock(model: any): Promise<Appointment> {
     return baseApiAxios.post<Appointment>(adminUrl + 'lock/', model)
-        .then(result => appointmentParser(result.data));
+        .then(result => customerRequestAppointmentParser(result.data));
   },
 
-  updateLock(id: number, model: SaveAppointmentRequest): Promise<Appointment> {
+  updateLock(id: number, model: UpsertAppointmentRequest): Promise<Appointment> {
     return baseApiAxios.patch<Appointment>(adminUrl + `${id}/plock/`, model)
-        .then(result => appointmentParser(result.data));
+        .then(result => customerRequestAppointmentParser(result.data));
   }
 }
 
 export const appointmentClient = {
-  ...baseModelRequest(userUrl, appointmentParser),
+  ...baseModelRequest(userUrl, customerRequestAppointmentParser),
 }

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Appointment} from 'src/app/api/appointments';
+import {CustomerRequestAppointment} from 'src/app/api/appointments';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import { KFlexColumn, KFlexRow } from 'src/app/shared/components/flex';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 
 interface EventDetailsProps {
-    appointment: Appointment;
+    appointment: CustomerRequestAppointment;
 }
 
 const EventDetails: React.FunctionComponent<EventDetailsProps> = (

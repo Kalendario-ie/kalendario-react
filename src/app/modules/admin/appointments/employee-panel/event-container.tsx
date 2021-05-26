@@ -1,34 +1,37 @@
 import moment from 'moment';
 import React from 'react';
-import {Appointment} from 'src/app/api/appointments';
+import {Appointment, CustomerAppointment} from 'src/app/api/appointments';
 import {Employee} from 'src/app/api/employees';
 import styles from 'src/app/modules/admin/appointments/employee-panel/employee-panel.module.scss';
 import {useAppSelector} from 'src/app/store';
 import {appointmentSelectors} from 'src/app/store/admin/appointments';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 
-interface EmployeePanelEventsProps {
-    employee: Employee;
-}
-
-
-interface EventContainerProps {
+interface EventProps {
     appointment: Appointment;
+    onClick: () => void;
 }
 
 
-const Event: React.FunctionComponent<EventContainerProps> = (
+const Event: React.FunctionComponent<EventProps> = (
     {
-        appointment
+        appointment,
+        onClick
     }) => {
     const slotSize = useAppSelector(adminDashboardSelectors.selectSlotSize);
     const start = moment.utc(appointment.start);
     const end = moment.utc(appointment.end);
 
+    const customerAppointment = 'customer' in appointment && appointment.customer ? appointment as CustomerAppointment : null;
+
+
     const top = `${(start.hours() + (start.minutes() / 60)) * slotSize}rem`;
     const duration = moment.duration(end.diff(start));
     const height = `${(duration.hours() + duration.minutes() / 60) * slotSize}rem`;
-    const backgroundColor = appointment.service.color;
+
+    const backgroundColor = customerAppointment ? customerAppointment.service.color : '#FFFFFF';
+    const title = customerAppointment ? customerAppointment.customer.name : appointment.internalNotes;
+    const subTitle = customerAppointment ? customerAppointment.service.name : '';
 
     const style: React.CSSProperties = {
         top,
@@ -38,19 +41,26 @@ const Event: React.FunctionComponent<EventContainerProps> = (
 
     return (
         <div style={style}
-             className={styles.panelEvent}>
+             className={styles.panelEvent}
+             onClick={onClick}
+        >
             <div>
-                {appointment.customer.name}
+                {title}
             </div>
-            {appointment.service.name}
+            {subTitle}
         </div>
     )
 }
 
+interface EventsContainerProps {
+    employee: Employee;
+    onSelect: (entity: Appointment | null) => () => void
+}
 
-const EventsContainer: React.FunctionComponent<EmployeePanelEventsProps> = (
+const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
     {
-        employee
+        employee,
+        onSelect
     }) => {
     const appointments = useAppSelector(appointmentSelectors.selectAll);
 
@@ -62,7 +72,10 @@ const EventsContainer: React.FunctionComponent<EmployeePanelEventsProps> = (
     return (
         <div className="position-relative">
             {employeeAppointments.map(appointment =>
-                <Event key={appointment.id} appointment={appointment}/>
+                <Event key={appointment.id}
+                       appointment={appointment}
+                       onClick={onSelect(appointment)}
+                />
             )}
         </div>
     )

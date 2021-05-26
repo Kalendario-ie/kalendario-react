@@ -1,13 +1,13 @@
-
+$base-width: 12.5rem;
 
 .panelItem {
-  width: 16rem;
+  width: $base-width;
   border-bottom: 0.5px solid #B4B4B4;
   border-right: 0.5px solid #B4B4B4;
 }
 
 .middleItem {
-  width: 16rem;
+  width: $base-width;
   border-bottom: 0.5px dashed #B4B4B4;
   border-right: 0.5px solid #B4B4B4;
 }
@@ -19,7 +19,7 @@
 
 
 .panelEvent {
-  width: 16rem;
+  width: $base-width;
   position: absolute;
   border: 0.5px lightgray solid;
   border-radius: 10px;

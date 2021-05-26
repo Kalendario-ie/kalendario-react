@@ -1,11 +1,11 @@
 import {Reducer} from 'redux';
-import {Appointment} from 'src/app/api/appointments';
+import {CustomerEvent} from 'src/app/api/appointments';
 import {ACTION_TYPES} from './types';
 
 
 export interface UsersState {
-    events: Appointment[] | null;
-    selectedEvent: Appointment | null;
+    events: CustomerEvent[] | null;
+    selectedEvent: CustomerEvent | null;
     start: string | null;
     end: string | null;
 }

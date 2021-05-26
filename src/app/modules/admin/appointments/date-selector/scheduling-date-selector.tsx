@@ -1,11 +1,11 @@
 import moment, {Moment} from 'moment';
 import React from 'react';
 import {Button} from 'reactstrap';
-import {KFlexRow} from 'app/shared/components/flex';
-import KDateInput from 'app/shared/components/primitives/k-date-input';
-import KIconButton from 'app/shared/components/primitives/k-icon-button';
-import {useAppDispatch, useAppSelector} from 'app/store';
-import {adminDashboardActions, adminDashboardSelectors} from 'app/store/admin/dashboard';
+import {KFlexRow} from 'src/app/shared/components/flex';
+import KDateInput from 'src/app/shared/components/primitives/k-date-input';
+import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
+import {useAppDispatch, useAppSelector} from 'src/app/store';
+import {adminDashboardActions, adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 
 const SchedulingDateSelector: React.FunctionComponent = () => {
     const currentDate = useAppSelector(adminDashboardSelectors.selectCurrentDate);
