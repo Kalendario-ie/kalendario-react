@@ -22,7 +22,7 @@ export function useEditModal<TEntity extends IReadModel>(
     }
 
     const handleSubmit = (entity: any) => {
-        if (!selectedEntity) {
+        if (!selectedEntity || selectedEntity.id === 0) {
             dispatch(baseActions.createEntity({entity}));
         } else {
             dispatch(baseActions.patchEntity({id: selectedEntity.id, entity}));

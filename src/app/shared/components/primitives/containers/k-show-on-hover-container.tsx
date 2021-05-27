@@ -4,12 +4,14 @@ import {KFlexRow} from 'src/app/shared/components/flex';
 interface KShowOnHoverContainerProps {
     children: React.ReactNode;
     className?: string;
+    style?: React.CSSProperties;
 }
 
 const KShowOnHoverContainer: React.FunctionComponent<KShowOnHoverContainerProps> = (
     {
         children,
-        className
+        className,
+        style
     }) => {
     const [showContent, setShowContent] = useState(false);
 
@@ -22,6 +24,7 @@ const KShowOnHoverContainer: React.FunctionComponent<KShowOnHoverContainerProps>
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseOut}
             className={`${className} position-relative`}
+            style={style}
         >
             {showContent &&
             children

@@ -47,7 +47,6 @@ $btn-border-radius: 10px;
 $btn-padding-y: 0.5rem;
 $btn-padding-x: 1rem;
 
-$zindex-sticky: 2;
 
 $list-group-action-hover-color: $accent-light;
 $list-group-hover-bg: inherit;
@@ -57,3 +56,9 @@ $breadcrumb-bg: white;
 
 
 $card-border-radius: 10px;
+
+//z-layer
+$zindex-navbar: 101;
+$zindex-sidebar: 100;
+$zindex-sticky: 99;
+$zindex-sticky-top-left: 2;

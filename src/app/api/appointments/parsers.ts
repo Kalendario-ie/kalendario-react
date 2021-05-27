@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
     Appointment,
     AppointmentHistory,
@@ -98,5 +99,33 @@ export function upsertEmployeeEventRequestParser(appointment: Appointment | null
         employee: 0,
         ignoreAvailability: false,
         internalNotes: '',
+    }
+}
+
+export function blankEmployeeEvent(employeeId: number, hour: number, minute: number): EmployeeEvent {
+    const start = moment.utc().startOf('day').add(hour, 'hour').add(minute, 'minute').toISOString()
+    return {
+        start,
+        end: start,
+        // @ts-ignore
+        employee: {id: employeeId},
+        deleted: null,
+        id: 0,
+        internalNotes: '',
+        name: '',
+        owner: 0,
+        type: EventType.EmployeeEvent
+    }
+}
+
+export function blankCustomerAppointment(employeeId: number, hour: number, minute: number): CustomerAppointment {
+    return {
+        ...blankEmployeeEvent(employeeId, hour, minute),
+        type: EventType.CustomerAppointment,
+        // @ts-ignore
+        customer: {id: 0},
+        // @ts-ignore
+        service: {id: 0}
+
     }
 }

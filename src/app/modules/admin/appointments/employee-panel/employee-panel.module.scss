@@ -19,6 +19,7 @@ $base-width: 12.5rem;
 
 
 .panelEvent {
+  z-index: 2;
   width: $base-width;
   position: absolute;
   border: 0.5px lightgray solid;

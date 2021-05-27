@@ -19,12 +19,12 @@ const AppointmentsContainer: React.FunctionComponent = () => {
     const [openModal, formModal] = useEditModal(appointmentSelectors, appointmentActions, AppointmentUpsertForm);
 
     return (
-        <KFlexColumn>
+        <KFlexColumn className="w-100">
             {formModal}
             <KFlexColumn className="sticky-top bg-white-gray">
                 <SchedulingPanelsSelector/>
                 <SchedulingDateSelector/>
-                <EmployeePanelHeadersContainer/>
+                <EmployeePanelHeadersContainer onCreateClick={openModal}/>
             </KFlexColumn>
             <EmployeePanelsBodyContainer onSelect={openModal}/>
         </KFlexColumn>
