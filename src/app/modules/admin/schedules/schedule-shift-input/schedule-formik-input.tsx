@@ -2,11 +2,35 @@ import {useFormikContext} from 'formik';
 import React, {useState} from 'react';
 import {timeToString} from 'src/app/api/common/models';
 import {UpsertScheduleRequestFrame} from 'src/app/api/schedule/requests';
-import HourCell from 'src/app/modules/admin/schedules/schedule-shift-input/hour-cell';
 import ScheduleFormikInputModal from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-formik-input-modal';
 import ScheduleFrame from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-frame';
 import {KFlexColumn} from 'src/app/shared/components/flex';
+import {KIconButton} from 'src/app/shared/components/primitives/buttons';
+import KShowOnHoverContainer from 'src/app/shared/components/primitives/containers/k-show-on-hover-container';
 import styles from './schedule-formik-input.module.scss';
+
+// interface HourCellProps {
+//     className: string;
+//     isMonday: boolean;
+//     hour: number;
+//     onClick: () => void;
+// }
+//
+// const HourCell: React.FunctionComponent<HourCellProps> = (
+//     {
+//         className,
+//         isMonday,
+//         hour,
+//         onClick
+//     }) => {
+//
+//
+//     return (
+//         <KFlexColumn>
+//
+//         </KFlexColumn>
+//     )
+// }
 
 interface ScheduleFormikInputProps {
     name: string;
@@ -49,6 +73,14 @@ const ScheduleFormikInput: React.FunctionComponent<ScheduleFormikInputProps> = (
         formikValues.value.splice(toDelete, 1);
     }
 
+    const hourCell = (hour: number) =>
+        <KFlexColumn className="position-relative">
+            {isMonday && <div className={styles.hourBox}>{timeToString({hour, minute: 0})}</div>}
+            <KShowOnHoverContainer className={className}>
+                <KIconButton color="primary" onClick={handleAddClick(hour)} icon="plus-square"/>
+            </KShowOnHoverContainer>
+        </KFlexColumn>
+
     return (
         <>
             <KFlexColumn className="position-relative" align={'center'}>
@@ -58,13 +90,7 @@ const ScheduleFormikInput: React.FunctionComponent<ScheduleFormikInputProps> = (
                                    frame={frame}
                                    onClick={handleFrameClick(i)}/>
                 )}
-                {hours.map((hour, i) =>
-                    <HourCell key={i}
-                              hour={hour}
-                              isMonday={isMonday}
-                              className={className}
-                              onClick={handleAddClick(hour)}/>
-                )}
+                {hours.map((hour, i) => hourCell(hour))}
             </KFlexColumn>
             <ScheduleFormikInputModal isOpen={!!selectedIndex}
                                       accessor={`${accessor}[${selectedIndex}]`}
