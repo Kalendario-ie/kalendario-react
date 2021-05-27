@@ -35,3 +35,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.h-100vh {
+  height: $view-height;
+}

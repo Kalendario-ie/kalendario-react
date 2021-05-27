@@ -11,3 +11,6 @@ export const selectApiError: (rootState: RootState) => ApiValidationError | null
 
 export const selectUser: (rootState: RootState) => User | null =
     (rootState) => rootState.auth.user;
+
+export const selectLoadingUser: (rootState: RootState) => boolean =
+    (rootState) => rootState.auth.loadingUser;

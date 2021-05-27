@@ -10,7 +10,7 @@ import history from './app/shared/util/history';
 import {Provider} from 'react-redux';
 import {store} from './app/store';
 import {configureBaseApi} from './app/api/common/clients/base-api';
-import AuthAutoLogin from './app/modules/auth/auth-auto-login';
+import AuthAutoLogin from 'src/app/shared/context-providers/auth-auto-login';
 
 configureBaseApi();
 const stripePromise = configureStripe();

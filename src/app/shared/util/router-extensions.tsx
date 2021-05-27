@@ -1,8 +1,11 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router';
 import {Redirect, Route, useHistory, useLocation} from 'react-router-dom';
+import Spinner from 'reactstrap/es/Spinner';
 import {isLoggedIn} from 'src/app/api/common/session-storage';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
+import {useCurrentUser} from 'src/app/shared/context-providers/auth-auto-login';
 
 
 export type QueryParams = Record<string, string | number | undefined>;
@@ -31,16 +34,28 @@ export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
         path,
         component
     }) => {
-    const loggedIn = isLoggedIn();
     const {returnUrl, ...params} = useQueryParams();
     const {location: {pathname}} = useKHistory();
+
+    const [loading, user] = useCurrentUser();
+
     return (
         <>
-            {loggedIn &&
-            <Route path={path} component={component}/>
+            {loading &&
+            <KFlexRow className="h-100vh" align={'center'} justify={'center'}>
+                Loading
+                <Spinner className={"ml-2"} color="primary"/>
+            </KFlexRow>
             }
-            {!loggedIn &&
-            <Redirect to={pathWithParams(AUTH_ROUTES.LOGIN, {...params, returnUrl: pathname})}/>
+            {!loading &&
+            <>
+                {user &&
+                <Route path={path} component={component}/>
+                }
+                {!user &&
+                <Redirect to={pathWithParams(AUTH_ROUTES.LOGIN, {...params, returnUrl: pathname})}/>
+                }
+            </>
             }
         </>
     )

@@ -11,6 +11,7 @@ import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import UsersContainer from 'src/app/modules/admin/users/users-container';
 import KDashboardContainer from 'src/app/shared/components/dashboard/k-dashboard-container';
 import {SideBarLinks} from 'src/app/shared/components/dashboard/k-dashboard-sidebar';
+import {ProtectedRoute} from 'src/app/shared/util/router-extensions';
 
 const AdminRoutes: React.FunctionComponent = () => {
     const intl = useIntl();
@@ -41,7 +42,7 @@ const AdminRoutes: React.FunctionComponent = () => {
                     <Route path={ADMIN_ROUTES.USERS} component={UsersContainer}/>
                     <Route path={ADMIN_ROUTES.PERMISSION_GROUPS} component={PermissionGroupsContainer}/>
                     <Route path={ADMIN_ROUTES.APPOINTMENTS} component={AppointmentsContainer}/>
-                    <Route path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
+                    <ProtectedRoute path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
                 </Switch>
             </KDashboardContainer>
             }

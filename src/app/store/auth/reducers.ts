@@ -7,14 +7,14 @@ import {ApiValidationError} from 'src/app/api/common/api-errors';
 export interface AuthState {
     apiError: ApiValidationError | null;
     loggedIn: boolean;
-    loading: boolean;
+    loadingUser: boolean;
     user: User | null;
 }
 
 const initialState: AuthState = {
     apiError: null,
     loggedIn: isLoggedIn(),
-    loading: false,
+    loadingUser: false,
     user: null
 }
 
@@ -23,9 +23,11 @@ const reducer: Reducer<AuthState> = (state = initialState, {type, payload}) => {
         case ACTION_TYPES.LOGIN_REQUEST:
             return {...state, apiError: null}
         case ACTION_TYPES.SET_USER:
-            return {...state, loggedIn: !!payload, user: payload}
+            return {...state, loggedIn: !!payload, user: payload, loadingUser: false}
+        case ACTION_TYPES.SET_LOADING_USER:
+            return {...state, loadingUser: payload}
         case ACTION_TYPES.LOGIN_REQUEST_FAIL:
-            return {...state, loggedIn: false, apiError: payload}
+            return {...state, loggedIn: false, apiError: payload, loadingUser: false}
         default:
             return {...state}
     }
