@@ -1,23 +1,16 @@
 import {useFormikContext} from 'formik';
 import moment, {Moment} from 'moment';
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import AsyncSelect from 'react-select/async';
 import {FormGroup, Input, Label} from 'reactstrap';
 import {CustomerAppointment} from 'src/app/api/appointments';
 import {timeToString} from 'src/app/api/common/models';
-import {adminCustomerClient, Customer} from 'src/app/api/customers';
-import {useEditModal} from 'src/app/shared/admin/hooks';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
-import {KFormikInput} from 'src/app/shared/components/forms';
-import {KIconButton} from 'src/app/shared/components/primitives/buttons';
+import {KFormikCustomerInput, KFormikInput} from 'src/app/shared/components/forms';
 import {KDateInput} from 'src/app/shared/components/primitives/inputs';
-import KIcon from 'src/app/shared/components/primitives/k-icon';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
-import {customerActions, customerSelectors} from 'src/app/store/admin/customers';
 import {employeeSelectors} from 'src/app/store/admin/employees';
 import {serviceSelectors} from 'src/app/store/admin/services';
-import CustomerUpsertForm from '../../customers/customer-upsert-form';
 
 function addHours(date: Moment, time: string): string {
     const momentTime = moment.utc(time, 'HH:mm')
@@ -82,71 +75,6 @@ const FormikStartEndTimeInput: React.FunctionComponent = () => {
     )
 }
 
-interface FormikCustomerInput {
-    initialCustomer: Customer | null;
-}
-
-const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({initialCustomer}) => {
-    const [customer, setCustomer] = useState<Customer | null>(initialCustomer);
-    const [openModal, modal, createdCustomer] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm);
-
-    useEffect(() => {
-        if (createdCustomer) {
-            setCustomer(createdCustomer);
-            setValue(createdCustomer.id);
-        }
-    }, [createdCustomer]);
-
-
-    const formik = useFormikContext();
-    const {setValue} = formik.getFieldHelpers('customer');
-
-    const promiseOptions = (value: string) => adminCustomerClient.get({search: value}).then(res => res.results);
-
-    const navigateToPage = (selectedCustomer: Customer | null) => {
-        setCustomer(selectedCustomer);
-        setValue(selectedCustomer?.id || null);
-    }
-
-
-    return (
-        <FormGroup>
-            {modal}
-            <Label>Customer</Label>
-            <KFlexRow align={'center'}>
-                <AsyncSelect className={"flex-fill"}
-                             cacheOptions
-                             defaultOptions
-                             backspaceRemovesValue
-                             defaultInputValue={initialCustomer?.name}
-                             getOptionValue={(option) => option.id.toString()}
-                             getOptionLabel={(option) => option.name}
-                             onChange={navigateToPage}
-                             loadOptions={promiseOptions}/>
-                <KIconButton color="primary" icon={'plus'} onClick={openModal(null)}/>
-            </KFlexRow>
-
-            {customer &&
-            <KFlexColumn>
-                <KFlexRow justify={'between'} align={'center'}>
-                    <div>
-                        <KIcon color="primary" icon={'user'}/>
-                        {customer.name}
-                    </div>
-                    <div>
-                        <KIcon color="primary" icon={'phone'}/>
-                        {customer.phone}
-                    </div>
-                </KFlexRow>
-                <KFlexRow align={'center'}>
-                    <KIcon color="primary" icon={'at'}/>
-                    {customer.email}
-                </KFlexRow>
-            </KFlexColumn>
-            }
-        </FormGroup>
-    )
-}
 
 function useEmployeeServices() {
     const formik = useFormikContext();
@@ -189,7 +117,7 @@ const CustomerAppointmentUpsertForm: React.FunctionComponent<CustomerAppointment
             <FormikStartEndTimeInput/>
             <KFormikInput name="employee" as={'select'} options={employees}/>
             <KFormikInput name="service" as={'select'} options={services}/>
-            <FormikCustomerInput initialCustomer={appointment?.customer || null}/>
+            <KFormikCustomerInput initialCustomer={appointment?.customer || null}/>
             <KFormikInput name="internalNotes" as={'textarea'}/>
             <KFormikInput placeholder="Allow Overlapping" name="ignoreAvailability" as={'checkbox'}/>
         </>

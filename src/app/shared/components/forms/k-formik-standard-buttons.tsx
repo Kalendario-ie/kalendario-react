@@ -12,9 +12,9 @@ const KFormikStandardButtons: React.FunctionComponent<KFormikStandardButtonsProp
         onCancel
     }) => {
     return (
-        <KFlexRow>
-            <KFormikSubmit className="mr-2 btn-block"/>
-            <KFormikCancel className="btn-block m-0" onClick={onCancel}/>
+        <KFlexRow align={'baseline'} justify={'end'}>
+            <KFormikSubmit className="mr-2"/>
+            <KFormikCancel className="m-0" onClick={onCancel}/>
         </KFlexRow>
     )
 }
