@@ -3,9 +3,8 @@ import {FormGroup} from 'reactstrap';
 import {Schedule, upsertScheduleRequestParser} from 'src/app/api/schedule';
 import ScheduleFormikInput from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-formik-input';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
-import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import {KFlexRow} from 'src/app/shared/components/flex';
+import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 
 
 const ScheduleUpsertForm: React.FunctionComponent<AdminEditContainerProps<Schedule>> = (
@@ -18,6 +17,7 @@ const ScheduleUpsertForm: React.FunctionComponent<AdminEditContainerProps<Schedu
     return (
         <KFormikForm initialValues={upsertScheduleRequestParser(entity)}
                      apiError={apiError}
+                     onCancel={onCancel}
                      onSubmit={onSubmit}>
             <KFormikInput name="name"/>
             <FormGroup>
@@ -31,7 +31,6 @@ const ScheduleUpsertForm: React.FunctionComponent<AdminEditContainerProps<Schedu
                     <ScheduleFormikInput name="sun"/>
                 </KFlexRow>
             </FormGroup>
-            <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
 }

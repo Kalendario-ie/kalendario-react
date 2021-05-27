@@ -4,12 +4,14 @@ import React from 'react';
 import {Form, FormGroup} from 'reactstrap';
 import {ApiValidationError} from 'src/app/api/common/api-errors';
 import KFormikErrorHandler from 'src/app/shared/components/forms/k-formik-error-handler';
+import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 
 export interface KFormikFormProps<Values> {
     initialValues: Values;
     apiError: ApiValidationError | null;
     validationSchema?: any | (() => any);
     onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void;
+    onCancel?: () => void;
     children: ((props: FormikProps<Values>) => React.ReactNode) | React.ReactNode;
     errors?: string[];
 }
@@ -19,6 +21,7 @@ export function KFormikForm<Values>(
         initialValues,
         apiError,
         onSubmit,
+        onCancel,
         children,
         validationSchema
     }: KFormikFormProps<Values>) {
@@ -43,11 +46,12 @@ export function KFormikForm<Values>(
                     {typeof children == 'function'
                         ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
                         : children}
+                    {onCancel &&
+                    <KFormikStandardButtons onCancel={onCancel}/>
+                    }
                 </Form>
             )}
-
         </Formik>
-
     )
 }
 

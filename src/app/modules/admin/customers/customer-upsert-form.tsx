@@ -2,7 +2,6 @@ import React from 'react';
 import {Customer, saveCustomerRequestParser} from 'src/app/api/customers';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import * as yup from 'yup';
 
 const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Customer>> = (
@@ -22,13 +21,13 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Custom
         <KFormikForm initialValues={saveCustomerRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     onCancel={onCancel}
                      validationSchema={validation}
         >
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>
             <KFormikInput name="phone"/>
-            <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
 }

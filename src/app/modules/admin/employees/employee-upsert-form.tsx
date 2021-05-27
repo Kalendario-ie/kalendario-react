@@ -2,10 +2,9 @@ import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {Employee, upsertEmployeeRequestParser, UpsertEmployeeRequestValidation} from 'src/app/api/employees';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
-import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
-import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import {KFlexColumn} from 'src/app/shared/components/flex';
+import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
+import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import {useAppDispatch} from 'src/app/store';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
 import {serviceCategoryActions} from 'src/app/store/admin/serviceCategories';
@@ -33,6 +32,7 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
         <KFormikForm initialValues={upsertEmployeeRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     onCancel={onCancel}
                      validationSchema={UpsertEmployeeRequestValidation}
         >
             {entity?.photoUrl &&
@@ -47,7 +47,6 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
             <KFormikInput name="instagram"/>
             <KFormikInput name="schedule" as={'select'} options={schedules}/>
             <KFormikInput name="services" as={'multi-select'} options={services} multiple={true}/>
-            <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
 }

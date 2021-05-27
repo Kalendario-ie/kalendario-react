@@ -20,14 +20,14 @@ const LoginView: React.FunctionComponent<LoginViewProps> = (
     }) => {
     return (
         <KFormikForm initialValues={data}
-               apiError={apiError}
-               onSubmit={onSubmit}
-               validationSchema={validationSchema}>
+                     apiError={apiError}
+                     onSubmit={onSubmit}
+                     validationSchema={validationSchema}>
             <>
                 <KFormikInput name="email" type="email"/>
                 <KFormikInput name="password" type="password"/>
                 <KFormikSubmit text={<FormattedMessage id={"AUTH.LOGIN"}/>}
-                              isBlock={true}
+                               isBlock={true}
                 ><FormattedMessage id="COMMON.FORM.SUBMIT"/></KFormikSubmit>
             </>
         </KFormikForm>

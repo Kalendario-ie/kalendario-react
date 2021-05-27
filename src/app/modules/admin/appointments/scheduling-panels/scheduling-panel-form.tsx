@@ -4,7 +4,6 @@ import {upsertSchedulingPanelRequestParser} from 'src/app/api/scheduling-panels/
 import {useSelectAll} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
 import {employeeActions, employeeSelectors} from 'src/app/store/admin/employees';
 
 const SchedulingPanelForm: React.FunctionComponent<AdminEditContainerProps<SchedulingPanel>> = (
@@ -20,10 +19,10 @@ const SchedulingPanelForm: React.FunctionComponent<AdminEditContainerProps<Sched
         <KFormikForm initialValues={upsertSchedulingPanelRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     onCancel={onCancel}
         >
             <KFormikInput name="name"/>
             <KFormikInput name="employees" as="multi-select" options={employees}/>
-            <KFormikStandardButtons onCancel={onCancel}/>
         </KFormikForm>
     )
 }
