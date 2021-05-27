@@ -36,7 +36,6 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
                          onSubmit={onSubmit}
                          validationSchema={validationSchema}
             >
-                <KFormikState/>
                 {isAppointment &&
                 <CustomerAppointmentUpsertForm appointment={entity as CustomerAppointment}/>
                 }

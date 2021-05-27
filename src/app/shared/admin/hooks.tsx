@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { IReadModel } from 'src/app/api/common/models';
+import {IReadModel} from 'src/app/api/common/models';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import KModal from 'src/app/shared/components/modal/k-modal';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
@@ -9,10 +9,11 @@ export function useEditModal<TEntity extends IReadModel>(
     baseSelectors: BaseSelectors<TEntity>,
     baseActions: BaseActions,
     EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>
-): [(entity: TEntity | null) => () => void, JSX.Element] {
+): [(entity: TEntity | null) => () => void, JSX.Element, TEntity | undefined] {
     const [selectedEntity, setSelectedEntity] = useState<TEntity | null>(null);
     const apiError = useAppSelector(baseSelectors.selectApiError);
     const editMode = useAppSelector(baseSelectors.selectEditMode);
+    const createdEntity = useAppSelector(baseSelectors.selectCreatedEntity)
     const dispatch = useAppDispatch();
 
     const handleEditCancel = () => {
@@ -39,7 +40,7 @@ export function useEditModal<TEntity extends IReadModel>(
                                                onCancel={handleEditCancel}/>}
                           isOpen={editMode}/>
 
-    return [openModal, modal]
+    return [openModal, modal, createdEntity]
 }
 
 

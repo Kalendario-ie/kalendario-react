@@ -1,5 +1,5 @@
 import React from 'react';
-import {Customer} from 'src/app/api/customers';
+import {Customer, saveCustomerRequestParser} from 'src/app/api/customers';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import KFormikStandardButtons from 'src/app/shared/components/forms/k-formik-standard-buttons';
@@ -19,7 +19,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Custom
     });
 
     return (
-        <KFormikForm initialValues={entity}
+        <KFormikForm initialValues={saveCustomerRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
                      validationSchema={validation}

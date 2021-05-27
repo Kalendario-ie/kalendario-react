@@ -14,12 +14,14 @@ import {ApiBaseError} from 'src/app/api/common/api-errors';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
 import {IReadModel} from 'src/app/api/common/models';
+import {PayloadAction} from 'typesafe-actions';
 
 
 interface BaseState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
     apiError: ApiBaseError | null;
     editMode: boolean;
+    createdEntityId: number | null;
 }
 
 export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
@@ -27,6 +29,7 @@ export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
     selectIsInitialized: (state: any) => boolean;
     selectApiError: (state: any) => ApiBaseError | null;
     selectEditMode: (state: any) => boolean;
+    selectCreatedEntity: (state: any) => TEntity | undefined;
 }
 
 export interface PatchActionPayload {
@@ -74,7 +77,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         initialState: adapter.getInitialState({
             isInitialized: false,
             apiError: null,
-            editMode: false
+            editMode: false,
+            createdEntityId: null
         }) as BaseState<TEntity>,
         reducers: {
             // @ts-ignore
@@ -93,6 +97,9 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             },
             setEditMode: (state, action) => {
                 state.editMode = action.payload;
+            },
+            setCreatedEntityId: (state, action: PayloadAction<string, number>) => {
+                state.createdEntityId = action.payload;
             }
         }
     });
@@ -108,6 +115,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         selectIsInitialized: createSelector(selector, store => store.isInitialized),
         selectApiError: createSelector(selector, store => store.apiError),
         selectEditMode: createSelector(selector, store => store.editMode),
+        selectCreatedEntity: createSelector(selector, store =>
+            store.createdEntityId ? store.entities[store.createdEntityId] : undefined),
     }
 
     function* initializeStore(action: { type: string, payload: {} }) {
@@ -142,6 +151,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             yield put(slice.actions.upsertOne(entity));
             yield put(slice.actions.setApiError(null));
             yield put(slice.actions.setEditMode(false));
+            yield put(slice.actions.setCreatedEntityId(entity.id));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }

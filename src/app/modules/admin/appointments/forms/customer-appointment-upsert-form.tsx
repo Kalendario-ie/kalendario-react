@@ -15,7 +15,7 @@ import KIcon from 'src/app/shared/components/primitives/k-icon';
 import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
-import {customerActions, customerSelectors } from 'src/app/store/admin/customers';
+import {customerActions, customerSelectors} from 'src/app/store/admin/customers';
 import {employeeSelectors} from 'src/app/store/admin/employees';
 import {serviceSelectors} from 'src/app/store/admin/services';
 import CustomerUpsertForm from '../../customers/customer-upsert-form';
@@ -85,7 +85,16 @@ interface FormikCustomerInput {
 
 const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({initialCustomer}) => {
     const [customer, setCustomer] = useState<Customer | null>(initialCustomer);
-    const [openModal, modal] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm)
+    const [openModal, modal, createdCustomer] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm);
+
+    useEffect(() => {
+        if (createdCustomer) {
+            setCustomer(createdCustomer);
+            setValue(createdCustomer.id);
+        }
+    }, [createdCustomer]);
+
+
     const formik = useFormikContext();
     const {setValue} = formik.getFieldHelpers('customer');
 
@@ -97,13 +106,12 @@ const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({init
     }
 
 
-
     return (
         <FormGroup>
             {modal}
             <KFlexRow align={'center'}>
                 <AsyncSelect className={"flex-fill"}
-                    cacheOptions
+                             cacheOptions
                              defaultOptions
                              backspaceRemovesValue
                              defaultInputValue={initialCustomer?.name}
