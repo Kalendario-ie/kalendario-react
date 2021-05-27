@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {timeToString} from 'src/app/api/common/models';
 import styles from 'src/app/modules/admin/schedules/schedule-shift-input/schedule-formik-input.module.scss';
-import {KFlexRow} from 'src/app/shared/components/flex';
 import {KIconButton} from 'src/app/shared/components/primitives/buttons';
+import KShowOnHoverContainer from 'src/app/shared/components/primitives/containers/k-show-on-hover-container';
 
 interface HourCellProps {
     className: string;
@@ -18,25 +18,13 @@ const HourCell: React.FunctionComponent<HourCellProps> = (
         hour,
         onClick
     }) => {
-    const [showIcon, setShowIcon] = useState(false);
 
-    const handleMouseEnter = () => setShowIcon(true);
-    const handleMouseOut = () => setShowIcon(false);
 
     return (
-        <KFlexRow
-            align={'center'}
-            justify={'center'}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseOut}
-            className={`${className} position-relative`}
-        >
+        <KShowOnHoverContainer className={className}>
             {isMonday && <div className={styles.hourBox}>{timeToString({hour, minute: 0})}</div>}
-            {showIcon &&
             <KIconButton color="primary" onClick={onClick} icon="plus-square"/>
-            }
-        </KFlexRow>
-
+        </KShowOnHoverContainer>
     )
 }
 
