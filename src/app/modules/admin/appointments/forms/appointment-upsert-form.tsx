@@ -44,6 +44,7 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
                     <KFormikDatetimeInput name="start"/>
                     <KFormikDatetimeInput name="end"/>
                     <KFormikInput name="internalNotes" as={'textarea'}/>
+                    <KFormikInput placeholder="Allow Overlapping" name="ignoreAvailability" as={'checkbox'}/>
                 </>
                 }
                 <KFormikStandardButtons onCancel={onCancel}/>

@@ -2,7 +2,7 @@ import {ErrorMessage, Field, FieldInputProps, useFormikContext} from 'formik';
 import * as React from 'react';
 import {FormFeedback, FormGroup, Label} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
-import {KColorInput, KDurationInput, KMultiSelectInput} from 'src/app/shared/components/primitives/inputs';
+import {KCheckbox, KColorInput, KDurationInput, KMultiSelectInput} from 'src/app/shared/components/primitives/inputs';
 import {MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
 import {camelCaseToWords} from 'src/app/shared/util/string-extensions';
 
@@ -30,6 +30,8 @@ function inputAs(as: string,
                     onBlur={fieldProps.onBlur}
                     options={options || []}
                 />
+        case 'checkbox':
+            return KCheckbox
         default:
             return as;
     }
@@ -52,7 +54,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     const fieldHelpers = formik.getFieldHelpers(name);
     className += (fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : '';
     className += multiple ? ' form-select form-control' : '';
-
+    const isCheckbox = as === 'checkbox';
     const inputType = React.useMemo(() => inputAs(as, options), [options]);
 
     const handleOnEmptySelect = () => {
@@ -61,8 +63,10 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     }
 
     return (
-        <FormGroup>
+        <FormGroup check={isCheckbox}>
+            {!isCheckbox &&
             <Label for={name}>{placeholder || camelCaseToWords(name)}</Label>
+            }
             <Field className={className}
                    as={inputType}
                    id={name}

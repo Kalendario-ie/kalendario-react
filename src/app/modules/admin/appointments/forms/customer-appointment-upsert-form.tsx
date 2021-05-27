@@ -112,6 +112,7 @@ const FormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({init
     return (
         <FormGroup>
             {modal}
+            <Label>Customer</Label>
             <KFlexRow align={'center'}>
                 <AsyncSelect className={"flex-fill"}
                              cacheOptions
@@ -190,6 +191,7 @@ const CustomerAppointmentUpsertForm: React.FunctionComponent<CustomerAppointment
             <KFormikInput name="service" as={'select'} options={services}/>
             <FormikCustomerInput initialCustomer={appointment?.customer || null}/>
             <KFormikInput name="internalNotes" as={'textarea'}/>
+            <KFormikInput placeholder="Allow Overlapping" name="ignoreAvailability" as={'checkbox'}/>
         </>
     )
 }

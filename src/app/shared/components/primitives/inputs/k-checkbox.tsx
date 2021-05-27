@@ -8,16 +8,19 @@ interface KCheckboxProps extends KBaseInputProps {
 export const KCheckbox: React.FunctionComponent<KCheckboxProps> = (
     {
         placeholder,
+        name,
         checked,
+        value,
         onChange,
         onBlur
     }) => {
     return (
         <Label check>
             <Input type="checkbox"
+                   name={name}
                    onChange={onChange}
                    onBlur={onBlur}
-                   checked={checked}
+                   checked={checked || !!value}
             />
             {placeholder}
         </Label>
