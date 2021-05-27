@@ -60,22 +60,26 @@ const FormikStartEndTimeInput: React.FunctionComponent = () => {
     const [, , endTime, handleEndTimeChange] = useDateHelper('end');
 
     return (
-        <FormGroup>
-            <KFlexRow justify={'between'}>
+        <>
+            <FormGroup>
                 <KFlexColumn>
                     <Label>Date</Label>
                     <KDateInput value={start} onChange={handleDateChange}/>
                 </KFlexColumn>
-                <KFlexColumn>
-                    <Label>Start</Label>
-                    <Input value={startTime} onChange={handleStartTimeChange} type={'time'}/>
-                </KFlexColumn>
-                <KFlexColumn>
-                    <Label>End</Label>
-                    <Input value={endTime} onChange={handleEndTimeChange} type={'time'}/>
-                </KFlexColumn>
-            </KFlexRow>
-        </FormGroup>
+            </FormGroup>
+            <FormGroup>
+                <KFlexRow align={'center'} justify={'center'}>
+                    <KFlexColumn className="w-100">
+                        Start
+                        <Input value={startTime} onChange={handleStartTimeChange} type={'time'}/>
+                    </KFlexColumn>
+                    <KFlexColumn className="w-100">
+                        Finish
+                        <Input value={endTime} onChange={handleEndTimeChange} type={'time'}/>
+                    </KFlexColumn>
+                </KFlexRow>
+            </FormGroup>
+        </>
     )
 }
 
