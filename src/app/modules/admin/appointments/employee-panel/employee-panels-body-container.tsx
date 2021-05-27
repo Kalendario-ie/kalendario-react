@@ -1,10 +1,9 @@
 import React from 'react';
-import {Appointment, blankCustomerAppointment, blankEmployeeEvent} from 'src/app/api/appointments';
+import {Appointment} from 'src/app/api/appointments';
 import {timeToString} from 'src/app/api/common/models';
 import {Employee} from 'src/app/api/employees';
 import {useSelectPanelEmployees} from 'src/app/modules/admin/appointments/employee-panel/hooks';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
-import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import KShowOnHoverContainer from 'src/app/shared/components/primitives/containers/k-show-on-hover-container';
 import {useAppSelector} from 'src/app/store';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';

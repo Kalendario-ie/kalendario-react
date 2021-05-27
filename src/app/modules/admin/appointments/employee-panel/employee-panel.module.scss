@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 $base-width: 12.5rem;
 
 .panelItem {
@@ -25,4 +27,11 @@ $base-width: 12.5rem;
   border: 0.5px lightgray solid;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.currentTimeLine {
+  border-bottom: $accent 1px solid;
+  width: calc(100% + 1px);
+  position: absolute;
+  z-index: 40;
 }

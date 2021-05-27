@@ -3,6 +3,7 @@ import React from 'react';
 import {Appointment, CustomerAppointment} from 'src/app/api/appointments';
 import {Employee} from 'src/app/api/employees';
 import styles from 'src/app/modules/admin/appointments/employee-panel/employee-panel.module.scss';
+import {useHoursConverter} from 'src/app/modules/admin/appointments/employee-panel/hooks';
 import {useAppSelector} from 'src/app/store';
 import {appointmentSelectors} from 'src/app/store/admin/appointments';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
@@ -18,24 +19,21 @@ const Event: React.FunctionComponent<EventProps> = (
         appointment,
         onClick
     }) => {
-    const slotSize = useAppSelector(adminDashboardSelectors.selectSlotSize);
     const start = moment.utc(appointment.start);
     const end = moment.utc(appointment.end);
 
     const customerAppointment = 'customer' in appointment && appointment.customer ? appointment as CustomerAppointment : null;
 
 
-    const top = `${(start.hours() + (start.minutes() / 60)) * slotSize}rem`;
     const duration = moment.duration(end.diff(start));
-    const height = `${(duration.hours() + duration.minutes() / 60) * slotSize}rem`;
 
     const backgroundColor = customerAppointment ? customerAppointment.service.color : '#FFFFFF';
     const title = customerAppointment ? customerAppointment.customer.name : appointment.internalNotes;
     const subTitle = customerAppointment ? customerAppointment.service.name : '';
 
     const style: React.CSSProperties = {
-        top,
-        height,
+        top: useHoursConverter(start),
+        height: useHoursConverter(duration),
         backgroundColor,
     }
 

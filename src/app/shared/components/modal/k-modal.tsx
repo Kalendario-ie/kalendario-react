@@ -38,7 +38,7 @@ const KModal: React.FunctionComponent<KModalProps> = (
                 {header}
             </ModalHeader>
             }
-            <ModalBody>
+            <ModalBody className={"m-2"}>
                 {body}
             </ModalBody>
             {buttons &&

@@ -1,5 +1,6 @@
 import React from 'react';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/date-selector/scheduling-date-selector';
+import TimeLineContainer from 'src/app/modules/admin/appointments/employee-panel/TimeLineContainer';
 import AppointmentUpsertForm from 'src/app/modules/admin/appointments/forms/appointment-upsert-form';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
 import {useEditModal, useInitializeEffect} from 'src/app/shared/admin/hooks';
@@ -26,6 +27,7 @@ const AppointmentsContainer: React.FunctionComponent = () => {
                 <SchedulingDateSelector/>
                 <EmployeePanelHeadersContainer onCreateClick={openModal}/>
             </KFlexColumn>
+            <TimeLineContainer/>
             <EmployeePanelsBodyContainer onSelect={openModal}/>
         </KFlexColumn>
     )

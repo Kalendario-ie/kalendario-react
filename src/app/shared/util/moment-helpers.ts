@@ -12,3 +12,11 @@ export function stringToMoment(value: string | Date | undefined): Moment {
 export function momentToIso(value: Moment): string {
     return value.toISOString();
 }
+
+export function momentIsToday(moment: Moment): boolean {
+    return moment.date() === moment.utc().date();
+}
+
+export function momentToday(): Moment {
+    return moment();
+}

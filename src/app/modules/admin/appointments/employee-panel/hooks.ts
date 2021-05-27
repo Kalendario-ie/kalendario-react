@@ -1,3 +1,4 @@
+import {Duration, Moment} from 'moment';
 import {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {AppointmentQueryParams} from 'src/app/api/appointments';
@@ -7,10 +8,12 @@ import {appointmentActions} from 'src/app/store/admin/appointments';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 import {employeeSelectors} from 'src/app/store/admin/employees';
 
+
 export function useSelectPanelEmployees() {
     const selectedPanel = useAppSelector(adminDashboardSelectors.selectSelectedPanel)
     return useAppSelector(state => employeeSelectors.selectByIds(state, selectedPanel?.employees || []));
 }
+
 
 export function useReloadAppointmentsEffect() {
     const selectedPanel = useAppSelector(adminDashboardSelectors.selectSelectedPanel)
@@ -27,4 +30,10 @@ export function useReloadAppointmentsEffect() {
 
     }, [selectedPanel, currentDate]);
 
+}
+
+
+export function useHoursConverter(value: Moment | Duration): string {
+    const slotSize = useAppSelector(adminDashboardSelectors.selectSlotSize);
+    return `${(value.hours() + (value.minutes() / 60)) * slotSize}rem`;
 }
