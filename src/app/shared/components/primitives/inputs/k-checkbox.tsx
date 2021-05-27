@@ -5,7 +5,7 @@ import {KBaseInputProps} from 'src/app/shared/components/primitives/inputs/inter
 interface KCheckboxProps extends KBaseInputProps {
 }
 
-const KCheckbox: React.FunctionComponent<KCheckboxProps> = (
+export const KCheckbox: React.FunctionComponent<KCheckboxProps> = (
     {
         placeholder,
         checked,
@@ -23,6 +23,3 @@ const KCheckbox: React.FunctionComponent<KCheckboxProps> = (
         </Label>
     )
 }
-
-
-export default KCheckbox;

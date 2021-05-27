@@ -3,8 +3,8 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {CompanyDetails} from 'src/app/api/companies';
 import {RequestModel} from 'src/app/api/requests';
 import CompanyAvatar from 'src/app/modules/companies/avatar/company-avatar';
-import KInput from 'src/app/shared/components/primitives/k-Input';
-import KalendarioCard from 'src/app/shared/components/k-card';
+import {KInput} from 'src/app/shared/components/primitives/inputs';
+import {KCard} from 'src/app/shared/components/primitives/containers';
 
 interface CartSummaryProps {
     company: CompanyDetails;
@@ -22,7 +22,7 @@ const CartCompanySummary: React.FunctionComponent<CartSummaryProps> = (
     const [notes, setNotes] = useState(request.customerNotes || '');
 
     return (
-        <KalendarioCard>
+        <KCard>
             <CompanyAvatar company={company}/>
             <p>
                 {company.config.preBookWarn}
@@ -36,7 +36,7 @@ const CartCompanySummary: React.FunctionComponent<CartSummaryProps> = (
             <button className="btn btn-primary btn-block" onClick={() => proceedToCheckoutClick(notes)}>
                 <FormattedMessage id="COMPANY.PROCEED-CHECKOUT"/>
             </button>
-        </KalendarioCard>
+        </KCard>
     )
 }
 

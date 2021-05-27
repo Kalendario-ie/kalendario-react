@@ -2,8 +2,8 @@ import moment, {Moment} from 'moment';
 import React from 'react';
 import {Button} from 'reactstrap';
 import {KFlexRow} from 'src/app/shared/components/flex';
-import KDateInput from 'src/app/shared/components/primitives/k-date-input';
-import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
+import {KDateInput} from 'src/app/shared/components/primitives/inputs';
+import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {adminDashboardActions, adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 

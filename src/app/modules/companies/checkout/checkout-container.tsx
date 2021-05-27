@@ -10,8 +10,7 @@ import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summ
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import {KFlexSpacer} from 'src/app/shared/components/flex';
-import KalendarioCard from 'src/app/shared/components/k-card';
-import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
+import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {
     confirmCartRequest,
@@ -51,7 +50,7 @@ const CheckoutContainer: React.FunctionComponent = () => {
                 {cartIsLoadedAndEmpty &&
                 <Redirect to={companiesUrls(company).index}/>
                 }
-                <KalendarioCard>
+                <KCard>
                     <>
                         <CompanyAvatar company={company}/>
                         <KFlexSpacer/>
@@ -75,7 +74,7 @@ const CheckoutContainer: React.FunctionComponent = () => {
                             }
                         </>
                     </>
-                </KalendarioCard>
+                </KCard>
                 <StripeContainer
                     price={request.total}
                     stripeSecret={stripeSecret}

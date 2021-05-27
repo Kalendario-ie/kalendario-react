@@ -3,8 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {useDispatch} from 'react-redux';
 import {authApi} from 'src/app/api/auth/clients';
 import {KFlexRow} from 'src/app/shared/components/flex';
-import KCard from 'src/app/shared/components/k-card';
-import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
+import { KCard, KPageContainer } from 'src/app/shared/components/primitives/containers';
 import {setUser} from 'src/app/store/auth';
 
 

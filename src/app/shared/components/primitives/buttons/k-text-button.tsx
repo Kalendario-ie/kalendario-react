@@ -4,7 +4,7 @@ interface KTextButtonProps
     extends React.ButtonHTMLAttributes<HTMLDivElement> {
 }
 
-const KTextButton: React.FunctionComponent<KTextButtonProps> = (
+export const KTextButton: React.FunctionComponent<KTextButtonProps> = (
     {
         children,
         className,
@@ -20,6 +20,3 @@ const KTextButton: React.FunctionComponent<KTextButtonProps> = (
         </div>
     )
 }
-
-
-export default KTextButton;

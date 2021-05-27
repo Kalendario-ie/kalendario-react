@@ -6,7 +6,7 @@ interface KColorInputProps extends KBaseInputProps {
     name: string;
 }
 
-const KColorInput: React.FunctionComponent<KColorInputProps> = (
+export const KColorInput: React.FunctionComponent<KColorInputProps> = (
     {
         value,
         name,
@@ -24,6 +24,3 @@ const KColorInput: React.FunctionComponent<KColorInputProps> = (
             value={value}/>
     )
 }
-
-
-export default KColorInput;

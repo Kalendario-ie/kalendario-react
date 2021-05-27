@@ -10,7 +10,7 @@ interface KInputProps {
     onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const KInput: React.FunctionComponent<KInputProps> = (
+export const KInput: React.FunctionComponent<KInputProps> = (
     {
         className,
         type,
@@ -29,6 +29,3 @@ const KInput: React.FunctionComponent<KInputProps> = (
         </Input>
     )
 }
-
-
-export default KInput;

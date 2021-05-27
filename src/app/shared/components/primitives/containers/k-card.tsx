@@ -11,7 +11,7 @@ export interface KalendarioCardProps {
     bodiless?: boolean;
 }
 
-const KCard: React.FunctionComponent<KalendarioCardProps> = (
+export const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
@@ -43,10 +43,8 @@ const KCard: React.FunctionComponent<KalendarioCardProps> = (
         <div className={className} style={style}>
             <h5 className="card-title mb-3 text-center">{header}</h5>
             <div className={bodiless ? '' : 'card-body'} style={bodyStyle}>
-            {children}
-        </div>
+                {children}
+            </div>
         </div>
     )
 }
-
-export default KCard;

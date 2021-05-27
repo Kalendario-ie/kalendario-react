@@ -5,8 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Appointment} from 'src/app/api/appointments';
 import {RequestModelGetParams} from 'src/app/api/companies';
 import EventModal from 'src/app/modules/users/bookings/event-modal';
-import KalendarioCard from 'src/app/shared/components/k-card';
-import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
+import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
 import {stringToMoment, validOrToday} from 'src/app/shared/util/moment-helpers';
 import {useQueryParams} from 'src/app/shared/util/router-extensions';
 import {eventsRequest, selectEvents, selectSelectedEvent, setSelectedEvent} from 'src/app/store/users';
@@ -38,7 +37,7 @@ const BookingsContainer: React.FunctionComponent = () => {
 
     return (
         <KPageContainer>
-            <KalendarioCard>
+            <KCard>
                 <Calendar
                     date={initialDate.toDate()}
                     localizer={momentLocalizer(moment)}
@@ -49,7 +48,7 @@ const BookingsContainer: React.FunctionComponent = () => {
                     onRangeChange={updateEvents}
                     onSelectEvent={selectEvent}
                 />
-            </KalendarioCard>
+            </KCard>
             <EventModal appointment={selectedEvent}
                         closeClick={closeModal}/>
         </KPageContainer>

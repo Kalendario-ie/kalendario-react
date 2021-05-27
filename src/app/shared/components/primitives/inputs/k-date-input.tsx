@@ -8,7 +8,7 @@ interface KDateInputProps {
     onChange?: (value: Moment) => void;
 }
 
-const KDateInput: React.FunctionComponent<KDateInputProps> = (
+export const KDateInput: React.FunctionComponent<KDateInputProps> = (
     {
         value,
         onChange
@@ -20,6 +20,3 @@ const KDateInput: React.FunctionComponent<KDateInputProps> = (
                onChange={event => onChange && onChange(moment.utc(event.target.value))}/>
     )
 }
-
-
-export default KDateInput;

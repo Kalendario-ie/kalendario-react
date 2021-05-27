@@ -1,19 +1,15 @@
 import React, {useState} from 'react';
-import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import {KFlexRow} from 'src/app/shared/components/flex';
+import {TreeViewItem} from '.';
+import {KFlexRow} from '../../flex';
+import {KIconButton} from '../buttons';
 
-export interface TreeViewItem {
-    id: number;
-    name: string;
-    children?: TreeViewItem[];
-}
 
 interface KTreeViewProps {
     items: TreeViewItem[];
     renderComponent: React.FunctionComponent<TreeViewItem>;
 }
 
-const KTreeView: React.FunctionComponent<KTreeViewProps> = (
+export const KTreeView: React.FunctionComponent<KTreeViewProps> = (
     {
         items,
         renderComponent
@@ -43,6 +39,3 @@ const KTreeView: React.FunctionComponent<KTreeViewProps> = (
         </ul>
     )
 }
-
-
-export default KTreeView;

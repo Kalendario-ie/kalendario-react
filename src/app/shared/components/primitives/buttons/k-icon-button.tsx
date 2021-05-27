@@ -7,7 +7,7 @@ interface KIconButtonProps {
     color?: string;
 }
 
-const KIconButton: React.FunctionComponent<KIconButtonProps> = (
+export const KIconButton: React.FunctionComponent<KIconButtonProps> = (
     {
         icon,
         onClick,
@@ -20,6 +20,3 @@ const KIconButton: React.FunctionComponent<KIconButtonProps> = (
         </div>
     )
 }
-
-
-export default KIconButton;

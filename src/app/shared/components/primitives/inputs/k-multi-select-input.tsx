@@ -1,11 +1,8 @@
-import {FieldInputProps} from 'formik';
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FormGroup} from 'reactstrap';
 import {KBaseInputProps, MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
-import KCheckbox from 'src/app/shared/components/primitives/inputs/k-checkbox';
-import KCard from 'src/app/shared/components/k-card';
-import KTreeView from 'src/app/shared/components/k-tree-view';
-import KIconButton from '../k-icon-button';
+import { KCard, KTreeView } from '../containers';
+import { KCheckbox } from './k-checkbox';
 
 // @ts-ignore
 interface KMultiSelectProps extends KBaseInputProps {
@@ -14,7 +11,7 @@ interface KMultiSelectProps extends KBaseInputProps {
     options: MultiSelectOption[];
 }
 
-const KMultiSelectInput: React.FunctionComponent<KMultiSelectProps> = (
+export const KMultiSelectInput: React.FunctionComponent<KMultiSelectProps> = (
     {
         name,
         value,
@@ -62,6 +59,3 @@ const KMultiSelectInput: React.FunctionComponent<KMultiSelectProps> = (
         </KCard>
     )
 }
-
-
-export default KMultiSelectInput;

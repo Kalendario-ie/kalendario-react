@@ -5,8 +5,7 @@ import CartCompanySummary from 'src/app/modules/companies/cart/cart-company-summ
 import CartRequestSummary from 'src/app/modules/companies/cart/cart-request-summary';
 import {companiesUrls} from 'src/app/modules/companies/paths';
 import KGrid from 'src/app/shared/components/grid/k-grid';
-import KalendarioCard from 'src/app/shared/components/k-card';
-import KPageContainer from 'src/app/shared/components/primitives/k-page-container';
+import {KPageContainer, KCard} from 'src/app/shared/components/primitives/containers';
 import {
     addNotesRequest,
     deleteAppointmentRequest,
@@ -39,11 +38,11 @@ const CartContainer: React.FunctionComponent<CartContainerProps> = () => {
                 <Redirect to={companiesUrls(company).index}/>
                 }
                 <KGrid size={6} smSize={12}>
-                    <KalendarioCard>
+                    <KCard>
                         <CartRequestSummary request={request}
                                             deleteClick={(id => dispatch(deleteAppointmentRequest(id)))}
                         />
-                    </KalendarioCard>
+                    </KCard>
                     <CartCompanySummary company={company}
                                         request={request}
                                         proceedToCheckoutClick={proceedToCheckout}

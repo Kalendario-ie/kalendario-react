@@ -2,10 +2,8 @@ import {ErrorMessage, Field, FieldInputProps, useFormikContext} from 'formik';
 import * as React from 'react';
 import {FormFeedback, FormGroup, Label} from 'reactstrap';
 import {KFormikInputBaseProps} from 'src/app/shared/components/forms/interfaces';
+import {KColorInput, KDurationInput, KMultiSelectInput} from 'src/app/shared/components/primitives/inputs';
 import {MultiSelectOption} from 'src/app/shared/components/primitives/inputs/interfaces';
-import KColorInput from 'src/app/shared/components/primitives/inputs/k-color-input';
-import KDurationInput from 'src/app/shared/components/primitives/inputs/k-duration-input';
-import KMultiSelectInput from 'src/app/shared/components/primitives/inputs/k-multi-select-input';
 import {camelCaseToWords} from 'src/app/shared/util/string-extensions';
 
 export interface KFormikInputProps extends KFormikInputBaseProps {

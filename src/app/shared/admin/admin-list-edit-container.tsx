@@ -4,7 +4,7 @@ import AdminTableButtons from 'src/app/shared/admin/admin-table-buttons';
 import {useEditModal} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps, AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
-import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
+import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 import {KFlexRow} from '../components/flex';

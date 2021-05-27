@@ -5,7 +5,7 @@ export interface KalendarioContainerProps {
     children: React.ReactNode;
 }
 
-const KPageContainer: React.FunctionComponent<KalendarioContainerProps> = (
+export const KPageContainer: React.FunctionComponent<KalendarioContainerProps> = (
     {
         children,
     }) => {
@@ -17,5 +17,3 @@ const KPageContainer: React.FunctionComponent<KalendarioContainerProps> = (
         </div>
     )
 }
-
-export default KPageContainer;

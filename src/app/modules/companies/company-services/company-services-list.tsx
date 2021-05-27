@@ -2,9 +2,9 @@ import React from 'react';
 import {isMobile} from 'react-device-detect';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
 import CompanyServicesItem from 'src/app/modules/companies/company-services/company-services-item';
-import {KFlexRow, KFlexRowItem } from 'src/app/shared/components/flex';
+import {KFlexRow, KFlexRowItem} from 'src/app/shared/components/flex';
 import KGrid from 'src/app/shared/components/grid/k-grid';
-import KCard from 'src/app/shared/components/k-card';
+import {KCard} from 'src/app/shared/components/primitives/containers';
 
 interface CompanyServicesListProps {
     services: Service[];

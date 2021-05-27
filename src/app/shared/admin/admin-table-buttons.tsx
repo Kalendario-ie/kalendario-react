@@ -1,6 +1,6 @@
 import React from 'react';
-import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
-import { KFlexRow } from '../components/flex';
+import {KIconButton} from 'src/app/shared/components/primitives/buttons';
+import {KFlexRow} from '../components/flex';
 
 interface AdminTableButtonsProps {
     onEditClick: () => void;

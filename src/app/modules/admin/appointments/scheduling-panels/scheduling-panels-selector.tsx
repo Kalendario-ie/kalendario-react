@@ -3,8 +3,7 @@ import SchedulingPanelForm from 'src/app/modules/admin/appointments/scheduling-p
 import {useEditModal, useSelectAll} from 'src/app/shared/admin/hooks';
 import {KFlexRow} from 'src/app/shared/components/flex';
 import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
-import KTextButton from 'src/app/shared/components/primitives/buttons/k-text-button';
-import KIconButton from 'src/app/shared/components/primitives/k-icon-button';
+import {KTextButton, KIconButton} from 'src/app/shared/components/primitives/buttons';
 import {useAppDispatch} from 'src/app/store';
 import {adminDashboardActions} from 'src/app/store/admin/dashboard';
 import {schedulingPanelActions, schedulingPanelSelectors} from 'src/app/store/admin/panels';
