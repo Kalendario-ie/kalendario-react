@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React from 'react';
 import {upsertUserRequestParser, UpsertUserRequestValidation, User} from 'src/app/api/users';
+import ChangePasswordForm from 'src/app/modules/admin/users/change-password-form';
 import {useSelectAll} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import {useAppDispatch} from 'src/app/store';
 import {employeeActions, employeeSelectors} from 'src/app/store/admin/employees';
 import {permissionGroupActions, permissionGroupSelectors} from 'src/app/store/admin/permissionGroups';
 
@@ -16,14 +15,8 @@ const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<User>> = 
         onSubmit,
         onCancel
     }) => {
-    const dispatch = useAppDispatch();
-    const employees = useSelector(employeeSelectors.selectAll)
-
-    useEffect(() => {
-        dispatch(employeeActions.initializeStore());
-    }, []);
+    const employees = useSelectAll(employeeSelectors, employeeActions);
     const groups = useSelectAll(permissionGroupSelectors, permissionGroupActions);
-
 
     return (
         <KFormikForm initialValues={upsertUserRequestParser(entity)}
@@ -32,6 +25,9 @@ const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<User>> = 
                      onCancel={onCancel}
                      validationSchema={UpsertUserRequestValidation}
         >
+            {entity?.id &&
+            <ChangePasswordForm id={entity.id}/>
+            }
             <KFormikInput name="firstName"/>
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>

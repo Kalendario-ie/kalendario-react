@@ -53,22 +53,18 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     const formik = useFormikContext();
     const fieldMeta = formik.getFieldMeta(name);
     const fieldHelpers = formik.getFieldHelpers(name);
-    className += (fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : '';
-    className += multiple ? ' form-select form-control' : '';
+    const fieldClassName = `form-control ${(fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : ''} ${multiple ? ' form-select form-control' : ''}`
     const isCheckbox = as === 'checkbox';
     const inputType = React.useMemo(() => inputAs(as, options), [options]);
 
-    const handleOnEmptySelect = () => {
-        console.log('onselect')
-        fieldHelpers.setValue(null);
-    }
+    const handleOnEmptySelect = () => fieldHelpers.setValue(null);
 
     return (
         <FormGroup className={className} check={isCheckbox}>
             {!isCheckbox &&
             <Label for={name}>{placeholder || camelCaseToWords(name)}</Label>
             }
-            <Field className="form-control"
+            <Field className={fieldClassName}
                    as={inputType}
                    id={name}
                    name={name}

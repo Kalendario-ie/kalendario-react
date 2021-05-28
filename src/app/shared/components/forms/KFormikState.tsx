@@ -14,6 +14,7 @@ export const KFormikState = (props: any) => {
             >
             <strong>props</strong> ={" "}
                 {JSON.stringify(formik.values, null, 2)}
+                {JSON.stringify(formik.errors, null, 2)}
         </pre>
         </div>
     )

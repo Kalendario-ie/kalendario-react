@@ -1,7 +1,7 @@
 import {PermissionModel} from 'src/app/api/auth';
 import {employeeParser} from 'src/app/api/employees';
 import {User} from 'src/app/api/users/models';
-import {UpsertUserRequest} from 'src/app/api/users/requests';
+import {ChangeUserPasswordRequest, UpsertUserRequest} from 'src/app/api/users/requests';
 
 
 export function userParser(data: any): User {
@@ -27,5 +27,11 @@ export function upsertUserRequestParser(user: User | null): UpsertUserRequest {
         email: '',
         employee: '',
         groups: []
+    }
+}
+
+export function changeUserPasswordRequestParser(): ChangeUserPasswordRequest {
+    return {
+        password1: '', password2: '', userPassword: ''
     }
 }
