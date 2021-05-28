@@ -41,8 +41,8 @@ export const KMultiSelectInput: React.FunctionComponent<KMultiSelectProps> = (
     return (
         <KCard hasShadow={false}
                maxHeight={30}
+               bodiless={true}
                mhUnit={'vh'}
-               header={name}
         >
             <KTreeView items={options}
                        renderComponent={(option) =>

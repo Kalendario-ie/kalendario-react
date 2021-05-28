@@ -46,7 +46,7 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
             <KFormikInput name="phone"/>
             <KFormikInput name="instagram"/>
             <KFormikInput name="schedule" as={'select'} options={schedules}/>
-            <KFormikInput name="services" as={'multi-select'} options={services} multiple={true}/>
+            <KFormikInput name="services" as={'multi-select'} options={services}/>
         </KFormikForm>
     )
 }
