@@ -2,10 +2,10 @@ import React from 'react';
 import {RouteComponentProps} from 'react-router';
 import {Redirect, Route, useHistory, useLocation} from 'react-router-dom';
 import Spinner from 'reactstrap/es/Spinner';
-import {isLoggedIn} from 'src/app/api/common/session-storage';
+import {PermissionModel, PermissionType} from 'src/app/api/auth';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
-import {useCurrentUser} from 'src/app/shared/context-providers/auth-auto-login';
+import {KFlexRow} from 'src/app/shared/components/flex';
+import {useCurrentUser, useUserHasPermission} from 'src/app/shared/context-providers/auth-auto-login';
 
 
 export type QueryParams = Record<string, string | number | undefined>;
@@ -27,17 +27,21 @@ export function useKHistory() {
 interface ProtectedRouteProps {
     path: string;
     component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+    permissionModel?: PermissionModel;
+    permissionType?: PermissionType;
 }
 
 export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
     {
         path,
-        component
+        component,
+        permissionModel,
+        permissionType= PermissionType.view,
     }) => {
     const {returnUrl, ...params} = useQueryParams();
     const {location: {pathname}} = useKHistory();
-
     const [loading, user] = useCurrentUser();
+    const hasPermission = useUserHasPermission(permissionType, permissionModel);
 
     return (
         <>
@@ -49,8 +53,13 @@ export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
             }
             {!loading &&
             <>
-                {user &&
+                {user && hasPermission &&
                 <Route path={path} component={component}/>
+                }
+                {user && !hasPermission &&
+                    <>
+                        unauthorized access
+                    </>
                 }
                 {!user &&
                 <Redirect to={pathWithParams(AUTH_ROUTES.LOGIN, {...params, returnUrl: pathname})}/>

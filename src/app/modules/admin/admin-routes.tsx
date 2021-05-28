@@ -1,6 +1,7 @@
 import React from 'react';
 import {useIntl} from 'react-intl';
-import {Route, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
+import {PermissionModel} from 'src/app/api/auth';
 import AppointmentsContainer from 'src/app/modules/admin/appointments/appointments-container';
 import CustomersContainer from 'src/app/modules/admin/customers/customers-container';
 import EmployeesContainer from 'src/app/modules/admin/employees/employees-container';
@@ -13,20 +14,51 @@ import KDashboardContainer from 'src/app/shared/components/dashboard/k-dashboard
 import {SideBarLinks} from 'src/app/shared/components/dashboard/k-dashboard-sidebar';
 import {ProtectedRoute} from 'src/app/shared/util/router-extensions';
 
+
 const AdminRoutes: React.FunctionComponent = () => {
     const intl = useIntl();
     const links: SideBarLinks = ({
         'Main': [
             // [intl.formatMessage({id: 'ADMIN.COMMON.HOME'}), ADMIN_ROUTES.HOME, 'home'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.SERVICES'}), ADMIN_ROUTES.SERVICES, 'magic'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.SCHEDULES'}), ADMIN_ROUTES.SCHEDULES, 'calendar-alt'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.EMPLOYEES'}), ADMIN_ROUTES.EMPLOYEES, 'people-carry'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.CUSTOMERS'}), ADMIN_ROUTES.CUSTOMERS, 'address-card'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.APPOINTMENTS'}), ADMIN_ROUTES.APPOINTMENTS, 'address-book'],
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.SCHEDULES'}),
+                url: ADMIN_ROUTES.SCHEDULES,
+                icon: 'calendar-alt',
+                permissionModel: PermissionModel.service
+            },
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.EMPLOYEES'}),
+                url: ADMIN_ROUTES.EMPLOYEES,
+                icon: 'people-carry',
+                permissionModel: PermissionModel.employee
+            },
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.CUSTOMERS'}),
+                url: ADMIN_ROUTES.CUSTOMERS,
+                icon: 'address-card',
+                permissionModel: PermissionModel.customer
+            },
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.APPOINTMENTS'}),
+                url: ADMIN_ROUTES.APPOINTMENTS,
+                icon: 'address-book',
+                permissionModel: PermissionModel.appointment
+            },
         ],
         'Manage': [
-            [intl.formatMessage({id: 'ADMIN.COMMON.USERS'}), ADMIN_ROUTES.USERS, 'users'],
-            [intl.formatMessage({id: 'ADMIN.COMMON.PERMISSION-GROUPS'}), ADMIN_ROUTES.PERMISSION_GROUPS, 'users-slash'],
+
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.USERS'}),
+                url: ADMIN_ROUTES.USERS,
+                icon: 'users',
+                permissionModel: PermissionModel.user
+            },
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.PERMISSION-GROUPS'}),
+                url: ADMIN_ROUTES.PERMISSION_GROUPS,
+                icon: 'users-slash',
+                permissionModel: PermissionModel.groupprofile
+            },
         ]
     });
 
@@ -35,14 +67,37 @@ const AdminRoutes: React.FunctionComponent = () => {
             {links &&
             <KDashboardContainer links={links}>
                 <Switch>
-                    <Route path={ADMIN_ROUTES.SERVICES} component={ServicesContainer}/>
-                    <Route path={ADMIN_ROUTES.EMPLOYEES} component={EmployeesContainer}/>
-                    <Route path={ADMIN_ROUTES.CUSTOMERS} component={CustomersContainer}/>
-                    <Route path={ADMIN_ROUTES.SCHEDULES} component={SchedulesContainer}/>
-                    <Route path={ADMIN_ROUTES.USERS} component={UsersContainer}/>
-                    <Route path={ADMIN_ROUTES.PERMISSION_GROUPS} component={PermissionGroupsContainer}/>
-                    <Route path={ADMIN_ROUTES.APPOINTMENTS} component={AppointmentsContainer}/>
-                    <ProtectedRoute path={ADMIN_ROUTES.ROOT} component={ServicesContainer}/>
+                    <ProtectedRoute permissionModel={PermissionModel.service}
+                                    path={ADMIN_ROUTES.SERVICES}
+                                    component={ServicesContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.employee}
+                                    path={ADMIN_ROUTES.EMPLOYEES}
+                                    component={EmployeesContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.customer}
+                                    path={ADMIN_ROUTES.CUSTOMERS}
+                                    component={CustomersContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.schedule}
+                                    path={ADMIN_ROUTES.SCHEDULES}
+                                    component={SchedulesContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.user}
+                                    path={ADMIN_ROUTES.USERS}
+                                    component={UsersContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.groupprofile}
+                                    path={ADMIN_ROUTES.PERMISSION_GROUPS}
+                                    component={PermissionGroupsContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.appointment}
+                                    path={ADMIN_ROUTES.APPOINTMENTS}
+                                    component={AppointmentsContainer}/>
+
+                    <ProtectedRoute permissionModel={PermissionModel.service}
+                                    path={ADMIN_ROUTES.ROOT}
+                                    component={ServicesContainer}/>
                 </Switch>
             </KDashboardContainer>
             }
