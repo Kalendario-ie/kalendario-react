@@ -26,7 +26,7 @@ export function KFormikForm<Values>(
         validationSchema
     }: KFormikFormProps<Values>) {
     let errors: string[] = [];
-    if (apiError && apiError.detail['nonFieldErrors']) {
+    if (apiError?.detail && apiError.detail['nonFieldErrors']) {
         errors = apiError.detail['nonFieldErrors'];
     }
     return (

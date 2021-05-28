@@ -11,7 +11,7 @@
 }
 
 .btn-light {
-  background-color:transparent;
+  background-color: transparent;
   border: 0;
 }
 
@@ -61,4 +61,14 @@ button:disabled {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.icon-button {
+  border: 0;
+  background-color: inherit;
+}
+
+.icon-button:disabled {
+  color: gray;
+  opacity: 50%;
 }

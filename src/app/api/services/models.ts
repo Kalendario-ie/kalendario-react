@@ -1,3 +1,4 @@
+import {PermissionModel} from 'src/app/api/auth';
 import {IReadModel, TimeOfDay} from 'src/app/api/common/models';
 
 
@@ -19,4 +20,4 @@ export interface ServiceCategory extends IReadModel {
     color?: string;
 }
 
-export const otherCategory: ServiceCategory = {id: 0, name: 'Other'}
+export const otherCategory = () => ({id: 0, name: 'Other', permissionModel: PermissionModel.servicecategory})

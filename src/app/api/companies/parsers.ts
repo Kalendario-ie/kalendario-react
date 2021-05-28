@@ -1,7 +1,7 @@
 import moment from 'moment';
+import {companyConfigParser} from 'src/app/api/company-config/parsers';
 import {otherCategory, serviceCategoryParser, serviceParser} from 'src/app/api/services';
 import {employeeParser} from '../employees';
-import {CompanyConfig} from '../admin-companies/models';
 import {Company, CompanyDetails, Slot} from './models';
 
 const imageStorage = process.env.REACT_APP_IMAGE_API_URL;
@@ -16,7 +16,7 @@ export function companyDetailsParser(data: any): CompanyDetails {
     });
     const serviceCategories = data.serviceCategories.map((cat: any) => serviceCategoryParser(cat));
     if (hasOtherCategory) {
-        serviceCategories.push(otherCategory);
+        serviceCategories.push(otherCategory());
     }
     return {
         ...data,
@@ -24,7 +24,7 @@ export function companyDetailsParser(data: any): CompanyDetails {
         employees: data.employees.map((employee: any) => employeeParser(employee)),
         services: services,
         serviceCategories: serviceCategories,
-        config: CompanyConfig.fromJs(data.config)
+        config: companyConfigParser(data.config)
     }
 }
 
@@ -32,7 +32,7 @@ export function companyParser(data: any): Company {
     return {
         ...data,
         avatar: imageStorage + data.avatar,
-        config: CompanyConfig.fromJs(data.config)
+        config: companyConfigParser(data.config)
     }
 }
 

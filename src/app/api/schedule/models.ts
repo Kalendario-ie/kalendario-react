@@ -1,8 +1,7 @@
+import {IReadModel} from 'src/app/api/common/models';
 import {Shift} from '../shifts/models';
 
-export interface Schedule {
-    id: 0;
-    name: string;
+export interface Schedule extends IReadModel {
     mon: Shift;
     tue: Shift;
     wed: Shift;

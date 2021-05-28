@@ -1,10 +1,12 @@
+import {PermissionModel} from 'src/app/api/auth';
 import {SchedulingPanel} from 'src/app/api/scheduling-panels/models';
 import {UpsertSchedulingPanelRequest} from 'src/app/api/scheduling-panels/requests';
 
 
 export function schedulingPanelParser(data: any): SchedulingPanel {
     return {
-        ...data
+        ...data,
+        permissionModel: PermissionModel.schedulingpanel,
     }
 }
 

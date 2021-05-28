@@ -1,8 +1,8 @@
+import {Moment} from 'moment';
+import {IReadModel} from '../common/models';
+import {CompanyConfig} from '../company-config/models';
 import {Employee} from '../employees/models';
 import {Service, ServiceCategory} from '../services/models';
-import {CompanyConfig} from '../admin-companies/models';
-import {IReadModel} from '../common/models';
-import {Moment} from 'moment';
 
 export interface Company extends IReadModel {
     id: number;

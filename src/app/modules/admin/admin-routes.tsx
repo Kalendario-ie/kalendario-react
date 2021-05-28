@@ -21,10 +21,16 @@ const AdminRoutes: React.FunctionComponent = () => {
         'Main': [
             // [intl.formatMessage({id: 'ADMIN.COMMON.HOME'}), ADMIN_ROUTES.HOME, 'home'],
             {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.SERVICES'}),
+                url: ADMIN_ROUTES.SERVICES,
+                icon: 'magic',
+                permissionModel: PermissionModel.service
+            },
+            {
                 name: intl.formatMessage({id: 'ADMIN.COMMON.SCHEDULES'}),
                 url: ADMIN_ROUTES.SCHEDULES,
                 icon: 'calendar-alt',
-                permissionModel: PermissionModel.service
+                permissionModel: PermissionModel.schedule
             },
             {
                 name: intl.formatMessage({id: 'ADMIN.COMMON.EMPLOYEES'}),

@@ -8,6 +8,7 @@ import {
     EventType
 } from 'src/app/api/appointments/models';
 import {UpsertCustomerAppointmentRequest, UpsertEmployeeEventRequest} from 'src/app/api/appointments/requests';
+import {PermissionModel} from 'src/app/api/auth';
 import {customerParser} from 'src/app/api/customers';
 import {employeeParser} from 'src/app/api/employees';
 import {serviceParser} from 'src/app/api/services';
@@ -45,6 +46,7 @@ function customerAppointmentParser(data: any): CustomerAppointment {
 function employeeEventParser(data: any): EmployeeEvent {
     return {
         ...data,
+        permissionModel: PermissionModel.appointment,
         type: EventType.EmployeeEvent,
         name: '',
         employee: employeeParser(data.employee),

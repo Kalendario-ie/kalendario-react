@@ -16,7 +16,7 @@ export interface User extends IReadModel {
     employeeId: number;
     groups: number[];
     permissions: string[];
-    company: Company | null;
+    company: { id: number, name: string } | null;
     verified: boolean;
 }
 

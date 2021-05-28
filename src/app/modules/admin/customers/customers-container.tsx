@@ -1,4 +1,5 @@
 import React from 'react';
+import {PermissionModel} from 'src/app/api/auth';
 import CustomerUpsertForm from 'src/app/modules/admin/customers/customer-upsert-form';
 import CustomersTable from 'src/app/modules/admin/customers/customers-table';
 import AdminListEditContainer from 'src/app/shared/admin/admin-list-edit-container';
@@ -17,6 +18,7 @@ const CustomersContainer: React.FunctionComponent = () => {
             <AdminListEditContainer baseSelectors={customerSelectors}
                                     baseActions={customerActions}
                                     filter={filter}
+                                    modelType={PermissionModel.customer}
                                     EditContainer={CustomerUpsertForm}
                                     ListContainer={CustomersTable}/>
     )

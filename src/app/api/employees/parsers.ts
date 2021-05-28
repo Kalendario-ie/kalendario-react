@@ -1,3 +1,4 @@
+import {PermissionModel} from 'src/app/api/auth';
 import {personParser} from 'src/app/api/common/parsers';
 import {Employee} from 'src/app/api/employees/models';
 import {UpsertEmployeeRequest} from 'src/app/api/employees/requests';
@@ -8,6 +9,7 @@ export function employeeParser(data?: any): Employee {
     return data ? {
         ...data,
         ...personParser(data),
+        permissionModel: PermissionModel.employee,
         private: !!data.private,
         photoUrl: data.profileImg ? imageStorage + data.profileImg
             : 'img/default-avatar.jpg',

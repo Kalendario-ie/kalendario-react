@@ -1,4 +1,5 @@
-import {timeFromString, timeToISOString, timeToString} from 'src/app/api/common/models';
+import {PermissionModel} from 'src/app/api/auth';
+import {timeFromString, timeToISOString} from 'src/app/api/common/models';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
 import {UpsertServiceRequest} from 'src/app/api/services/requests';
 
@@ -6,6 +7,7 @@ import {UpsertServiceRequest} from 'src/app/api/services/requests';
 export function serviceParser(data?: any): Service {
     return {
         ...data,
+        permissionModel: PermissionModel.service,
         duration: timeFromString(data.duration)
     }
 }

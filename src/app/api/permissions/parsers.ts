@@ -1,3 +1,4 @@
+import {PermissionModel} from 'src/app/api/auth';
 import {Permission, PermissionGroup} from 'src/app/api/permissions/models';
 import {UpsertPermissionGroupRequest} from 'src/app/api/permissions/requests';
 
@@ -5,6 +6,7 @@ import {UpsertPermissionGroupRequest} from 'src/app/api/permissions/requests';
 export function permissionGroupParser(data: any): PermissionGroup {
     return {
         ...data,
+        permissionModel: PermissionModel.groupprofile,
         permissions: data.permissions ? data.permissions : []
     }
 }

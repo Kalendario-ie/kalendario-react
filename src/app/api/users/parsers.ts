@@ -1,13 +1,15 @@
-import {companyParser} from 'src/app/api/companies';
+import {PermissionModel} from 'src/app/api/auth';
 import {employeeParser} from 'src/app/api/employees';
 import {User} from 'src/app/api/users/models';
 import {UpsertUserRequest} from 'src/app/api/users/requests';
 
+
 export function userParser(data: any): User {
     return {
         ...data,
+        permissionModel: PermissionModel.user,
         employee: data.employee ? employeeParser(data.employee) : null,
-        company: data.owner ? companyParser(data.owner) : null,
+        company: data.owner ? {...data.owner} : null,
         verified: !!data.verified
     }
 }

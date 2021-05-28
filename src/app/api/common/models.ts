@@ -1,6 +1,8 @@
+import {PermissionModel} from 'src/app/api/auth';
 
 export interface IReadModel {
     id: number;
+    permissionModel: PermissionModel;
     name: string;
 }
 

@@ -1,5 +1,5 @@
 import {Moment} from 'moment';
-import {IConfigWriteModel} from '../admin-companies/models';
+import {UpsertCompanyConfigRequest} from 'src/app/api/company-config/requests';
 
 
 export interface CompanyDetailsRequest {
@@ -15,7 +15,7 @@ export interface ICompanyWriteModel {
     phoneNumber: string;
     whatsapp: string;
     facebook: string;
-    config?: IConfigWriteModel;
+    config?: UpsertCompanyConfigRequest;
 }
 
 export interface SlotRequestParams {

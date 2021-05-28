@@ -1,4 +1,5 @@
 import {Moment} from 'moment';
+import {PermissionModel} from 'src/app/api/auth';
 import {timeToISOString} from 'src/app/api/common/models';
 import {Schedule} from 'src/app/api/schedule/models';
 import {UpsertScheduleRequest, UpsertScheduleRequestShift} from 'src/app/api/schedule/requests';
@@ -6,8 +7,8 @@ import {Shift, shiftParser} from 'src/app/api/shifts';
 
 export function scheduleParser(data: any): Schedule {
     return {
-        id: data.id,
-        name: data.name,
+        ...data,
+        permissionModel: PermissionModel.schedule,
         mon: shiftParser(data.mon),
         tue: shiftParser(data.tue),
         wed: shiftParser(data.wed),
