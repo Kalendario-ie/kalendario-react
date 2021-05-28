@@ -11,6 +11,7 @@ export interface KFormikInputProps extends KFormikInputBaseProps {
     multiple?: boolean;
     emptyOption?: boolean;
     as?: string;
+    className?: string;
 }
 
 function inputAs(as: string,
@@ -45,11 +46,11 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
         options,
         multiple = false,
         emptyOption = true,
-        as = 'input'
+        as = 'input',
+        className = '',
     }
 ) => {
     const formik = useFormikContext();
-    let className = "form-control";
     const fieldMeta = formik.getFieldMeta(name);
     const fieldHelpers = formik.getFieldHelpers(name);
     className += (fieldMeta.error && fieldMeta.touched) ? ' is-invalid' : '';
@@ -63,11 +64,11 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     }
 
     return (
-        <FormGroup check={isCheckbox}>
+        <FormGroup className={className} check={isCheckbox}>
             {!isCheckbox &&
             <Label for={name}>{placeholder || camelCaseToWords(name)}</Label>
             }
-            <Field className={className}
+            <Field className="form-control"
                    as={inputType}
                    id={name}
                    name={name}

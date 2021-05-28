@@ -46,6 +46,7 @@ export function KFormikForm<Values>(
                     {typeof children == 'function'
                         ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
                         : children}
+
                     {onCancel &&
                     <KFormikStandardButtons onCancel={onCancel}/>
                     }

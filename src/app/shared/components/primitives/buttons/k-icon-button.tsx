@@ -25,6 +25,7 @@ export const KIconButton: React.FunctionComponent<KIconButtonProps> = (
         >
             <button onClick={onClick}
                     disabled={disabled}
+                    type="button"
                     className={`c-${color} icon-button mx-1`}
             >
                 <KIcon icon={icon}/>

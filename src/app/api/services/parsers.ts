@@ -1,7 +1,7 @@
 import {PermissionModel} from 'src/app/api/auth';
 import {timeFromString, timeToISOString} from 'src/app/api/common/models';
 import {Service, ServiceCategory} from 'src/app/api/services/models';
-import {UpsertServiceRequest} from 'src/app/api/services/requests';
+import {UpsertServiceCategoryRequest, UpsertServiceRequest} from 'src/app/api/services/requests';
 
 
 export function serviceParser(data?: any): Service {
@@ -17,7 +17,6 @@ export function serviceCategoryParser(data: any): ServiceCategory {
         ...data
     }
 }
-
 
 export function createUpsertServiceRequest(service: Service | null | undefined): UpsertServiceRequest {
     return service ? {
@@ -39,5 +38,15 @@ export function createUpsertServiceRequest(service: Service | null | undefined):
         name: '',
         private: false
 
+    }
+}
+
+export function createUpsertServiceCategoryRequest(category: ServiceCategory | null | undefined): UpsertServiceCategoryRequest {
+    return category ? {
+        name: category.name,
+        color: category.color || ''
+    } : {
+        name: '',
+        color: '',
     }
 }

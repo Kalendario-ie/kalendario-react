@@ -1,3 +1,4 @@
+import {IReadModel} from 'src/app/api/common/models';
 import * as yup from 'yup';
 
 export interface UpsertServiceRequest {
@@ -18,5 +19,15 @@ export const UpsertServiceRequestValidation = yup.object().shape({
     duration: yup.string(),
     cost: yup.number(),
     description: yup.string().required().max(255),
+    color: yup.string().required(),
+});
+
+export interface UpsertServiceCategoryRequest {
+    name: string;
+    color: string;
+}
+
+export const UpsertServiceCategoryRequestValidation = yup.object().shape({
+    name: yup.string().required().max(255),
     color: yup.string().required(),
 });
