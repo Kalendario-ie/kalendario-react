@@ -5,12 +5,9 @@ import {momentIsToday, momentToday} from 'src/app/shared/util/moment-helpers';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 import styles from './employee-panel.module.scss';
 
-interface TimerLineContainerProps {
-}
 
-const TimeLineContainer: React.FunctionComponent<TimerLineContainerProps> = (
+const TimeLineContainer: React.FunctionComponent = (
     {
-        children
     }) => {
     const currentDate = useSelector(adminDashboardSelectors.selectCurrentDate);
     const isToday = momentIsToday(currentDate)
