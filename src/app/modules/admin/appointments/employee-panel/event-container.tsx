@@ -6,7 +6,6 @@ import styles from 'src/app/modules/admin/appointments/employee-panel/employee-p
 import {useHoursConverter} from 'src/app/modules/admin/appointments/employee-panel/hooks';
 import {useAppSelector} from 'src/app/store';
 import {appointmentSelectors} from 'src/app/store/admin/appointments';
-import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 
 interface EventProps {
     appointment: Appointment;

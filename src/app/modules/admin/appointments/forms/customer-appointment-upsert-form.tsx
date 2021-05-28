@@ -92,12 +92,14 @@ function useEmployeeServices() {
 function useUpdateEndTimeOnServiceChangeEffect() {
     const formik = useFormikContext();
     const serviceId = formik.getFieldProps<number>('service').value;
+    const [initialId, setInitialId] = useState(serviceId);
     const service = useAppSelector((state) => serviceSelectors.selectById(state, serviceId));
     const {value} = formik.getFieldProps('start');
     const {setValue} = formik.getFieldHelpers('end');
 
     useEffect(() => {
-        if (service) {
+        if (service && serviceId !== initialId) {
+            setInitialId(serviceId);
             setValue(addHours(stringToMoment(value), timeToString(service.duration)))
         }
     }, [serviceId]);
