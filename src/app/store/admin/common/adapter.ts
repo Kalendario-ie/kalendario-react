@@ -191,6 +191,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         actions,
         adapter,
         reducer: slice.reducer,
+        slice,
         sagas,
         selectors
     }

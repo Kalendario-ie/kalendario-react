@@ -1,11 +1,14 @@
 import React, {useMemo} from 'react';
-import {Employee} from 'src/app/api/employees';
+import {adminEmployeeClient, Employee} from 'src/app/api/employees';
 import EmployeeRowExpanded from 'src/app/modules/admin/employees/employee-row-expanded';
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
+import EditableAvatarImg from 'src/app/shared/components/primitives/containers/editable-avatar-img';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 import KTable from 'src/app/shared/components/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/components/tables/k-text-column-filter';
+import {useAppDispatch} from 'src/app/store';
+import {employeeReducerActions} from 'src/app/store/admin/employees';
 
 
 const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
@@ -14,6 +17,8 @@ const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
         buttonsColumn,
         filter,
     }) => {
+    const dispatch = useAppDispatch();
+
     const columns = useMemo(() => [
         {
             // Make an expander cell
@@ -28,7 +33,9 @@ const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
         {
             Header: 'Photo',
             accessor: 'photoUrl',
-            Cell: (value: any) => <AvatarImg src={value.cell.value} size={3}/>
+            Cell: (value: any) => <EditableAvatarImg src={value.cell.value}
+                                                     onSubmit={(file) => handleFileSubmit(value.row.original, file)}
+                                                     size={3}/>
         },
         {
             Header: 'Name',
@@ -51,6 +58,14 @@ const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
         },
         buttonsColumn
     ], [])
+
+    const handleFileSubmit = (entity: Employee, file: File) =>
+        adminEmployeeClient.uploadProfilePicture(entity.id, file)
+            .then(res => {
+                dispatch(employeeReducerActions.upsertOne({...entity, photoUrl: res.url}));
+                return true;
+            })
+            .catch(error => false);
 
     const renderRowSubComponent = React.useCallback(
         (row: any) => <EmployeeRowExpanded employee={row.original}/>, [])

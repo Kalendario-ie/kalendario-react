@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {Employee, upsertEmployeeRequestParser, UpsertEmployeeRequestValidation} from 'src/app/api/employees';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
-import {KFlexColumn} from 'src/app/shared/components/flex';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import {useAppDispatch} from 'src/app/store';
@@ -36,12 +36,16 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
                      validationSchema={UpsertEmployeeRequestValidation}
         >
             {entity?.photoUrl &&
-            <KFlexColumn className="mb-2" justify={'center'} align={'center'}>
-                <AvatarImg size={3} src={entity.photoUrl}/>
-            </KFlexColumn>
+            <KFlexRow className="mb-2" justify={'between'} align={'center'}>
+                <KFlexRow className="flex-fill mr-2" justify={'center'} align={'center'}>
+                    <AvatarImg size={5} src={entity.photoUrl}/>
+                </KFlexRow>
+                <KFlexColumn>
+                    <KFormikInput name="firstName"/>
+                    <KFormikInput name="lastName"/>
+                </KFlexColumn>
+            </KFlexRow>
             }
-            <KFormikInput name="firstName"/>
-            <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>
             <KFormikInput name="phone"/>
             <KFormikInput name="instagram"/>
