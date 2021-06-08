@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
 import {timeToString} from 'src/app/api/common/models';
+import {Service} from 'src/app/api/services';
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import KColorBox from 'src/app/shared/components/primitives/KColorBox';
 import {KSelectColumnFilter} from 'src/app/shared/components/tables/k-select-column-filter';
@@ -9,7 +10,7 @@ import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {serviceCategoryActions, serviceCategorySelectors} from 'src/app/store/admin/serviceCategories';
 
 
-const ServicesTable: React.FunctionComponent<AdminTableContainerProps> = (
+const ServicesTable: React.FunctionComponent<AdminTableContainerProps<Service>> = (
     {
         entities,
         buttonsColumn,

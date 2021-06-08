@@ -1,22 +1,22 @@
 import React from 'react';
 import {ColumnInstance, Row, TablePropGetter, TableProps} from 'react-table';
 
-interface KTableBodyProps {
-    getTableBodyProps: (propGetter?: TablePropGetter<object>) => TableProps;
-    rows: Array<Row<object>>;
-    prepareRow: (row: Row<object>) => void;
-    visibleColumns: Array<ColumnInstance<object>>;
-    renderRowSubComponent?: (row: Row<object>) => React.ReactNode;
+interface KTableBodyProps<D extends object> {
+    getTableBodyProps: (propGetter?: TablePropGetter<D>) => TableProps;
+    rows: Array<Row<D>>;
+    prepareRow: (row: Row<D>) => void;
+    visibleColumns: Array<ColumnInstance<D>>;
+    renderRowSubComponent?: (row: Row<D>) => React.ReactNode;
 }
 
-const KTableBody: React.FunctionComponent<KTableBodyProps> = (
+function KTableBody<D extends object>(
     {
         getTableBodyProps,
         rows,
         prepareRow,
         visibleColumns,
         renderRowSubComponent
-    }) => {
+    }: KTableBodyProps<D>) {
     return (
         <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
@@ -25,7 +25,7 @@ const KTableBody: React.FunctionComponent<KTableBodyProps> = (
                 <React.Fragment key={i}>
                     <tr {
                             // @ts-ignore
-                            ...renderRowSubComponent ? row.getToggleRowExpandedProps() : null
+                            ...renderRowSubComponent ? row.getToggleRowExpandedProps() : row.getRowProps()
                         }>
                         {row.cells.map(cell =>
                             <td style={{verticalAlign: 'middle'}} {...cell.getCellProps()}>

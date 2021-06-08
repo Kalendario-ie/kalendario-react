@@ -6,22 +6,24 @@ import KTableBody from 'src/app/shared/components/tables/k-table-body';
 import KTableHeader from 'src/app/shared/components/tables/k-table-header';
 import style from './k-table.module.scss';
 
-interface KTableProps<D extends object = {}> {
+interface KTableProps<D extends object> {
     columns: Array<Column<D>>
     data: D[]
     renderRowSubComponent?: (row: Row<D>) => React.ReactNode
     hover?: boolean;
     stripped?: boolean;
+    extraPrepare?: (row: Row<D>) => void;
 }
 
-const KTable: React.FunctionComponent<KTableProps> = (
+function KTable<D extends object>(
     {
         columns,
         data,
         renderRowSubComponent,
         hover = false,
-        stripped = false
-    }) => {
+        stripped = false,
+        extraPrepare,
+    }: KTableProps<D>) {
     const filterTypes = React.useMemo(
         () => ({
             text: (rows: any[], id: number, filterValue: string) => {
@@ -59,6 +61,11 @@ const KTable: React.FunctionComponent<KTableProps> = (
         useExpanded,
     )
 
+    const customPrepareRow = (row: Row<D>) => {
+        prepareRow(row);
+        extraPrepare && extraPrepare(row);
+    }
+
 
     return (
         <Table className={style.fixedHeaders} hover={hover} striped={stripped} {...getTableProps()}>
@@ -66,7 +73,7 @@ const KTable: React.FunctionComponent<KTableProps> = (
             />
             <KTableBody getTableBodyProps={getTableBodyProps}
                         rows={rows}
-                        prepareRow={prepareRow}
+                        prepareRow={customPrepareRow}
                         visibleColumns={visibleColumns}
                         renderRowSubComponent={renderRowSubComponent}
             />

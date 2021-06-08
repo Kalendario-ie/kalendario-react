@@ -8,8 +8,8 @@ export interface AdminEditContainerProps<TEntity> {
     onCancel: () => void;
 }
 
-export interface AdminTableContainerProps {
-    entities: IReadModel[];
+export interface AdminTableContainerProps<TModel> {
+    entities: TModel[];
     filter?: (value: string | undefined) => void;
     buttonsColumn: any
 }

@@ -1,15 +1,11 @@
 import React from 'react';
 import {HeaderGroup} from 'react-table';
-import {Table} from 'reactstrap';
 
-interface KTableHeaderProps {
-    headerGroups: Array<HeaderGroup<object>>;
+interface KTableHeaderProps<D extends object> {
+    headerGroups: Array<HeaderGroup<D>>;
 }
 
-const KTableHeader: React.FunctionComponent<KTableHeaderProps> = (
-    {
-        headerGroups
-    }) => {
+function KTableHeader<D extends object>({headerGroups}: KTableHeaderProps<D>) {
     return (
         <thead>
         {headerGroups.map(headerGroup => (

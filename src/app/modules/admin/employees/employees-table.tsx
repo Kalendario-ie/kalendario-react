@@ -2,7 +2,6 @@ import React, {useMemo} from 'react';
 import {adminEmployeeClient, Employee} from 'src/app/api/employees';
 import EmployeeRowExpanded from 'src/app/modules/admin/employees/employee-row-expanded';
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
-import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import EditableAvatarImg from 'src/app/shared/components/primitives/containers/editable-avatar-img';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 import KTable from 'src/app/shared/components/tables/k-table';
@@ -11,7 +10,7 @@ import {useAppDispatch} from 'src/app/store';
 import {employeeReducerActions} from 'src/app/store/admin/employees';
 
 
-const EmployeesTable: React.FunctionComponent<AdminTableContainerProps> = (
+const EmployeesTable: React.FunctionComponent<AdminTableContainerProps<Employee>> = (
     {
         entities,
         buttonsColumn,

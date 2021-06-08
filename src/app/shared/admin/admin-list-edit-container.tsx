@@ -15,7 +15,7 @@ interface AdminListEditContainerProps<TEntity> {
     modelType: PermissionModel;
     filter?: (value: string | undefined) => void;
     EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>;
-    ListContainer: React.FunctionComponent<AdminTableContainerProps>;
+    ListContainer: React.FunctionComponent<AdminTableContainerProps<TEntity>>;
 }
 
 function AdminListEditContainer<TEntity extends IReadModel>(
