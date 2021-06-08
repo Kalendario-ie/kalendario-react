@@ -50,6 +50,11 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
                                  defaultInputValue={initialCustomer?.name}
                                  getOptionValue={(option) => option.id.toString()}
                                  getOptionLabel={(option) => option.name}
+                                 formatOptionLabel={(option) =>
+                                     <KFlexColumn justify={'between'} className={option.warning ? 'bg-danger' : ''}>
+                                         <span className="font-bold">{option.name}</span> {option.email}
+                                     </KFlexColumn>
+                                 }
                                  onChange={navigateToPage}
                                  loadOptions={promiseOptions}/>
                     <KIconButton color="primary" icon={'plus'} onClick={openModal(null)}/>
