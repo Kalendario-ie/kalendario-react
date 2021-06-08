@@ -4,6 +4,7 @@ export interface SaveCustomerRequest {
     lastName: string;
     email: string;
     phone: string;
+    warning: string;
 }
 
 

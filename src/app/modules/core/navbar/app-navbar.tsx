@@ -97,11 +97,17 @@ const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
                                     </NavLink>
                                 </DropdownItem>
                                 <DropdownItem divider/>
+                                    <DropdownItem>
+                                        <NavLink tag={Link} to={ADMIN_ROUTES.ROOT}>
+                                            <FormattedMessage id={'NAVBAR.ADMIN'}/>
+                                        </NavLink>
+                                    </DropdownItem>
                                 <DropdownItem>
                                     <NavLink tag={Link} to={ADMIN_ROUTES.ROOT}>
-                                        <FormattedMessage id={'NAVBAR.ADMIN'}/>
+                                        <FormattedMessage id={'NAVBAR.EMPLOYEE'}/>
                                     </NavLink>
                                 </DropdownItem>
+                                <DropdownItem divider/>
                                 <DropdownItem>
                                     <NavLink tag={Link} to={AUTH_ROUTES.LOGOUT}>
                                         <FormattedMessage id={'AUTH.LOGOUT'}/>

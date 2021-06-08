@@ -15,7 +15,8 @@
     "SURE-DELETE": "Are you sure you want to delete?"
   },
   "NAVBAR": {
-    "ADMIN": "Admin Dashboard"
+    "ADMIN": "Admin Dashboard",
+    "EMPLOYEE": "Employee Dashboard"
   },
   "COMPANY": {
     "NO-SLOTS": "No time available for the date selected",

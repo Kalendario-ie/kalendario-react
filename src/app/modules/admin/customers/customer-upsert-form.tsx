@@ -28,6 +28,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Custom
             <KFormikInput name="lastName"/>
             <KFormikInput name="email"/>
             <KFormikInput name="phone"/>
+            <KFormikInput as="textarea" name="warning"/>
         </KFormikForm>
     )
 }

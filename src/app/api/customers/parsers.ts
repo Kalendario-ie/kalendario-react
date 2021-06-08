@@ -7,6 +7,7 @@ import {SaveCustomerRequest} from '.';
 export function customerParser(data?: any): Customer {
     return {
         ...personParser(data),
+        warning: data.warning,
         permissionModel: PermissionModel.customer,
     }
 
@@ -17,8 +18,9 @@ export function saveCustomerRequestParser(customer: Customer | null): SaveCustom
         email: customer.email,
         firstName: customer.firstName,
         lastName: customer.lastName,
-        phone: customer.phone
+        phone: customer.phone,
+        warning: customer.warning
     } : {
-        email: '', firstName: '', lastName: '', phone: ''
+        email: '', firstName: '', lastName: '', phone: '', warning: ''
     }
 }
