@@ -42,14 +42,14 @@ const LoginContainer = () => {
                                 header={<FormattedMessage id="AUTH.LOGIN-HEADER"/>}
                 >
                     <>
-                        {faceBookAppId &&
-                        <FacebookLogin
-                            appId={faceBookAppId}
-                            autoLoad={false}
-                            size={'small'}
-                            fields="name,email,picture"
-                            callback={facebookCallback}/>
-                        }
+                        {/*{faceBookAppId &&*/}
+                        {/*<FacebookLogin*/}
+                        {/*    appId={faceBookAppId}*/}
+                        {/*    autoLoad={false}*/}
+                        {/*    size={'small'}*/}
+                        {/*    fields="name,email,picture"*/}
+                        {/*    callback={facebookCallback}/>*/}
+                        {/*}*/}
 
                         <LoginView onSubmit={handleSubmit}
                                    data={initialValues}
