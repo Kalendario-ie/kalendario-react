@@ -62,7 +62,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
     return (
         <FormGroup className={className} check={isCheckbox}>
             {!isCheckbox &&
-            <Label for={name}>{placeholder || camelCaseToWords(name)}</Label>
+            <Label for={name} className="ml-1 mb-1">{placeholder || camelCaseToWords(name)}</Label>
             }
             <Field className={fieldClassName}
                    as={inputType}

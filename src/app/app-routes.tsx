@@ -1,3 +1,5 @@
+import EmployeeRoutes from 'src/app/modules/employee/employee-routes';
+import {EMPLOYEE_ROUTES} from 'src/app/modules/employee/urls';
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import AdminRoutes from 'src/app/modules/admin/admin-routes';
@@ -18,6 +20,7 @@ const AppRoutes: React.FunctionComponent = () => {
             <Route path="/c" component={CompaniesRoutes}/>
             <ProtectedRoute path={USER_ROUTES.ROOT} component={UsersRoutes}/>
             <ProtectedRoute path={ADMIN_ROUTES.ROOT} component={AdminRoutes}/>
+            <ProtectedRoute path={EMPLOYEE_ROUTES.ROOT} component={EmployeeRoutes}/>
             <Route path="/" component={HomeContainer}/>
         </Switch>
     )

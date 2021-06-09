@@ -1,6 +1,7 @@
 {
   "AUTH": {
     "LOGIN-HEADER": "Log in to Kalendario",
+    "REGISTER-HEADER": "Register to Kalendario",
     "LOGIN": "Login",
     "REGISTER": "Register",
     "LOGOUT": "Logout",

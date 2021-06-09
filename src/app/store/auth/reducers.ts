@@ -20,12 +20,14 @@ const initialState: AuthState = {
 
 const reducer: Reducer<AuthState> = (state = initialState, {type, payload}) => {
     switch (type) {
+        case ACTION_TYPES.REGISTER_REQUEST:
         case ACTION_TYPES.LOGIN_REQUEST:
             return {...state, apiError: null}
         case ACTION_TYPES.SET_USER:
             return {...state, loggedIn: !!payload, user: payload, loadingUser: false}
         case ACTION_TYPES.SET_LOADING_USER:
             return {...state, loadingUser: payload}
+        case ACTION_TYPES.REGISTER_REQUEST_FAIL:
         case ACTION_TYPES.LOGIN_REQUEST_FAIL:
             return {...state, loggedIn: false, apiError: payload, loadingUser: false}
         default:

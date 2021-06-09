@@ -28,7 +28,7 @@ const LoginView: React.FunctionComponent<LoginViewProps> = (
                 <KFormikInput name="password" type="password"/>
                 <KFormikSubmit text={<FormattedMessage id={"AUTH.LOGIN"}/>}
                                isBlock={true}
-                ><FormattedMessage id="COMMON.FORM.SUBMIT"/></KFormikSubmit>
+                />
             </>
         </KFormikForm>
     )

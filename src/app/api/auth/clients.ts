@@ -1,10 +1,10 @@
 import {AxiosInstance, AxiosResponse} from 'axios';
 import {userParser} from 'src/app/api/users';
 import baseApiAxios from '../common/clients/base-api';
-import {LoginRequest} from './requests';
+import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
 import {User} from '../users/models';
 import {LoginResponse, RefreshAccessTokenResponse} from './models';
-import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
+import {LoginRequest, RegisterRequest} from './requests';
 
 
 const authUrl = 'auth/';
@@ -17,6 +17,11 @@ export const authApi = {
     },
     login(request: LoginRequest): Promise<User | null> {
         return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
+            .then(completeLogin);
+    },
+
+    register(request: RegisterRequest): Promise<User | null> {
+        return baseApiAxios.post<LoginResponse>(authUrl + 'registration/', request)
             .then(completeLogin);
     },
 
