@@ -23,7 +23,7 @@ const PermissionGroupUpsertForm: React.FunctionComponent<AdminEditContainerProps
 
     useEffect(() => {
         dispatch(permissionsActions.initializeStore());
-    }, []);
+    }, [dispatch]);
 
     return (
         <KFormikForm initialValues={upsertPermissionGroupRequestParser(entity)}

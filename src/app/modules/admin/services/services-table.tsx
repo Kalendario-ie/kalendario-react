@@ -22,7 +22,7 @@ const ServicesTable: React.FunctionComponent<AdminTableContainerProps<Service>> 
 
     useEffect(() => {
         dispatch(serviceCategoryActions.initializeStore());
-    }, []);
+    }, [dispatch]);
 
     const columns = useMemo(
         () => [
@@ -58,7 +58,7 @@ const ServicesTable: React.FunctionComponent<AdminTableContainerProps<Service>> 
             },
             buttonsColumn
         ],
-        [serviceCategories, serviceCategoryDict]
+        [buttonsColumn, serviceCategories, serviceCategoryDict]
     )
 
     return (

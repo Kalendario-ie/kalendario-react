@@ -18,7 +18,7 @@ const PermissionGroupsTable: React.FunctionComponent<AdminTableContainerProps<Pe
                 Filter: (cell: any) => <KTextColumnFilter {...cell} onChangeSideEffect={filter}/>
             },
             buttonsColumn
-        ], [])
+        ], [buttonsColumn, filter])
 
     return (
         <KTable columns={columns} data={entities}/>

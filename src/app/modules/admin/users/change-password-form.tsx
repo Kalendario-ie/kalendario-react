@@ -8,7 +8,6 @@ import {
     ChangeUserPasswordValidation
 } from 'src/app/api/users';
 import {KFormikForm, KFormikInput} from 'src/app/shared/components/forms';
-import { KFormikState } from 'src/app/shared/components/forms/KFormikState';
 import KModal from 'src/app/shared/components/modal/k-modal';
 
 interface ChangePasswordFormProps {
@@ -31,7 +30,6 @@ const ChangePasswordForm: React.FunctionComponent<ChangePasswordFormProps> = (
                      onCancel={onCancel}
                      validationSchema={ChangeUserPasswordValidation}
         >
-            <KFormikState></KFormikState>
             <KFormikInput name="password1" type="password"/>
             <KFormikInput name="password2" type="password"/>
             <KFormikInput name="userPassword" type="password"/>

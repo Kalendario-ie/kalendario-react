@@ -26,7 +26,7 @@ const UsersTable: React.FunctionComponent<AdminTableContainerProps<User>> = (
                 accessor: 'phone',
             },
             buttonsColumn
-        ], [])
+        ], [buttonsColumn, filter])
 
     return (
         <KTable columns={columns} data={entities}/>

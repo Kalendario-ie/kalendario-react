@@ -19,7 +19,7 @@ const HomeContainer: React.FunctionComponent = () => {
             companyClient.detail(ownerId)
                 .then(company => history.push(`/c/${company.name}`))
         }
-    }, [ownerId]);
+    }, [company, history, ownerId]);
 
 
     const promiseOptions = (value: string) => companyClient.get({search: value})

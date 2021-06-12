@@ -26,7 +26,7 @@ const SchedulesTable: React.FunctionComponent<AdminTableContainerProps<Schedule>
             )),
             buttonsColumn
         ],
-        []
+        [buttonsColumn]
     )
 
     return (

@@ -84,7 +84,7 @@ function useEmployeeServices() {
 
     useEffect(() => {
         setEmployeeServices(employeeEntities[employeeId]?.services || [])
-    }, [employeeId]);
+    }, [employeeEntities, employeeId]);
 
     return useAppSelector((state) => serviceSelectors.selectByIds(state, employeeServices));
 }
@@ -102,14 +102,14 @@ function useUpdateEndTimeOnServiceChangeEffect() {
             setInitialId(serviceId);
             setValue(addHours(stringToMoment(value), timeToString(service.duration)))
         }
-    }, [serviceId]);
+    }, [initialId, service, serviceId, setValue, value]);
 }
 
-interface CustomerAppointmentUpsertForm {
+interface CustomerAppointmentUpsertFormProps {
     appointment: CustomerAppointment | null;
 }
 
-const CustomerAppointmentUpsertForm: React.FunctionComponent<CustomerAppointmentUpsertForm> = ({appointment}) => {
+const CustomerAppointmentUpsertForm: React.FunctionComponent<CustomerAppointmentUpsertFormProps> = ({appointment}) => {
     const employees = useAppSelector(employeeSelectors.selectAll);
     const services = useEmployeeServices();
     useUpdateEndTimeOnServiceChangeEffect();

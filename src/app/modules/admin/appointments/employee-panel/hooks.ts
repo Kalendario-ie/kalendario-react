@@ -28,7 +28,7 @@ export function useReloadAppointmentsEffect() {
         };
         dispatch(appointmentActions.fetchEntitiesWithSetAll(params));
 
-    }, [selectedPanel, currentDate]);
+    }, [selectedPanel, currentDate, dispatch]);
 
 }
 

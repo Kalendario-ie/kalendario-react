@@ -1,9 +1,7 @@
 import {createAction, createSelector, createSlice} from '@reduxjs/toolkit';
-import {Moment} from 'moment';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
 import {ApiBaseError} from 'src/app/api/common/api-errors';
 import {adminPermissionGroupClient, Permission} from 'src/app/api/permissions';
-import {ACTION_TYPES, selectSelectedDate} from 'src/app/store/companies';
 import {RootState} from 'src/app/store/store';
 import {PayloadAction} from 'typesafe-actions';
 
@@ -35,7 +33,7 @@ const permissionSlice = createSlice({
     }
 })
 
-const {reducer, actions, caseReducers, name} = permissionSlice;
+const {reducer, actions, name} = permissionSlice;
 
 const baseSelector: (rootState: RootState) => PermissionsState =
     (rootState) => rootState.adminPermissions;

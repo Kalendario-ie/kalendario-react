@@ -1,4 +1,3 @@
-import {IReadModel} from 'src/app/api/common/models';
 import * as yup from 'yup';
 
 export interface UpsertServiceRequest {

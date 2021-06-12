@@ -1,6 +1,5 @@
 import React from 'react';
 import {CSSModule} from 'reactstrap';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KButton} from 'src/app/shared/components/primitives/buttons/k-button';
 
 interface KRoundedButtonProps

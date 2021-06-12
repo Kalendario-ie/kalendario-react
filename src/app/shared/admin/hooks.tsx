@@ -48,7 +48,7 @@ export function useSelectAll<TEntity>(baseSelectors: BaseSelectors<TEntity>, bas
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(baseActions.initializeStore());
-    }, []);
+    }, [baseActions, dispatch]);
     return useAppSelector(baseSelectors.selectAll);
 }
 
@@ -60,5 +60,5 @@ export function useInitializeEffect(baseActions: BaseActions) {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(baseActions.initializeStore());
-    }, []);
+    }, [baseActions, dispatch]);
 }

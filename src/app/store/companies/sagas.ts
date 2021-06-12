@@ -137,7 +137,7 @@ function* requestAddNotes(action: { type: string, payload: AddNotesRequest }) {
 
 function* requestCartConfirmation(action: { type: string, payload: number }) {
     try {
-        const request: RequestModel = yield call(companyRequestClient.complete, action.payload)
+        yield call(companyRequestClient.complete, action.payload);
         yield put(confirmCartRequestSuccess());
         yield put(setCurrentRequest(null));
     } catch (error) {

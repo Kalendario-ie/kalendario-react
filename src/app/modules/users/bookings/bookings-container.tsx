@@ -22,7 +22,7 @@ const BookingsContainer: React.FunctionComponent = () => {
 
     useEffect(() => {
         dispatch(eventsRequest({start: initialDate.clone().startOf('month'), end: initialDate.clone().endOf('month')}))
-    }, []);
+    }, [dispatch, initialDate]);
 
 
     const updateEvents = (range: Date[] | { start: stringOrDate; end: stringOrDate }) => {

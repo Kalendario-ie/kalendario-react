@@ -20,7 +20,7 @@ const KFormikErrorHandler: React.FunctionComponent<KFormikErrorHandlerProps> = (
                 }
             })
         }
-    }, [apiError]);
+    }, [apiError, formik]);
 
 
     return (

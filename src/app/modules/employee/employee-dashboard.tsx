@@ -6,7 +6,7 @@ import {adminAppointmentClient, Appointment} from 'src/app/api/appointments';
 import {getShift, Schedule} from 'src/app/api/schedule';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KIconButton, KRoundedButton} from 'src/app/shared/components/primitives/buttons';
-import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
+import {KCard} from 'src/app/shared/components/primitives/containers';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 import {momentToIso, stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {selectUserEmployee} from 'src/app/store/auth';
@@ -161,7 +161,7 @@ const EmployeeDashboard: React.FunctionComponent = () => {
                 from_date: momentToIso(currentDate.clone().startOf('day')),
                 to_date: momentToIso(currentDate.clone().endOf('day')),
             }).then(res => setAppointments(res.results));
-    }, [currentDate]);
+    }, [currentDate, employee?.id]);
 
 
     return (

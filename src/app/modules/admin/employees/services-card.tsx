@@ -20,7 +20,7 @@ const ServicesCard: React.FunctionComponent<ServicesCardProps> = (
     useEffect(() => {
         dispatch(serviceActions.initializeStore())
         dispatch(serviceCategoryActions.initializeStore())
-    }, []);
+    }, [dispatch]);
 
 
     return (

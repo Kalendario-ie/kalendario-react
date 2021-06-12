@@ -17,17 +17,15 @@ interface FormikCustomerInput {
 export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({initialCustomer}) => {
     const [customer, setCustomer] = useState<Customer | null>(initialCustomer);
     const [openModal, modal, createdCustomer] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm);
+    const formik = useFormikContext();
+    const {setValue} = formik.getFieldHelpers('customer');
 
     useEffect(() => {
         if (createdCustomer) {
             setCustomer(createdCustomer);
             setValue(createdCustomer.id);
         }
-    }, [createdCustomer]);
-
-
-    const formik = useFormikContext();
-    const {setValue} = formik.getFieldHelpers('customer');
+    }, [createdCustomer, setValue]);
 
     const promiseOptions = (value: string) => adminCustomerClient.get({search: value}).then(res => res.results);
 

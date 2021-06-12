@@ -1,6 +1,6 @@
 import {useFormikContext} from 'formik';
 
-export const KFormikState = (props: any) => {
+export const KFormikState = () => {
     const formik = useFormikContext();
     return (
         <div style={{margin: "1rem 0"}}>

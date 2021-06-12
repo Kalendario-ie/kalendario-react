@@ -26,7 +26,7 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
         dispatch(scheduleActions.initializeStore());
         dispatch(serviceActions.initializeStore());
         dispatch(serviceCategoryActions.initializeStore());
-    }, []);
+    }, [dispatch]);
 
     return (
         <KFormikForm initialValues={upsertEmployeeRequestParser(entity)}

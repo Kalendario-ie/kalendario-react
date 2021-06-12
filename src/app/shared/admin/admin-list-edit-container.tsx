@@ -35,7 +35,7 @@ function AdminListEditContainer<TEntity extends IReadModel>(
 
     useEffect(() => {
         dispatch(baseActions.initializeStore())
-    }, []);
+    }, [baseActions, dispatch]);
 
     const handleDeleteClick = (id: number) => () => {
         setDeleteId(id);

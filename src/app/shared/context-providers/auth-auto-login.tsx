@@ -19,7 +19,7 @@ const AuthAutoLogin: React.FunctionComponent<AuthAutoLoginProps> = (
         authApi.whoAmI().then(user => {
             dispatch(setUser(user));
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

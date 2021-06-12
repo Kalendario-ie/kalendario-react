@@ -6,9 +6,7 @@ import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 import styles from './employee-panel.module.scss';
 
 
-const TimeLineContainer: React.FunctionComponent = (
-    {
-    }) => {
+const TimeLineContainer: React.FunctionComponent = () => {
     const currentDate = useSelector(adminDashboardSelectors.selectCurrentDate);
     const isToday = momentIsToday(currentDate)
     const today = momentToday();

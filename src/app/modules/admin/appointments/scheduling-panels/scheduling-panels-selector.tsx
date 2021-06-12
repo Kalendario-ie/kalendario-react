@@ -8,6 +8,7 @@ import {useAppDispatch} from 'src/app/store';
 import {adminDashboardActions} from 'src/app/store/admin/dashboard';
 import {schedulingPanelActions, schedulingPanelSelectors} from 'src/app/store/admin/panels';
 
+
 const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const dispatch = useAppDispatch();
     const schedulingPanels = useSelectAll(schedulingPanelSelectors, schedulingPanelActions);
@@ -15,21 +16,20 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const [setDeleteId, confirmDeleteModal] = UseConfirmationModalWithDispatch(schedulingPanelActions.deleteEntity);
     const [openModal, formModal] = useEditModal(schedulingPanelSelectors, schedulingPanelActions, SchedulingPanelForm);
 
-    const selectPanel = (index: number) => schedulingPanels[index];
 
     useEffect(() => {
-        if (schedulingPanels && selectPanel(selectedIndex)) {
-            dispatch(adminDashboardActions.setSelectedPanelId(selectPanel(selectedIndex).id));
+        if (schedulingPanels && schedulingPanels[selectedIndex]) {
+            dispatch(adminDashboardActions.setSelectedPanelId(schedulingPanels[selectedIndex].id));
         }
-    }, [schedulingPanels])
+    }, [dispatch, schedulingPanels, selectedIndex])
 
     const handlePanelClick = (index: number) => () => {
         setSelectedIndex(index);
-        dispatch(adminDashboardActions.setSelectedPanelId(selectPanel(index).id));
+        dispatch(adminDashboardActions.setSelectedPanelId(schedulingPanels[index].id));
     }
 
     const handleDeleteClick = () => {
-        setDeleteId(selectPanel(selectedIndex).id);
+        setDeleteId(schedulingPanels[selectedIndex].id);
     }
 
     return (
@@ -43,7 +43,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
                 >{panel.name}</KTextButton>)
             }
             <KIconButton color="primary" icon="plus" onClick={openModal(null)}/>
-            <KIconButton color="accent" icon="edit" onClick={openModal(selectPanel(selectedIndex))}/>
+            <KIconButton color="accent" icon="edit" onClick={openModal(schedulingPanels[selectedIndex])}/>
             <KIconButton color="danger" icon="trash" onClick={handleDeleteClick}/>
         </KFlexRow>
     )

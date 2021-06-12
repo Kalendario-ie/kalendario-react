@@ -63,7 +63,7 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
 
     const employeeAppointments = React.useMemo(() =>
             appointments.filter(appointment => appointment.employee.id === employee.id)
-        , [appointments]
+        , [appointments, employee.id]
     )
 
     return (

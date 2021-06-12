@@ -18,53 +18,57 @@ const EmployeesTable: React.FunctionComponent<AdminTableContainerProps<Employee>
     }) => {
     const dispatch = useAppDispatch();
 
-    const columns = useMemo(() => [
-        {
-            // Make an expander cell
-            Header: () => null, // No header
-            id: 'expander', // It needs an ID
-            Cell: (value: any) => (
-                <span>
+
+    const columns = useMemo(() => {
+        const handleFileSubmit = (entity: Employee, file: File) =>
+            adminEmployeeClient.uploadProfilePicture(entity.id, file)
+                .then(res => {
+                    dispatch(employeeReducerActions.upsertOne({...entity, photoUrl: res.url}));
+                    return true;
+                })
+                .catch(error => false);
+
+        return [
+            {
+                // Make an expander cell
+                Header: () => null, // No header
+                id: 'expander', // It needs an ID
+                Cell: (value: any) => (
+                    <span>
                     {value.row.isExpanded ? <KIcon icon="caret-down"/> : <KIcon icon="caret-right"/>}
                 </span>
-            ),
-        },
-        {
-            Header: 'Photo',
-            accessor: 'photoUrl',
-            Cell: (value: any) => <EditableAvatarImg src={value.cell.value}
-                                                     onSubmit={(file) => handleFileSubmit(value.row.original, file)}
-                                                     size={3}/>
-        },
-        {
-            Header: 'Name',
-            accessor: 'name',
-            Filter: KTextColumnFilter
-        },
-        {
-            Header: 'Email',
-            accessor: 'email',
-            Filter: KTextColumnFilter
-        },
-        {
-            Header: 'Phone',
-            accessor: 'phone',
-            Filter: KTextColumnFilter
-        },
-        {
-            Header: 'Instagram',
-            accessor: 'instagram',
-        },
-        buttonsColumn
-    ], [])
+                ),
+            },
+            {
+                Header: 'Photo',
+                accessor: 'photoUrl',
+                Cell: (value: any) => <EditableAvatarImg src={value.cell.value}
+                                                         onSubmit={(file) => handleFileSubmit(value.row.original, file)}
+                                                         size={3}/>
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+                Filter: KTextColumnFilter
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+                Filter: KTextColumnFilter
+            },
+            {
+                Header: 'Phone',
+                accessor: 'phone',
+                Filter: KTextColumnFilter
+            },
+            {
+                Header: 'Instagram',
+                accessor: 'instagram',
+            },
+            buttonsColumn
+        ]
+    }, [buttonsColumn, dispatch])
 
-    const handleFileSubmit = (entity: Employee, file: File) =>
-        adminEmployeeClient.uploadProfilePicture(entity.id, file)
-            .then(res => {
-                dispatch(employeeReducerActions.upsertOne({...entity, photoUrl: res.url}));
-                return true;
-            })
-            .catch(error => false);
 
     const renderRowSubComponent = React.useCallback(
         (row: any) => <EmployeeRowExpanded employee={row.original}/>, [])
