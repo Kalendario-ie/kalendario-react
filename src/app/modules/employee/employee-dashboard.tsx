@@ -76,7 +76,9 @@ const EmployeeDashboardDatePicker: React.FunctionComponent<EmployeeDashboardDate
                     </KFlexColumn>
                 )}
             </KFlexRow>
-            <hr/>
+            <div>
+                <hr/>
+            </div>
             <KFlexRow justify="center" align="center">
                 <KIcon icon="calendar" margin={2}/>
                 {currentDate.format('dddd, DD MMM YY')}
@@ -171,9 +173,13 @@ const EmployeeDashboard: React.FunctionComponent = () => {
                         {employee.name}
                     </KFlexRow>
                     <EmployeeDashboardDatePicker currentDate={currentDate} dateChange={setCurrentDate}/>
-                    <hr/>
+                    <div>
+                        <hr/>
+                    </div>
                     <EmployeeScheduleView schedule={employee.schedule} date={currentDate}/>
-                    <hr/>
+                    <div>
+                        <hr/>
+                    </div>
                     <div className="flex-fill overflow-auto">
                         {appointments.map(appointment => <React.Fragment key={appointment.id}>
                                 <EmployeeDashboardAppointment appointment={appointment}/>
