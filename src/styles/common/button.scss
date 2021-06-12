@@ -22,7 +22,16 @@
 }
 
 .btn-round {
-  border-radius: 4rem;
+  border-radius: 1.5rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  position: relative;
 }
 
 .btn-accent, .btn-accent:hover {

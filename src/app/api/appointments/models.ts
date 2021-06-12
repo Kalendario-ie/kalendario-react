@@ -14,7 +14,7 @@ export enum EventType {
     CustomerEvent,
 }
 
-export type Appointment = CustomerRequestAppointment | EmployeeEvent | CustomerEvent;
+export type Appointment = CustomerEvent | CustomerRequestAppointment | EmployeeEvent;
 
 export interface CustomerEvent extends CustomerRequestAppointment {
     owner: Company;

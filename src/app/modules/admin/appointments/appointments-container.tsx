@@ -1,4 +1,5 @@
 import React from 'react';
+import {Appointment} from 'src/app/api/appointments';
 import SchedulingDateSelector from 'src/app/modules/admin/appointments/date-selector/scheduling-date-selector';
 import TimeLineContainer from 'src/app/modules/admin/appointments/employee-panel/TimeLineContainer';
 import AppointmentUpsertForm from 'src/app/modules/admin/appointments/forms/appointment-upsert-form';
@@ -17,7 +18,7 @@ import {
 const AppointmentsContainer: React.FunctionComponent = () => {
     useInitializeEffect(employeeActions);
     useReloadAppointmentsEffect();
-    const [openModal, formModal] = useEditModal(appointmentSelectors, appointmentActions, AppointmentUpsertForm);
+    const [openModal, formModal] = useEditModal<Appointment>(appointmentSelectors, appointmentActions, AppointmentUpsertForm);
 
     return (
         <KFlexColumn className="w-100">

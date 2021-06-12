@@ -3,8 +3,8 @@ import {convertMoment} from '../helpers';
 import baseApiAxios from './base-api';
 import {AxiosResponse} from 'axios';
 
-export interface BaseModelRequest<TEntity> {
-    get: (filter: any) => Promise<ApiListResult<TEntity>>;
+export interface BaseModelRequest<TEntity, TFilter  = object> {
+    get: (filter: TFilter) => Promise<ApiListResult<TEntity>>;
     post: (model: any) => Promise<TEntity>;
     detail: (id: number, params?: {}) => Promise<TEntity>;
     patch: (id: number, model: any) => Promise<TEntity>;
@@ -12,7 +12,7 @@ export interface BaseModelRequest<TEntity> {
     delete: (id: number) => Promise<AxiosResponse>;
 }
 
-function baseModelRequest<TEntity>(baseUrl: string, adapter: (model: any) => TEntity): BaseModelRequest<TEntity> {
+function baseModelRequest<TEntity, TFilter = object>(baseUrl: string, adapter: (model: any) => TEntity): BaseModelRequest<TEntity, TFilter> {
     return {
         get(filter: any): Promise<ApiListResult<TEntity>> {
             const params = convertMoment(filter);

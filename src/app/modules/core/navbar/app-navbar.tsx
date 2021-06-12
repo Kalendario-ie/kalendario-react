@@ -20,8 +20,8 @@ import {User} from 'src/app/api/users';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {companiesUrls} from 'src/app/modules/companies/paths';
+import {EMPLOYEE_ROUTES} from 'src/app/modules/employee/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
-import {KButton} from 'src/app/shared/components/primitives';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
 
@@ -103,7 +103,7 @@ const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
                                         </NavLink>
                                     </DropdownItem>
                                 <DropdownItem>
-                                    <NavLink tag={Link} to={ADMIN_ROUTES.ROOT}>
+                                    <NavLink tag={Link} to={EMPLOYEE_ROUTES.ROOT}>
                                         <FormattedMessage id={'NAVBAR.EMPLOYEE'}/>
                                     </NavLink>
                                 </DropdownItem>
