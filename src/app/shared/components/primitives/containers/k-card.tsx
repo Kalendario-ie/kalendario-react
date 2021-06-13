@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 
 export interface KalendarioCardProps {
     header?: React.ReactNode;
+    footer?: ReactElement
     className?: string;
     maxWidth?: number | undefined;
     mwUnit?: string | undefined;
@@ -16,6 +17,7 @@ export const KCard: React.FunctionComponent<KalendarioCardProps> = (
     {
         header,
         children,
+        footer,
         className = '',
         maxWidth,
         mwUnit = 'px',
@@ -44,6 +46,11 @@ export const KCard: React.FunctionComponent<KalendarioCardProps> = (
                 {header && <h5 className="card-title text-center">{header}</h5>}
                 {children}
             </div>
+            {footer &&
+            <div className="card-footer">
+                {footer}
+            </div>
+            }
         </div>
     )
 }
