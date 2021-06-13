@@ -15,7 +15,7 @@ import {serviceParser} from 'src/app/api/services';
 import {userParser} from 'src/app/api/users';
 
 export function appointmentParser(data: any): Appointment {
-    return data.customer ? customerAppointmentParser(data) : employeeEventParser(data);
+    return !!data.customer ? customerAppointmentParser(data) : employeeEventParser(data);
 }
 
 export function customerRequestAppointmentParser(data: any): CustomerRequestAppointment {
@@ -44,13 +44,14 @@ function customerAppointmentParser(data: any): CustomerAppointment {
 }
 
 function employeeEventParser(data: any): EmployeeEvent {
-    return {
+    const result = {
         ...data,
         permissionModel: PermissionModel.appointment,
         type: EventType.EmployeeEvent,
         name: '',
         employee: employeeParser(data.employee),
     }
+    return result;
 }
 
 export function appointmentHistoryParser(data: any): AppointmentHistory {

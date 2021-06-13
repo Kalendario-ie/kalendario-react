@@ -142,7 +142,7 @@ const EmployeeDashboardAppointment: React.FunctionComponent<EmployeeDashboardApp
             }
             {customerNotes &&
             <KFlexRow align="center" className="mb-2">
-                <KIcon icon="comment-alt" color="primary" margin={2}/> {appointment.internalNotes}
+                <KIcon icon="comment-alt" color="primary" margin={2}/> {customerNotes}
             </KFlexRow>
             }
         </KFlexColumn>

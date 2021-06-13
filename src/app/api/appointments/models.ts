@@ -14,7 +14,7 @@ export enum EventType {
     CustomerEvent,
 }
 
-export type Appointment = CustomerEvent | CustomerRequestAppointment | EmployeeEvent;
+export type Appointment = CustomerEvent | CustomerRequestAppointment | CustomerAppointment | EmployeeEvent;
 
 export interface CustomerEvent extends CustomerRequestAppointment {
     owner: Company;
@@ -28,18 +28,26 @@ export interface CustomerRequestAppointment extends CustomerAppointment {
     owner: number | Company;
 }
 
-export interface CustomerAppointment extends EmployeeEvent {
+export interface CustomerAppointment extends BaseAppointment {
     customer: Customer;
     service: Service;
 }
 
-export interface EmployeeEvent extends IReadModel {
+export interface EmployeeEvent extends BaseAppointment {
+    customer: null;
+    service: null;
+}
+
+export interface BaseAppointment extends IReadModel {
+    customer: Customer | null;
+    service: Service | null;
     type: EventType;
     start: string;
     end: string;
     employee: Employee;
     owner: number | Company;
     internalNotes: string;
+    customerNotes: string | null;
     deleted: string | null;
 }
 
