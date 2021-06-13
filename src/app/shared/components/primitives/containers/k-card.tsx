@@ -40,8 +40,8 @@ export const KCard: React.FunctionComponent<KalendarioCardProps> = (
 
     return (
         <div className={className} style={style}>
-            {header && <h5 className="card-title mb-3 text-center">{header}</h5>}
             <div className={bodiless ? '' : 'card-body'} style={bodyStyle}>
+                {header && <h5 className="card-title text-center">{header}</h5>}
                 {children}
             </div>
         </div>
