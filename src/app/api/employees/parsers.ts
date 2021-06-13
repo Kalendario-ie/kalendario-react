@@ -4,7 +4,7 @@ import {Employee, UserEmployee} from 'src/app/api/employees/models';
 import {UpsertEmployeeRequest} from 'src/app/api/employees/requests';
 import { scheduleParser } from '../schedule/parsers';
 
-const imageStorage = process.env.REACT_APP_IMAGE_API_URL;
+const imageStorage = process.env.REACT_APP_IMAGE_API_URL || 'https://res.cloudinary.com/gchahm/';
 
 export function employeeParser(data?: any): Employee {
     return data ? {
