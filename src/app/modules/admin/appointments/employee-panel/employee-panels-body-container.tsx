@@ -98,15 +98,13 @@ export const EmployeePanelsBodyContainer: React.FunctionComponent<EmployeePanels
     const employees = useSelectPanelEmployees();
     return (
         <KFlexRow>
-            <>
-                <PanelHours/>
-                {employees.map(employee =>
-                    <React.Fragment key={employee.id}>
-                        <EventsContainer onSelect={onSelect} employee={employee}/>
-                        <EmployeePanelBody onCreateClick={onSelect} employee={employee}/>
-                    </React.Fragment>
-                )}
-            </>
+            <PanelHours/>
+            {employees.map(employee =>
+                <React.Fragment key={employee.id}>
+                    <EventsContainer onSelect={onSelect} employee={employee}/>
+                    <EmployeePanelBody onCreateClick={onSelect} employee={employee}/>
+                </React.Fragment>
+            )}
         </KFlexRow>
     )
 }

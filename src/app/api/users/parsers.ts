@@ -1,20 +1,16 @@
 import {PermissionModel} from 'src/app/api/auth';
-import {userEmployeeParser} from 'src/app/api/employees';
-import {User} from 'src/app/api/users/models';
+import {AdminUser} from 'src/app/api/users/models';
 import {ChangeUserPasswordRequest, UpsertUserRequest} from 'src/app/api/users/requests';
 
 
-export function userParser(data: any): User {
+export function userParser(data: any): AdminUser {
     return {
         ...data,
         permissionModel: PermissionModel.user,
-        employee: data.employee ? userEmployeeParser(data.employee) : null,
-        company: data.owner ? {...data.owner} : null,
-        verified: !!data.verified
     }
 }
 
-export function upsertUserRequestParser(user: User | null): UpsertUserRequest {
+export function upsertUserRequestParser(user: AdminUser | null): UpsertUserRequest {
     return user ? {
         firstName: user.firstName,
         lastName: user.lastName,

@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {hasPermission, PermissionModel, PermissionType} from 'src/app/api/auth';
+import {AuthUser, hasPermission, PermissionModel, PermissionType} from 'src/app/api/auth';
 import {authApi} from "src/app/api/auth/clients";
-import {User} from 'src/app/api/users';
 import {useAppSelector} from 'src/app/store';
 import {selectLoadingUser, selectUser, setLoadingUser, setUser} from 'src/app/store/auth';
 
@@ -31,7 +30,7 @@ const AuthAutoLogin: React.FunctionComponent<AuthAutoLoginProps> = (
 export default AuthAutoLogin;
 
 
-export function useCurrentUser(): [boolean, User | null] {
+export function useCurrentUser(): [boolean, AuthUser | null] {
     const user = useAppSelector(selectUser);
     const loading = useAppSelector(selectLoadingUser);
     return [loading, user];

@@ -46,7 +46,7 @@ const KDashboardSidebarLink: React.FunctionComponent<KDashboardSidebarLinkProps>
                 >
                     {icon && <KIcon icon={icon}/>}
                     {isOpen &&
-                    <span className="sidebar-link-title">{name}</span>
+                    name
                     }
                 </Link>
             </li>

@@ -7,10 +7,10 @@ import {
   PERMISSION_VIEW,
   PermissionModels
 } from './index';
-import {User} from 'src/app/api/users';
+import {AdminUser} from 'src/app/api/users';
 
 
-export function userPermissions(user: User, model: PermissionModels): ModelPermissions {
+export function userPermissions(user: AdminUser, model: PermissionModels): ModelPermissions {
   return {
     view: user.permissions.includes(`${getApp(model)}.${PERMISSION_VIEW}_${model}`),
     add: user.permissions.includes(`${getApp(model)}.${PERMISSION_ADD}_${model}`),

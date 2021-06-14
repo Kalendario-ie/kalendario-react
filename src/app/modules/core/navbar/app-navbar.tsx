@@ -14,9 +14,9 @@ import {
     NavLink,
     UncontrolledDropdown,
 } from 'reactstrap';
+import {AuthUser} from 'src/app/api/auth';
 import {CompanyDetails} from 'src/app/api/companies';
 import {RequestModel} from 'src/app/api/requests';
-import {User} from 'src/app/api/users';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {companiesUrls} from 'src/app/modules/companies/paths';
@@ -29,7 +29,7 @@ interface AppNavbarProps {
     company: CompanyDetails | null;
     cart: RequestModel | null;
     cartIsEmpty: boolean;
-    user: User | null;
+    user: AuthUser | null;
     menuOpen: boolean;
     toggleMenu: () => void;
     showSidenavToggle: boolean;

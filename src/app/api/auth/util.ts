@@ -1,7 +1,7 @@
+import {AuthUser} from 'src/app/api/auth/models';
 import {PermissionModel, PermissionType} from 'src/app/api/auth/permissions';
-import {User} from 'src/app/api/users';
 
-export function hasPermission(user: User, type: PermissionType, model: PermissionModel) {
+export function hasPermission(user: AuthUser, type: PermissionType, model: PermissionModel) {
     const app = getAppLabel(model);
     return user.permissions.includes(`${app}.${type}_${model}`);
 }

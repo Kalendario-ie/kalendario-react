@@ -6,7 +6,6 @@ import {KDateInput} from 'src/app/shared/components/primitives/inputs';
 import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {adminDashboardActions, adminDashboardSelectors} from 'src/app/store/admin/dashboard';
-import styles from './scheduling-date-selector.module.scss';
 
 const SchedulingDateSelector: React.FunctionComponent = () => {
     const currentDate = useAppSelector(adminDashboardSelectors.selectCurrentDate);
@@ -27,7 +26,7 @@ const SchedulingDateSelector: React.FunctionComponent = () => {
     }
 
     return (
-        <KFlexRow className={styles.dateSelectorContainer} align={'center'}>
+        <KFlexRow className="sticky-top-left p-2" align={'center'}>
             <Button color="primary" size="sm" onClick={handleTodayClick}>Today</Button>
             <KIconButton icon="chevron-left" color="accent" onClick={handlePreviousClick}/>
             <KIconButton icon="chevron-right" color="accent" onClick={handleNextClick}/>
