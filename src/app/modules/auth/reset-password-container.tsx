@@ -7,14 +7,8 @@ import {KFlexColumn} from 'src/app/shared/components/flex';
 import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
 import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
 
-interface ResetPasswordContainerProps {
-    children: React.ReactNode;
-}
 
-const ResetPasswordContainer: React.FunctionComponent<ResetPasswordContainerProps> = (
-    {
-        children
-    }) => {
+const ResetPasswordContainer: React.FunctionComponent = () => {
     const [apiError, setApiError] = useState<ApiValidationError | null>(null);
     const [emailSent, setEmailSent] = useState(false);
     const initialValue: ForgotPasswordRequest = {email: ''};
