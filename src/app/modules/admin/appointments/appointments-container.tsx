@@ -8,6 +8,7 @@ import {useEditModal, useInitializeEffect} from 'src/app/shared/admin/hooks';
 import {KFlexColumn} from 'src/app/shared/components/flex';
 import {appointmentActions, appointmentSelectors} from 'src/app/store/admin/appointments';
 import {employeeActions} from 'src/app/store/admin/employees';
+import {scheduleActions} from 'src/app/store/admin/schedules';
 import {
     EmployeePanelHeadersContainer,
     EmployeePanelsBodyContainer,
@@ -17,6 +18,7 @@ import {
 
 const AppointmentsContainer: React.FunctionComponent = () => {
     useInitializeEffect(employeeActions);
+    useInitializeEffect(scheduleActions);
     useReloadAppointmentsEffect();
     const [openModal, formModal] = useEditModal<Appointment>(appointmentSelectors, appointmentActions, AppointmentUpsertForm);
 

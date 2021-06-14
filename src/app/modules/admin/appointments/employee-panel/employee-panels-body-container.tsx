@@ -2,11 +2,14 @@ import React from 'react';
 import {Appointment} from 'src/app/api/appointments';
 import {timeToString} from 'src/app/api/common/models';
 import {Employee} from 'src/app/api/employees';
+import {getShift} from 'src/app/api/schedule';
+import {isAvailable} from 'src/app/api/shifts';
 import {useSelectPanelEmployees} from 'src/app/modules/admin/appointments/employee-panel/hooks';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import KShowOnHoverContainer from 'src/app/shared/components/primitives/containers/k-show-on-hover-container';
 import {useAppSelector} from 'src/app/store';
 import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
+import {scheduleSelectors} from 'src/app/store/admin/schedules';
 import CreateAppointmentButtons from './create-appointment-buttons';
 import styles from './employee-panel.module.scss';
 import EventsContainer from './event-container';
@@ -46,24 +49,34 @@ const EmployeePanelBody: React.FunctionComponent<EmployeePanelProps> = (
         employee,
         onCreateClick
     }) => {
+    const currentDate = useAppSelector(adminDashboardSelectors.selectCurrentDate);
+    const schedule = useAppSelector(state => scheduleSelectors.selectById(state, employee.schedule));
     const hours = useAppSelector(adminDashboardSelectors.selectPanelHours);
     const slotSize = useAppSelector(adminDashboardSelectors.selectSlotSize);
-
     const style = {
         height: `${slotSize / 2}rem`,
+    }
+
+    function backgroundColor(hour: number, minute: number) {
+        return schedule && getShift(schedule, currentDate)?.frames
+            .some(frame => isAvailable(frame, hour, minute)) ? '' : styles.unavailableSlot;
     }
 
     return (
         <KFlexColumn>
             {hours.map((hour, i) =>
                 <React.Fragment key={i}>
-                    <KShowOnHoverContainer className={styles.middleItem} style={style}>
+                    <KShowOnHoverContainer className={`${styles.middleItem} ${backgroundColor(hour, 0)}`}
+                                           style={style}
+                    >
                         <CreateAppointmentButtons employee={employee}
                                                   onCreateClick={onCreateClick}
                                                   hour={hour}
                                                   minute={0}/>
                     </KShowOnHoverContainer>
-                    <KShowOnHoverContainer className={styles.panelItem} style={style}>
+                    <KShowOnHoverContainer className={`${styles.middleItem} ${backgroundColor(hour, 30)}`}
+                                           style={style}
+                    >
                         <CreateAppointmentButtons employee={employee}
                                                   onCreateClick={onCreateClick}
                                                   hour={hour}
