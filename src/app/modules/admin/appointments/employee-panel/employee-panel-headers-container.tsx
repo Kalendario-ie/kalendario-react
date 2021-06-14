@@ -44,7 +44,9 @@ export const EmployeePanelHeadersContainer: React.FunctionComponent<EmployeePane
 
     return (
         <KFlexRow>
-            <KFiller className={`bg-white-gray ${styles.panelItem}`} width={5}/>
+            <KFiller className={`sticky-top-left bg-white-gray ${styles.borderRight}`}>
+                <div className={styles.sideItem}/>
+            </KFiller>
             {employees.map(employee =>
                 <EmployeePanelHeader key={employee.id} employee={employee} onCreateClick={onCreateClick}/>
             )}

@@ -1,5 +1,6 @@
 import {Reducer} from 'redux';
 import {ACTION_TYPES} from './types';
+import {isMobile} from 'react-device-detect';
 
 
 export interface UiState {
@@ -9,7 +10,7 @@ export interface UiState {
 
 const initialState: UiState = {
     showDashboardToggle: false,
-    sidenavOpen: true,
+    sidenavOpen: !isMobile,
 }
 
 const reducer: Reducer<UiState> = (state = initialState, {type, payload}) => {
