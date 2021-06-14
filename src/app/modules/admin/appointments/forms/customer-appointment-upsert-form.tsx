@@ -49,14 +49,18 @@ function useDateHelper(name: string): [Moment, (value: Moment) => void, string, 
 
 const FormikStartEndTimeInput: React.FunctionComponent = () => {
     const [start, handleDateChange, startTime, handleStartTimeChange] = useDateHelper('start');
-    const [, , endTime, handleEndTimeChange] = useDateHelper('end');
+    const [, handleEndDateChange, endTime, handleEndTimeChange] = useDateHelper('end');
 
     return (
         <>
             <FormGroup>
                 <KFlexColumn>
                     <Label>Date</Label>
-                    <KDateInput value={start} onChange={handleDateChange}/>
+                    <KDateInput value={start}
+                                onChange={(e) => {
+                                    handleDateChange(e);
+                                    handleEndDateChange(e);
+                                }}/>
                 </KFlexColumn>
             </FormGroup>
             <FormGroup>
