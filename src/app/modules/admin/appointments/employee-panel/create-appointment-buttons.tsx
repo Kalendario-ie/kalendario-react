@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 import React from 'react';
-import {Appointment, blankCustomerAppointment} from 'src/app/api/appointments';
+import {Appointment, blankCustomerAppointment, blankEmployeeEvent} from 'src/app/api/appointments';
 import {Employee} from 'src/app/api/employees';
 import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 
@@ -25,7 +25,7 @@ const CreateAppointmentButtons: React.FunctionComponent<CreateAppointmentButtons
     const handleAddClick = () =>
         onCreateClick(blankCustomerAppointment(employeeId, selectedTime()))();
     const handleLockClick = () =>
-        onCreateClick(blankCustomerAppointment(employeeId, selectedTime().add(minute, 'minute')))();
+        onCreateClick(blankEmployeeEvent(employeeId, selectedTime().add(minute, 'minute')))();
 
     return (
         <>
