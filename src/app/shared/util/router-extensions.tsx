@@ -36,7 +36,7 @@ export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
         path,
         component,
         permissionModel,
-        permissionType= PermissionType.view,
+        permissionType = PermissionType.view,
     }) => {
     const {returnUrl, ...params} = useQueryParams();
     const {location: {pathname}} = useKHistory();
@@ -57,9 +57,9 @@ export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
                 <Route path={path} component={component}/>
                 }
                 {user && !hasPermission &&
-                    <>
-                        unauthorized access
-                    </>
+                <>
+                    unauthorized access
+                </>
                 }
                 {!user &&
                 <Redirect to={pathWithParams(AUTH_ROUTES.LOGIN, {...params, returnUrl: pathname})}/>
@@ -72,14 +72,11 @@ export const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = (
 
 
 export function pathWithParams(path: string, queryParams: QueryParams | null | undefined): string {
-    return `${path}${queryParams ? createQueryString(queryParams) : ''}`;
+    return `${path}${queryParams ? '?' + createQueryString(queryParams) : ''}`;
 }
 
 function createQueryString(params?: QueryParams): string {
     if (!params) return '';
-    const url = Object.keys(params)
-        .reduce((prev, cur, i) => {
-            return params[cur] ? `${prev}${i === 0 ? '?' : '&'}${cur}=${params[cur]}` : prev;
-        }, '');
+    const url = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
     return encodeURI(url);
 }

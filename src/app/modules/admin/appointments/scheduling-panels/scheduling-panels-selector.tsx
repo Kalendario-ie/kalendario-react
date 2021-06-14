@@ -6,6 +6,7 @@ import {useEditModal, useSelectAll} from 'src/app/shared/admin/hooks';
 import {KFlexRow} from 'src/app/shared/components/flex';
 import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
 import {KTextButton} from 'src/app/shared/components/primitives/buttons';
+import {useKHistory, useQueryParams} from 'src/app/shared/util/router-extensions';
 import {useAppDispatch} from 'src/app/store';
 import {adminDashboardActions} from 'src/app/store/admin/dashboard';
 import {schedulingPanelActions, schedulingPanelSelectors} from 'src/app/store/admin/panels';
@@ -17,17 +18,23 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const [setDeleteId, confirmDeleteModal] = UseConfirmationModalWithDispatch(schedulingPanelActions.deleteEntity);
     const [openModal, formModal] = useEditModal(schedulingPanelSelectors, schedulingPanelActions, SchedulingPanelForm);
-
+    const params = useQueryParams();
+    const history = useKHistory();
 
     useEffect(() => {
-        if (schedulingPanels && schedulingPanels[selectedIndex]) {
-            dispatch(adminDashboardActions.setSelectedPanelId(schedulingPanels[selectedIndex].id));
+        let panelId = +(params['panel'] || selectedIndex);
+        if (schedulingPanels.length > 0) {
+            if (panelId > schedulingPanels.length) {
+                panelId = 0;
+            }
+            setSelectedIndex(panelId);
+            dispatch(adminDashboardActions.setSelectedPanelId(schedulingPanels[panelId].id));
         }
-    }, [dispatch, schedulingPanels, selectedIndex])
+    }, [dispatch, params, schedulingPanels, selectedIndex]);
+
 
     const handlePanelClick = (index: number) => () => {
-        setSelectedIndex(index);
-        dispatch(adminDashboardActions.setSelectedPanelId(schedulingPanels[index].id));
+        history.push(history.location.pathname, {panel: index})
     }
 
     const handleDeleteClick = () => {
