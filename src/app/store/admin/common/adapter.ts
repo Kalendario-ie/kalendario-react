@@ -173,6 +173,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             yield call(client.delete, action.payload);
             yield put(slice.actions.removeOne(action.payload));
             yield put(slice.actions.setApiError(null));
+            yield put(slice.actions.setEditMode(false));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }

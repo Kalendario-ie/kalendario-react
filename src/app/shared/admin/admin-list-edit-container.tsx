@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {PermissionModel, PermissionType} from 'src/app/api/auth';
 import {IReadModel} from 'src/app/api/common/models';
+import DeleteButton from 'src/app/shared/admin/delete-button';
 import {useEditModal} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps, AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
-import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 import {KFlexRow} from '../components/flex';
@@ -29,7 +29,6 @@ function AdminListEditContainer<TEntity extends IReadModel>(
     }: AdminListEditContainerProps<TEntity>) {
     const dispatch = useAppDispatch();
     const entities = useAppSelector(baseSelectors.selectAll)
-    const [setDeleteId, confirmDeleteModal] = UseConfirmationModalWithDispatch(baseActions.deleteEntity);
     const [openModal, formModal] = useEditModal(baseSelectors, baseActions, EditContainer);
 
 
@@ -37,18 +36,15 @@ function AdminListEditContainer<TEntity extends IReadModel>(
         dispatch(baseActions.initializeStore())
     }, [baseActions, dispatch]);
 
-    const handleDeleteClick = (id: number) => () => {
-        setDeleteId(id);
-    }
 
     const buttons = (entity: TEntity) =>
         <KFlexRow align="end" justify="end">
             <AdminButton type={PermissionType.change}
                          model={modelType}
                          onClick={openModal(entity)}/>
-            <AdminButton type={PermissionType.delete}
-                         model={modelType}
-                         onClick={handleDeleteClick(entity.id)}/>
+            <DeleteButton entity={entity}
+                          modelType={modelType}
+                          baseActions={baseActions}/>
         </KFlexRow>
 
     const buttonsColumn = {
@@ -64,7 +60,6 @@ function AdminListEditContainer<TEntity extends IReadModel>(
 
     return (
         <>
-            {confirmDeleteModal}
             {formModal}
             <ListContainer entities={entities}
                            filter={filter}
