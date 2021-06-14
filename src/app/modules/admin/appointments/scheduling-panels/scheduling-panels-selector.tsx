@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import {PermissionModel, PermissionType} from 'src/app/api/auth';
 import SchedulingPanelForm from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panel-form';
+import AdminButton from 'src/app/shared/admin/admin-button';
 import {useEditModal, useSelectAll} from 'src/app/shared/admin/hooks';
 import {KFlexRow} from 'src/app/shared/components/flex';
 import {UseConfirmationModalWithDispatch} from 'src/app/shared/components/modal/delete-confirmation-modal';
-import {KTextButton, KIconButton} from 'src/app/shared/components/primitives/buttons';
+import {KTextButton} from 'src/app/shared/components/primitives/buttons';
 import {useAppDispatch} from 'src/app/store';
 import {adminDashboardActions} from 'src/app/store/admin/dashboard';
 import {schedulingPanelActions, schedulingPanelSelectors} from 'src/app/store/admin/panels';
@@ -33,7 +35,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     }
 
     return (
-        <KFlexRow className="m-2" align={'center'}>
+        <KFlexRow className="m-2 sticky-top-left" align={'center'}>
             {confirmDeleteModal}
             {formModal}
             {schedulingPanels.map((panel, i) =>
@@ -42,9 +44,9 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
                              onClick={handlePanelClick(i)}
                 >{panel.name}</KTextButton>)
             }
-            <KIconButton color="primary" icon="plus" onClick={openModal(null)}/>
-            <KIconButton color="accent" icon="edit" onClick={openModal(schedulingPanels[selectedIndex])}/>
-            <KIconButton color="danger" icon="trash" onClick={handleDeleteClick}/>
+            <AdminButton type={PermissionType.add} model={PermissionModel.schedulingpanel} onClick={openModal(null)}/>
+            <AdminButton type={PermissionType.change} model={PermissionModel.schedulingpanel} onClick={openModal(schedulingPanels[selectedIndex])}/>
+            <AdminButton type={PermissionType.delete} model={PermissionModel.schedulingpanel} onClick={handleDeleteClick}/>
         </KFlexRow>
     )
 }
