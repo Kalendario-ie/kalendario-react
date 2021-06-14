@@ -2,7 +2,7 @@ import {CustomerRequestAppointment} from 'src/app/api/appointments';
 import {IReadModel} from 'src/app/api/common/models';
 import {Company} from 'src/app/api/companies';
 import {Employee} from 'src/app/api/employees';
-import {User} from 'src/app/api/users';
+import {AdminUser} from 'src/app/api/users';
 
 export interface RequestItem {
   employee: Employee;
@@ -20,6 +20,6 @@ export interface RequestModel extends IReadModel {
   complete: boolean;
   customerNotes: string | null | undefined;
   status: string;
-  user: User;
+  user: AdminUser;
 }
 

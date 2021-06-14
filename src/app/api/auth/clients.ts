@@ -1,9 +1,8 @@
 import {AxiosInstance, AxiosResponse} from 'axios';
-import {userParser} from 'src/app/api/users';
 import baseApiAxios from '../common/clients/base-api';
 import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
-import {User} from '../users/models';
-import {LoginResponse, RefreshAccessTokenResponse} from './models';
+import {AuthUser, LoginResponse, RefreshAccessTokenResponse} from './models';
+import {authUserParser} from './parsers';
 import {LoginRequest, RegisterRequest} from './requests';
 
 
@@ -15,17 +14,17 @@ export const authApi = {
     verifyEmail(key: string) {
         return baseApiAxios.post(authUrl + 'registration/verify-email/', {key});
     },
-    login(request: LoginRequest): Promise<User | null> {
+    login(request: LoginRequest): Promise<AuthUser | null> {
         return baseApiAxios.post<LoginResponse>(authUrl + 'login/', request)
             .then(completeLogin);
     },
 
-    register(request: RegisterRequest): Promise<User | null> {
+    register(request: RegisterRequest): Promise<AuthUser | null> {
         return baseApiAxios.post<LoginResponse>(authUrl + 'registration/', request)
             .then(completeLogin);
     },
 
-    authenticateFacebook(accessToken: string): Promise<User | null> {
+    authenticateFacebook(accessToken: string): Promise<AuthUser | null> {
         return baseApiAxios.post<LoginResponse>(facebookUrl, {accessToken})
             .then(completeLogin);
     },
@@ -35,10 +34,10 @@ export const authApi = {
             .then(removeToken);
     },
 
-    whoAmI(): Promise<User | null> {
+    whoAmI(): Promise<AuthUser | null> {
         if (isLoggedIn()) {
-            return baseApiAxios.get<User>(authUrl + 'user/')
-                .then(({data}) => userParser(data))
+            return baseApiAxios.get<AuthUser>(authUrl + 'user/')
+                .then(({data}) => authUserParser(data))
                 .catch(error => {
                     removeToken();
                     return Promise.resolve(null);
@@ -61,6 +60,6 @@ export const authApi = {
 const completeLogin = ({data}: AxiosResponse<LoginResponse>) => {
     setToken(data.accessToken);
     setRefreshToken(data.refreshToken);
-    return userParser(data.user);
+    return authUserParser(data.user);
 }
 

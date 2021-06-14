@@ -1,10 +1,10 @@
-import {User} from 'src/app/api/users';
+import {AdminUser} from 'src/app/api/users';
 import React, {useMemo} from 'react';
 import {AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
 import KTable from 'src/app/shared/components/tables/k-table';
 import KTextColumnFilter from 'src/app/shared/components/tables/k-text-column-filter';
 
-const UsersTable: React.FunctionComponent<AdminTableContainerProps<User>> = (
+const UsersTable: React.FunctionComponent<AdminTableContainerProps<AdminUser>> = (
     {
         entities,
         buttonsColumn,

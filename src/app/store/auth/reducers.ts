@@ -1,14 +1,14 @@
 import {Reducer} from 'redux';
+import {AuthUser} from 'src/app/api/auth';
+import {ApiValidationError} from 'src/app/api/common/api-errors';
 import {isLoggedIn} from 'src/app/api/common/session-storage';
 import {ACTION_TYPES} from './types';
-import {User} from 'src/app/api/users';
-import {ApiValidationError} from 'src/app/api/common/api-errors';
 
 export interface AuthState {
     apiError: ApiValidationError | null;
     loggedIn: boolean;
     loadingUser: boolean;
-    user: User | null;
+    user: AuthUser | null;
 }
 
 const initialState: AuthState = {

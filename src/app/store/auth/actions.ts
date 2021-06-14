@@ -1,9 +1,8 @@
 import {createAction} from '@reduxjs/toolkit';
-import {LoginRequest, RegisterRequest} from 'src/app/api/auth';
-import {ACTION_TYPES} from './types';
+import {AuthUser, LoginRequest, RegisterRequest} from 'src/app/api/auth';
 import {action} from 'typesafe-actions';
-import {User} from 'src/app/api/users';
 import {ApiBaseError} from '../../api/common/api-errors';
+import {ACTION_TYPES} from './types';
 
 export const loginRequest = (request: LoginRequest) =>
     action(ACTION_TYPES.LOGIN_REQUEST, request);
@@ -23,7 +22,7 @@ export const registerRequestSuccess = () =>
 export const registerRequestFail = (error?: ApiBaseError) =>
     action(ACTION_TYPES.REGISTER_REQUEST_FAIL, error)
 
-export const setUser = (user: User | null) =>
+export const setUser = (user: AuthUser | null) =>
     action(ACTION_TYPES.SET_USER, user)
 
 export const setLoadingUser = createAction<boolean>(ACTION_TYPES.SET_LOADING_USER)

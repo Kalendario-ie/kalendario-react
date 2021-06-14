@@ -5,7 +5,7 @@ import {Company} from 'src/app/api/companies';
 import {Customer} from 'src/app/api/customers';
 import {Employee} from 'src/app/api/employees/models';
 import {Service} from 'src/app/api/services';
-import {User} from 'src/app/api/users/models';
+import {AdminUser} from 'src/app/api/users/models';
 
 export enum EventType {
     EmployeeEvent,
@@ -54,7 +54,7 @@ export interface BaseAppointment extends IReadModel {
 export interface History {
     historyType: HistoryType;
     historyDate: Moment | null;
-    historyUser: User | null;
+    historyUser: AdminUser | null;
 }
 
 export type AppointmentHistory = Appointment & History;

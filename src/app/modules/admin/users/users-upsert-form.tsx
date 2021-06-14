@@ -1,5 +1,5 @@
 import React from 'react';
-import {upsertUserRequestParser, UpsertUserRequestValidation, User} from 'src/app/api/users';
+import {upsertUserRequestParser, UpsertUserRequestValidation, AdminUser} from 'src/app/api/users';
 import ChangePasswordForm from 'src/app/modules/admin/users/change-password-form';
 import {useSelectAll} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps} from 'src/app/shared/admin/interfaces';
@@ -8,7 +8,7 @@ import {employeeActions, employeeSelectors} from 'src/app/store/admin/employees'
 import {permissionGroupActions, permissionGroupSelectors} from 'src/app/store/admin/permissionGroups';
 
 
-const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<User>> = (
+const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<AdminUser>> = (
     {
         entity,
         apiError,

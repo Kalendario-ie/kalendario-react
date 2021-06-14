@@ -1,19 +1,20 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
-import {User} from 'src/app/api/users';
-import {LoginRequest, authApi, RegisterRequest} from 'src/app/api/auth';
-import {ACTION_TYPES} from './types';
+import {call, put, takeEvery} from 'redux-saga/effects'
+import {authApi, AuthUser, LoginRequest, RegisterRequest} from 'src/app/api/auth';
 import {
     facebookLoginRequestFail,
     facebookLoginRequestSuccess,
     loginRequestFail,
-    loginRequestSuccess, registerRequestFail, registerRequestSuccess,
+    loginRequestSuccess,
+    registerRequestFail,
+    registerRequestSuccess,
     setUser
 } from './actions';
+import {ACTION_TYPES} from './types';
 
 
 function* requestLogin(action: { type: string, payload: LoginRequest }) {
     try {
-        const user: User = yield call(authApi.login, action.payload);
+        const user: AuthUser = yield call(authApi.login, action.payload);
         yield put(loginRequestSuccess());
         yield put(setUser(user));
     } catch (error) {
@@ -24,7 +25,7 @@ function* requestLogin(action: { type: string, payload: LoginRequest }) {
 
 function* register(action: { type: string, payload: RegisterRequest }) {
     try {
-        const user: User = yield call(authApi.register, action.payload);
+        const user: AuthUser = yield call(authApi.register, action.payload);
         yield put(registerRequestSuccess());
         yield put(setUser(user));
     } catch (error) {
@@ -35,7 +36,7 @@ function* register(action: { type: string, payload: RegisterRequest }) {
 
 function* requestFacebookLogin(action: { type: string, payload: string }) {
     try {
-        const user: User = yield call(authApi.authenticateFacebook, action.payload);
+        const user: AuthUser = yield call(authApi.authenticateFacebook, action.payload);
         yield put(facebookLoginRequestSuccess());
         yield put(setUser(user));
     } catch (error) {
