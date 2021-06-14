@@ -23,3 +23,7 @@ export interface ResetPasswordRequest {
     newPassword1: string;
     newPassword2: string;
 }
+
+export interface ForgotPasswordRequest {
+    email: string;
+}

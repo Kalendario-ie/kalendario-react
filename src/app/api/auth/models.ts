@@ -50,3 +50,6 @@ export interface RefreshAccessTokenResponse {
     accessTokenExpiration: string;
 }
 
+export interface ForgotPasswordResponse {
+    detail: string;
+}

@@ -19,3 +19,10 @@ export const RegisterRequestValidation = Yup.object().shape({
         .required()
         .oneOf([Yup.ref('password1'), null], 'Passwords must match'),
 });
+
+
+export const ForgotPasswordRequestValidation = Yup.object().shape({
+    email: Yup.string()
+        .email('Invalid email')
+        .required('Required'),
+});

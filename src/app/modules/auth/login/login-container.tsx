@@ -4,8 +4,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {LoginRequest} from 'src/app/api/auth/requests';
 import {LoginRequestValidation} from 'src/app/api/auth/validations';
 import {useRedirectIfLoggedInEffect} from 'src/app/modules/auth/effects';
+import {AUTH_ROUTES} from 'src/app/modules/auth/urls';
 import {KFlexColumn} from 'src/app/shared/components/flex';
+import {KTextButton} from 'src/app/shared/components/primitives/buttons';
 import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
+import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {loginRequest, selectApiError} from 'src/app/store/auth';
 import LoginView from './login-view';
 
@@ -15,9 +18,16 @@ const LoginContainer = () => {
     const dispatch = useDispatch();
     const apiError = useSelector(selectApiError);
     const initialValues: LoginRequest = {email: '', password: ''};
+
     const handleSubmit = (data: LoginRequest) => {
         dispatch(loginRequest(data));
     };
+
+    const history = useKHistory();
+
+    const handlePasswordReset = () => {
+        history.push(AUTH_ROUTES.RESET_PASSWORD);
+    }
 
     // const faceBookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
     //
@@ -49,6 +59,9 @@ const LoginContainer = () => {
                                    validationSchema={LoginRequestValidation}
                         />
                     </>
+                    <KTextButton onClick={handlePasswordReset}>
+                        <FormattedMessage id="AUTH.RESET-PASS-TEXT"/>
+                    </KTextButton>
                 </KCard>
             </KFlexColumn>
         </KPageContainer>

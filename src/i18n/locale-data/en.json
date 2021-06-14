@@ -2,6 +2,10 @@
   "AUTH": {
     "LOGIN-HEADER": "Log in to Kalendario",
     "REGISTER-HEADER": "Register to Kalendario",
+    "RESET-PASS-HEADER": "Reset your password",
+    "RESET-PASS-CONFIRM": "Send Email",
+    "RESET-PASS-TEXT": "Can't login? Reset Password",
+    "RESET-PASS-SENT": "Email sent successfully, check you inbox for further instructions",
     "LOGIN": "Login",
     "REGISTER": "Register",
     "LOGOUT": "Logout",
