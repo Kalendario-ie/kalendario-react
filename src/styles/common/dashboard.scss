@@ -24,12 +24,10 @@
 }
 
 .dashboard-content {
-  display: flex;
   width: 100%;
   min-height: $view-height;
   max-height: $view-height;
   overflow: scroll;
-  flex-wrap: wrap;
   background: $white-gray;
 }
 
