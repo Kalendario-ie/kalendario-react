@@ -42,7 +42,6 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
         setShowHistory(false);
     };
 
-    let AdminAppointmentActions;
     return (
         <KFormikForm initialValues={initialValues}
                      apiError={apiError}
