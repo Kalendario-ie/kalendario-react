@@ -28,12 +28,13 @@ const SchedulingDateSelector: React.FunctionComponent = () => {
 
     return (
         <KFlexRow className={styles.dateSelectorContainer} align={'center'}>
-            <KFlexColumn className="mr-2">
-                <KDateInput value={currentDate} onChange={handleDateChange}/>
-            </KFlexColumn>
             <Button color="primary" size="sm" onClick={handleTodayClick}>Today</Button>
             <KIconButton icon="chevron-left" color="accent" onClick={handlePreviousClick}/>
             <KIconButton icon="chevron-right" color="accent" onClick={handleNextClick}/>
+            {currentDate.format('dddd')}
+            <KFlexColumn align="center" className="ml-2">
+                <KDateInput value={currentDate} onChange={handleDateChange}/>
+            </KFlexColumn>
         </KFlexRow>
     )
 }
