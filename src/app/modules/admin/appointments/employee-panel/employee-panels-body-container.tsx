@@ -16,7 +16,6 @@ const PanelHours: React.FunctionComponent = () => {
     const slotSize = useAppSelector(adminDashboardSelectors.selectSlotSize);
 
     const style: React.CSSProperties = {
-        width: '5rem',
         minHeight: `${slotSize / 2}rem`,
         height: `${slotSize / 2}rem`,
         textAlign: 'right',
@@ -27,7 +26,7 @@ const PanelHours: React.FunctionComponent = () => {
         <KFlexColumn className={`sticky-top-left bg-white-gray ${styles.borderRight}`}>
             {hours.map((hour, i) =>
                 <React.Fragment key={i}>
-                    <div style={style}>
+                    <div style={style} className={styles.sideItem}>
                         {timeToString({hour, minute: 0})}
                     </div>
                     <div style={style}/>
