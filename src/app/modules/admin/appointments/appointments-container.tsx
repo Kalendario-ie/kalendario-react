@@ -5,7 +5,7 @@ import TimeLineContainer from 'src/app/modules/admin/appointments/employee-panel
 import AppointmentUpsertForm from 'src/app/modules/admin/appointments/forms/appointment-upsert-form';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
 import {useEditModal, useInitializeEffect} from 'src/app/shared/admin/hooks';
-import {KFlexColumn} from 'src/app/shared/components/flex';
+import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {appointmentActions, appointmentSelectors} from 'src/app/store/admin/appointments';
 import {employeeActions} from 'src/app/store/admin/employees';
 import {scheduleActions} from 'src/app/store/admin/schedules';
@@ -26,8 +26,12 @@ const AppointmentsContainer: React.FunctionComponent = () => {
         <KFlexColumn>
             {formModal}
             <KFlexColumn className="sticky-top bg-white-gray">
-                <SchedulingPanelsSelector/>
-                <SchedulingDateSelector/>
+                <KFlexRow>
+                    <SchedulingPanelsSelector/>
+                </KFlexRow>
+                <KFlexRow>
+                    <SchedulingDateSelector/>
+                </KFlexRow>
                 <EmployeePanelHeadersContainer onCreateClick={openModal}/>
             </KFlexColumn>
             <TimeLineContainer/>

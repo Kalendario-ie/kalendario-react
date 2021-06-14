@@ -35,7 +35,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
     }
 
     return (
-        <KFlexRow className="m-2 sticky-top-left" align={'center'}>
+        <KFlexRow className="sticky-top-left" align={'center'}>
             {confirmDeleteModal}
             {formModal}
             {schedulingPanels.map((panel, i) =>
