@@ -6,6 +6,8 @@ import {useSelectPanelEmployees} from 'src/app/modules/admin/appointments/employ
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
 import KFiller from 'src/app/shared/components/primitives/k-filler';
+import {useAppSelector} from 'src/app/store';
+import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 import styles from './employee-panel.module.scss';
 
 interface EmployeePanelHeaderProps {
@@ -18,12 +20,15 @@ const EmployeePanelHeader: React.FunctionComponent<EmployeePanelHeaderProps> = (
         employee,
         onCreateClick
     }) => {
+    const currentDate = useAppSelector(adminDashboardSelectors.selectCurrentDate);
+
     return (
         <KFlexColumn className={`${styles.panelItem} py-3`} align={'center'} justify={'center'}>
             {employee.name}
             <AvatarImg className="m-1" size={4} key={employee.id} src={employee.photoUrl}/>
             <KFlexRow>
                 <CreateAppointmentButtons employee={employee}
+                                          currentDate={currentDate}
                                           onCreateClick={onCreateClick}
                                           hour={0}
                                           minute={0}/>

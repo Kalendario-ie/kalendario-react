@@ -71,6 +71,7 @@ const EmployeePanelBody: React.FunctionComponent<EmployeePanelProps> = (
                     >
                         <CreateAppointmentButtons employee={employee}
                                                   onCreateClick={onCreateClick}
+                                                  currentDate={currentDate}
                                                   hour={hour}
                                                   minute={0}/>
                     </KShowOnHoverContainer>
@@ -79,6 +80,7 @@ const EmployeePanelBody: React.FunctionComponent<EmployeePanelProps> = (
                     >
                         <CreateAppointmentButtons employee={employee}
                                                   onCreateClick={onCreateClick}
+                                                  currentDate={currentDate}
                                                   hour={hour}
                                                   minute={30}/>
                     </KShowOnHoverContainer>

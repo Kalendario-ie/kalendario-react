@@ -1,4 +1,4 @@
-import moment from 'moment';
+import {Moment} from 'moment';
 import {
     Appointment,
     AppointmentHistory,
@@ -13,6 +13,7 @@ import {customerParser} from 'src/app/api/customers';
 import {employeeParser} from 'src/app/api/employees';
 import {serviceParser} from 'src/app/api/services';
 import {userParser} from 'src/app/api/users';
+import {momentToIso} from 'src/app/shared/util/moment-helpers';
 
 export function appointmentParser(data: any): Appointment {
     return !!data.customer ? customerAppointmentParser(data) : employeeEventParser(data);
@@ -105,11 +106,11 @@ export function upsertEmployeeEventRequestParser(appointment: Appointment | null
     }
 }
 
-export function blankEmployeeEvent(employeeId: number, hour: number, minute: number): EmployeeEvent {
-    const start = moment.utc().startOf('day').add(hour, 'hour').add(minute, 'minute').toISOString()
+export function blankEmployeeEvent(employeeId: number, start: Moment): EmployeeEvent {
+    // const start = moment.utc().startOf('day').add(hour, 'hour').add(minute, 'minute').toISOString()
     return {
-        start,
-        end: start,
+        start: momentToIso(start),
+        end: momentToIso(start),
         // @ts-ignore
         employee: {id: employeeId},
         deleted: null,
@@ -121,9 +122,9 @@ export function blankEmployeeEvent(employeeId: number, hour: number, minute: num
     }
 }
 
-export function blankCustomerAppointment(employeeId: number, hour: number, minute: number): CustomerAppointment {
+export function blankCustomerAppointment(employeeId: number, value: Moment): CustomerAppointment {
     return {
-        ...blankEmployeeEvent(employeeId, hour, minute),
+        ...blankEmployeeEvent(employeeId, value),
         type: EventType.CustomerAppointment,
         // @ts-ignore
         customer: {id: 0},
