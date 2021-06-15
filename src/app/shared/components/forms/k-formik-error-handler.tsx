@@ -20,7 +20,8 @@ const KFormikErrorHandler: React.FunctionComponent<KFormikErrorHandlerProps> = (
                 }
             })
         }
-    }, [apiError, formik]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [apiError]);
 
 
     return (

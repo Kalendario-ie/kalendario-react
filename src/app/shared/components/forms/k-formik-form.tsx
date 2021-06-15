@@ -1,6 +1,6 @@
 import {Formik} from 'formik';
 import {FormikHelpers, FormikProps} from 'formik/dist/types';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, FormGroup} from 'reactstrap';
 import {ApiValidationError} from 'src/app/api/common/api-errors';
 import KFormikErrorHandler from 'src/app/shared/components/forms/k-formik-error-handler';
@@ -25,10 +25,13 @@ export function KFormikForm<Values>(
         children,
         validationSchema
     }: KFormikFormProps<Values>) {
-    let errors: string[] = [];
-    if (apiError?.detail && apiError.detail['nonFieldErrors']) {
-        errors = apiError.detail['nonFieldErrors'];
-    }
+    const [errors, setErrors] = useState<string[]>([]);
+    useEffect(() => {
+        if (apiError?.detail && apiError.detail['nonFieldErrors']) {
+            setErrors(apiError.detail['nonFieldErrors']);
+        }
+    }, [apiError]);
+
     return (
         <Formik initialValues={initialValues}
                 validationSchema={validationSchema}

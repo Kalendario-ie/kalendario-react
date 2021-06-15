@@ -1,9 +1,9 @@
 import {AxiosInstance, AxiosResponse} from 'axios';
 import baseApiAxios from '../common/clients/base-api';
 import {getRefreshToken, isLoggedIn, removeToken, setRefreshToken, setToken} from '../common/session-storage';
-import {AuthUser, LoginResponse, RefreshAccessTokenResponse} from './models';
+import {AuthUser, ForgotPasswordResponse, LoginResponse, RefreshAccessTokenResponse} from './models';
 import {authUserParser} from './parsers';
-import {LoginRequest, RegisterRequest} from './requests';
+import {ForgotPasswordRequest, LoginRequest, RegisterRequest, ResetPasswordRequest} from './requests';
 
 
 const authUrl = 'auth/';
@@ -44,6 +44,14 @@ export const authApi = {
                 });
         }
         return Promise.resolve(null);
+    },
+
+    forgotPassword(request: ForgotPasswordRequest) {
+        return baseApiAxios.post<ForgotPasswordResponse>(authUrl + 'password/reset/', request);
+    },
+
+    resetPasswordConfirm(request: ResetPasswordRequest) {
+        return baseApiAxios.post<any>(authUrl + 'password/reset/confirm/', request);
     },
 
     refreshAccessToken(axios: AxiosInstance): Promise<string | null> {
