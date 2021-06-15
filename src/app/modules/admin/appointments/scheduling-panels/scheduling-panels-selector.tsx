@@ -34,7 +34,7 @@ const SchedulingPanelsSelector: React.FunctionComponent = () => {
 
 
     const handlePanelClick = (index: number) => () => {
-        history.push(history.location.pathname, {panel: index})
+        history.push(history.location.pathname, {...params, panel: index})
     }
 
     const handleDeleteClick = () => {
