@@ -25,7 +25,8 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
             setCustomer(createdCustomer);
             setValue(createdCustomer.id);
         }
-    }, [createdCustomer, setValue]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [createdCustomer]);
 
     const promiseOptions = (value: string) => adminCustomerClient.get({search: value}).then(res => res.results);
 
