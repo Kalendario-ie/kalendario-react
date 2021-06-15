@@ -96,17 +96,22 @@ function useEmployeeServices() {
 function useUpdateEndTimeOnServiceChangeEffect() {
     const formik = useFormikContext();
     const serviceId = formik.getFieldProps<number>('service').value;
-    const [initialId, setInitialId] = useState(serviceId);
-    const service = useAppSelector((state) => serviceSelectors.selectById(state, serviceId));
-    const {value} = formik.getFieldProps('start');
+    const start = formik.getFieldProps('start').value;
     const {setValue} = formik.getFieldHelpers('end');
 
+    const [initialId, setInitialId] = useState(serviceId);
+    const [initialStart, setInitialStart] = useState(start);
+
+    const service = useAppSelector((state) => serviceSelectors.selectById(state, serviceId));
+
     useEffect(() => {
-        if (service && serviceId !== initialId) {
+        if (service && (serviceId !== initialId || start !== initialStart)) {
             setInitialId(serviceId);
-            setValue(addHours(stringToMoment(value), timeToString(service.duration)))
+            setInitialStart(start);
+            setValue(addHours(stringToMoment(start), timeToString(service.duration)))
         }
-    }, [initialId, service, serviceId, setValue, value]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialId, start, service, serviceId, initialStart]);
 }
 
 interface CustomerAppointmentUpsertFormProps {

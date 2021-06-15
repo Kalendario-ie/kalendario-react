@@ -1,6 +1,6 @@
 import React from 'react';
 import {Appointment} from 'src/app/api/appointments';
-import SchedulingDateSelector from 'src/app/modules/admin/appointments/date-selector/scheduling-date-selector';
+import SchedulingDateSelectorContainer from 'src/app/modules/admin/appointments/date-selector/scheduling-date-selector-container';
 import TimeLineContainer from 'src/app/modules/admin/appointments/employee-panel/TimeLineContainer';
 import AppointmentUpsertForm from 'src/app/modules/admin/appointments/forms/appointment-upsert-form';
 import SchedulingPanelsSelector from 'src/app/modules/admin/appointments/scheduling-panels/scheduling-panels-selector';
@@ -30,7 +30,7 @@ const AppointmentsContainer: React.FunctionComponent = () => {
                     <SchedulingPanelsSelector/>
                 </KFlexRow>
                 <KFlexRow>
-                    <SchedulingDateSelector/>
+                    <SchedulingDateSelectorContainer/>
                 </KFlexRow>
                 <EmployeePanelHeadersContainer onCreateClick={openModal}/>
             </KFlexColumn>
