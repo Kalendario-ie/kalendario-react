@@ -10,17 +10,18 @@ import {customerActions, customerSelectors} from 'src/app/store/admin/customers'
 const CustomersContainer: React.FunctionComponent = () => {
     const dispatch = useAppDispatch()
 
-    const filter = (value: string | undefined) => {
-        dispatch(customerActions.fetchEntities({search: value}));
-    }
+    const filter = React.useMemo(() =>
+        (value: string | undefined) => {
+            dispatch(customerActions.fetchEntities({search: value}));
+        }, [dispatch]);
 
     return (
-            <AdminListEditContainer baseSelectors={customerSelectors}
-                                    baseActions={customerActions}
-                                    filter={filter}
-                                    modelType={PermissionModel.customer}
-                                    EditContainer={CustomerUpsertForm}
-                                    ListContainer={CustomersTable}/>
+        <AdminListEditContainer baseSelectors={customerSelectors}
+                                baseActions={customerActions}
+                                filter={filter}
+                                modelType={PermissionModel.customer}
+                                EditContainer={CustomerUpsertForm}
+                                ListContainer={CustomersTable}/>
     )
 }
 

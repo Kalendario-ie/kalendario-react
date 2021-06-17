@@ -37,26 +37,26 @@ function AdminListEditContainer<TEntity extends IReadModel>(
     }, [baseActions, dispatch]);
 
 
-    const buttons = (entity: TEntity) =>
-        <KFlexRow align="end" justify="end">
-            <AdminButton type={PermissionType.change}
-                         model={modelType}
-                         onClick={openModal(entity)}/>
-            <DeleteButton entity={entity}
-                          modelType={modelType}
-                          baseActions={baseActions}/>
-        </KFlexRow>
-
-    const buttonsColumn = {
-        Header: () =>
-            <KFlexRow justify={'end'}>
-                <AdminButton type={PermissionType.add}
-                             model={modelType}
-                             onClick={openModal(null)}/>
-            </KFlexRow>,
-        id: 'buttons',
-        Cell: (value: any) => buttons(value.row.original)
-    }
+    const buttonsColumn = React.useMemo(() =>
+        ({
+            Header: () =>
+                <KFlexRow justify={'end'}>
+                    <AdminButton type={PermissionType.add}
+                                 model={modelType}
+                                 onClick={openModal(null)}/>
+                </KFlexRow>,
+            id: 'buttons',
+            Cell: (value: any) => (
+                <KFlexRow align="end" justify="end">
+                    <AdminButton type={PermissionType.change}
+                                 model={modelType}
+                                 onClick={openModal(value.row.original)}/>
+                    <DeleteButton entity={value.row.original}
+                                  modelType={modelType}
+                                  baseActions={baseActions}/>
+                </KFlexRow>
+            )
+        }), [modelType, openModal])
 
     return (
         <>
