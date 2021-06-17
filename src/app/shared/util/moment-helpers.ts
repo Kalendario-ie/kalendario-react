@@ -13,8 +13,8 @@ export function momentToIso(value: Moment): string {
     return value.toISOString();
 }
 
-export function momentIsToday(moment: Moment): boolean {
-    return moment.date() === moment.utc().date();
+export function momentIsToday(date: Moment): boolean {
+    return date.date() === moment.utc().date();
 }
 
 export function momentToday(): Moment {

@@ -29,10 +29,11 @@ export function useEditModal<TEntity extends IReadModel>(
         }
     }
 
-    const openModal = (entity: TEntity | null) => () => {
-        setSelectedEntity(entity);
-        dispatch(baseActions.setEditMode(true));
-    }
+    const openModal = React.useMemo(() =>
+        (entity: TEntity | null) => () => {
+            setSelectedEntity(entity);
+            dispatch(baseActions.setEditMode(true));
+        }, [baseActions, dispatch])
 
     const modal = <KModal body={<EditContainer entity={selectedEntity}
                                                apiError={apiError}

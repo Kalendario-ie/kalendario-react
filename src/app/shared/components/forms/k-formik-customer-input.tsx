@@ -8,7 +8,8 @@ import {useEditModal} from 'src/app/shared/admin/hooks';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
-import {customerActions, customerSelectors} from 'src/app/store/admin/customers';
+import { useAppDispatch } from 'src/app/store';
+import {customerActions, customerSelectors, customerSlice} from 'src/app/store/admin/customers';
 
 interface FormikCustomerInput {
     initialCustomer: Customer | null;
@@ -17,6 +18,7 @@ interface FormikCustomerInput {
 export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> = ({initialCustomer}) => {
     const [customer, setCustomer] = useState<Customer | null>(initialCustomer);
     const [openModal, modal, createdCustomer] = useEditModal(customerSelectors, customerActions, CustomerUpsertForm);
+    const dispatch = useAppDispatch();
     const formik = useFormikContext();
     const {setValue} = formik.getFieldHelpers('customer');
 
@@ -25,6 +27,10 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
             setCustomer(createdCustomer);
             setValue(createdCustomer.id);
         }
+        return () => {
+            dispatch(customerSlice.actions.setCreatedEntityId(null))
+        }
+        // the below is disabled because setValue will cause an infinite loop if added to deps.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createdCustomer]);
 
@@ -44,7 +50,6 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
                 <KFlexRow align={'center'}>
                     <AsyncSelect className={"flex-fill"}
                                  cacheOptions
-                                 defaultOptions
                                  backspaceRemovesValue
                                  defaultInputValue={initialCustomer?.name}
                                  getOptionValue={(option) => option.id.toString()}
