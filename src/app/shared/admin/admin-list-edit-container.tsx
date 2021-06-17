@@ -56,7 +56,7 @@ function AdminListEditContainer<TEntity extends IReadModel>(
                                   baseActions={baseActions}/>
                 </KFlexRow>
             )
-        }), [modelType, openModal])
+        }), [baseActions, modelType, openModal])
 
     return (
         <>
