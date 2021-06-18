@@ -44,6 +44,7 @@ export interface CreateActionPayload {
 export interface BaseActions {
     initializeStore: ActionCreatorWithoutPayload;
     fetchEntities: ActionCreatorWithPayload<object>;
+    fetchEntity: ActionCreatorWithPayload<number>;
     fetchEntitiesWithSetAll: ActionCreatorWithPayload<object>;
     createEntity: ActionCreatorWithPayload<CreateActionPayload>;
     patchEntity: ActionCreatorWithPayload<PatchActionPayload>;
@@ -65,6 +66,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     const actions: BaseActions = {
         initializeStore: createAction<void>(`${sliceName}/initializeStore`),
         fetchEntities: createAction<object>(`${sliceName}/fetchEntities`),
+        fetchEntity: createAction<number>(`${sliceName}/fetchEntity`),
         fetchEntitiesWithSetAll: createAction<object>(`${sliceName}/fetchEntitiesWithSetAll`),
         createEntity: createAction<CreateActionPayload>(`${sliceName}/createEntity`),
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
@@ -136,6 +138,15 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         }
     }
 
+    function* fetchEntity(action: { type: string, payload: number }) {
+        try {
+            const entity: TEntity = yield call(client.detail, action.payload);
+            yield put(slice.actions.upsertOne(entity));
+        } catch (error) {
+            yield put(slice.actions.setApiError(error));
+        }
+    }
+
     function* fetchEntitiesWithSetAll(action: { type: string, payload: object }) {
         try {
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
@@ -182,6 +193,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     function* sagas() {
         yield takeEvery(actions.initializeStore.type, initializeStore);
         yield takeEvery(actions.fetchEntities.type, fetchEntities);
+        yield takeEvery(actions.fetchEntity.type, fetchEntity);
         yield takeEvery(actions.fetchEntitiesWithSetAll.type, fetchEntitiesWithSetAll);
         yield takeEvery(actions.createEntity.type, createEntity);
         yield takeEvery(actions.patchEntity.type, patchEntity);

@@ -68,18 +68,9 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
             {customer &&
             <KFlexColumn>
                 <KFlexRow justify={'between'}>
-                    <KFlexRow className={"mb-2"} align={'center'}>
-                        <KIcon margin={2} color="primary" icon={'user'}/>
-                        {customer.name}
-                    </KFlexRow>
-                    <KFlexRow align={'center'}>
-                        <KIcon margin={2} color="primary" icon={'phone'}/>
-                        {customer.phone}
-                    </KFlexRow>
-                </KFlexRow>
-                <KFlexRow align={'center'}>
-                    <KIcon margin={2} color="primary" icon={'at'}/>
-                    {customer.email}
+                    <KIcon icon="user" color="primary" text={customer.name}/>
+                    <KIcon icon="phone" color="primary" text={customer.phone}/>
+                    <KIcon icon="at" color="primary" text={customer.email}/>
                 </KFlexRow>
             </KFlexColumn>
             }

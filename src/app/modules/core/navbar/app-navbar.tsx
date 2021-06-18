@@ -23,7 +23,7 @@ import {companiesUrls} from 'src/app/modules/companies/paths';
 import {EMPLOYEE_ROUTES} from 'src/app/modules/employee/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import KIcon from 'src/app/shared/components/primitives/k-icon';
+import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 
 interface AppNavbarProps {
     company: CompanyDetails | null;
@@ -52,7 +52,7 @@ const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
         <header>
             <Navbar className="k-shadow-0" light expand="md">
                 {showSidenavToggle &&
-                <KIcon onClick={toggleSidenav} margin={2} icon="bars"/>
+                <KIconButton onClick={toggleSidenav} icon="bars"/>
                 }
                 <NavbarBrand tag={Link} to="/" className="nav-logo">Kalendario</NavbarBrand>
                 <NavbarToggler onClick={toggleMenu}/>

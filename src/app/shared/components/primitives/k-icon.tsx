@@ -1,10 +1,11 @@
 import React from 'react';
+import {KFlexRow} from 'src/app/shared/components/flex';
 
 interface KIconProps {
     icon: string;
     color?: string;
     margin?: number;
-    onClick?: () => void;
+    text?: string;
 }
 
 const KIcon: React.FunctionComponent<KIconProps> = (
@@ -12,11 +13,21 @@ const KIcon: React.FunctionComponent<KIconProps> = (
         icon,
         color,
         margin = 1,
-        onClick,
+        text
     }) => {
-    const className = `fa fa-${icon} c-${color} mx-${margin}${!onClick ? '' : ' c-pointer'}`;
+    const className = `fa fa-${icon} c-${color} mx-${margin}`;
+    const iconElement = <i className={className}/>;
     return (
-        <i className={className} onClick={onClick}/>
+        <>
+            {!text &&
+            iconElement
+            }
+            {text &&
+            <KFlexRow align={'center'}>
+                {iconElement} {text}
+            </KFlexRow>
+            }
+        </>
     )
 }
 
