@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {PermissionModel, PermissionType} from 'src/app/api/auth';
 import {IReadModel} from 'src/app/api/common/models';
-import DeleteButton from 'src/app/shared/admin/delete-button';
+import AdminDeleteButton from 'src/app/shared/admin/delete-button';
 import {useEditModal} from 'src/app/shared/admin/hooks';
 import {AdminEditContainerProps, AdminTableContainerProps} from 'src/app/shared/admin/interfaces';
+import {useKHistory} from 'src/app/shared/util/router-extensions';
 import {useAppDispatch, useAppSelector} from 'src/app/store';
 import {BaseActions, BaseSelectors} from 'src/app/store/admin/common/adapter';
 import {KFlexRow} from '../components/flex';
@@ -14,6 +15,8 @@ interface AdminListEditContainerProps<TEntity> {
     baseActions: BaseActions;
     modelType: PermissionModel;
     filter?: (value: string | undefined) => void;
+    detailsUrl?: string;
+    initializeStore?: boolean;
     EditContainer: React.FunctionComponent<AdminEditContainerProps<TEntity>>;
     ListContainer: React.FunctionComponent<AdminTableContainerProps<TEntity>>;
 }
@@ -23,6 +26,8 @@ function AdminListEditContainer<TEntity extends IReadModel>(
         baseSelectors,
         baseActions,
         filter,
+        detailsUrl,
+        initializeStore = true,
         modelType,
         EditContainer,
         ListContainer
@@ -30,11 +35,13 @@ function AdminListEditContainer<TEntity extends IReadModel>(
     const dispatch = useAppDispatch();
     const entities = useAppSelector(baseSelectors.selectAll)
     const [openModal, formModal] = useEditModal(baseSelectors, baseActions, EditContainer);
-
+    const history = useKHistory();
 
     useEffect(() => {
-        dispatch(baseActions.initializeStore())
-    }, [baseActions, dispatch]);
+        if (initializeStore) {
+            dispatch(baseActions.initializeStore());
+        }
+    }, [baseActions, dispatch, initializeStore]);
 
 
     const buttonsColumn = React.useMemo(() =>
@@ -48,15 +55,21 @@ function AdminListEditContainer<TEntity extends IReadModel>(
             id: 'buttons',
             Cell: (value: any) => (
                 <KFlexRow align="end" justify="end">
+                    {detailsUrl &&
+                    <AdminButton type={PermissionType.view}
+                                 model={modelType}
+                                 onClick={() => history.push(`${detailsUrl}/${value.row.original.id}`)}/>
+                    }
                     <AdminButton type={PermissionType.change}
                                  model={modelType}
                                  onClick={openModal(value.row.original)}/>
-                    <DeleteButton entity={value.row.original}
+                    <AdminDeleteButton entity={value.row.original}
                                   modelType={modelType}
                                   baseActions={baseActions}/>
                 </KFlexRow>
             )
-        }), [baseActions, modelType, openModal])
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }), [])
 
     return (
         <>

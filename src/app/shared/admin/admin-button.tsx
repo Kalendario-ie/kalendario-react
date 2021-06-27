@@ -32,7 +32,7 @@ function iconType(type: PermissionType): string {
         case PermissionType.delete:
             return 'trash';
         case PermissionType.view:
-            return 'eye';
+            return 'external-link-alt';
 
     }
 }

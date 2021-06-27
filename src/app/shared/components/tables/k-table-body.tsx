@@ -37,7 +37,7 @@ function KTableBody<D extends object>(
                     // @ts-ignore
                     row.isExpanded ? (
                         <tr {...row.getRowProps()}>
-                            <td colSpan={visibleColumns.length}>
+                            <td className="p-0" colSpan={visibleColumns.length}>
                                 {renderRowSubComponent(row)}
                             </td>
                         </tr>

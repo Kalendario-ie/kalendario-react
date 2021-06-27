@@ -51,11 +51,13 @@
   },
   "ADMIN": {
     "COMMON": {
+      "BACK-TO-LIST": "Back to list",
       "HOME": "Home",
       "SERVICES": "Services",
       "SCHEDULES": "Schedules",
       "EMPLOYEES": "Employees",
       "CUSTOMERS": "Customers",
+      "CUSTOMER-DETAILS": "Customer Details",
       "USERS": "Users",
       "PERMISSION-GROUPS": "Permission Groups",
       "APPOINTMENTS": "Appointments"

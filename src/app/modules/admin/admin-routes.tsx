@@ -3,7 +3,7 @@ import {useIntl} from 'react-intl';
 import {Switch} from 'react-router-dom';
 import {PermissionModel} from 'src/app/api/auth';
 import AppointmentsContainer from 'src/app/modules/admin/appointments/appointments-container';
-import CustomersContainer from 'src/app/modules/admin/customers/customers-container';
+import CustomersRoutes from 'src/app/modules/admin/customers/customers-routes';
 import EmployeesContainer from 'src/app/modules/admin/employees/employees-container';
 import PermissionGroupsContainer from 'src/app/modules/admin/permissionGroups/permission-groups-container';
 import SchedulesContainer from 'src/app/modules/admin/schedules/schedules-container';
@@ -83,7 +83,7 @@ const AdminRoutes: React.FunctionComponent = () => {
 
                     <ProtectedRoute permissionModel={PermissionModel.customer}
                                     path={ADMIN_ROUTES.CUSTOMERS}
-                                    component={CustomersContainer}/>
+                                    component={CustomersRoutes}/>
 
                     <ProtectedRoute permissionModel={PermissionModel.schedule}
                                     path={ADMIN_ROUTES.SCHEDULES}

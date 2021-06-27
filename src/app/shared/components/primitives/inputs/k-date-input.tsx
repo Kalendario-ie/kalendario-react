@@ -4,7 +4,7 @@ import {Input} from 'reactstrap';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 
 interface KDateInputProps {
-    value?: Moment;
+    value?: Moment | string;
     onChange?: (value: Moment) => void;
 }
 
@@ -13,7 +13,7 @@ export const KDateInput: React.FunctionComponent<KDateInputProps> = (
         value,
         onChange
     }) => {
-    const useValue = value && moment.isMoment(value) ? value : stringToMoment(value)
+    const useValue = value && moment.isMoment(value) ? value : stringToMoment(value);
     return (
         <Input type='date'
                value={useValue && useValue.format('YYYY-MM-DD')}
