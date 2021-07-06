@@ -1,5 +1,5 @@
-import {useFormikContext} from 'formik';
-import {Moment} from 'moment';
+import {ErrorMessage, useFormikContext} from 'formik';
+import moment, {Moment} from 'moment';
 import React from 'react';
 import Datetime from 'react-datetime';
 import {FormGroup} from 'reactstrap';
@@ -14,21 +14,26 @@ const KFormikDatetimeInput: React.FunctionComponent<KDatetimeInput> = (
         name,
     }) => {
     const formik = useFormikContext();
+    const fieldMeta = formik.getFieldMeta(name);
+    const fieldHelpers = formik.getFieldHelpers(name);
 
     const handleDateChange = (e: Moment | string) => {
-        formik.getFieldHelpers(name).setValue(momentToIso(e as Moment));
+        fieldHelpers.setValue(moment.isMoment(e) ? momentToIso(e) : e);
     }
 
     return (
         <FormGroup>
             <Datetime
+                closeOnClickOutside={true}
                 inputProps={{
+                    readOnly: true,
                     name: name,
-                    className: 'form-control',
+                    className: `form-control${(fieldMeta.error) ? ' is-invalid' : ''}`,
                 }}
                 initialValue={stringToMoment(formik.getFieldProps(name).value)}
                 onChange={handleDateChange}
             />
+            <ErrorMessage name={name}/>
         </FormGroup>
     )
 }
