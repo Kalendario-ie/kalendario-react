@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+import {Spinner} from 'reactstrap';
 import {Appointment, CustomerAppointment} from 'src/app/api/appointments';
 import {Employee} from 'src/app/api/employees';
 import styles from 'src/app/modules/admin/appointments/employee-panel/employee-panel.module.scss';
@@ -60,6 +61,7 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
         onSelect
     }) => {
     const appointments = useAppSelector(appointmentSelectors.selectAll);
+    const isLoading = useAppSelector(appointmentSelectors.selectIsLoading);
 
     const employeeAppointments = React.useMemo(() =>
             appointments.filter(appointment => appointment.employee.id === employee.id)
@@ -68,6 +70,9 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
 
     return (
         <div className="position-relative">
+            {isLoading &&
+            <Spinner className="position-absolute"/>
+            }
             {employeeAppointments.map(appointment =>
                 <Event key={appointment.id}
                        appointment={appointment}
