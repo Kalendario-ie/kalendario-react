@@ -19,6 +19,7 @@ import {PayloadAction} from 'typesafe-actions';
 
 interface BaseState<TEntity> extends EntityState<TEntity> {
     isInitialized: boolean;
+    isLoading: boolean;
     apiError: ApiBaseError | null;
     editMode: boolean;
     createdEntityId: number | null;
@@ -29,6 +30,7 @@ export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
     selectIsInitialized: (state: any) => boolean;
     selectApiError: (state: any) => ApiBaseError | null;
     selectEditMode: (state: any) => boolean;
+    selectIsLoading: (state: any) => boolean;
     selectCreatedEntity: (state: any) => TEntity | undefined;
 }
 
@@ -78,6 +80,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         name: sliceName,
         initialState: adapter.getInitialState({
             isInitialized: false,
+            isLoading: false,
             apiError: null,
             editMode: false,
             createdEntityId: null
@@ -91,6 +94,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             upsertOne: adapter.upsertOne,
             // @ts-ignore
             removeOne: adapter.removeOne,
+            // @ts-ignore
+            removeAll: adapter.removeAll,
             setInitialized: (state, action) => {
                 state.isInitialized = action.payload
             },
@@ -102,6 +107,9 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             },
             setCreatedEntityId: (state, action: PayloadAction<string, number>) => {
                 state.createdEntityId = action.payload;
+            },
+            setIsLoading: (state, action: PayloadAction<string, boolean>) => {
+                state.isLoading = action.payload;
             }
         }
     });
@@ -117,6 +125,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         selectIsInitialized: createSelector(selector, store => store.isInitialized),
         selectApiError: createSelector(selector, store => store.apiError),
         selectEditMode: createSelector(selector, store => store.editMode),
+        selectIsLoading: createSelector(selector, store => store.isLoading),
         selectCreatedEntity: createSelector(selector, store =>
             store.createdEntityId ? store.entities[store.createdEntityId] : undefined),
     }
@@ -139,21 +148,26 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
     }
 
     function* fetchEntity(action: { type: string, payload: number }) {
+        yield put(slice.actions.setIsLoading(true));
         try {
             const entity: TEntity = yield call(client.detail, action.payload);
             yield put(slice.actions.upsertOne(entity));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }
+        yield put(slice.actions.setIsLoading(false));
     }
 
     function* fetchEntitiesWithSetAll(action: { type: string, payload: object }) {
+        yield put(slice.actions.setIsLoading(true));
+        yield put(slice.actions.removeAll([]));
         try {
             const result: ApiListResult<TEntity> = yield call(client.get, action.payload);
             yield put(slice.actions.setAll(result.results));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
         }
+        yield put(slice.actions.setIsLoading(false));
     }
 
     function* createEntity(action: { type: string, payload: CreateActionPayload }) {

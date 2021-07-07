@@ -1,7 +1,7 @@
+import axios, {AxiosResponse} from 'axios';
 import {ApiListResult} from '../api-results';
 import {convertMoment} from '../helpers';
 import baseApiAxios from './base-api';
-import {AxiosResponse} from 'axios';
 
 export interface BaseModelRequest<TEntity, TFilter  = object> {
     get: (filter: TFilter) => Promise<ApiListResult<TEntity>>;
@@ -13,10 +13,14 @@ export interface BaseModelRequest<TEntity, TFilter  = object> {
 }
 
 function baseModelRequest<TEntity, TFilter = object>(baseUrl: string, adapter: (model: any) => TEntity): BaseModelRequest<TEntity, TFilter> {
+    const token = axios.CancelToken;
+    let source = token.source();
     return {
         get(filter: any): Promise<ApiListResult<TEntity>> {
             const params = convertMoment(filter);
-            return baseApiAxios.get<ApiListResult<TEntity>>(baseUrl, {params})
+            source.cancel('New request was made, canceling old request.');
+            source = token.source();
+            return baseApiAxios.get<ApiListResult<TEntity>>(baseUrl, {params, cancelToken: source.token})
                 .then(project => {
                         project.data.results = project.data.results.map(r => adapter(r));
                         return project.data;
