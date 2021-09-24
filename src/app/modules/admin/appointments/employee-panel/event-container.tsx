@@ -1,21 +1,28 @@
 import moment from 'moment';
 import React from 'react';
 import {Spinner} from 'reactstrap';
-import {Appointment, CustomerAppointment} from 'src/app/api/appointments';
+import {Appointment, BaseAppointment, CustomerAppointment} from 'src/app/api/appointments';
 import {Employee} from 'src/app/api/employees';
 import styles from 'src/app/modules/admin/appointments/employee-panel/employee-panel.module.scss';
 import {useHoursConverter} from 'src/app/modules/admin/appointments/employee-panel/hooks';
+import {compareByStartDate} from 'src/app/shared/util/comparers';
+import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
 import {appointmentSelectors} from 'src/app/store/admin/appointments';
 
 interface EventProps {
+    order: number;
+    isOverlapping: boolean;
     appointment: Appointment;
     onClick: () => void;
 }
 
+const BASE_WIDTH = 12.5;
 
 const Event: React.FunctionComponent<EventProps> = (
     {
+        order,
+        isOverlapping,
         appointment,
         onClick
     }) => {
@@ -32,6 +39,10 @@ const Event: React.FunctionComponent<EventProps> = (
     const subTitle = customerAppointment ? customerAppointment.service.name : '';
 
     const style: React.CSSProperties = {
+        width: `${BASE_WIDTH - 0.25 - 3 * +isOverlapping}rem`,
+        marginRight: '0.125rem',
+        marginLeft: `${0.125 + 3 * +isOverlapping}rem`,
+        zIndex: order + 2,
         top: useHoursConverter(start),
         height: useHoursConverter(duration),
         backgroundColor,
@@ -39,7 +50,7 @@ const Event: React.FunctionComponent<EventProps> = (
 
     return (
         <div style={style}
-             className={styles.panelEvent}
+             className={`${styles.panelEvent} k-shadow-0`}
              onClick={onClick}
         >
             <div>
@@ -64,7 +75,9 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
     const isLoading = useAppSelector(appointmentSelectors.selectIsLoading);
 
     const employeeAppointments = React.useMemo(() =>
-            appointments.filter(appointment => appointment.employee.id === employee.id)
+            appointments
+                .filter(appointment => appointment.employee.id === employee.id)
+                .sort(compareByStartDate)
         , [appointments, employee.id]
     )
 
@@ -73,8 +86,10 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
             {isLoading &&
             <Spinner className="position-absolute"/>
             }
-            {employeeAppointments.map(appointment =>
+            {employeeAppointments.map((appointment, index) =>
                 <Event key={appointment.id}
+                       isOverlapping={index > 0 ? isOverlapping(appointment, employeeAppointments[index - 1]) : false}
+                       order={index}
                        appointment={appointment}
                        onClick={onSelect(appointment)}
                 />
@@ -83,5 +98,8 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
     )
 }
 
+const isOverlapping = (currentAppointment: BaseAppointment, previousAppointment: BaseAppointment): boolean => {
+    return stringToMoment(currentAppointment.start).isBefore(stringToMoment(previousAppointment.end));
+}
 
 export default EventsContainer;

@@ -7,6 +7,7 @@ import {timeToString} from 'src/app/api/common/models';
 import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
 import {KFormikCustomerInput, KFormikInput} from 'src/app/shared/components/forms';
 import {KDateInput} from 'src/app/shared/components/primitives/inputs';
+import {compareByName} from 'src/app/shared/util/comparers';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
 import {employeeSelectors} from 'src/app/store/admin/employees';
@@ -90,7 +91,9 @@ function useEmployeeServices() {
         setEmployeeServices(employeeEntities[employeeId]?.services || [])
     }, [employeeEntities, employeeId]);
 
-    return useAppSelector((state) => serviceSelectors.selectByIds(state, employeeServices));
+    return useAppSelector((state) => serviceSelectors
+        .selectByIds(state, employeeServices))
+        .sort(compareByName);
 }
 
 function useUpdateEndTimeOnServiceChangeEffect() {
