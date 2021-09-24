@@ -31,8 +31,7 @@ $border-color: #d3d3d3;
 }
 
 .panelEvent {
-  z-index: 2;
-  width: $base-width;
+  width: $base-width - 0.25rem;
   position: absolute;
   border: 0.5px lightgray solid;
   border-radius: 10px;
