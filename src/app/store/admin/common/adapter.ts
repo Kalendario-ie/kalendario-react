@@ -14,6 +14,7 @@ import {ApiBaseError} from 'src/app/api/common/api-errors';
 import {ApiListResult} from 'src/app/api/common/api-results';
 import {BaseModelRequest} from 'src/app/api/common/clients/base-django-api';
 import {IReadModel} from 'src/app/api/common/models';
+import {compareByName} from 'src/app/shared/util/comparers';
 import {PayloadAction} from 'typesafe-actions';
 
 
@@ -62,7 +63,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
 
     const adapter = createEntityAdapter<TEntity>({
         selectId: (entity) => entity.id,
-        sortComparer: (a, b) => a.name.localeCompare(b.name),
+        sortComparer: compareByName,
     })
 
     const actions: BaseActions = {
