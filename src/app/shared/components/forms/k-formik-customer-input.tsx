@@ -5,10 +5,10 @@ import {FormGroup, Label} from 'reactstrap';
 import {adminCustomerClient, Customer} from 'src/app/api/customers';
 import CustomerUpsertForm from 'src/app/modules/admin/customers/customer-upsert-form';
 import {useEditModal} from 'src/app/shared/admin/hooks';
-import {KFlexColumn, KFlexRow} from 'src/app/shared/components/flex';
+import {KFlexColumn, KFlexRow, KFlexSpacer} from 'src/app/shared/components/flex';
 import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 import KIcon from 'src/app/shared/components/primitives/k-icon';
-import { useAppDispatch } from 'src/app/store';
+import {useAppDispatch} from 'src/app/store';
 import {customerActions, customerSelectors, customerSlice} from 'src/app/store/admin/customers';
 
 interface FormikCustomerInput {
@@ -71,6 +71,12 @@ export const KFormikCustomerInput: React.FunctionComponent<FormikCustomerInput> 
                     <KIcon icon="user" color="primary" text={customer.name}/>
                     <KIcon icon="phone" color="primary" text={customer.phone}/>
                     <KIcon icon="at" color="primary" text={customer.email}/>
+                </KFlexRow>
+                <KFlexSpacer size={0.4}/>
+                <KFlexRow>
+                    {customer.warning &&
+                    <KIcon icon="exclamation" color="danger" text={customer.warning}/>
+                    }
                 </KFlexRow>
             </KFlexColumn>
             }
