@@ -5,6 +5,8 @@ import BookContainer from 'src/app/modules/companies/cart/book-container';
 import CartContainer from 'src/app/modules/companies/cart/cart-container';
 import CheckoutContainer from 'src/app/modules/companies/checkout/checkout-container';
 import CompaniesContainer from 'src/app/modules/companies/companies-container';
+import CreateCompanyContainer from 'src/app/modules/companies/create-company/create-company-container';
+import {COMPANY_URLS} from 'src/app/modules/companies/paths';
 import {ProtectedRoute} from 'src/app/shared/util/router-extensions';
 import {companyDetailsRequest, selectCompany} from 'src/app/store/companies';
 
@@ -34,6 +36,7 @@ const CompaniesRoutes: React.FunctionComponent = () => {
     let {path} = useRouteMatch();
     return (
         <Switch>
+            <Route path={COMPANY_URLS.CREATE} component={CreateCompanyContainer}/>
             <Route path={`${path}/:name`}>
                 <CompaniesInnerRoutes/>
             </Route>
