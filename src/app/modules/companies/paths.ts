@@ -10,3 +10,7 @@ export const companiesUrls = (company: CompanyDetails) => {
         checkout: `/c/${company.name}/checkout`,
     }
 }
+
+export const COMPANY_URLS = {
+    CREATE: '/c/create',
+}

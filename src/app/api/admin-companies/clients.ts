@@ -1,35 +1,28 @@
-export {}
-// import {Injectable} from '@angular/core';
-// import {HttpClient} from '@angular/common/http';
-// import {ModelViewSetClient} from '@api/clients/ModelViewSetClient';
-// import {
-//   Company,
-//   CompanyAdapter,
-//   CompanyConfig,
-//   CompanyStripeDetails,
-//   CompanyStripeDetailsAdapter,
-//   ConfigAdapter
-// } from '@api/models';
-// import {environment} from '../../../environments/environment';
-// import {Observable} from 'rxjs';
-// import {map} from 'rxjs/operators';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CompanyAdminClient extends ModelViewSetClient<Company, object> {
-//   constructor(http: HttpClient,
-//               adapter: CompanyAdapter,
-//               private stripeAdapter: CompanyStripeDetailsAdapter,
-//               private configAdapter: ConfigAdapter) {
-//     super(http, adapter, environment.apiUrl + 'admin/companies/');
-//   }
-//
-//   stripe = environment.apiUrl + 'billing/accounts/';
-//
-//   config(id, model): Observable<CompanyConfig> {
-//     return this.http.patch<CompanyConfig>(this.baseUrl + id + '/config/', model).pipe(map(this.configAdapter.adapt));
-//   }
+import {CompanyConfig} from 'src/app/api/company-config/models';
+import {companyConfigParser} from 'src/app/api/company-config/parsers';
+import baseApiAxios from 'src/app/api/common/clients/base-api';
+import {AdminCompany} from 'src/app/api/admin-companies/models';
+import {adminCompanyParser} from 'src/app/api/admin-companies/parsers';
+import baseModelRequest from 'src/app/api/common/clients/base-django-api';
+
+const adminUrl = 'admin/companies/'
+const stripeUrl = 'billing/accounts/';
+
+
+export const adminCompanyClient = {
+    ...baseModelRequest<AdminCompany, null>(adminUrl, adminCompanyParser),
+
+    config(id: number, model: CompanyConfig): Promise<CompanyConfig> {
+        return baseApiAxios.patch<CompanyConfig>(adminUrl + id + '/config/', model)
+            .then(result => companyConfigParser(result.data));
+    },
+
+    stripeUrl(id: number): Promise<{ url: string }> {
+        return baseApiAxios.post<{ url: string }>(`${stripeUrl}${id}/connect/`, {})
+            .then(result => result.data);
+    }
+}
+
 //
 //   uploadProfilePicture(id: number, file: File): Observable<Company> {
 //     const formData = new FormData();
@@ -38,12 +31,10 @@ export {}
 //       .pipe(map(this.adapter.adapt));
 //   }
 //
-//   stripeUrl(id: number): Observable<{ url: string }> {
-//     return this.http.post<{url: string}>(`${this.stripe}${id}/connect/`, {});
-//   }
+
 //
 //   stripeDetails(id: number): Observable<CompanyStripeDetails> {
 //     return this.http.get<CompanyStripeDetails>(`${this.stripe}${id}/`).pipe(map(this.stripeAdapter.adapt));
 //   }
 // }
-//
+
