@@ -39,10 +39,10 @@ export function getShift(schedule: Schedule, date: Moment) {
     }
 }
 
-function shiftToUpsertShift(shift?: Shift): UpsertScheduleRequestShift | null {
+function shiftToUpsertShift(shift?: Shift): UpsertScheduleRequestShift {
     return shift ? {
         frames: shift.frames.map(frame => ({start: timeToISOString(frame.start), end: timeToISOString(frame.end)}))
-    } : null;
+    } : {frames: []};
 }
 
 export function upsertScheduleRequestParser(schedule: Schedule | null): UpsertScheduleRequest {
@@ -58,12 +58,12 @@ export function upsertScheduleRequestParser(schedule: Schedule | null): UpsertSc
 
     } : {
         name: '',
-        mon: null,
-        tue: null,
-        wed: null,
-        thu: null,
-        fri: null,
-        sat: null,
-        sun: null
+        mon: {frames: []},
+        tue: {frames: []},
+        wed: {frames: []},
+        thu: {frames: []},
+        fri: {frames: []},
+        sat: {frames: []},
+        sun: {frames: []}
     }
 }
