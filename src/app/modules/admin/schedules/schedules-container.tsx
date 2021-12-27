@@ -1,7 +1,7 @@
 import React from 'react';
 import {PermissionModel} from 'src/app/api/auth';
 import SchedulesTable from 'src/app/modules/admin/schedules/schedules-table';
-import ScheduleUpsertForm from 'src/app/modules/admin/services/schedule-upsert-form';
+import ScheduleUpsertForm from 'src/app/modules/admin/schedules/schedule-upsert-form';
 import AdminListEditContainer from 'src/app/shared/admin/admin-list-edit-container';
 import {scheduleActions, scheduleSelectors} from 'src/app/store/admin/schedules';
 

@@ -9,11 +9,11 @@ export interface UpsertScheduleRequestShift {
 
 export interface UpsertScheduleRequest {
     name: string;
-    mon: UpsertScheduleRequestShift | null;
-    tue: UpsertScheduleRequestShift | null;
-    wed: UpsertScheduleRequestShift | null;
-    thu: UpsertScheduleRequestShift | null;
-    fri: UpsertScheduleRequestShift | null;
-    sat: UpsertScheduleRequestShift | null;
-    sun: UpsertScheduleRequestShift | null;
+    mon: UpsertScheduleRequestShift;
+    tue: UpsertScheduleRequestShift;
+    wed: UpsertScheduleRequestShift;
+    thu: UpsertScheduleRequestShift;
+    fri: UpsertScheduleRequestShift;
+    sat: UpsertScheduleRequestShift;
+    sun: UpsertScheduleRequestShift;
 }
