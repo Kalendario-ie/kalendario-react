@@ -13,6 +13,7 @@ const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<AdminUser
         entity,
         apiError,
         onSubmit,
+        isSubmitting,
         onCancel
     }) => {
     const employees = useSelectAll(employeeSelectors, employeeActions);
@@ -22,6 +23,7 @@ const UsersUpsertForm: React.FunctionComponent<AdminEditContainerProps<AdminUser
         <KFormikForm initialValues={upsertUserRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      onCancel={onCancel}
                      validationSchema={UpsertUserRequestValidation}
         >

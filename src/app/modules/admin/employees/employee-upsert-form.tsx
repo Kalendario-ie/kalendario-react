@@ -15,6 +15,7 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
         entity,
         apiError,
         onSubmit,
+        isSubmitting,
         onCancel
     }) => {
     const schedules = useSelector(scheduleSelectors.selectAll)
@@ -32,6 +33,7 @@ const EmployeeUpsertForm: React.FunctionComponent<AdminEditContainerProps<Employ
         <KFormikForm initialValues={upsertEmployeeRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      onCancel={onCancel}
                      validationSchema={UpsertEmployeeRequestValidation}
         >

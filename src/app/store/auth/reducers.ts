@@ -9,13 +9,15 @@ export interface AuthState {
     loggedIn: boolean;
     loadingUser: boolean;
     user: AuthUser | null;
+    isSubmitting: boolean;
 }
 
 const initialState: AuthState = {
     apiError: null,
     loggedIn: isLoggedIn(),
     loadingUser: false,
-    user: null
+    user: null,
+    isSubmitting: false,
 }
 
 const reducer: Reducer<AuthState> = (state = initialState, {type, payload}) => {

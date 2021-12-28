@@ -17,3 +17,6 @@ export const selectUserEmployee = createSelector(selectUser, user => user?.emplo
 
 export const selectLoadingUser: (rootState: RootState) => boolean =
     (rootState) => rootState.auth.loadingUser;
+
+export const selectIsSubmitting: (rootState: RootState) => boolean =
+    (rootState) => rootState.auth.isSubmitting;

@@ -23,6 +23,7 @@ interface BaseState<TEntity> extends EntityState<TEntity> {
     isLoading: boolean;
     apiError: ApiBaseError | null;
     editMode: boolean;
+    isSubmitting: boolean;
     createdEntityId: number | null;
 }
 
@@ -32,6 +33,7 @@ export interface BaseSelectors<TEntity> extends EntitySelectors<TEntity, any> {
     selectApiError: (state: any) => ApiBaseError | null;
     selectEditMode: (state: any) => boolean;
     selectIsLoading: (state: any) => boolean;
+    selectIsSubmitting: (state: any) => boolean;
     selectCreatedEntity: (state: any) => TEntity | undefined;
 }
 
@@ -53,6 +55,7 @@ export interface BaseActions {
     patchEntity: ActionCreatorWithPayload<PatchActionPayload>;
     deleteEntity: ActionCreatorWithPayload<number>;
     setEditMode: ActionCreatorWithPayload<boolean>;
+    setIsSubmitting: ActionCreatorWithPayload<boolean>;
 }
 
 export function kCreateBaseStore<TEntity extends IReadModel>(
@@ -75,6 +78,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         patchEntity: createAction<PatchActionPayload>(`${sliceName}/patchEntity`),
         deleteEntity: createAction<number>(`${sliceName}/deleteEntity`),
         setEditMode: createAction<any>(`${sliceName}/setEditMode`),
+        setIsSubmitting: createAction<any>(`${sliceName}/setIsSubmitting`),
     }
 
     const slice = createSlice({
@@ -84,7 +88,8 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             isLoading: false,
             apiError: null,
             editMode: false,
-            createdEntityId: null
+            createdEntityId: null,
+            isSubmitting: false,
         }) as BaseState<TEntity>,
         reducers: {
             // @ts-ignore
@@ -105,12 +110,18 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             },
             setEditMode: (state, action) => {
                 state.editMode = action.payload;
+                if (action.payload) {
+                    state.isSubmitting = false;
+                }
             },
             setCreatedEntityId: (state, action: PayloadAction<string, number>) => {
                 state.createdEntityId = action.payload;
             },
             setIsLoading: (state, action: PayloadAction<string, boolean>) => {
                 state.isLoading = action.payload;
+            },
+            setIsSubmitting: (state, action: PayloadAction<string, boolean>) => {
+                state.isSubmitting = action.payload;
             }
         }
     });
@@ -127,6 +138,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
         selectApiError: createSelector(selector, store => store.apiError),
         selectEditMode: createSelector(selector, store => store.editMode),
         selectIsLoading: createSelector(selector, store => store.isLoading),
+        selectIsSubmitting: createSelector(selector, store => store.isSubmitting),
         selectCreatedEntity: createSelector(selector, store =>
             store.createdEntityId ? store.entities[store.createdEntityId] : undefined),
     }
@@ -173,6 +185,7 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
 
     function* createEntity(action: { type: string, payload: CreateActionPayload }) {
         try {
+            yield put(slice.actions.setIsSubmitting(true));
             const entity: TEntity = yield call(client.post, action.payload.entity);
             yield put(slice.actions.upsertOne(entity));
             yield put(slice.actions.setApiError(null));
@@ -180,17 +193,20 @@ export function kCreateBaseStore<TEntity extends IReadModel>(
             yield put(slice.actions.setCreatedEntityId(entity.id));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
+            yield put(slice.actions.setIsSubmitting(false));
         }
     }
 
     function* patchEntity(action: { type: string, payload: PatchActionPayload }) {
         try {
+            yield put(slice.actions.setIsSubmitting(true));
             const entity: TEntity = yield call(client.patch, action.payload.id, action.payload.entity);
             yield put(slice.actions.upsertOne(entity));
             yield put(slice.actions.setApiError(null));
             yield put(slice.actions.setEditMode(false));
         } catch (error) {
             yield put(slice.actions.setApiError(error));
+            yield put(slice.actions.setIsSubmitting(false));
         }
     }
 

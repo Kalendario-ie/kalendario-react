@@ -9,13 +9,14 @@ import {KFlexColumn} from 'src/app/shared/components/flex';
 import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/components/forms';
 import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
 import {useAppDispatch} from 'src/app/store';
-import {registerRequest, selectApiError} from 'src/app/store/auth';
+import {registerRequest, selectApiError, selectIsSubmitting} from 'src/app/store/auth';
 
 
 const RegisterContainer = () => {
     useRedirectIfLoggedInEffect();
 
     const apiError = useSelector(selectApiError);
+    const isSubmitting = useSelector(selectIsSubmitting)
     const dispatch = useAppDispatch();
 
     const handleSubmit = (data: RegisterRequest) => {
@@ -31,6 +32,7 @@ const RegisterContainer = () => {
                     <KFormikForm initialValues={parseRegisterRequest()}
                                  apiError={apiError}
                                  onSubmit={handleSubmit}
+                                 isSubmitting={isSubmitting}
                                  validationSchema={RegisterRequestValidation}
                     >
                         <KFormikInput name="firstName"/>

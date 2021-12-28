@@ -12,6 +12,7 @@ import KModal from 'src/app/shared/components/modal/k-modal';
 
 interface ChangePasswordFormProps {
     apiError: ApiValidationError | null;
+    isSubmitting: boolean;
     onSubmit: (value: ChangeUserPasswordRequest) => void;
     onCancel: () => void;
 }
@@ -19,6 +20,7 @@ interface ChangePasswordFormProps {
 const ChangePasswordForm: React.FunctionComponent<ChangePasswordFormProps> = (
     {
         apiError,
+        isSubmitting,
         onSubmit,
         onCancel
     }) => {
@@ -28,6 +30,7 @@ const ChangePasswordForm: React.FunctionComponent<ChangePasswordFormProps> = (
                      apiError={apiError}
                      onSubmit={onSubmit}
                      onCancel={onCancel}
+                     isSubmitting={isSubmitting}
                      validationSchema={ChangeUserPasswordValidation}
         >
             <KFormikInput name="password1" type="password"/>
@@ -44,6 +47,7 @@ interface ChangePasswordContainerProps {
 const ChangePasswordContainer: React.FunctionComponent<ChangePasswordContainerProps> = ({id}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [apiError, setApiError] = useState<ApiValidationError | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleButtonClick = () => {
         setIsOpen(true)
@@ -53,16 +57,16 @@ const ChangePasswordContainer: React.FunctionComponent<ChangePasswordContainerPr
         setIsOpen(false);
     }
     const handleSubmit = (form: ChangeUserPasswordRequest) => {
+        setIsSubmitting(true);
         adminUserClient.changePassword(id, form)
-            .then(res => setIsOpen(false))
-            .catch(apiError => {
-                console.log(apiError);
-                setApiError(apiError);
-            });
+            .then(() => setIsOpen(false))
+            .catch(apiError => setApiError(apiError))
+            .finally(() => setIsSubmitting(false));
     }
 
     const form = <ChangePasswordForm
         apiError={apiError}
+        isSubmitting={isSubmitting}
         onSubmit={handleSubmit}
         onCancel={handleCancel}/>
 
@@ -70,7 +74,8 @@ const ChangePasswordContainer: React.FunctionComponent<ChangePasswordContainerPr
         <>
             <KModal body={form} isOpen={isOpen}/>
             <FormGroup>
-                <Button block={true} color={'primary'} type={'button'} onClick={handleButtonClick}> change password</Button>
+                <Button block={true} color={'primary'} type={'button'} onClick={handleButtonClick}> change
+                    password</Button>
             </FormGroup>
         </>
     )

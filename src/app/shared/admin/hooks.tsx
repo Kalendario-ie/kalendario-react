@@ -13,7 +13,8 @@ export function useEditModal<TEntity extends IReadModel>(
     const [selectedEntity, setSelectedEntity] = useState<TEntity | null>(null);
     const apiError = useAppSelector(baseSelectors.selectApiError);
     const editMode = useAppSelector(baseSelectors.selectEditMode);
-    const createdEntity = useAppSelector(baseSelectors.selectCreatedEntity)
+    const createdEntity = useAppSelector(baseSelectors.selectCreatedEntity);
+    const isSubmitting = useAppSelector(baseSelectors.selectIsSubmitting);
     const dispatch = useAppDispatch();
 
     const handleEditCancel = () => {
@@ -21,7 +22,7 @@ export function useEditModal<TEntity extends IReadModel>(
         dispatch(baseActions.setEditMode(false));
     }
 
-    const handleSubmit = (entity: any) => {
+    const handleSubmit = (entity: any): void => {
         if (!selectedEntity || selectedEntity.id === 0) {
             dispatch(baseActions.createEntity({entity}));
         } else {
@@ -38,6 +39,7 @@ export function useEditModal<TEntity extends IReadModel>(
     const modal = <KModal body={<EditContainer entity={selectedEntity}
                                                apiError={apiError}
                                                onSubmit={handleSubmit}
+                                               isSubmitting={isSubmitting}
                                                onCancel={handleEditCancel}/>}
                           isOpen={editMode}/>
 
