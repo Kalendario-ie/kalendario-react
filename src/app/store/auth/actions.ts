@@ -25,7 +25,9 @@ export const registerRequestFail = (error?: ApiBaseError) =>
 export const setUser = (user: AuthUser | null) =>
     action(ACTION_TYPES.SET_USER, user)
 
-export const setLoadingUser = createAction<boolean>(ACTION_TYPES.SET_LOADING_USER)
+export const setLoadingUser = createAction<boolean>(ACTION_TYPES.SET_LOADING_USER);
+
+export const setIsSubmitting = createAction<boolean>(ACTION_TYPES.SET_IS_SUBMITTING);
 
 export const facebookLoginRequest = (accessToken: string) =>
     action(ACTION_TYPES.FACEBOOK_LOGIN_REQUEST, accessToken);

@@ -11,6 +11,7 @@ const ServiceCategoryUpsertForm: React.FunctionComponent<AdminEditContainerProps
     {
         entity,
         apiError,
+        isSubmitting,
         onSubmit,
         onCancel
     }) => {
@@ -18,6 +19,7 @@ const ServiceCategoryUpsertForm: React.FunctionComponent<AdminEditContainerProps
         <KFormikForm initialValues={createUpsertServiceCategoryRequest(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      onCancel={onCancel}
                      validationSchema={UpsertServiceCategoryRequestValidation}
         >

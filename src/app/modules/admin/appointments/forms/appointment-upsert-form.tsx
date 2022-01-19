@@ -25,6 +25,7 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
     {
         entity,
         apiError,
+        isSubmitting,
         onSubmit,
         onCancel
     }) => {
@@ -46,6 +47,7 @@ const AppointmentUpsertForm: React.FunctionComponent<AdminEditContainerProps<App
         <KFormikForm initialValues={initialValues}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      onCancel={onCancel}
                      validationSchema={validationSchema}
         >

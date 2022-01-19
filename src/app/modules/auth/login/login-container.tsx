@@ -9,7 +9,7 @@ import {KFlexColumn} from 'src/app/shared/components/flex';
 import {KTextButton} from 'src/app/shared/components/primitives/buttons';
 import {KCard, KPageContainer} from 'src/app/shared/components/primitives/containers';
 import {useKHistory} from 'src/app/shared/util/router-extensions';
-import {loginRequest, selectApiError} from 'src/app/store/auth';
+import {loginRequest, selectApiError, selectIsSubmitting} from 'src/app/store/auth';
 import LoginView from './login-view';
 
 
@@ -17,9 +17,10 @@ const LoginContainer = () => {
     useRedirectIfLoggedInEffect();
     const dispatch = useDispatch();
     const apiError = useSelector(selectApiError);
+    const isSubmitting = useSelector(selectIsSubmitting);
     const initialValues: LoginRequest = {email: '', password: ''};
 
-    const handleSubmit = (data: LoginRequest) => {
+    const handleSubmit = (data: LoginRequest): void => {
         dispatch(loginRequest(data));
     };
 
@@ -54,6 +55,7 @@ const LoginContainer = () => {
                         {/*}*/}
 
                         <LoginView onSubmit={handleSubmit}
+                                   isSubmitting={isSubmitting}
                                    data={initialValues}
                                    apiError={apiError}
                                    validationSchema={LoginRequestValidation}

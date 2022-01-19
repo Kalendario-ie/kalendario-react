@@ -9,19 +9,27 @@ import {KCard, KPageContainer} from 'src/app/shared/components/primitives/contai
 
 const CreateCompanyContainer: React.FunctionComponent = () => {
     const [apiError, setApiError] = useState<ApiValidationError | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const history = useHistory();
 
-    const onSubmit = (company: AdminCompany) => {
+    const onSubmit = (company: AdminCompany): void => {
+        setIsSubmitting(true);
         adminCompanyClient
             .post(company)
             .then(_ => history.push(ADMIN_ROUTES.ROOT))
             .catch(e => setApiError(e))
-    };
+            .finally(() => setIsSubmitting(false));
+    }
+
     return (
         <KPageContainer>
             <KFlexRow justify="center">
                 <KCard header="Create Company">
-                    <KFormikForm initialValues={adminCompanyParser(null)} apiError={apiError} onSubmit={onSubmit}>
+                    <KFormikForm initialValues={adminCompanyParser(null)}
+                                 apiError={apiError}
+                                 isSubmitting={isSubmitting}
+                                 onSubmit={onSubmit}
+                    >
                         <KFormikInput name="name"/>
                         <KFormikSubmit/>
                     </KFormikForm>

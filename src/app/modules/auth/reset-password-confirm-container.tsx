@@ -14,6 +14,7 @@ import {useKHistory} from 'src/app/shared/util/router-extensions';
 
 const ResetPasswordConfirmContainer: React.FunctionComponent = () => {
     const [apiError, setApiError] = useState<ApiValidationError | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [complete, setComplete] = useState(false);
     const {uid, token} = useParams<{ uid: string, token: string }>();
     const history = useKHistory();
@@ -21,9 +22,11 @@ const ResetPasswordConfirmContainer: React.FunctionComponent = () => {
     const initialValue: ResetPasswordRequest = {newPassword1: '', newPassword2: '', uid, token};
 
     const handleSubmit = (values: ResetPasswordRequest) => {
+        setIsSubmitting(true);
         authApi.resetPasswordConfirm(values)
-            .then(res => setComplete(true))
-            .catch(error => setApiError(error));
+            .then(() => setComplete(true))
+            .catch(error => setApiError(error))
+            .finally(() => setIsSubmitting(false));
     }
 
     const handleLoginClick = () => history.push(AUTH_ROUTES.LOGIN);
@@ -38,22 +41,23 @@ const ResetPasswordConfirmContainer: React.FunctionComponent = () => {
                     < KFormikForm initialValues={initialValue}
                                   apiError={apiError}
                                   onSubmit={handleSubmit}
+                                  isSubmitting={isSubmitting}
                                   validationSchema={ResetPasswordRequestValidation}
                     >
                         <KFormikInput type="password" name="newPassword1" placeholder="Password"/>
-                        <KFormikInput type="password" name="newPassword2"  placeholder="Confirm Password"/>
+                        <KFormikInput type="password" name="newPassword2" placeholder="Confirm Password"/>
                         <KFormikSubmit text={<FormattedMessage id={"AUTH.RESET-PASS-CONFIRM-BUTTON"}/>}
                                        isBlock={true}
                         />
                     </KFormikForm>
                     }
                     {complete &&
-                        <>
-                            <FormattedMessage id="AUTH.RESET-PASS-CONFIRM-SENT"/>
-                            <KButton block={true} color="primary" onClick={handleLoginClick}>
-                                <FormattedMessage id="AUTH.LOGIN"/>
-                            </KButton>
-                        </>
+                    <>
+                        <FormattedMessage id="AUTH.RESET-PASS-CONFIRM-SENT"/>
+                        <KButton block={true} color="primary" onClick={handleLoginClick}>
+                            <FormattedMessage id="AUTH.LOGIN"/>
+                        </KButton>
+                    </>
                     }
 
                 </KCard>

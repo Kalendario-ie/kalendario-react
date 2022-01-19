@@ -11,6 +11,7 @@ export interface KFormikFormProps<Values> {
     apiError: ApiValidationError | null;
     validationSchema?: any | (() => any);
     onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void;
+    isSubmitting: boolean;
     onCancel?: () => void;
     children: ((props: FormikProps<Values>) => React.ReactNode) | React.ReactNode;
     errors?: string[];
@@ -21,6 +22,7 @@ export function KFormikForm<Values>(
         initialValues,
         apiError,
         onSubmit,
+        isSubmitting,
         onCancel,
         children,
         validationSchema
@@ -36,25 +38,32 @@ export function KFormikForm<Values>(
         <Formik initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}>
-            {(formik) => (
-                <Form className="is-invalid" onSubmit={(e) => {
-                    e.preventDefault();
-                    formik.handleSubmit(e);
-                }}>
-                    <FormGroup className="text-danger">
-                        {errors.map((error, key) => <div key={key}>{error}</div>)}
-                    </FormGroup>
-                    <KFormikErrorHandler apiError={apiError}/>
+            {(formik) => {
+                if (formik.isSubmitting != isSubmitting) {
+                    formik.setSubmitting(isSubmitting);
+                }
+                return (
+                    <Form className="is-invalid" onSubmit={(e) => {
+                        e.preventDefault();
+                        formik.handleSubmit(e);
 
-                    {typeof children == 'function'
-                        ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
-                        : children}
+                    }}>
+                        <FormGroup className="text-danger">
+                            {errors.map((error, key) => <div key={key}>{error}</div>)}
+                        </FormGroup>
+                        <KFormikErrorHandler apiError={apiError}/>
 
-                    {onCancel &&
-                    <KFormikStandardButtons onCancel={onCancel}/>
-                    }
-                </Form>
-            )}
+                        {typeof children == 'function'
+                            ? (children as (props: FormikProps<Values>) => React.ReactNode)(formik)
+                            : children}
+
+                        {onCancel &&
+                        <KFormikStandardButtons onCancel={onCancel}/>
+                        }
+                    </Form>
+                );
+            }
+            }
         </Formik>
     )
 }

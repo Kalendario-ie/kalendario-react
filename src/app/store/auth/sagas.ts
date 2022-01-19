@@ -6,7 +6,7 @@ import {
     loginRequestFail,
     loginRequestSuccess,
     registerRequestFail,
-    registerRequestSuccess,
+    registerRequestSuccess, setIsSubmitting,
     setUser
 } from './actions';
 import {ACTION_TYPES} from './types';
@@ -14,23 +14,27 @@ import {ACTION_TYPES} from './types';
 
 function* requestLogin(action: { type: string, payload: LoginRequest }) {
     try {
+        yield put(setIsSubmitting(true));
         const user: AuthUser = yield call(authApi.login, action.payload);
         yield put(loginRequestSuccess());
         yield put(setUser(user));
     } catch (error) {
         yield put(loginRequestFail(error));
     }
+    yield put(setIsSubmitting(false));
 }
 
 
 function* register(action: { type: string, payload: RegisterRequest }) {
     try {
+        yield put(setIsSubmitting(true));
         const user: AuthUser = yield call(authApi.register, action.payload);
         yield put(registerRequestSuccess());
         yield put(setUser(user));
     } catch (error) {
         yield put(registerRequestFail(error));
     }
+    yield put(setIsSubmitting(false));
 }
 
 

@@ -6,6 +6,7 @@ import {KFormikForm, KFormikInput, KFormikSubmit} from 'src/app/shared/component
 
 export interface LoginViewProps {
     data: LoginRequest;
+    isSubmitting: boolean;
     onSubmit: (data: LoginRequest) => void;
     apiError: ApiValidationError | null;
     validationSchema?: any | (() => any);
@@ -14,6 +15,7 @@ export interface LoginViewProps {
 const LoginView: React.FunctionComponent<LoginViewProps> = (
     {
         data,
+        isSubmitting,
         onSubmit,
         apiError,
         validationSchema
@@ -22,6 +24,7 @@ const LoginView: React.FunctionComponent<LoginViewProps> = (
         <KFormikForm initialValues={data}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      validationSchema={validationSchema}>
             <>
                 <KFormikInput name="email" type="email"/>

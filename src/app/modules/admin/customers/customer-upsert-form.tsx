@@ -9,6 +9,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Custom
         entity,
         apiError,
         onSubmit,
+        isSubmitting,
         onCancel
     }) => {
     const validation = yup.object().shape({
@@ -21,6 +22,7 @@ const CustomerUpsertForm: React.FunctionComponent<AdminEditContainerProps<Custom
         <KFormikForm initialValues={saveCustomerRequestParser(entity)}
                      apiError={apiError}
                      onSubmit={onSubmit}
+                     isSubmitting={isSubmitting}
                      onCancel={onCancel}
                      validationSchema={validation}
         >
