@@ -27,7 +27,7 @@ const KDashboardContainer: React.FunctionComponent<DashboardContainerProps> = (
     const isOpen = useSelector(selectSidenavOpen);
 
     return (
-        <KFlexRow align={'stretch'}>
+        <KFlexRow align={'stretch'} className="dashboard-container">
             <KDashboardSidebar
                 links={links}
                 isOpen={isOpen}

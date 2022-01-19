@@ -62,7 +62,7 @@ const KDashboardSidebar: React.FunctionComponent<KDashboardSidebarProps> = (
     }) => {
 
     return (
-        <div className={`sidebar ${isOpen ? 'open' : 'closed'} k-shadow-0 py-3`}>
+        <div className={`sidebar ${isOpen ? 'open' : 'closed'} k-shadow-0 pt-3`}>
             {Object.keys(links).map(key => {
                 return (
                     <React.Fragment key={key}>
