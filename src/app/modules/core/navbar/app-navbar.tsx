@@ -32,8 +32,6 @@ interface AppNavbarProps {
     user: AuthUser | null;
     menuOpen: boolean;
     toggleMenu: () => void;
-    showSidenavToggle: boolean;
-    toggleSidenav: () => void;
 }
 
 const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
@@ -44,16 +42,11 @@ const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
         user,
         menuOpen,
         toggleMenu,
-        showSidenavToggle,
-        toggleSidenav,
     }) => {
 
     return (
         <header>
             <Navbar className="k-shadow-0" light expand="md">
-                {showSidenavToggle &&
-                <KIconButton onClick={toggleSidenav} icon="bars"/>
-                }
                 <NavbarBrand tag={Link} to="/" className="nav-logo">Kalendario</NavbarBrand>
                 <NavbarToggler onClick={toggleMenu}/>
                 <Collapse className="justify-content-end" isOpen={menuOpen} navbar>
