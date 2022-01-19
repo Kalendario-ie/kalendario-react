@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface AvatarImgProps {
-    src: string;
+    src?: string;
     size?: number;
     className?: string;
     alt?: string;
@@ -10,7 +10,7 @@ interface AvatarImgProps {
 
 const AvatarImg: React.FunctionComponent<AvatarImgProps> = (
     {
-        src,
+        src= "/icons/avatar.png",
         size= 7,
         alt,
         className = '',

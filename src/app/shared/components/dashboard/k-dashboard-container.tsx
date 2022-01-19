@@ -3,7 +3,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import KDashboardContent from 'src/app/shared/components/dashboard/k-dashboard-content';
 import KDashboardSidebar, {SideBarLinks} from 'src/app/shared/components/dashboard/k-dashboard-sidebar';
 import {KFlexRow} from 'src/app/shared/components/flex';
-import {selectSidenavOpen, setShowDashboardToggle} from 'src/app/store/ui';
+import {useCurrentUser} from 'src/app/shared/context-providers/auth-auto-login';
+import {userSelectors} from 'src/app/store/admin/users';
+import {selectSidenavOpen, setShowDashboardToggle, toggleDashboardSidenav} from 'src/app/store/ui';
 
 interface DashboardContainerProps {
     links: SideBarLinks;
@@ -25,17 +27,28 @@ const KDashboardContainer: React.FunctionComponent<DashboardContainerProps> = (
     }, [dispatch]);
 
     const isOpen = useSelector(selectSidenavOpen);
+    const toggleSideNav = () => {
+        dispatch(toggleDashboardSidenav())
+    }
+
+    const [_, user] = useCurrentUser();
 
     return (
-        <KFlexRow align={'stretch'} className="dashboard-container">
-            <KDashboardSidebar
-                links={links}
-                isOpen={isOpen}
-            />
-            <KDashboardContent>
-                {children}
-            </KDashboardContent>
-        </KFlexRow>
+        <>
+            {user &&
+            <KFlexRow align={'stretch'} className="dashboard-container">
+                <KDashboardSidebar
+                    links={links}
+                    isOpen={isOpen}
+                    toggleSideNav={toggleSideNav}
+                    user={user}
+                />
+                <KDashboardContent>
+                    {children}
+                </KDashboardContent>
+            </KFlexRow>
+            }
+        </>
     )
 }
 

@@ -6,11 +6,25 @@
 }
 
 .sidebar.open {
-  width: 16rem;
+  padding-top: 1.5rem;
+  width: 19.5rem;
+}
+
+.sidebar.open > *:not(hr) {
+  padding: 0 0 1.5rem 1.5rem;
 }
 
 .sidebar.closed {
   width: 4rem;
+}
+
+.sidebar-title {
+  color: $primary;
+  font-family: RedHat;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: bold;
+  padding-bottom: 1rem;
 }
 
 .sidebar-heading {
@@ -28,7 +42,7 @@
   min-height: 100%;
   max-height: 100%;
   overflow: scroll;
-  background: $white-gray;
+  background: white;
 }
 
 .list-clear {
@@ -38,7 +52,7 @@
 
 .sidebar-link {
   display: flex;
-  padding: 0.5rem 1.5rem;
+  padding-top: 1.25rem;
   transition: background 0.3s;
   text-decoration: none;
   align-items: center;
@@ -60,4 +74,15 @@
 
 .dashboard-container {
   height: 100vh;
+}
+
+.sidebar-bottom {
+  position: absolute;
+  bottom: 1.5rem;
+}
+
+.dashboard-avatar {
+  line-height: 1.3125rem;
+  font-size: 0.875rem;
+  padding-left: 1rem!important;
 }
