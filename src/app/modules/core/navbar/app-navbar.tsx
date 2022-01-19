@@ -23,7 +23,6 @@ import {companiesUrls} from 'src/app/modules/companies/paths';
 import {EMPLOYEE_ROUTES} from 'src/app/modules/employee/urls';
 import {USER_ROUTES} from 'src/app/modules/users/urls';
 import AvatarImg from 'src/app/shared/components/primitives/avatar-img';
-import {KIconButton} from 'src/app/shared/components/primitives/buttons';
 
 interface AppNavbarProps {
     company: CompanyDetails | null;
@@ -32,8 +31,6 @@ interface AppNavbarProps {
     user: AuthUser | null;
     menuOpen: boolean;
     toggleMenu: () => void;
-    showSidenavToggle: boolean;
-    toggleSidenav: () => void;
 }
 
 const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
@@ -44,16 +41,11 @@ const AppNavbar: React.FunctionComponent<AppNavbarProps> = (
         user,
         menuOpen,
         toggleMenu,
-        showSidenavToggle,
-        toggleSidenav,
     }) => {
 
     return (
         <header>
             <Navbar className="k-shadow-0" light expand="md">
-                {showSidenavToggle &&
-                <KIconButton onClick={toggleSidenav} icon="bars"/>
-                }
                 <NavbarBrand tag={Link} to="/" className="nav-logo">Kalendario</NavbarBrand>
                 <NavbarToggler onClick={toggleMenu}/>
                 <Collapse className="justify-content-end" isOpen={menuOpen} navbar>
