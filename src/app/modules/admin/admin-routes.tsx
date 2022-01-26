@@ -7,6 +7,7 @@ import CustomersRoutes from 'src/app/modules/admin/customers/customers-routes';
 import EmployeesContainer from 'src/app/modules/admin/employees/employees-container';
 import PermissionGroupsContainer from 'src/app/modules/admin/permissionGroups/permission-groups-container';
 import SchedulesContainer from 'src/app/modules/admin/schedules/schedules-container';
+import SettingsContainer from 'src/app/modules/admin/settings/settings-container';
 import ServicesContainer from 'src/app/modules/admin/services/services-container';
 import {ADMIN_ROUTES} from 'src/app/modules/admin/urls';
 import UsersContainer from 'src/app/modules/admin/users/users-container';
@@ -19,7 +20,6 @@ const AdminRoutes: React.FunctionComponent = () => {
     const intl = useIntl();
     const links: SideBarLinks = ({
         'Main': [
-            // [intl.formatMessage({id: 'ADMIN.COMMON.HOME'}), ADMIN_ROUTES.HOME, 'home'],
             {
                 name: intl.formatMessage({id: 'ADMIN.COMMON.SERVICES'}),
                 url: ADMIN_ROUTES.SERVICES,
@@ -65,6 +65,12 @@ const AdminRoutes: React.FunctionComponent = () => {
                 icon: 'users-slash',
                 permissionModel: PermissionModel.groupprofile
             },
+            {
+                name: intl.formatMessage({id: 'ADMIN.COMMON.SETTINGS'}),
+                url: ADMIN_ROUTES.SETTINGS,
+                icon: 'cogs',
+                permissionModel: PermissionModel.config
+            },
         ]
     });
 
@@ -73,6 +79,10 @@ const AdminRoutes: React.FunctionComponent = () => {
             {links &&
             <KDashboardContainer links={links}>
                 <Switch>
+                    <ProtectedRoute permissionModel={PermissionModel.config}
+                                    path={ADMIN_ROUTES.SETTINGS}
+                                    component={SettingsContainer}/>
+
                     <ProtectedRoute permissionModel={PermissionModel.service}
                                     path={ADMIN_ROUTES.SERVICES}
                                     component={ServicesContainer}/>

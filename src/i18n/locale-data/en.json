@@ -53,6 +53,7 @@
     "COMMON": {
       "BACK-TO-LIST": "Back to list",
       "HOME": "Home",
+      "SETTINGS": "Settings",
       "SERVICES": "Services",
       "SCHEDULES": "Schedules",
       "EMPLOYEES": "Employees",
@@ -64,6 +65,12 @@
     },
     "SCHEDULE": {
       "EDIT-FRAME-MODAL": "Edit frame times"
+    },
+    "CONFIG": {
+      "BOOKING-MESSAGES": "Booking messages",
+      "EMAIL-MESSAGES": "Email messages",
+      "PRE-BOOK": "Pre booking message",
+      "POST-BOOK": "Post booking message"
     }
   }
 }

@@ -70,7 +70,7 @@ export const KFormikInput: React.FunctionComponent<KFormikInputProps> = (
                    name={name}
                    type={type}
                    multiple={multiple}
-                   placeholder={placeholder || name}>
+                   placeholder={placeholder || camelCaseToWords(name)}>
                 {options &&
                 <>
                     {emptyOption && !multiple && <option onClick={handleOnEmptySelect} value=""/>}

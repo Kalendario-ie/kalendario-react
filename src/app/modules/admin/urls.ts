@@ -2,7 +2,7 @@
 
 export const ADMIN_ROUTES = {
     ROOT: '/admin',
-    HOME: '/admin/home',
+    SETTINGS: '/admin/settings',
     SERVICES: '/admin/services',
     SCHEDULES: '/admin/schedules',
     EMPLOYEES: '/admin/employees',
