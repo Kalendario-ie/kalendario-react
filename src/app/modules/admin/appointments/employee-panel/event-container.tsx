@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, {Moment} from 'moment';
 import React from 'react';
 import {Spinner} from 'reactstrap';
 import {Appointment, BaseAppointment, CustomerAppointment} from 'src/app/api/appointments';
@@ -9,12 +9,14 @@ import {compareByStartDate} from 'src/app/shared/util/comparers';
 import {stringToMoment} from 'src/app/shared/util/moment-helpers';
 import {useAppSelector} from 'src/app/store';
 import {appointmentSelectors} from 'src/app/store/admin/appointments';
+import {adminDashboardSelectors} from 'src/app/store/admin/dashboard';
 
 interface EventProps {
     order: number;
     isOverlapping: boolean;
     appointment: Appointment;
     onClick: () => void;
+    currentDate: Moment;
 }
 
 const BASE_WIDTH = 12.5;
@@ -24,15 +26,31 @@ const Event: React.FunctionComponent<EventProps> = (
         order,
         isOverlapping,
         appointment,
-        onClick
+        onClick,
+        currentDate
     }) => {
     const start = moment.utc(appointment.start);
     const end = moment.utc(appointment.end);
 
+    const isStartBeforeCurrentDate = React.useMemo(() =>
+            start.clone().startOf('day') < currentDate.clone().startOf('day'),
+        [start, currentDate]);
+
+    const isEndAfterCurrentDate = React.useMemo(() =>
+            end.clone().startOf('day') > currentDate.clone().startOf('day'),
+        [end, currentDate]);
+
+    const startTop = useHoursConverter(start);
+
     const customerAppointment = 'customer' in appointment && appointment.customer ? appointment as CustomerAppointment : null;
 
 
-    const duration = moment.duration(end.diff(start));
+    const duration =
+        isStartBeforeCurrentDate ?
+            moment.duration(end.format('HH:mm')) :
+            isEndAfterCurrentDate ?
+                moment.duration(start.clone().endOf('day').diff(start)) :
+                moment.duration(end.diff(start));
 
     const backgroundColor = customerAppointment ? customerAppointment.service.color : '#FFFFFF';
     const title = customerAppointment ? customerAppointment.customer.name : appointment.internalNotes;
@@ -43,7 +61,7 @@ const Event: React.FunctionComponent<EventProps> = (
         marginRight: '0.125rem',
         marginLeft: `${0.125 + 3 * +isOverlapping}rem`,
         zIndex: order + 2,
-        top: useHoursConverter(start),
+        top: isStartBeforeCurrentDate ? '0' : startTop,
         height: useHoursConverter(duration),
         backgroundColor,
     }
@@ -73,6 +91,7 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
     }) => {
     const appointments = useAppSelector(appointmentSelectors.selectAll);
     const isLoading = useAppSelector(appointmentSelectors.selectIsLoading);
+    const currentDate = useAppSelector(adminDashboardSelectors.selectCurrentDate);
 
     const employeeAppointments = React.useMemo(() =>
             appointments
@@ -92,6 +111,7 @@ const EventsContainer: React.FunctionComponent<EventsContainerProps> = (
                        order={index}
                        appointment={appointment}
                        onClick={onSelect(appointment)}
+                       currentDate={currentDate}
                 />
             )}
         </div>
